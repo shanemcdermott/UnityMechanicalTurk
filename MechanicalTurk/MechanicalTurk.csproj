@@ -298,6 +298,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\PCG1.cs" />
+    <Compile Include="Assets\Scripts\MapDisplay.cs" />
+    <Compile Include="Assets\Scripts\MapGenerator.cs" />
+    <Compile Include="Assets\Scripts\MeshGenerator.cs" />
+    <Compile Include="Assets\Scripts\Noise.cs" />
+    <Compile Include="Assets\Scripts\TextureGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
