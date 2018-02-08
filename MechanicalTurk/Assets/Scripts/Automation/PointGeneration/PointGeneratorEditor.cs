@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+
+//Shane McDermott 2018
+
 [CustomEditor(typeof(PointGenerator))]
 public class PointGeneratorEditor : Editor
 {

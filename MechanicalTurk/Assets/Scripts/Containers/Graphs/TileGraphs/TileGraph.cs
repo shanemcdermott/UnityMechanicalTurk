@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Shane McDermott 2017
 public class TileGraph : MonoBehaviour, IGraph<IntPoint>
 {
     //Size of each tile

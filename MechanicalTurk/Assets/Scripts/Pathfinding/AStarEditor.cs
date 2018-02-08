@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+//Shane McDermott 2017
 [CustomEditor(typeof(TileAStar))]
 public class AStarEditor : Editor {
 

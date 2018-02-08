@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Shane McDermott 2017
+
 public class TileAStar : MonoBehaviour
 {
     public PathSmoother pathSmoother;

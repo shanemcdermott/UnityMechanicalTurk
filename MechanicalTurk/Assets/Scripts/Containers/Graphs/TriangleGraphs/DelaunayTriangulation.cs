@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Shane McDermott 2018
 public struct CircumCirc
 {
     public Vector2 Center;
