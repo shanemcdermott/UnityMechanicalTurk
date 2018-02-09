@@ -1,15 +1,15 @@
 ###
 # Unity folders and files
 ###
-[Aa]ssets/AssetStoreTools*
-[Bb]uild/
-[Ll]ibrary/
-[Ll]ocal[Cc]ache/
-[Oo]bj/
-[Tt]emp/
-[Uu]nityGenerated/
+*[Aa]ssets/AssetStoreTools*
+*[Bb]uild/
+*[Ll]ibrary/
+*[Ll]ocal[Cc]ache/
+*[Oo]bj/
+*[Tt]emp/
+*[Uu]nityGenerated/
 # file on crash reports
-sysinfo.txt
+*sysinfo.txt
 # Unity3D generated meta files
 *.pidb.meta
 
@@ -26,16 +26,16 @@ sysinfo.txt
 *.user
 *.userprefs
 *.pidb
-.DS_Store
+*.DS_Store
 
 ###
 # OS generated
 ###
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-Icon?
-ehthumbs.db
-Thumbs.db
+*.DS_Store
+*.DS_Store?
+*._*
+*.Spotlight-V100
+*.Trashes
+*Icon?
+*ehthumbs.db
+*Thumbs.db
