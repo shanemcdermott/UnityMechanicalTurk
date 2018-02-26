@@ -4,12 +4,24 @@ using UnityEngine;
 
 
 
-public class Node : MonoBehaviour, IHasConnections<Node>
+public class Node : IHasConnections<Node>
 {
-	protected List<Node> connections =new List<Node>();
+    protected Vector3 position;
+    protected List<Node> connections =new List<Node>();
 
-    public void Start()
+    public Node()
     {
+        position = new Vector3();
+    }
+
+    public Node(Vector2 position2)
+    {
+        position = new Vector3(position2.x, position2.y);
+    }
+
+    public Node(Vector3 position)
+    {
+        this.position = position;
     }
 
     /// <summary>
@@ -71,18 +83,20 @@ public class Node : MonoBehaviour, IHasConnections<Node>
         }
     }
 
-    public void OnDrawGizmos()
+    public Vector3 GetPosition()
     {
-        DrawConnections();
+        return position;
     }
 
     public void DrawConnections()
     {
+        Vector3 pNorm = position.normalized;
+        Gizmos.color = new Color(pNorm.x,pNorm.y, pNorm.z);
         foreach (Node c in connections)
         {
             if (c != null)
             {
-                Gizmos.DrawLine(transform.position, c.transform.position);
+                Gizmos.DrawLine(position, c.position);
             }
         }
     }

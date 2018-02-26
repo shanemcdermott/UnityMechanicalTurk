@@ -128,7 +128,8 @@ public class GraphEditorWindow : EditorWindow {
         polyScrollPos = EditorGUILayout.BeginScrollView(polyScrollPos, GUILayout.Width(100), GUILayout.Height(100));
         foreach (Node node in polyGrid.GetVertices())
         {
-            EditorGUILayout.ObjectField(node, typeof(Node), true);
+            EditorGUILayout.Vector3Field("position",node.GetPosition());
+            
         }
         EditorGUILayout.EndScrollView();
     }
