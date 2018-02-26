@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Shane McDermott 2018
-
 public struct Grid2D
 {
     public int width;
     public int height;
-    private Vector2[,] vertices;
+    private Vector2[,] cells;
 
     public Grid2D(int width, int height)
     {
         this.width = width;
         this.height = height;
-        this.vertices = new Vector2[width, height];
+        this.cells = new Vector2[width, height];
     }
 
     public int GetWidth()
@@ -40,7 +38,7 @@ public struct Grid2D
     public Vector2 GetPoint(IntPoint gcoord)
     {
         if (IsValidCoord(gcoord))
-            return vertices[gcoord.x, gcoord.y];
+            return cells[gcoord.x, gcoord.y];
 
         return Vector2.positiveInfinity;
     }
@@ -54,7 +52,7 @@ public struct Grid2D
     {
         if(IsValidCoord(gcoord))
         {
-            vertices[gcoord.x, gcoord.y] = point;
+            cells[gcoord.x, gcoord.y] = point;
         }
     }
 

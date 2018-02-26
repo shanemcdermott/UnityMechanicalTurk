@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Shane McDermott 2018
-
 public class RandomQueue<T>
 {
     protected List<T> contents = new List<T>();

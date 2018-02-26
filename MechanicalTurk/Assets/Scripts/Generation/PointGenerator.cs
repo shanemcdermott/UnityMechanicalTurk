@@ -6,19 +6,15 @@ using UnityEngine;
 abstract public class PointGenerator : MonoBehaviour
 {
     [SerializeField]
-    protected Rect bounds = new Rect(0,0,100,100);
+    public PolygonCollider2D bounds;
 
     public List<Vector2> samplePoints;
 
-    public void SetBounds(float width, float height)
-    {
-        bounds = new Rect(0, 0, width, height);
-    }
-
     public virtual Vector2 RandPoint()
     {
-        float x = UnityEngine.Random.Range(0, bounds.width);
-        float y = UnityEngine.Random.Range(0, bounds.height);
+        
+        float x = UnityEngine.Random.Range(bounds.bounds.min.x, bounds.bounds.max.x);
+        float y = UnityEngine.Random.Range(bounds.bounds.min.y, bounds.bounds.max.y);
         return new Vector2(x, y);
     }
 
@@ -30,11 +26,7 @@ abstract public class PointGenerator : MonoBehaviour
 
     public Vector2[] Corners()
     {
-        Vector2 bottomLeft = new Vector2(bounds.xMin, bounds.yMin);
-        Vector2 topLeft = new Vector2(bounds.xMin, bounds.yMax);
-        Vector2 bottomRight = new Vector2(bounds.xMax, bounds.yMin);
-        Vector2 topRight = new Vector2(bounds.xMax, bounds.yMax);
-        return new Vector2[] { topLeft, bottomLeft, bottomRight, topRight };
+        return bounds.points;
     }
 
     public abstract void Init();

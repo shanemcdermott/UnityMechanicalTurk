@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class BaseConnection<T> : IConnection<T>
 {
-    public T fromNode;
     public float cost = 1;
-    public T toNode;
+    protected T fromNode;
+    protected T toNode;
 
     public BaseConnection(T from, T to)
     {
@@ -30,4 +30,8 @@ public class BaseConnection<T> : IConnection<T>
         return toNode;
     }
 
+    public bool HasNode(T t)
+    {
+        return t != null && (t.Equals(fromNode) || t.Equals(toNode));
+    }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public interface IGraph<T>
 {
     /// <summary>
@@ -12,6 +11,19 @@ public interface IGraph<T>
     /// <param name="fromNode">The node whose connections to return.</param>
     /// <param name="connections">The connections to return.</param>
     void GetConnections(T fromNode, out List<IConnection<T>> connections);
+}
+
+public interface IHasConnections<T>
+{
+    /// <summary>
+    /// Returns an array of connections (implementing IConnection)
+    /// outgoing from self
+    /// </summary>
+    /// <param name="connections">The connections to return.</param>
+    void GetConnections(out List<IConnection<T>> connections);
+
+    //returns true if this has a connection to other
+    bool IsConnectedTo(T other);
 }
 
 //Connection between nodes of type T
@@ -34,6 +46,8 @@ public interface IConnection<T>
     /// </summary>
     /// <returns></returns>
     T GetToNode();
+
+    bool HasNode(T t);
 }
 
 public enum NodeCategory
@@ -81,6 +95,16 @@ public struct IntPoint
     {
         return new IntPoint(a.x + x, a.y + y);
     }
+
+	public static IntPoint Sub(IntPoint a, int x, int y)
+	{
+		return Add (a, -x, -y);
+	}
+
+	public static IntPoint Sub(IntPoint a, IntPoint b)
+	{
+		return Sub (a, b.x, b.y);
+	}
 
     public static float Distance(IntPoint a, IntPoint b)
     {

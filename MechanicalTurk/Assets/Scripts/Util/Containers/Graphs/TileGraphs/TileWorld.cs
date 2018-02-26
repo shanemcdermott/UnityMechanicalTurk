@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Shane McDermott 2017
 //NodeArray implementation for tile based AStar
 public class TileWorld : MonoBehaviour
 {

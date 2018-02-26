@@ -30,11 +30,14 @@ public class PoissonDiskSampling : PointGenerator
 
     public override void Init()
     {
+        width = bounds.bounds.extents.x * 2;
+        height = bounds.bounds.extents.y * 2;
+        minDistance = width / 15;
         cellSize = minDistance / Mathf.Sqrt(2);
         grid = new Grid2D(Mathf.CeilToInt(width / cellSize), Mathf.CeilToInt(height / cellSize));
         processList = new RandomQueue<Vector2>();
         samplePoints = new List<Vector2>();
-        SetBounds(width, height);
+        AddPoint(gameObject.transform.position);
     }
 
     public override void Init(Vector2[] sourcePoints)
@@ -69,7 +72,8 @@ public class PoissonDiskSampling : PointGenerator
         for(;sampleCount < newPointsCount; sampleCount++)
         {
             Vector2 newPoint = GenerateRandomPointAround(sourcePoint, minDistance);
-            if (bounds.Contains(newPoint) && !IsInNeighborhood(newPoint))
+            
+            if (bounds.OverlapPoint(newPoint) && !IsInNeighborhood(newPoint))
             {
                 AddPoint(newPoint);
                 return newPoint;
