@@ -22,7 +22,7 @@ public struct SquareGridParams
 
     public Vector2Int NumVertices()
     {
-        return FacesPerSide + new Vector2Int(2, 2);
+        return FacesPerSide + new Vector2Int(1,1);
     }
 }
 

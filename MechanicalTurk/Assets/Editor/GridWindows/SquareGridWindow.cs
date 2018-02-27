@@ -12,11 +12,12 @@ public class SquareGridWindow : GridWindow
     {
         gridParams = new SquareGridParams();
         gridParams.Dimensions = new Vector2(100, 100);
-        gridParams.FacesPerSide = new Vector2Int(10, 10);
+        gridParams.FacesPerSide = new Vector2Int(2, 2);
     }
 
-    public override void ShowParams()
+    public override void ShowParams(bool canEdit)
     {
+        GUI.enabled = canEdit;
         gridParams.Dimensions = EditorGUILayout.Vector2Field("Dimensions", gridParams.Dimensions);
         gridParams.FacesPerSide = EditorGUILayout.Vector2IntField("Faces Per Size", gridParams.FacesPerSide);
 
@@ -31,5 +32,6 @@ public class SquareGridWindow : GridWindow
         {
             Debug.Log("Failed to create Grid!");
         }
+        this.grid = grid;
     }
 }

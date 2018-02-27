@@ -38,7 +38,7 @@ public class GridBuilderWindow : EditorWindow
     {
         tab = GUILayout.Toolbar(tab, typeNames);
 
-        gridWindows[tab].ShowParams();
+        gridWindows[tab].ShowParams(polyGrid == null);
 
         if (polyGrid == null)
         {
@@ -52,16 +52,18 @@ public class GridBuilderWindow : EditorWindow
             EditorGUILayout.BeginVertical();
             polyScrollPos = EditorGUILayout.BeginScrollView(polyScrollPos);
             List<Node> verts = polyGrid.GetVertices();
+            GUI.enabled = false;
             for (int i = 0; i < verts.Count; i++)
             {
-                string str = "node " + i;
+                string str = "Vertex " + i;
                 EditorGUILayout.Vector2Field(str, verts[i].GetPosition());
-                GUI.enabled = false;
+                
                 EditorGUILayout.IntField("connections", verts[i].NumConnections());
-                GUI.enabled = true;
+               
             }
+            GUI.enabled = true;
             EditorGUILayout.EndScrollView();
-
+            EditorGUILayout.EndVertical();
         }
     }
 }
