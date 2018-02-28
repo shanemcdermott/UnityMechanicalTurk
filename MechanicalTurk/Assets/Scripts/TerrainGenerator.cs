@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TerrainGenerator : MonoBehaviour {
+public class TerrainGenerator : MonoBehaviour
+{
 
     SimplexNoise simplex;
 
@@ -44,16 +45,16 @@ public class TerrainGenerator : MonoBehaviour {
         float[,] heights = new float[width, height];
 
 
-        for(int x = 0; x < width; x++)
+        for (int x = 0; x < width; x++)
         {
-            for(int y = 0; y < height; y++)
+            for (int y = 0; y < height; y++)
             {
                 heights[x, y] = CalculateHeight(x, y);
             }
         }
         return heights;
     }
-	
+
     float CalculateHeight(int x, int y)
     {
         float xf = (float)x / width * scale + offsetX;
