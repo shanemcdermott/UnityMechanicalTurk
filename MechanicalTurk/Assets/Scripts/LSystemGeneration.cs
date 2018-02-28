@@ -18,7 +18,8 @@ public class LSystemGeneration : MonoBehaviour
     {
         DragonCurve,
         FractalPlant,
-        SierpinskiTri
+        SierpinskiTri,
+        RandomTest
     };
     public lSystems dropdown = lSystems.DragonCurve;
     // Use this for initialization
@@ -29,8 +30,18 @@ public class LSystemGeneration : MonoBehaviour
         if (dropdown == lSystems.DragonCurve)
         {
             //Dragon Curve
-            rules.Add('X', "X+!YF+");
-            rules.Add('Y', "-FX!-Y");
+            rules.Add('X', "X+YF+");
+            rules.Add('Y', "-FX-Y");
+            angle = 90f;
+            iterations = 12;
+            axiom = "FX";
+        }
+        //
+        else if (dropdown == lSystems.RandomTest)
+        {
+            //Random Test -- ! -> random event (-,+,delete last command, or nothing)
+            rules.Add('X', "X+Y!F+");
+            rules.Add('Y', "-F!X-Y");
             angle = 90f;
             iterations = 12;
             axiom = "FX";
@@ -58,7 +69,6 @@ public class LSystemGeneration : MonoBehaviour
         //
         roads.Add(transform.position);
         currString = axiom;
-        angle = 90f;
         for (int i = 0; i < iterations; i++)
         {
             Generate();
