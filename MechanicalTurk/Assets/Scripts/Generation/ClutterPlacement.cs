@@ -14,13 +14,17 @@ public class ClutterPlacement : MonoBehaviour
 
     public List<GameObject> spawnedClutter;
 
+    //Map Mesh
+    public MeshFilter mapMeshFilter;
+
     public void placeClutter()
     {
         List<Vector2> points;
         pointGenerator.Generate(out points);
         foreach (Vector2 v in points)
         {
-            Vector3 v3 = new Vector3(v.x, 0, v.y) + transform.position;
+            float mapHeight = GetHeightAtPostion(v);
+            Vector3 v3 = new Vector3(v.x, mapHeight, v.y) + transform.position;
             GameObject go = (GameObject)Instantiate(GetRandomClutter(), v3, transform.rotation);
             if(go)
             {
@@ -28,6 +32,24 @@ public class ClutterPlacement : MonoBehaviour
                 spawnedClutter.Add(go);
             }
         }
+    }
+
+    float GetHeightAtPostion(Vector2 v2)
+    {
+        Mesh mapMesh = mapMeshFilter.mesh;
+        Vector3[] meshVerts = mapMesh.vertices;
+        Vector3[] meshNormals = mapMesh.normals;
+
+        for(int x = 0; x < meshVerts.Length; x++)
+        {
+            //if(meshVerts[x].x - v2.x < 3 && meshVerts[x].z - v2.y < 3 && meshNormals[x].)
+            //{
+            //    Debug.Log("found height");
+            //    return meshVerts[x].y;
+            //}
+        }
+
+        return 0;
     }
 
     public void clearClutter()
