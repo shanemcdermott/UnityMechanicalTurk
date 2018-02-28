@@ -9,7 +9,7 @@ using UnityEditor;
 public class GridBuilderWindow : EditorWindow
 {
 
-    private Vector2 polyScrollPos;
+
     private PolyGrid polyGrid;
 
     private int tab = 0;
@@ -17,6 +17,10 @@ public class GridBuilderWindow : EditorWindow
     private GridWindow[] gridWindows;
 
     private bool showGridProperties;
+    private bool showGridVertices;
+    private Vector2 vertScrollPos;
+    private bool showGridFaces;
+    private Vector2 faceScrollPos;
     private bool showAdvancedOptions;
 
     [MenuItem("GameObject/Create Grid")]
@@ -71,8 +75,12 @@ public class GridBuilderWindow : EditorWindow
 
     public void ShowGridProps()
     {
-            EditorGUILayout.BeginVertical();
-            polyScrollPos = EditorGUILayout.BeginScrollView(polyScrollPos);
+        EditorGUILayout.BeginHorizontal();
+        
+        showGridVertices = EditorGUILayout.Foldout(showGridVertices, "Vertices");        
+        if (showGridVertices)
+        {
+            vertScrollPos = EditorGUILayout.BeginScrollView(vertScrollPos);
             List<Node> verts = polyGrid.GetVertices();
             GUI.enabled = false;
             for (int i = 0; i < verts.Count; i++)
@@ -85,7 +93,28 @@ public class GridBuilderWindow : EditorWindow
             }
             GUI.enabled = true;
             EditorGUILayout.EndScrollView();
-            EditorGUILayout.EndVertical();
+        }
+
+        showGridFaces = EditorGUILayout.Foldout(showGridFaces, "Faces");
+        if (showGridFaces)
+        {
+            faceScrollPos = EditorGUILayout.BeginScrollView(faceScrollPos);
+            GUI.enabled = false;
+            List<GridFace> faces = polyGrid.GetFaces();
+            for (int i = 0; i < faces.Count; i++)
+            {
+                string str = "Face " + i;
+                EditorGUILayout.Vector2Field(str, faces[i].GetPosition());
+
+                EditorGUILayout.IntField("vertices", faces[i].NumVertices());
+            }
+            GUI.enabled = true;
+            EditorGUILayout.EndScrollView();
+        }
+        EditorGUILayout.EndHorizontal();
+       
+
+            
     }
 
     public void ShowAdvancedOptions()
@@ -93,6 +122,14 @@ public class GridBuilderWindow : EditorWindow
         if (GUILayout.Button("Flip Y and Z"))
         {
             polyGrid.FlipAxes();
+        }
+
+        if(polyGrid.GetComponent<MeshFilter>())
+        {
+            if(GUILayout.Button("Save Mesh"))
+            {
+                SaveMesh(polyGrid.GetComponent<MeshFilter>().sharedMesh, "Test Mesh", true, true);
+            }
         }
 
         if (GUILayout.Button("Destroy"))
@@ -104,5 +141,21 @@ public class GridBuilderWindow : EditorWindow
     public void OnInspectorUpdate()
     {
         this.Repaint();
+    }
+
+    public static void SaveMesh(Mesh mesh, string name, bool makeNewInstance, bool optimizeMesh)
+    {
+        string path = EditorUtility.SaveFilePanel("Save Separate Mesh Asset", "Assets/", name, "asset");
+        if (string.IsNullOrEmpty(path)) return;
+
+        path = FileUtil.GetProjectRelativePath(path);
+
+        Mesh meshToSave = (makeNewInstance) ? Object.Instantiate(mesh) as Mesh : mesh;
+
+        if (optimizeMesh)
+            MeshUtility.Optimize(meshToSave);
+
+        AssetDatabase.CreateAsset(meshToSave, path);
+        AssetDatabase.SaveAssets();
     }
 }

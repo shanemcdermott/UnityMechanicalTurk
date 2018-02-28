@@ -16,7 +16,7 @@ public class Node : IHasConnections<Node>
 
     public Node(Vector2 position2)
     {
-        position = new Vector3(position2.x, position2.y);
+        position = new Vector3(position2.x, 0, position2.y);
     }
 
     public Node(Vector3 position)
@@ -88,6 +88,11 @@ public class Node : IHasConnections<Node>
         this.position = position;
     }
 
+    public Vector2 GetPositionXZ()
+    {
+        return new Vector2(position.x, position.z);
+    }
+
     public Vector3 GetPosition()
     {
         return position;
@@ -96,12 +101,13 @@ public class Node : IHasConnections<Node>
     public void DrawConnections()
     {
         Vector3 pNorm = position.normalized;
-        Gizmos.color = new Color(pNorm.x,pNorm.y, pNorm.z);
+       
+        Color color = new Color(pNorm.x,pNorm.y, pNorm.z);
         foreach (Node c in connections)
         {
             if (c != null)
             {
-                Gizmos.DrawLine(position, c.position);
+                Debug.DrawLine(position, c.position, color);
             }
         }
     }

@@ -19,7 +19,7 @@ public class SquareGridWindow : GridWindow
     {
         GUI.enabled = grid == null;
         gridParams.Dimensions = EditorGUILayout.Vector2Field("Dimensions", gridParams.Dimensions);
-        gridParams.FacesPerSide = EditorGUILayout.Vector2IntField("Faces Per Size", gridParams.FacesPerSide);
+        gridParams.FacesPerSide = EditorGUILayout.Vector2IntField("Faces Per Side", gridParams.FacesPerSide);
 
         GUI.enabled = false;
         EditorGUILayout.Vector2Field("Face Dimensions", gridParams.GetFaceDimensions());

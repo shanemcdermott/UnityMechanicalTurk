@@ -15,6 +15,12 @@ public struct SquareGridParams
     public Vector2 Dimensions;
     public Vector2Int FacesPerSide;
 
+    public SquareGridParams(PolyGrid source)
+    {
+        Dimensions = source.Dimensions;
+        FacesPerSide = source.FacesPerSide;
+    }
+
     public Vector2 GetFaceDimensions()
     {
         return new Vector2(Dimensions.x / FacesPerSide.x, Dimensions.y / FacesPerSide.y);
@@ -31,14 +37,21 @@ public class GridFactory
 
     public static bool CreateSquareGrid(SquareGridParams gridParams, out PolyGrid grid)
     {
-
         GameObject go = new GameObject("Grid");
         grid = go.AddComponent<PolyGrid>();
+        grid.Dimensions = gridParams.Dimensions;
+        grid.FacesPerSide = gridParams.FacesPerSide;
+        return PopulateSquareGrid(ref grid);
+    }
+
+    public static bool PopulateSquareGrid(ref PolyGrid grid)
+    {
+        SquareGridParams gridParams = new SquareGridParams(grid);
         Vector2 faceDimensions = gridParams.GetFaceDimensions();
         Vector2Int vertsPerSide = gridParams.NumVertices();
 
         Node[,] vertices = new Node[vertsPerSide.x, vertsPerSide.y];
-        Node[,] faces = new Node[gridParams.FacesPerSide.x, gridParams.FacesPerSide.y];
+        GridFace[,] faces = new GridFace[gridParams.FacesPerSide.x, gridParams.FacesPerSide.y];
 
 
         //Add Vertices
@@ -74,8 +87,9 @@ public class GridFactory
         {
             for (int y = 0; y < gridParams.FacesPerSide.y; y++)
             {
-                Vector2 vertex = MathOps.Midpoint(vertices[x, y].GetPosition(), vertices[x + 1, y + 1].GetPosition());
-                faces[x, y] = new Node(vertex);
+                Vector2 vertex = MathOps.Midpoint(vertices[x, y].GetPositionXZ(), vertices[x + 1, y + 1].GetPositionXZ());
+                faces[x, y] = new GridFace(vertex);
+                faces[x, y].AddVertices(new Node[] { vertices[x,y], vertices[x+1,y], vertices[x,y+1], vertices[x+1,y+1]});
                 grid.AddFace(faces[x, y]);
                 
             }

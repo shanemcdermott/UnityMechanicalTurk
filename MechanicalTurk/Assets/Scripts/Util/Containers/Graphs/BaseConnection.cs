@@ -15,7 +15,7 @@ public class BaseConnection<T> : IConnection<T>
         this.toNode = to;
     }
 
-    public float GetCost()
+    public virtual float GetCost()
     {
         return cost;
     }

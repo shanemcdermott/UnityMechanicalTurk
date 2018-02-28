@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class PolyGrid : MonoBehaviour
 {
+    //Spawn Parameters
+    public Vector2 Dimensions;
+    public Vector2Int FacesPerSide;
+
+
     [SerializeField]
-    protected List<Node> faces = new List<Node>();
+    protected List<GridFace> faces = new List<GridFace>();
 
     [SerializeField]
 	protected List<Node> vertices = new List<Node>();
 
-    public void AddFace(Node newFace)
+    public int NumFaces()
+    {
+        return faces.Count;
+    }
+
+    public void AddFace(GridFace newFace)
     {
         faces.Add(newFace);
     }
@@ -26,7 +36,7 @@ public class PolyGrid : MonoBehaviour
         return vertices;
     }
 
-    public List<Node> GetFaces()
+    public List<GridFace> GetFaces()
     {
         return faces;
     }
@@ -37,7 +47,7 @@ public class PolyGrid : MonoBehaviour
         {
             n.SetPosition(MathOps.FlipYZ(n.GetPosition()));
         }
-        foreach (Node n in faces)
+        foreach (GridFace n in faces)
         {
             n.SetPosition(MathOps.FlipYZ(n.GetPosition()));
         }
