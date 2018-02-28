@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11edb3bbf1af3f641aa61e726f0c900d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 3
+  seed: 15
   dropdown: 3
 --- !u!4 &832138745
 Transform:
@@ -382,9 +382,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1184539671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60a3eb7722c9dd54b8b65c0b51e7d8d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 179abcf35adac2643bcbff516e24bd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  depth: 3
+  width: 256
+  height: 256
+  scale: 10
+  offsetX: 100
+  offsetY: 100
+  seed: 0
 --- !u!114 &1184539676
 MonoBehaviour:
   m_ObjectHideFlags: 0
