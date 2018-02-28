@@ -14,7 +14,10 @@ public class GridBuilderWindow : EditorWindow
 
     private int tab = 0;
     private string[] typeNames;
-    private GridWindow[] gridWindows; 
+    private GridWindow[] gridWindows;
+
+    private bool showGridProperties;
+    private bool showAdvancedOptions;
 
     [MenuItem("GameObject/Create Grid")]
     public static void ShowWindow()
@@ -32,13 +35,14 @@ public class GridBuilderWindow : EditorWindow
         {
             typeNames[i] = gridWindows[i].GetName();
         }
+        showGridProperties = false;
     }
 
     private void OnGUI()
     {
         tab = GUILayout.Toolbar(tab, typeNames);
 
-        gridWindows[tab].ShowParams(polyGrid == null);
+        gridWindows[tab].ShowParams();
 
         if (polyGrid == null)
         {
@@ -49,6 +53,24 @@ public class GridBuilderWindow : EditorWindow
         }
         else
         {
+            showGridProperties = EditorGUILayout.Foldout(showGridProperties, "Grid Properties");
+            if (showGridProperties)
+            {
+                ShowGridProps();
+            }
+
+
+            showAdvancedOptions = EditorGUILayout.Foldout(showAdvancedOptions, "Advanced");
+            if(showAdvancedOptions)
+            {
+                ShowAdvancedOptions();
+            }
+
+        }
+    }
+
+    public void ShowGridProps()
+    {
             EditorGUILayout.BeginVertical();
             polyScrollPos = EditorGUILayout.BeginScrollView(polyScrollPos);
             List<Node> verts = polyGrid.GetVertices();
@@ -57,13 +79,30 @@ public class GridBuilderWindow : EditorWindow
             {
                 string str = "Vertex " + i;
                 EditorGUILayout.Vector2Field(str, verts[i].GetPosition());
-                
+
                 EditorGUILayout.IntField("connections", verts[i].NumConnections());
-               
+
             }
             GUI.enabled = true;
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
+    }
+
+    public void ShowAdvancedOptions()
+    {
+        if (GUILayout.Button("Flip Y and Z"))
+        {
+            polyGrid.FlipAxes();
         }
+
+        if (GUILayout.Button("Destroy"))
+        {
+            DestroyImmediate(polyGrid.gameObject);
+        }
+    }
+
+    public void OnInspectorUpdate()
+    {
+        this.Repaint();
     }
 }

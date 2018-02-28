@@ -20,8 +20,14 @@ public abstract class GridWindow
         return type;
     }
 
-    public abstract void ShowParams(bool canEdit);
+    public abstract void ShowParams();
 
     public abstract void CreateGrid(out PolyGrid grid);
 
+    public void SetGrid(PolyGrid grid)
+    {
+        this.grid = grid;
+    }
+
+    public abstract void Subdivide();
 }

@@ -83,6 +83,11 @@ public class Node : IHasConnections<Node>
         }
     }
 
+    public void SetPosition(Vector3 position)
+    {
+        this.position = position;
+    }
+
     public Vector3 GetPosition()
     {
         return position;

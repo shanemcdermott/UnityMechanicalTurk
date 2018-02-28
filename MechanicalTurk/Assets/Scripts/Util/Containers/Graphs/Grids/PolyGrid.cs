@@ -31,7 +31,19 @@ public class PolyGrid : MonoBehaviour
         return faces;
     }
 
-    public void OnDrawGizmosSelected()
+    public void FlipAxes()
+    {
+        foreach(Node n in vertices)
+        {
+            n.SetPosition(MathOps.FlipYZ(n.GetPosition()));
+        }
+        foreach (Node n in faces)
+        {
+            n.SetPosition(MathOps.FlipYZ(n.GetPosition()));
+        }
+    }
+
+    public void OnDrawGizmos()
     {
         DrawVertices();
         DrawFaces();
