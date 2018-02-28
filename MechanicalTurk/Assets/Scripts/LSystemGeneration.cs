@@ -50,11 +50,11 @@ public class LSystemGeneration : MonoBehaviour
         else if (dropdown == lSystems.FractalPlant)
         {
             //Fractal Plant
-            rules.Add('X', "F[-X][X]F[-X]+FX");
+            rules.Add('X', "F-[[X]+X]+F[+FX]-X");
             rules.Add('F', "FF");
             axiom = "X";
             iterations = 6;
-            angle = 25f;
+            angle = 22f;
         }
         //
         else if (dropdown == lSystems.SierpinskiTri)
