@@ -29,8 +29,8 @@ public class LSystemGeneration : MonoBehaviour
         if (dropdown == lSystems.DragonCurve)
         {
             //Dragon Curve
-            rules.Add('X', "X+YF+");
-            rules.Add('Y', "-FX-Y");
+            rules.Add('X', "X+!YF+");
+            rules.Add('Y', "-FX!-Y");
             angle = 90f;
             iterations = 12;
             axiom = "FX";
@@ -131,8 +131,28 @@ public class LSystemGeneration : MonoBehaviour
                 transform.position = ti.position;
                 transform.rotation = ti.rotation;
             }
-            else if (currentCharacter == '!')
+            else if (currentCharacter == '!')//Insert Random Command
             {
+                float num = Random.value;
+                if(num < 0.1f)//Turn left
+                {
+                    stringCharacters.SetValue('-', i + 1);
+                    i--;
+                }
+                else if( num < 0.2f)//Turn right
+                {
+                    stringCharacters.SetValue('+', i + 1);
+                    i--;
+                }
+                else if(num < 0.3f)//Delete command
+                {
+                    stringCharacters.SetValue('n', i + 1);
+                    i--;
+                }
+                // Anything else
+                //Do nothing
+
+
                 //last segment +=  new Vector3( Random.next(),0, Random.next() );
                 //random needs to be 0,1,2,3 
             }
