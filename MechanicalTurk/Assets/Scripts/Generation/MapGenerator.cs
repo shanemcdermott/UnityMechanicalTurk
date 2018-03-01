@@ -9,15 +9,9 @@ public class MapGenerator : MonoBehaviour {
 	const int mapChunkSize = 241;
 	[Range(0,6)]
 	public int levelOfDetail;
-	public float noiseScale;
-
-	public int octaves;
-	[Range(0,1)]
-	public float persistance;
-	public float lacunarity;
 
 	public int seed;
-	public Vector2 offset;
+
 
 	public float meshHeightMultiplier;
 	public AnimationCurve meshHeightCurve;
@@ -26,8 +20,15 @@ public class MapGenerator : MonoBehaviour {
 
 	public TerrainType[] regions;
 
-	public void GenerateMap() {
-		float[,] noiseMap = Noise.GenerateNoiseMap (mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
+
+	public NoiseGenerator noiseGenerator;
+
+	public void GenerateMap() 
+	{
+		noiseGenerator = GetComponent<NoiseGenerator> ();
+
+		noiseGenerator.init (seed);
+		float[,] noiseMap = noiseGenerator.GenerateHeightMap (mapChunkSize, mapChunkSize);//Noise.GenerateNoiseMap (mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
 		Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
 		for (int y = 0; y < mapChunkSize; y++) {
@@ -51,15 +52,7 @@ public class MapGenerator : MonoBehaviour {
 			display.DrawMesh (MeshGenerator.GenerateTerrainMesh (noiseMap, meshHeightMultiplier, meshHeightCurve, levelOfDetail), TextureGenerator.TextureFromColourMap (colourMap, mapChunkSize, mapChunkSize));
 		}
 	}
-
-	void OnValidate() {
-		if (lacunarity < 1) {
-			lacunarity = 1;
-		}
-		if (octaves < 0) {
-			octaves = 0;
-		}
-	}
+		
 }
 
 [System.Serializable]

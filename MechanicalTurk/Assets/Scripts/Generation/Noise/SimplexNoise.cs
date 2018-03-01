@@ -4,7 +4,16 @@ using UnityEngine;
 
 //Simplex Noise algorithm from: http://webstaff.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
 
-public class SimplexNoise : MonoBehaviour {
+public class SimplexNoise : NoiseGenerator 
+{
+
+	public float scale = 10f;
+	public bool randomOffset  = true;
+	public float offsetX = 100f;
+	public float offsetY = 100f;
+	public int width = 256;
+	public int height = 256;
+
         // Simplex noise in 2D
         public Grad[] grad3 = {new Grad(1,1),new Grad(-1,1),new Grad(1,-1),new Grad(-1,-1),
                                      new Grad(1,0),new Grad(-1,0),new Grad(1,0),new Grad(-1,0),
@@ -29,7 +38,7 @@ public class SimplexNoise : MonoBehaviour {
         private short[] perm = new short[512];
         private short[] permMod12 = new short[512];
 
-        public void init(int seed)
+        public override void init(int seed)
         {
         p = (short[]) p_temp.Clone();
 
@@ -53,6 +62,10 @@ public class SimplexNoise : MonoBehaviour {
                 perm[i] = p[i & 255];
                 permMod12[i] = (short)(perm[i] % 12);
             }
+		if (randomOffset) {
+			offsetX = Random.Range(0f, 9999f);
+			offsetY = Random.Range(0f, 9999f);
+		}
         }
 
         // Skewing and unskewing factors for 2 dimensions
@@ -129,8 +142,32 @@ public class SimplexNoise : MonoBehaviour {
             return 70.0f * (n0 + n1 + n2);
         }
         
-        public class Grad
-        {
+	public override float[,] GenerateHeightMap(int width, int height)
+	{
+		this.width = width;
+		this.height = height;
+		float[,] heights = new float[width, height];
+	
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				heights[x, y] = CalculateHeight(x, y);
+			}
+		}
+		return heights;
+	}
+
+
+	float CalculateHeight(int x, int y)
+	{
+		float xf = (float)x / width * scale + offsetX;
+		float yf = (float)y / height * scale + offsetY;
+		return noise(xf, yf);
+	}
+        
+	public class Grad
+    {
             public float x, y;
 
             public Grad(float x, float y)

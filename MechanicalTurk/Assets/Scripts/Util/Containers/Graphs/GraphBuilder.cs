@@ -7,6 +7,8 @@ public class GraphBuilder : MonoBehaviour
     public DelaunayTriangulation delTri;
     public bool drawTriangles = false;
 
+
+	public NoiseGenerator noiseGenerator;
     public PointGenerator pointGenerator;
     public bool drawPoints = true;
 

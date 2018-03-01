@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum NoiseAlgorithm
+public abstract class NoiseGenerator : MonoBehaviour
 {
-    Simplex,
-    Perlin
-}
-
-public interface NoiseGenerator
-{
-   float[,] GenerateHeightmap(int width, int height);
+	public abstract void init (int seed);
+	public abstract float[,] GenerateHeightMap(int width, int height);
 }
