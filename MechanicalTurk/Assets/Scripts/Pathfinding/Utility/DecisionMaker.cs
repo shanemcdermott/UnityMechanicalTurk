@@ -13,6 +13,7 @@ namespace UtilitySystem
         public void PerformBestDecision()
         {
             Decision decision = GetBestDecision();
+            decision.perform ();
             last = decision.GetContext();
         }
 
