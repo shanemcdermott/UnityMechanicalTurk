@@ -5,9 +5,8 @@ using UnityEngine;
 //Shane McDermott 2018
 public class ClutterPlacement : MonoBehaviour
 {
-
-    //Prefabs
-    public GameObject[] clutterPrefabs;
+    //Object selection algorithm
+    public ObjectPicker objectSelector;
 
     //PlacementAlgorithm
     public PointGenerator pointGenerator;
@@ -21,14 +20,16 @@ public class ClutterPlacement : MonoBehaviour
         foreach (Vector2 v in points)
         {
             Vector3 v3 = new Vector3(v.x, 0, v.y) + transform.position;
-            GameObject go = (GameObject)Instantiate(GetRandomClutter(), v3, transform.rotation);
-            if(go)
+            GameObject go = GameObject.Instantiate(objectSelector.GetChoice(), v3, transform.rotation);
+            if (go)
             {
                 go.transform.SetParent(transform);
                 spawnedClutter.Add(go);
             }
         }
     }
+
+
 
     public void clearClutter()
     {
@@ -39,10 +40,4 @@ public class ClutterPlacement : MonoBehaviour
         }
         spawnedClutter.Clear();
     }
-
-    public GameObject GetRandomClutter()
-    {
-        return clutterPrefabs[Random.Range(0, clutterPrefabs.Length)];
-    }
-
 }

@@ -25,15 +25,20 @@ public class GameNode : MonoBehaviour
 	
     public void SpawnBuildings()
     {
-      for(float x = minLocation.x; x < maxLocation.x; x+=spawnSpace.x)
-        {
-            for(float z = minLocation.z; z < maxLocation.z; z+=spawnSpace.z)
+        GameObject go = GameObject.Instantiate(GetRandomPrefab());
+        go.transform.SetParent(transform);
+        go.transform.localPosition = new Vector3();
+        /*
+          for(float x = minLocation.x; x < maxLocation.x; x+=spawnSpace.x)
             {
-                GameObject go = GameObject.Instantiate(GetRandomPrefab());
-                go.transform.SetParent(transform);
-                go.transform.localPosition = new Vector3(x,0,z);
+                for(float z = minLocation.z; z < maxLocation.z; z+=spawnSpace.z)
+                {
+                    GameObject go = GameObject.Instantiate(GetRandomPrefab());
+                    go.transform.SetParent(transform);
+                    go.transform.localPosition = new Vector3(x,0,z);
+                }
             }
-        }
+            */
     }
 
     public GameObject GetRandomPrefab()
