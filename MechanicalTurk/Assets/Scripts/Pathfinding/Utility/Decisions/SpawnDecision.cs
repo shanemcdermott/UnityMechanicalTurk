@@ -1,26 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilitySystem;
 
-namespace UtilitySystem
+public class SpawnDecision : Decision
 {
+    public GameObject objectToSpawn;
 
-    public class SpawnDecision : Decision
+    public override DecisionContext GetContext()
     {
-        public GameObject objectToSpawn;
-        
-        public override DecisionContext GetContext()
-        {
-            return new DecisionContext(id, gameObject, objectToSpawn);  
-        }
-
-        public override void Perform()
-        {
-            GameObject.Instantiate(objectToSpawn, transform);
-        }
-
-
+        return new DecisionContext(id, gameObject, objectToSpawn);
     }
 
+    public override void Perform()
+    {
+        GameObject.Instantiate(objectToSpawn, transform);
+    }
 
 }
