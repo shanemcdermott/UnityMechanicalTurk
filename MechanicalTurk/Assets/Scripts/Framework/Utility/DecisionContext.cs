@@ -10,29 +10,23 @@ namespace UtilitySystem
     {
         /*What are you trying to do?*/
         public int decisionId;
+
         /*Who is asking?*/
-        public GameObject intelligence;
+        public GameObject intelObject;
 
         //Optional target
         public GameObject targetObject;
 
-        public DecisionContext(int decisionIdentifier, GameObject intelligenceController)
-        {
-            decisionId = decisionIdentifier;
-            intelligence = intelligenceController;
-            targetObject = null;
-        }
-
         public DecisionContext(int decisionIdentifier, GameObject intelligenceController, GameObject targetObject)
         {
             this.decisionId = decisionIdentifier;
-            this.intelligence = intelligenceController;
+            this.intelObject= intelligenceController;
             this.targetObject = targetObject;
         }
 
         public GameObject GetIntelligence()
         {
-            return intelligence;
+            return intelObject;
         }
 
         public virtual float GetBonusFactor(DecisionContext lastDecision)
