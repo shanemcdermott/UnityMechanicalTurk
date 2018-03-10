@@ -4,38 +4,37 @@ using System.Collections;
 public class TerrainGenerator : MonoBehaviour
 {
 
-    NoiseGenerator simplex;
+    public NoiseMap noiseMap;
 
     public int depth = 3;
-    public int width = 256;
-    public int height = 256;
 
     public float scale = 10f;
 
     public float offsetX = 100f;
     public float offsetY = 100f;
 
-    public int seed = 0;
-
-    void Start()
-    {
-        simplex = GetComponent<NoiseGenerator>();
-        simplex.init(seed);
-
-    }
-
     void Update()
     {
+        Generate();
+    }
+
+
+    public void Generate()
+    {
+        if(noiseMap == null)
+        {
+            noiseMap = GetComponent<NoiseGenerator>().noiseMap;
+        }
         Terrain terrain = GetComponent<Terrain>();
-        terrain.terrainData = GenerateTerrain(terrain.terrainData);
+        terrain.terrainData = GenerateTerrainData(terrain.terrainData);
         terrain.Flush();
     }
 
-    TerrainData GenerateTerrain(TerrainData terrainData)
+    TerrainData GenerateTerrainData(TerrainData terrainData)
     {
-        terrainData.heightmapResolution = width + 1;
-        terrainData.size = new Vector3(width, depth, height);
-		terrainData.SetHeightsDelayLOD(0, 0, simplex.GenerateHeightMap(width,height));
+        terrainData.heightmapResolution = noiseMap.Width + 1;
+        terrainData.size = new Vector3(noiseMap.Width, depth, noiseMap.Height);
+		terrainData.SetHeightsDelayLOD(0, 0, noiseMap.Values);
         return terrainData;
     }
 	/*

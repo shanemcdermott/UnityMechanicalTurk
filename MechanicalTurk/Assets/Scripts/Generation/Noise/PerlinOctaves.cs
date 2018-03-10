@@ -3,25 +3,15 @@ using System.Collections;
 
 public class PerlinOctaves : NoiseGenerator 
 {
-	public float scale;
 	public int octaves;
 	[Range(0,1)]
 	public float persistance;
 	public float lacunarity;
 	public Vector2 offset;
 
-
-	public override void init(int seed)
+    public override float[,] GenerateHeightMap(int mapWidth, int mapHeight)
 	{
-		Random.InitState (seed);
-
-	}
-
-	public override float[,] GenerateHeightMap(int width, int height)
-	{
-		float[,] noiseMap = new float[width, height];
-		int mapWidth = width;
-		int mapHeight = height;
+		float[,] heightmap = new float[mapWidth, mapHeight];
 
 		Vector2[] octaveOffsets = new Vector2[octaves];
 		for (int i = 0; i < octaves; i++) {
@@ -64,17 +54,17 @@ public class PerlinOctaves : NoiseGenerator
 				} else if (noiseHeight < minNoiseHeight) {
 					minNoiseHeight = noiseHeight;
 				}
-				noiseMap [x, y] = noiseHeight;
+				heightmap [x, y] = noiseHeight;
 			}
 		}
 
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
-				noiseMap [x, y] = Mathf.InverseLerp (minNoiseHeight, maxNoiseHeight, noiseMap [x, y]);
+				heightmap [x, y] = Mathf.InverseLerp (minNoiseHeight, maxNoiseHeight, heightmap [x, y]);
 			}
 		}
 
-		return noiseMap;	
+		return heightmap;	
 	}
 
 

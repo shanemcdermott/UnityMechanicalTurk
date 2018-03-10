@@ -15,7 +15,7 @@ public class GenerationSequence : GenerationAlgorithm
          return generationSequence[seqIndex];
     }
 
-    public override bool IsReady()
+    public override bool CanGenerate()
     {
         return generationSequence.Length > 0 && seqIndex == 0;
     }
@@ -29,7 +29,7 @@ public class GenerationSequence : GenerationAlgorithm
     /// <summary>
     /// Increments @seqIndex and calls StartCurrentAlgorithm
     /// </summary>
-    public void StartNextAlgorithm()
+    public virtual void StartNextAlgorithm()
     {
         seqIndex++;
         Generate();
@@ -41,15 +41,11 @@ public class GenerationSequence : GenerationAlgorithm
         if (alg)
         {
             alg.OnGenerationComplete.AddListener(StartNextAlgorithm);
-            if(!alg.IsReady())
+            alg.Setup();
+            if (alg.CanGenerate())
             {
-                alg.Setup();
+                alg.Generate(true);
             }
-            alg.Generate();
-        }
-        else
-        {
-            OnGenerationComplete.Invoke();
         }
     }
 

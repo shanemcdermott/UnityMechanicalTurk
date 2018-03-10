@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/**
- * Event handler for generation algorithms.
- */ 
+/// <summary>
+/// Manages Random Seed, Generation Sequences.
+/// </summary>
 public class GenerationController : MonoBehaviour
 {
     /*RNG Seed to be used for all generation processes*/
@@ -38,11 +38,11 @@ public class GenerationController : MonoBehaviour
         Random.InitState(Seed);
         foreach (GenerationSequence sequence in GenerationSequences)
         {
-            if (!sequence.IsReady())
+            if (sequence.CanGenerate())
             {
                 sequence.Setup();
+                sequence.Generate(true);
             }
-            sequence.Generate();
         }
     }
 

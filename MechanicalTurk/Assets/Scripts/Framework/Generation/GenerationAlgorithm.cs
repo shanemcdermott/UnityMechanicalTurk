@@ -20,13 +20,26 @@ public abstract class GenerationAlgorithm : MonoBehaviour
     /// Checks to see if generation prerequisites are met.
     /// </summary>
     /// <returns>true if ready for generation.</returns>
-    public abstract bool IsReady();
+    public abstract bool CanGenerate();
 
     
     /// <summary>
     /// Collects any prerequisites for generation.
     /// </summary>
     public abstract void Setup();
+
+    /// <summary>
+    /// Invokes OnGenerationComplete when finished.
+    /// </summary>
+    public virtual void Generate(bool ShouldInvokeOnComplete)
+    {
+        Generate();
+        if (ShouldInvokeOnComplete)
+        {
+            OnGenerationComplete.Invoke();
+        }
+    }
+
     public abstract void Generate();
 
 

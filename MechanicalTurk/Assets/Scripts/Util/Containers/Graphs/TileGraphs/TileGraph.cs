@@ -30,7 +30,7 @@ public class TileGraph : MonoBehaviour, IGraph<IntPoint>
 
     
     //If a terrain reference is provided, samples the height value at each point in the graph.
-    //Otherwise sets each height value equal to the graph's gransform.
+    //Otherwise sets each height value equal to the graph's transform.
     public void InitHeightField()
     {
         IntPoint numTiles = WorldToTile(graphSize);
