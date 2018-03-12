@@ -94,7 +94,11 @@ public class GenerationController : MonoBehaviour
         MapGenerator mapGen = GetComponent<MapGenerator>();
         if (mapGen)
         {
-            mapGen.GenerateMap(heightMap.Values);
+           Color[] colors = mapGen.GetColorMap(heightMap);
+           Texture2D tex = TextureGenerator.TextureFromColourMap (colors, heightMap.Width, heightMap.Height);
+           TerrainGenerator terrainGenerator = GetComponent<TerrainGenerator>();
+           terrainGenerator.terrainTexture = tex;
+           terrainGenerator.GenerateTerrain();
         }
     }
 

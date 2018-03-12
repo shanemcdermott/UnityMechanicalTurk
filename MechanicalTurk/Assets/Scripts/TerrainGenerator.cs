@@ -15,6 +15,7 @@ public class TerrainGenerator : MonoBehaviour
     public float offsetX = 100f;
     public float offsetY = 100f;
 
+    public Texture2D terrainTexture;
     public int seed = 0;
 
     void Start()
@@ -45,13 +46,23 @@ public class TerrainGenerator : MonoBehaviour
         terrainData.heightmapResolution = width + 1;
         terrainData.size = new Vector3(width, depth, height);
         terrainData.SetHeightsDelayLOD(0, 0, GenerateHeights());
+        if(terrainTexture)
+        {
+            SplatPrototype[] textures = new SplatPrototype[1];
+			textures [0] = new SplatPrototype ();
+            textures[0].texture = terrainTexture;
+            textures[0].tileSize = new Vector2(1,1);   
+            terrainData.splatPrototypes = textures;
+        }
         return terrainData;
     }
 
     float[,] GenerateHeights()
     {
-        float[,] heights = new float[width, height];
+		GenerationController con = GetComponent<GenerationController> ();
+		return con.heightMap.Values;
 
+        float[,] heights = new float[width, height];
 
         for (int x = 0; x < width; x++)
         {

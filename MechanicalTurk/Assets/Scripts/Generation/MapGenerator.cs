@@ -55,6 +55,24 @@ public class MapGenerator : MonoBehaviour {
 		}
 	}
 
+	public Color[] GetColorMap(NoiseMap noiseMap)
+	{
+		Color[]  colourMap = new Color[noiseMap.Width*noiseMap.Height];
+			for (int y = 0; y < noiseMap.Height; y++) {
+			for (int x = 0; x < noiseMap.Width; x++) {
+				float currentHeight = noiseMap [x, y];
+				for (int i = 0; i < regions.Length; i++) {
+					if (currentHeight <= regions [i].height) {
+						colourMap [noiseMap.ToIndex(x,y)] = regions [i].colour;
+						break;
+					}
+				}
+			}
+		}
+
+		return colourMap;
+	}
+
 	void OnValidate() {
 		if (lacunarity < 1) {
 			lacunarity = 1;
