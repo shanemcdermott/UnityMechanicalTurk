@@ -23,13 +23,21 @@ public class TerrainGenerator : MonoBehaviour
         simplex.init(seed);
         offsetX = Random.Range(0f, 9999f);
         offsetY = Random.Range(0f, 9999f);
+        simplex.offsetX = offsetX;
+        simplex.offsetY = offsetY;
+        simplex.scale = scale;
     }
 
-    void Update()
+    public virtual void GenerateTerrain()
     {
         Terrain terrain = GetComponent<Terrain>();
         terrain.terrainData = GenerateTerrain(terrain.terrainData);
         terrain.Flush();
+    }
+
+    void Update()
+    {
+        GenerateTerrain();
     }
 
     TerrainData GenerateTerrain(TerrainData terrainData)

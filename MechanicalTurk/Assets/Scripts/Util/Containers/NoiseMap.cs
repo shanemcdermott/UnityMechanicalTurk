@@ -7,9 +7,18 @@ using UnityEngine;
 /// 2D Array with indexers
 /// </summary>
 [System.Serializable]
-public class NoiseMap 
+public class NoiseMap : MonoBehaviour
 {
     public float scale = 1f;
+
+    public Vector2Int Dimensions
+    {
+        get { return new Vector2Int(width, height); }
+        set
+        {
+            Resize(value);
+        }
+    }
 
     public int Width
     {
@@ -32,9 +41,11 @@ public class NoiseMap
         }
     }
 
-
+    [SerializeField]
     private int width = 256;
+    [SerializeField]
     private int height = 256;
+
     private float[,] heightmap;
 
     public float[,] Values

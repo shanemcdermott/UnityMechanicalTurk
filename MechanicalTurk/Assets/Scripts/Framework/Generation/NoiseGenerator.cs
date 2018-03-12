@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class NoiseGenerator : GenerationAlgorithm
 {
     [SerializeField]
-    public NoiseMap noiseMap = new NoiseMap();
+    public NoiseMap noiseMap;
 
     public float scale
     {
@@ -38,7 +38,7 @@ public abstract class NoiseGenerator : GenerationAlgorithm
     public override void Setup()
     {
         if (noiseMap == null)
-            noiseMap = new NoiseMap();
+            noiseMap = GetComponent<NoiseMap>();
     }
 
     public override bool CanGenerate()

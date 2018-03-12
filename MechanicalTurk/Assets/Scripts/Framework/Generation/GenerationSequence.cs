@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class GenerationSequence : GenerationAlgorithm
 {
-    public GenerationAlgorithm[] generationSequence;
+    public List<GenerationAlgorithm> generationSequence = new List<GenerationAlgorithm>();
     public int seqIndex;
 
     public GenerationAlgorithm GetCurrentAlgorithm()
     {
-         if (seqIndex >= generationSequence.Length)
+         if (seqIndex >= generationSequence.Count)
                return null;
 
          return generationSequence[seqIndex];
     }
 
+    public override void SetController(GenerationController controller)
+    {
+        base.SetController(controller);
+        for(int i = 0; i < generationSequence.Count; i++)
+        {
+            generationSequence[i].Controller = controller;
+        }
+    }
+
     public override bool CanGenerate()
     {
-        return generationSequence.Length > 0 && seqIndex == 0;
+        return generationSequence.Count > 0 && seqIndex == 0;
     }
 
     public override void Setup()

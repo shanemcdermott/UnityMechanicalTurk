@@ -6,7 +6,18 @@ using UnityEngine.Events;
 /*Wrapper for various generation algorithms that adds events */
 public abstract class GenerationAlgorithm : MonoBehaviour
 {
+    
     public UnityEvent OnGenerationComplete;
+
+    public GenerationController Controller
+    {
+        get { return controller; }
+        set
+        {
+            SetController(value);
+        }
+    }
+    private GenerationController controller;
 
     void Awake()
     {
@@ -14,6 +25,11 @@ public abstract class GenerationAlgorithm : MonoBehaviour
         {
             OnGenerationComplete = new UnityEvent();
         }
+    }
+
+    public virtual void SetController(GenerationController controller)
+    {
+        this.controller = controller;
     }
 
     /// <summary>

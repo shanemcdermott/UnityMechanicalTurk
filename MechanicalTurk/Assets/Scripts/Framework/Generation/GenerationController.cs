@@ -8,43 +8,90 @@ using UnityEngine;
 /// </summary>
 public class GenerationController : MonoBehaviour
 {
+
     /*RNG Seed to be used for all generation processes*/
-    public int Seed = 1;
+    public int Seed
+    {
+        get { return seed; }
+        set
+        {
+            seed = value;
+            Random.InitState(seed);
+        }
+    }
 
-    public GenerationSequence[] GenerationSequences;
+    public GenerationSequence controlledSequence;
+    public NoiseGenerator heightMapGenerator;
 
-    /*Static instance of Generation Controller*/
-    public static GenerationController instance = null;
+    public NoiseMap heightMap;
 
+
+    private int seed;
     void Awake()
     {
-        if(instance == null)
+        LookForComponents();
+        ConnectToAlgorithms();
+    }
+
+    protected virtual void LookForComponents()
+    {
+        if (heightMapGenerator == null)
         {
-            instance = this;
+            heightMapGenerator = GetComponent<NoiseGenerator>();
         }
-        else if(instance != this)
+        if (controlledSequence == null)
         {
-            Destroy(gameObject);
+            controlledSequence = GetComponentInChildren<GenerationSequence>();
+        }
+        if (heightMap == null)
+        {
+            heightMap = GetComponent<NoiseMap>();
         }
     }
 
     void Start()
     {
-        StartGenerationSequences();
+        Setup();
+        StartGenerationSequence();
     }
 
-    public void StartGenerationSequences()
+    void Setup()
     {
         Random.InitState(Seed);
-        foreach (GenerationSequence sequence in GenerationSequences)
+        controlledSequence.Setup();
+        heightMapGenerator.noiseMap = heightMap;
+        heightMapGenerator.Setup();
+    }
+
+    //Give child Algorithms a reference to this controller.
+    protected void ConnectToAlgorithms()
+    {
+        controlledSequence.Controller = this;
+        heightMapGenerator.Controller = this;
+    }
+
+    public void StartGenerationSequence()
+    {
+        GenerateHeightmap();
+        MapGenerator mapGen = GetComponent<MapGenerator>();
+        if(mapGen)
         {
-            if (sequence.CanGenerate())
-            {
-                sequence.Setup();
-                sequence.Generate(true);
-            }
+            mapGen.GenerateMap(heightMap.Values);
+        }
+        if (controlledSequence.CanGenerate())
+        {
+            controlledSequence.Generate(true);
         }
     }
 
-   
+    public void GenerateHeightmap()
+    {
+       heightMapGenerator.Generate();
+    }
+
+    public void SetupAndGenerate()
+    {
+        Setup();
+        StartGenerationSequence();
+    }
 }
