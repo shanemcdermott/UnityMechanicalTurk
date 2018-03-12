@@ -23,6 +23,7 @@ public class GenerationController : MonoBehaviour
     public GenerationSequence controlledSequence;
     public NoiseGenerator heightMapGenerator;
 
+
     public NoiseMap heightMap;
 
 
@@ -55,29 +56,27 @@ public class GenerationController : MonoBehaviour
         StartGenerationSequence();
     }
 
-    void Setup()
+    protected virtual void Setup()
     {
         Random.InitState(Seed);
+        LookForComponents();
+        ConnectToAlgorithms();
         controlledSequence.Setup();
         heightMapGenerator.noiseMap = heightMap;
         heightMapGenerator.Setup();
     }
 
     //Give child Algorithms a reference to this controller.
-    protected void ConnectToAlgorithms()
+    protected virtual void ConnectToAlgorithms()
     {
         controlledSequence.Controller = this;
         heightMapGenerator.Controller = this;
     }
 
-    public void StartGenerationSequence()
+    public virtual void StartGenerationSequence()
     {
         GenerateHeightmap();
-        MapGenerator mapGen = GetComponent<MapGenerator>();
-        if(mapGen)
-        {
-            mapGen.GenerateMap(heightMap.Values);
-        }
+
         if (controlledSequence.CanGenerate())
         {
             controlledSequence.Generate(true);
@@ -86,7 +85,17 @@ public class GenerationController : MonoBehaviour
 
     public void GenerateHeightmap()
     {
-       heightMapGenerator.Generate();
+       heightMapGenerator.OnGenerationComplete.AddListener(GenerateBiomes);
+       heightMapGenerator.Generate(true);
+    }
+
+    public void GenerateBiomes()
+    {
+        MapGenerator mapGen = GetComponent<MapGenerator>();
+        if (mapGen)
+        {
+            mapGen.GenerateMap(heightMap.Values);
+        }
     }
 
     public void SetupAndGenerate()
