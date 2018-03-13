@@ -15,15 +15,6 @@ public class GenerationSequence : GenerationAlgorithm
          return generationSequence[seqIndex];
     }
 
-    public override void SetController(GenerationController controller)
-    {
-        base.SetController(controller);
-        for(int i = 0; i < generationSequence.Count; i++)
-        {
-            generationSequence[i].Controller = controller;
-        }
-    }
-
     public override bool CanGenerate()
     {
         return generationSequence.Count > 0 && seqIndex == 0;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TerrainGenerator : MonoBehaviour
+public class SimplexTerrainGenerator : MonoBehaviour
 {
 
     SimplexNoise simplex;
@@ -33,6 +33,7 @@ public class TerrainGenerator : MonoBehaviour
     {
         Terrain terrain = GetComponent<Terrain>();
         terrain.terrainData = GenerateTerrain(terrain.terrainData);
+        terrain.terrainData.RefreshPrototypes();
         terrain.Flush();
     }
 
@@ -51,7 +52,7 @@ public class TerrainGenerator : MonoBehaviour
             SplatPrototype[] textures = new SplatPrototype[1];
 			textures [0] = new SplatPrototype ();
             textures[0].texture = terrainTexture;
-            textures[0].tileSize = new Vector2(1,1);   
+            textures[0].tileSize = new Vector2(width,height);   
             terrainData.splatPrototypes = textures;
         }
         return terrainData;
@@ -59,8 +60,6 @@ public class TerrainGenerator : MonoBehaviour
 
     float[,] GenerateHeights()
     {
-		GenerationController con = GetComponent<GenerationController> ();
-		return con.heightMap.Values;
 
         float[,] heights = new float[width, height];
 

@@ -86,7 +86,6 @@ public class NoiseMap : MonoBehaviour
         }
     }
 
-
     public void Resize(Vector2Int newSize)
     {
         width = newSize.x;
