@@ -11,7 +11,7 @@ public class TerrainGenerator : GenerationAlgorithm
     public NoiseMap heightMap;
     public Terrain terrain;
     public Texture2D biomeTexture;
-   
+	public Texture2D roadTexture;
 
     public override bool CanGenerate()
     {
@@ -83,12 +83,23 @@ public class TerrainGenerator : GenerationAlgorithm
         }
         if (biomeTexture)
         {
-            SplatPrototype[] textures = new SplatPrototype[1];
+            SplatPrototype[] textures = new SplatPrototype[2];
             textures[0] = new SplatPrototype();
             textures[0].texture = biomeTexture;
             textures[0].tileSize = heightMap.Dimensions;
+			textures [1] = new SplatPrototype ();
+			textures [1].texture = roadTexture;
+			textures [1].tileSize = new Vector2Int (1, 1);
             terrain.terrainData.splatPrototypes = textures;
         }
+		float[,,] alpha = new float[heightMap.Width, heightMap.Height, 2];
+		for (int x = 0; x < heightMap.Width; x++) {
+			for (int y = 0; y < heightMap.Height; y++) {
+				alpha [x / heightMap.Width, y / heightMap.Height, 0] = 0;
+				alpha [x / heightMap.Width, y / heightMap.Height, 1] = 1;
+			}
+		}
+		terrain.terrainData.SetAlphamaps (0, 0, alpha);
         terrain.terrainData.RefreshPrototypes();
         terrain.Flush();
     }
