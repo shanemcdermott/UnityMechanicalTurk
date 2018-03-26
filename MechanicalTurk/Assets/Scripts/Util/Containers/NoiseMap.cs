@@ -9,8 +9,6 @@ using UnityEngine;
 [System.Serializable]
 public class NoiseMap : MonoBehaviour
 {
-    public float scale = 1f;
-
     public Vector2Int Dimensions
     {
         get { return new Vector2Int(width, height); }
@@ -25,8 +23,11 @@ public class NoiseMap : MonoBehaviour
         get { return width; }
         set
         {
-            width = value;
-            heightmap = new float[width, height];
+            if (width != value)
+            {
+                width = value;
+                heightmap = new float[width, height];
+            }
         }
     }
 
@@ -36,8 +37,11 @@ public class NoiseMap : MonoBehaviour
         get { return height; }
         set
         {
-            height = value;
-            heightmap = new float[width, height];
+            if (height != value)
+            {
+                height = value;
+                heightmap = new float[width, height];
+            }
         }
     }
 
@@ -45,6 +49,7 @@ public class NoiseMap : MonoBehaviour
     private int width = 256;
     [SerializeField]
     private int height = 256;
+
 
     private float[,] heightmap;
 
@@ -96,5 +101,15 @@ public class NoiseMap : MonoBehaviour
     public int ToIndex(int x, int y)
     {
         return x * width + y;
+    }
+
+    public int GetWidth()
+    {
+        return width;
+    }
+
+    public int GetHeight()
+    {
+        return height;
     }
 }

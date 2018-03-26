@@ -8,14 +8,7 @@ public abstract class NoiseGenerator : GenerationAlgorithm
     [SerializeField]
     public NoiseMap noiseMap;
 
-    public float scale
-    {
-        get { return noiseMap.scale; }
-        set
-        {
-            noiseMap.scale = value;
-        }
-    }
+    public float scale = 1f;
 
     public int width
     {

@@ -16,12 +16,14 @@ public class GenerationControllerEditor : Editor
         {
             controller.SetupAndGenerate();
         }
-        if(GUILayout.Button("Save Texture"))
+        /*
+        if (GUILayout.Button("Save Heightmap"))
         {
             Texture2D tex = controller.terrainGenerator.biomeTexture;
             string fileName = Application.persistentDataPath + "/" + tex.name + ".png";
             File.WriteAllBytes(fileName, tex.EncodeToPNG());
             Debug.Log("Saved to " + fileName);
         }
+        */
     }
 }

@@ -13,7 +13,7 @@ public class GenerationController : MonoBehaviour
     public int Seed;
 
     public TerrainGenerator terrainGenerator;
-
+    public CityGenerator cityGenerator;
 
     public NoiseMap heightMap
     {
@@ -37,6 +37,10 @@ public class GenerationController : MonoBehaviour
         {
             terrainGenerator = GetComponentInChildren<TerrainGenerator>();
         }
+        if(cityGenerator == null)
+        {
+            cityGenerator = GetComponentInChildren<CityGenerator>();
+        }
     }
 
     void Start()
@@ -54,12 +58,27 @@ public class GenerationController : MonoBehaviour
 
     public virtual void StartGenerationSequence()
     {
+        terrainGenerator.OnGenerationComplete.AddListener(GenerateCity);
         GenerateHeightmap();
     }
 
     public void GenerateHeightmap()
     {
         terrainGenerator.Generate(true);
+    }
+
+    public void GenerateCity()
+    {
+        cityGenerator.heightMap = terrainGenerator.heightMap;
+        cityGenerator.Setup();
+        if (cityGenerator.CanGenerate())
+        {
+            cityGenerator.Generate(true);
+        }
+        else
+        {
+            Debug.Log("City Generator is unable to generate at this time!");
+        }
     }
 
     public void SetupAndGenerate()
