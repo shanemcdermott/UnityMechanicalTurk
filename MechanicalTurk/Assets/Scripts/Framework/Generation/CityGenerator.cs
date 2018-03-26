@@ -9,7 +9,7 @@ public class CityGenerator : GenerationAlgorithm
     public PolyGrid polyGrid;
     //Level of detail prefabs. Each should have a GameNode Component;
     public GameObject[] LOD_0_Prefabs = new GameObject[3];
-
+	public Vector2Int minFaceSize = new Vector2Int(2,2);
 
     public override bool CanGenerate()
     {
@@ -25,7 +25,7 @@ public class CityGenerator : GenerationAlgorithm
             {
                 polyGrid = gameObject.AddComponent<PolyGrid>();
                 polyGrid.Dimensions = heightMap.Dimensions;
-                polyGrid.FacesPerSide = new Vector2Int(2, 2);
+				polyGrid.FacesPerSide = new Vector2Int(heightMap.Dimensions.x/minFaceSize.x, heightMap.Dimensions.y/minFaceSize.y);
             }
         }
     }
@@ -42,6 +42,7 @@ public class CityGenerator : GenerationAlgorithm
                 go.transform.SetParent(transform);
                 GameNode gn = go.GetComponent<GameNode>();
                 gn.SetNode(node);
+
                 gn.SpawnBuildings();
             }
         }
