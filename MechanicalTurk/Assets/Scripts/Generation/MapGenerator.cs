@@ -26,9 +26,12 @@ public class MapGenerator : MonoBehaviour {
 
 	public TerrainType[] regions;
 
-	public void GenerateMap() {
-		float[,] noiseMap = Noise.GenerateNoiseMap (mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
+    public void GenerateMap() {
+        GenerateMap(PerlinOctaves.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset));
+    }
 
+    public void GenerateMap(float[,] noiseMap)
+    { 
 		Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
 		for (int y = 0; y < mapChunkSize; y++) {
 			for (int x = 0; x < mapChunkSize; x++) {
@@ -50,6 +53,24 @@ public class MapGenerator : MonoBehaviour {
 		} else if (drawMode == DrawMode.Mesh) {
 			display.DrawMesh (MeshGenerator.GenerateTerrainMesh (noiseMap, meshHeightMultiplier, meshHeightCurve, levelOfDetail), TextureGenerator.TextureFromColourMap (colourMap, mapChunkSize, mapChunkSize));
 		}
+	}
+
+	public Color[] GetColorMap(NoiseMap noiseMap)
+	{
+		Color[]  colourMap = new Color[noiseMap.Width*noiseMap.Height];
+			for (int y = 0; y < noiseMap.Height; y++) {
+			for (int x = 0; x < noiseMap.Width; x++) {
+				float currentHeight = noiseMap [x, y];
+				for (int i = 0; i < regions.Length; i++) {
+					if (currentHeight <= regions [i].height) {
+						colourMap [noiseMap.ToIndex(x,y)] = regions [i].colour;
+						break;
+					}
+				}
+			}
+		}
+
+		return colourMap;
 	}
 
 	void OnValidate() {

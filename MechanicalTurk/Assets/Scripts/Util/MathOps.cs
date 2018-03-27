@@ -96,5 +96,8 @@ public class MathOps {
        // return Vector2.Distance(circumCenter, p) <= circumRadius * circumRadius; 
     }
 
-    
+    public static Vector3 FlipYZ(Vector3 P)
+    {
+        return new Vector3(P.x, P.z, P.y);
+    }
 }
