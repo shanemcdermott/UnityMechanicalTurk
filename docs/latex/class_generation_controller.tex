@@ -1,0 +1,124 @@
+\hypertarget{class_generation_controller}{}\section{Generation\+Controller Class Reference}
+\label{class_generation_controller}\index{Generation\+Controller@{Generation\+Controller}}
+
+
+Manages Random Seed, Generation Sequences.  
+
+
+Inheritance diagram for Generation\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_generation_controller}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_generation_controller_acd448bb5172dac81bd23d5adf5bf10b4}{Start\+Generation\+Sequence}} ()
+\item 
+void \mbox{\hyperlink{class_generation_controller_ab27f15ea71ed914f3ab494a7d99bb14f}{Generate\+Heightmap}} ()
+\item 
+void \mbox{\hyperlink{class_generation_controller_a45c2cd12e416dd1445b5182a6a2a7693}{Generate\+City}} ()
+\item 
+void \mbox{\hyperlink{class_generation_controller_a3588a2d352dbd2edfef4f9380207cf6c}{Setup\+And\+Generate}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_generation_controller_a8fc1d7ff7316969411545d4b4a7a547a}{Seed}}
+\item 
+\mbox{\hyperlink{class_terrain_generator}{Terrain\+Generator}} \mbox{\hyperlink{class_generation_controller_aca0b988596dc14d92fdbd9fb5037c2cd}{terrain\+Generator}}
+\item 
+\mbox{\hyperlink{class_city_generator}{City\+Generator}} \mbox{\hyperlink{class_generation_controller_a215ad934a6c4951844954b6b61b0187d}{city\+Generator}}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_generation_controller_a178f4eb6bcb5cbe94a7d67cb8685857f}{Look\+For\+Components}} ()
+\item 
+virtual void \mbox{\hyperlink{class_generation_controller_acc6ec4bf38f4982c3d727a36b6aed321}{Setup}} ()
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_noise_map}{Noise\+Map}} \mbox{\hyperlink{class_generation_controller_ada5207d54f73a82b066d367a65dd6035}{height\+Map}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages Random Seed, Generation Sequences. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_generation_controller_a45c2cd12e416dd1445b5182a6a2a7693}\label{class_generation_controller_a45c2cd12e416dd1445b5182a6a2a7693}} 
+\index{Generation\+Controller@{Generation\+Controller}!Generate\+City@{Generate\+City}}
+\index{Generate\+City@{Generate\+City}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{Generate\+City()}{GenerateCity()}}
+{\footnotesize\ttfamily void Generation\+Controller.\+Generate\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_generation_controller_ab27f15ea71ed914f3ab494a7d99bb14f}\label{class_generation_controller_ab27f15ea71ed914f3ab494a7d99bb14f}} 
+\index{Generation\+Controller@{Generation\+Controller}!Generate\+Heightmap@{Generate\+Heightmap}}
+\index{Generate\+Heightmap@{Generate\+Heightmap}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{Generate\+Heightmap()}{GenerateHeightmap()}}
+{\footnotesize\ttfamily void Generation\+Controller.\+Generate\+Heightmap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_generation_controller_a178f4eb6bcb5cbe94a7d67cb8685857f}\label{class_generation_controller_a178f4eb6bcb5cbe94a7d67cb8685857f}} 
+\index{Generation\+Controller@{Generation\+Controller}!Look\+For\+Components@{Look\+For\+Components}}
+\index{Look\+For\+Components@{Look\+For\+Components}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{Look\+For\+Components()}{LookForComponents()}}
+{\footnotesize\ttfamily virtual void Generation\+Controller.\+Look\+For\+Components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_generation_controller_acc6ec4bf38f4982c3d727a36b6aed321}\label{class_generation_controller_acc6ec4bf38f4982c3d727a36b6aed321}} 
+\index{Generation\+Controller@{Generation\+Controller}!Setup@{Setup}}
+\index{Setup@{Setup}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{Setup()}{Setup()}}
+{\footnotesize\ttfamily virtual void Generation\+Controller.\+Setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_generation_controller_a3588a2d352dbd2edfef4f9380207cf6c}\label{class_generation_controller_a3588a2d352dbd2edfef4f9380207cf6c}} 
+\index{Generation\+Controller@{Generation\+Controller}!Setup\+And\+Generate@{Setup\+And\+Generate}}
+\index{Setup\+And\+Generate@{Setup\+And\+Generate}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{Setup\+And\+Generate()}{SetupAndGenerate()}}
+{\footnotesize\ttfamily void Generation\+Controller.\+Setup\+And\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_generation_controller_acd448bb5172dac81bd23d5adf5bf10b4}\label{class_generation_controller_acd448bb5172dac81bd23d5adf5bf10b4}} 
+\index{Generation\+Controller@{Generation\+Controller}!Start\+Generation\+Sequence@{Start\+Generation\+Sequence}}
+\index{Start\+Generation\+Sequence@{Start\+Generation\+Sequence}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{Start\+Generation\+Sequence()}{StartGenerationSequence()}}
+{\footnotesize\ttfamily virtual void Generation\+Controller.\+Start\+Generation\+Sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_generation_controller_a215ad934a6c4951844954b6b61b0187d}\label{class_generation_controller_a215ad934a6c4951844954b6b61b0187d}} 
+\index{Generation\+Controller@{Generation\+Controller}!city\+Generator@{city\+Generator}}
+\index{city\+Generator@{city\+Generator}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{city\+Generator}{cityGenerator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_city_generator}{City\+Generator}} Generation\+Controller.\+city\+Generator}
+
+\mbox{\Hypertarget{class_generation_controller_a8fc1d7ff7316969411545d4b4a7a547a}\label{class_generation_controller_a8fc1d7ff7316969411545d4b4a7a547a}} 
+\index{Generation\+Controller@{Generation\+Controller}!Seed@{Seed}}
+\index{Seed@{Seed}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{Seed}{Seed}}
+{\footnotesize\ttfamily int Generation\+Controller.\+Seed}
+
+\mbox{\Hypertarget{class_generation_controller_aca0b988596dc14d92fdbd9fb5037c2cd}\label{class_generation_controller_aca0b988596dc14d92fdbd9fb5037c2cd}} 
+\index{Generation\+Controller@{Generation\+Controller}!terrain\+Generator@{terrain\+Generator}}
+\index{terrain\+Generator@{terrain\+Generator}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{terrain\+Generator}{terrainGenerator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_terrain_generator}{Terrain\+Generator}} Generation\+Controller.\+terrain\+Generator}
+
+
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_generation_controller_ada5207d54f73a82b066d367a65dd6035}\label{class_generation_controller_ada5207d54f73a82b066d367a65dd6035}} 
+\index{Generation\+Controller@{Generation\+Controller}!height\+Map@{height\+Map}}
+\index{height\+Map@{height\+Map}!Generation\+Controller@{Generation\+Controller}}
+\subsubsection{\texorpdfstring{height\+Map}{heightMap}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_noise_map}{Noise\+Map}} Generation\+Controller.\+height\+Map\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Framework/\+Generation/\mbox{\hyperlink{_generation_controller_8cs}{Generation\+Controller.\+cs}}\end{DoxyCompactItemize}

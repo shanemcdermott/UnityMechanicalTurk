@@ -1,0 +1,165 @@
+\hypertarget{class_node}{}\section{Node Class Reference}
+\label{class_node}\index{Node@{Node}}
+Inheritance diagram for Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_node}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_node_a989164b636cfeff98b4df9833976f4f5}{Node}} ()
+\item 
+\mbox{\hyperlink{class_node_a653c96cdaab99419a8c1d8d80be10b80}{Node}} (Vector2 position2)
+\item 
+\mbox{\hyperlink{class_node_a188e8794e019e1dd2fcfa84af795c06d}{Node}} (Vector3 \mbox{\hyperlink{class_node_a315059cd3874b8ca61426a4e1bd097a7}{position}})
+\item 
+void \mbox{\hyperlink{class_node_adaf109cc39cf2444181ea55985767cee}{Add\+Connection}} (\mbox{\hyperlink{class_node}{Node}} connection)
+\begin{DoxyCompactList}\small\item\em Adds \mbox{\hyperlink{class_node_edge}{Node\+Edge}} to edges as well as to \textquotesingle{}s edges. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_node_ac11a8a128533ef77b42e97d883ab0825}{Remove\+Connection}} (\mbox{\hyperlink{class_node}{Node}} connection)
+\item 
+bool \mbox{\hyperlink{class_node_a60543d6f014ce3e5d201108949bec386}{Is\+Null\+Or\+This}} (\mbox{\hyperlink{class_node}{Node}} c)
+\item 
+int \mbox{\hyperlink{class_node_adfa9ae31ba9f758335618f4928d9d4a0}{Index\+Of}} (\mbox{\hyperlink{class_node}{Node}} other)
+\item 
+bool \mbox{\hyperlink{class_node_acf505ea93da66cff664d7195d64c4a5b}{Is\+Connected\+To}} (\mbox{\hyperlink{class_node}{Node}} other)
+\item 
+int \mbox{\hyperlink{class_node_a229ce68ffe988dbfd45c05b7e7cbdf2d}{Num\+Connections}} ()
+\item 
+void \mbox{\hyperlink{class_node_a0a14a3bf53ab9b4939fa6518d1fa4278}{Get\+Connections}} (out List$<$ \mbox{\hyperlink{interface_i_connection}{I\+Connection}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$$>$ \mbox{\hyperlink{class_node_a1d236f5a6dd9111a6ed9f2ebbdea57ac}{connections}})
+\item 
+void \mbox{\hyperlink{class_node_a42ff8a164e2432ceda0f17ab88fa47e1}{Set\+Position}} (Vector3 \mbox{\hyperlink{class_node_a315059cd3874b8ca61426a4e1bd097a7}{position}})
+\item 
+Vector2 \mbox{\hyperlink{class_node_a1173e5e173312924b2d0d399bf18e246}{Get\+Position\+XZ}} ()
+\item 
+Vector3 \mbox{\hyperlink{class_node_aba752b203dcf1360d6a9ef80deabd98e}{Get\+Position}} ()
+\item 
+void \mbox{\hyperlink{class_node_ada2f9aee327ffd50e46684303411b2a8}{Draw\+Connections}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector3 \mbox{\hyperlink{class_node_a315059cd3874b8ca61426a4e1bd097a7}{position}}
+\item 
+List$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \mbox{\hyperlink{class_node_a1d236f5a6dd9111a6ed9f2ebbdea57ac}{connections}} =new List$<$\mbox{\hyperlink{class_node}{Node}}$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_node_a989164b636cfeff98b4df9833976f4f5}\label{class_node_a989164b636cfeff98b4df9833976f4f5}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Node.\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a653c96cdaab99419a8c1d8d80be10b80}\label{class_node_a653c96cdaab99419a8c1d8d80be10b80}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Node.\+Node (\begin{DoxyParamCaption}\item[{Vector2}]{position2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a188e8794e019e1dd2fcfa84af795c06d}\label{class_node_a188e8794e019e1dd2fcfa84af795c06d}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Node.\+Node (\begin{DoxyParamCaption}\item[{Vector3}]{position }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_node_adaf109cc39cf2444181ea55985767cee}\label{class_node_adaf109cc39cf2444181ea55985767cee}} 
+\index{Node@{Node}!Add\+Connection@{Add\+Connection}}
+\index{Add\+Connection@{Add\+Connection}!Node@{Node}}
+\subsubsection{\texorpdfstring{Add\+Connection()}{AddConnection()}}
+{\footnotesize\ttfamily void Node.\+Add\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{connection }\end{DoxyParamCaption})}
+
+
+
+Adds \mbox{\hyperlink{class_node_edge}{Node\+Edge}} to edges as well as to \textquotesingle{}s edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The \textquotesingle{}to\textquotesingle{} \mbox{\hyperlink{class_node}{Node}} to add a connection to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_node_ada2f9aee327ffd50e46684303411b2a8}\label{class_node_ada2f9aee327ffd50e46684303411b2a8}} 
+\index{Node@{Node}!Draw\+Connections@{Draw\+Connections}}
+\index{Draw\+Connections@{Draw\+Connections}!Node@{Node}}
+\subsubsection{\texorpdfstring{Draw\+Connections()}{DrawConnections()}}
+{\footnotesize\ttfamily void Node.\+Draw\+Connections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a0a14a3bf53ab9b4939fa6518d1fa4278}\label{class_node_a0a14a3bf53ab9b4939fa6518d1fa4278}} 
+\index{Node@{Node}!Get\+Connections@{Get\+Connections}}
+\index{Get\+Connections@{Get\+Connections}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Connections()}{GetConnections()}}
+{\footnotesize\ttfamily void Node.\+Get\+Connections (\begin{DoxyParamCaption}\item[{out List$<$ \mbox{\hyperlink{interface_i_connection}{I\+Connection}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$$>$}]{connections }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_aba752b203dcf1360d6a9ef80deabd98e}\label{class_node_aba752b203dcf1360d6a9ef80deabd98e}} 
+\index{Node@{Node}!Get\+Position@{Get\+Position}}
+\index{Get\+Position@{Get\+Position}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Position()}{GetPosition()}}
+{\footnotesize\ttfamily Vector3 Node.\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a1173e5e173312924b2d0d399bf18e246}\label{class_node_a1173e5e173312924b2d0d399bf18e246}} 
+\index{Node@{Node}!Get\+Position\+XZ@{Get\+Position\+XZ}}
+\index{Get\+Position\+XZ@{Get\+Position\+XZ}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Position\+X\+Z()}{GetPositionXZ()}}
+{\footnotesize\ttfamily Vector2 Node.\+Get\+Position\+XZ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_adfa9ae31ba9f758335618f4928d9d4a0}\label{class_node_adfa9ae31ba9f758335618f4928d9d4a0}} 
+\index{Node@{Node}!Index\+Of@{Index\+Of}}
+\index{Index\+Of@{Index\+Of}!Node@{Node}}
+\subsubsection{\texorpdfstring{Index\+Of()}{IndexOf()}}
+{\footnotesize\ttfamily int Node.\+Index\+Of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{other }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_acf505ea93da66cff664d7195d64c4a5b}\label{class_node_acf505ea93da66cff664d7195d64c4a5b}} 
+\index{Node@{Node}!Is\+Connected\+To@{Is\+Connected\+To}}
+\index{Is\+Connected\+To@{Is\+Connected\+To}!Node@{Node}}
+\subsubsection{\texorpdfstring{Is\+Connected\+To()}{IsConnectedTo()}}
+{\footnotesize\ttfamily bool Node.\+Is\+Connected\+To (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{other }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a60543d6f014ce3e5d201108949bec386}\label{class_node_a60543d6f014ce3e5d201108949bec386}} 
+\index{Node@{Node}!Is\+Null\+Or\+This@{Is\+Null\+Or\+This}}
+\index{Is\+Null\+Or\+This@{Is\+Null\+Or\+This}!Node@{Node}}
+\subsubsection{\texorpdfstring{Is\+Null\+Or\+This()}{IsNullOrThis()}}
+{\footnotesize\ttfamily bool Node.\+Is\+Null\+Or\+This (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a229ce68ffe988dbfd45c05b7e7cbdf2d}\label{class_node_a229ce68ffe988dbfd45c05b7e7cbdf2d}} 
+\index{Node@{Node}!Num\+Connections@{Num\+Connections}}
+\index{Num\+Connections@{Num\+Connections}!Node@{Node}}
+\subsubsection{\texorpdfstring{Num\+Connections()}{NumConnections()}}
+{\footnotesize\ttfamily int Node.\+Num\+Connections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_ac11a8a128533ef77b42e97d883ab0825}\label{class_node_ac11a8a128533ef77b42e97d883ab0825}} 
+\index{Node@{Node}!Remove\+Connection@{Remove\+Connection}}
+\index{Remove\+Connection@{Remove\+Connection}!Node@{Node}}
+\subsubsection{\texorpdfstring{Remove\+Connection()}{RemoveConnection()}}
+{\footnotesize\ttfamily void Node.\+Remove\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{connection }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a42ff8a164e2432ceda0f17ab88fa47e1}\label{class_node_a42ff8a164e2432ceda0f17ab88fa47e1}} 
+\index{Node@{Node}!Set\+Position@{Set\+Position}}
+\index{Set\+Position@{Set\+Position}!Node@{Node}}
+\subsubsection{\texorpdfstring{Set\+Position()}{SetPosition()}}
+{\footnotesize\ttfamily void Node.\+Set\+Position (\begin{DoxyParamCaption}\item[{Vector3}]{position }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_node_a1d236f5a6dd9111a6ed9f2ebbdea57ac}\label{class_node_a1d236f5a6dd9111a6ed9f2ebbdea57ac}} 
+\index{Node@{Node}!connections@{connections}}
+\index{connections@{connections}!Node@{Node}}
+\subsubsection{\texorpdfstring{connections}{connections}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_node}{Node}}$>$ Node.\+connections =new List$<$\mbox{\hyperlink{class_node}{Node}}$>$()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_node_a315059cd3874b8ca61426a4e1bd097a7}\label{class_node_a315059cd3874b8ca61426a4e1bd097a7}} 
+\index{Node@{Node}!position@{position}}
+\index{position@{position}!Node@{Node}}
+\subsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily Vector3 Node.\+position\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Util/\+Containers/\+Graphs/\+Grids/\mbox{\hyperlink{_node_8cs}{Node.\+cs}}\end{DoxyCompactItemize}

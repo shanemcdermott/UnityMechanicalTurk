@@ -1,0 +1,143 @@
+\hypertarget{class_grid_face}{}\section{Grid\+Face Class Reference}
+\label{class_grid_face}\index{Grid\+Face@{Grid\+Face}}
+Inheritance diagram for Grid\+Face\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_grid_face}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_grid_face_a328917a6e83b3357fbb95aae6c43b861}{Grid\+Face}} ()
+\item 
+\mbox{\hyperlink{class_grid_face_a2f31cf59941dd0886b1a9a3bd3eec590}{Grid\+Face}} (Vector2 position2)
+\item 
+\mbox{\hyperlink{class_grid_face_adb30d4c2fb9f5be07319720fb21481ba}{Grid\+Face}} (Vector3 \mbox{\hyperlink{class_node_a315059cd3874b8ca61426a4e1bd097a7}{position}})
+\item 
+void \mbox{\hyperlink{class_grid_face_a55db6fc7a977c60fd6ce94de473d895c}{Add\+Vertices}} (\mbox{\hyperlink{class_node}{Node}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_grid_face_ad283473ab08b56840f9ae843e60c1d15}{vertices}})
+\item 
+int \mbox{\hyperlink{class_grid_face_af0f04e74e12e9ee8f03a6675ee5a4eab}{Add\+Vertex}} (\mbox{\hyperlink{class_node}{Node}} vertex)
+\item 
+int \mbox{\hyperlink{class_grid_face_a31c9530fd0dca84658fde5ddfc369fc5}{Num\+Vertices}} ()
+\item 
+\mbox{\hyperlink{class_node}{Node}} \mbox{\hyperlink{class_grid_face_a153928011211a1740054bf60adf67730}{Get\+Vertex}} (int index)
+\item 
+bool \mbox{\hyperlink{class_grid_face_ad038c4fab1850cb71cdb8b4a0c2f52f2}{Has\+Vertex}} (\mbox{\hyperlink{class_node}{Node}} vertex)
+\item 
+\mbox{\hyperlink{class_node}{Node}} \mbox{\hyperlink{class_grid_face_a19159b9927ce52f293e566975fcd3340}{Get\+Connection\+With\+Vertex}} (\mbox{\hyperlink{class_node}{Node}} vertex)
+\item 
+List$<$ Vector3 $>$ \mbox{\hyperlink{class_grid_face_af4dabd4122b97fca940b763ca0000100}{Get\+Vertex\+Positions}} ()
+\item 
+\mbox{\hyperlink{class_node}{Node}} \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_grid_face_a60aa8f74afb2447bf1921385581c8972}{Get\+Vertices}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_grid_face_a4a97d1968f8e31252c109c6a817d4db5}{Find\+Connection\+With\+Vertex}} (\mbox{\hyperlink{class_node}{Node}} vertex)
+\item 
+void \mbox{\hyperlink{class_grid_face_a7a09019689547ed0d1e719f999e9a50b}{Swap\+Vertices}} (int i, int j)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \mbox{\hyperlink{class_grid_face_ad283473ab08b56840f9ae843e60c1d15}{vertices}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_grid_face_a328917a6e83b3357fbb95aae6c43b861}\label{class_grid_face_a328917a6e83b3357fbb95aae6c43b861}} 
+\index{Grid\+Face@{Grid\+Face}!Grid\+Face@{Grid\+Face}}
+\index{Grid\+Face@{Grid\+Face}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Grid\+Face()}{GridFace()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Grid\+Face.\+Grid\+Face (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_a2f31cf59941dd0886b1a9a3bd3eec590}\label{class_grid_face_a2f31cf59941dd0886b1a9a3bd3eec590}} 
+\index{Grid\+Face@{Grid\+Face}!Grid\+Face@{Grid\+Face}}
+\index{Grid\+Face@{Grid\+Face}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Grid\+Face()}{GridFace()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Grid\+Face.\+Grid\+Face (\begin{DoxyParamCaption}\item[{Vector2}]{position2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_adb30d4c2fb9f5be07319720fb21481ba}\label{class_grid_face_adb30d4c2fb9f5be07319720fb21481ba}} 
+\index{Grid\+Face@{Grid\+Face}!Grid\+Face@{Grid\+Face}}
+\index{Grid\+Face@{Grid\+Face}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Grid\+Face()}{GridFace()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Grid\+Face.\+Grid\+Face (\begin{DoxyParamCaption}\item[{Vector3}]{position }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_grid_face_af0f04e74e12e9ee8f03a6675ee5a4eab}\label{class_grid_face_af0f04e74e12e9ee8f03a6675ee5a4eab}} 
+\index{Grid\+Face@{Grid\+Face}!Add\+Vertex@{Add\+Vertex}}
+\index{Add\+Vertex@{Add\+Vertex}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Add\+Vertex()}{AddVertex()}}
+{\footnotesize\ttfamily int Grid\+Face.\+Add\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{vertex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_a55db6fc7a977c60fd6ce94de473d895c}\label{class_grid_face_a55db6fc7a977c60fd6ce94de473d895c}} 
+\index{Grid\+Face@{Grid\+Face}!Add\+Vertices@{Add\+Vertices}}
+\index{Add\+Vertices@{Add\+Vertices}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Add\+Vertices()}{AddVertices()}}
+{\footnotesize\ttfamily void Grid\+Face.\+Add\+Vertices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}} \mbox{[}$\,$\mbox{]}}]{vertices }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_a4a97d1968f8e31252c109c6a817d4db5}\label{class_grid_face_a4a97d1968f8e31252c109c6a817d4db5}} 
+\index{Grid\+Face@{Grid\+Face}!Find\+Connection\+With\+Vertex@{Find\+Connection\+With\+Vertex}}
+\index{Find\+Connection\+With\+Vertex@{Find\+Connection\+With\+Vertex}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Find\+Connection\+With\+Vertex()}{FindConnectionWithVertex()}}
+{\footnotesize\ttfamily int Grid\+Face.\+Find\+Connection\+With\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_grid_face_a19159b9927ce52f293e566975fcd3340}\label{class_grid_face_a19159b9927ce52f293e566975fcd3340}} 
+\index{Grid\+Face@{Grid\+Face}!Get\+Connection\+With\+Vertex@{Get\+Connection\+With\+Vertex}}
+\index{Get\+Connection\+With\+Vertex@{Get\+Connection\+With\+Vertex}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Get\+Connection\+With\+Vertex()}{GetConnectionWithVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_node}{Node}} Grid\+Face.\+Get\+Connection\+With\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{vertex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_a153928011211a1740054bf60adf67730}\label{class_grid_face_a153928011211a1740054bf60adf67730}} 
+\index{Grid\+Face@{Grid\+Face}!Get\+Vertex@{Get\+Vertex}}
+\index{Get\+Vertex@{Get\+Vertex}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Get\+Vertex()}{GetVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_node}{Node}} Grid\+Face.\+Get\+Vertex (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_af4dabd4122b97fca940b763ca0000100}\label{class_grid_face_af4dabd4122b97fca940b763ca0000100}} 
+\index{Grid\+Face@{Grid\+Face}!Get\+Vertex\+Positions@{Get\+Vertex\+Positions}}
+\index{Get\+Vertex\+Positions@{Get\+Vertex\+Positions}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Get\+Vertex\+Positions()}{GetVertexPositions()}}
+{\footnotesize\ttfamily List$<$Vector3$>$ Grid\+Face.\+Get\+Vertex\+Positions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_a60aa8f74afb2447bf1921385581c8972}\label{class_grid_face_a60aa8f74afb2447bf1921385581c8972}} 
+\index{Grid\+Face@{Grid\+Face}!Get\+Vertices@{Get\+Vertices}}
+\index{Get\+Vertices@{Get\+Vertices}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Get\+Vertices()}{GetVertices()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_node}{Node}} \mbox{[}$\,$\mbox{]} Grid\+Face.\+Get\+Vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_ad038c4fab1850cb71cdb8b4a0c2f52f2}\label{class_grid_face_ad038c4fab1850cb71cdb8b4a0c2f52f2}} 
+\index{Grid\+Face@{Grid\+Face}!Has\+Vertex@{Has\+Vertex}}
+\index{Has\+Vertex@{Has\+Vertex}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Has\+Vertex()}{HasVertex()}}
+{\footnotesize\ttfamily bool Grid\+Face.\+Has\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{vertex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_a31c9530fd0dca84658fde5ddfc369fc5}\label{class_grid_face_a31c9530fd0dca84658fde5ddfc369fc5}} 
+\index{Grid\+Face@{Grid\+Face}!Num\+Vertices@{Num\+Vertices}}
+\index{Num\+Vertices@{Num\+Vertices}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Num\+Vertices()}{NumVertices()}}
+{\footnotesize\ttfamily int Grid\+Face.\+Num\+Vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_face_a7a09019689547ed0d1e719f999e9a50b}\label{class_grid_face_a7a09019689547ed0d1e719f999e9a50b}} 
+\index{Grid\+Face@{Grid\+Face}!Swap\+Vertices@{Swap\+Vertices}}
+\index{Swap\+Vertices@{Swap\+Vertices}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{Swap\+Vertices()}{SwapVertices()}}
+{\footnotesize\ttfamily void Grid\+Face.\+Swap\+Vertices (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_grid_face_ad283473ab08b56840f9ae843e60c1d15}\label{class_grid_face_ad283473ab08b56840f9ae843e60c1d15}} 
+\index{Grid\+Face@{Grid\+Face}!vertices@{vertices}}
+\index{vertices@{vertices}!Grid\+Face@{Grid\+Face}}
+\subsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_node}{Node}}$>$ Grid\+Face.\+vertices\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Util/\+Containers/\+Graphs/\+Grids/\mbox{\hyperlink{_grid_face_8cs}{Grid\+Face.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,148 @@
+\hypertarget{class_tile_graph}{}\section{Tile\+Graph Class Reference}
+\label{class_tile_graph}\index{Tile\+Graph@{Tile\+Graph}}
+Inheritance diagram for Tile\+Graph\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_tile_graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_tile_graph_a4e921f79aca67d58cad7367227fe8c06}{Awake}} ()
+\item 
+void \mbox{\hyperlink{class_tile_graph_a349a2602be0a8c9473aed6103955a2a6}{Init}} ()
+\item 
+void \mbox{\hyperlink{class_tile_graph_a839b7d0deee777d52006ad5678170694}{Init\+Height\+Field}} ()
+\item 
+\mbox{\hyperlink{struct_int_point}{Int\+Point}} \mbox{\hyperlink{class_tile_graph_a470894695f1deb2d9c127a1e50d0b859}{World\+To\+Tile}} (Vector2 world\+Position)
+\item 
+\mbox{\hyperlink{struct_int_point}{Int\+Point}} \mbox{\hyperlink{class_tile_graph_a121a3327fefcf7009e2dc3c5d1c9d310}{World\+To\+Tile}} (Vector3 world\+Position)
+\item 
+Vector3 \mbox{\hyperlink{class_tile_graph_ae13070f1638b7409ad1d63b5551bc3fa}{Tile\+To\+World}} (\mbox{\hyperlink{struct_int_point}{Int\+Point}} tile\+Position)
+\item 
+Vector3 \mbox{\hyperlink{class_tile_graph_a23609e10dfa34c3b498c3c0a35548e0f}{World\+To\+Tile\+Center}} (Vector3 world\+Position)
+\item 
+void \mbox{\hyperlink{class_tile_graph_a36cabbaca38766f02b95a82ee0967ebc}{Get\+Connections}} (\mbox{\hyperlink{struct_int_point}{Int\+Point}} from\+Node, out List$<$ \mbox{\hyperlink{interface_i_connection}{I\+Connection}}$<$ \mbox{\hyperlink{struct_int_point}{Int\+Point}} $>$$>$ connections)
+\begin{DoxyCompactList}\small\item\em Fills connections with node connections that can be reached from from\+Node \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_tile_graph_a9213b3332566a8e720dd28a05376001c}{Is\+Tile\+Blocked}} (\mbox{\hyperlink{struct_int_point}{Int\+Point}} tile\+Coords)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_tile_graph_ae6728f48acf48baa4400f8829cc29bc3}{tile\+Size}} = 1.\+0f
+\item 
+Vector3 \mbox{\hyperlink{class_tile_graph_a2d996c82ced0508bb04cbdf1a45ba144}{graph\+Size}} = new Vector3(40, 1, 40)
+\item 
+string \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_tile_graph_a882d4a8adc35cb6a66f4d29d63dcb0c0}{blocking}} = new string\mbox{[}1\mbox{]}
+\item 
+float \mbox{[},\mbox{]} \mbox{\hyperlink{class_tile_graph_a5e585742f9ecd6ce5e3a0abb55a9f89b}{height\+Values}}
+\item 
+Terrain \mbox{\hyperlink{class_tile_graph_a064f51b86f086091ec4b9fff14c554e2}{terrain}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tile_graph_a4e921f79aca67d58cad7367227fe8c06}\label{class_tile_graph_a4e921f79aca67d58cad7367227fe8c06}} 
+\index{Tile\+Graph@{Tile\+Graph}!Awake@{Awake}}
+\index{Awake@{Awake}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily void Tile\+Graph.\+Awake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_tile_graph_a36cabbaca38766f02b95a82ee0967ebc}\label{class_tile_graph_a36cabbaca38766f02b95a82ee0967ebc}} 
+\index{Tile\+Graph@{Tile\+Graph}!Get\+Connections@{Get\+Connections}}
+\index{Get\+Connections@{Get\+Connections}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{Get\+Connections()}{GetConnections()}}
+{\footnotesize\ttfamily void Tile\+Graph.\+Get\+Connections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_int_point}{Int\+Point}}}]{from\+Node,  }\item[{out List$<$ \mbox{\hyperlink{interface_i_connection}{I\+Connection}}$<$ \mbox{\hyperlink{struct_int_point}{Int\+Point}} $>$$>$}]{connections }\end{DoxyParamCaption})}
+
+
+
+Fills connections with node connections that can be reached from from\+Node 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from\+Node} & The tile coordinates of the node to find connections for.\\
+\hline
+{\em connections} & The resulting set of connections\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tile_graph_a349a2602be0a8c9473aed6103955a2a6}\label{class_tile_graph_a349a2602be0a8c9473aed6103955a2a6}} 
+\index{Tile\+Graph@{Tile\+Graph}!Init@{Init}}
+\index{Init@{Init}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Tile\+Graph.\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_tile_graph_a839b7d0deee777d52006ad5678170694}\label{class_tile_graph_a839b7d0deee777d52006ad5678170694}} 
+\index{Tile\+Graph@{Tile\+Graph}!Init\+Height\+Field@{Init\+Height\+Field}}
+\index{Init\+Height\+Field@{Init\+Height\+Field}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{Init\+Height\+Field()}{InitHeightField()}}
+{\footnotesize\ttfamily void Tile\+Graph.\+Init\+Height\+Field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_tile_graph_a9213b3332566a8e720dd28a05376001c}\label{class_tile_graph_a9213b3332566a8e720dd28a05376001c}} 
+\index{Tile\+Graph@{Tile\+Graph}!Is\+Tile\+Blocked@{Is\+Tile\+Blocked}}
+\index{Is\+Tile\+Blocked@{Is\+Tile\+Blocked}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{Is\+Tile\+Blocked()}{IsTileBlocked()}}
+{\footnotesize\ttfamily bool Tile\+Graph.\+Is\+Tile\+Blocked (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_int_point}{Int\+Point}}}]{tile\+Coords }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_tile_graph_ae13070f1638b7409ad1d63b5551bc3fa}\label{class_tile_graph_ae13070f1638b7409ad1d63b5551bc3fa}} 
+\index{Tile\+Graph@{Tile\+Graph}!Tile\+To\+World@{Tile\+To\+World}}
+\index{Tile\+To\+World@{Tile\+To\+World}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{Tile\+To\+World()}{TileToWorld()}}
+{\footnotesize\ttfamily Vector3 Tile\+Graph.\+Tile\+To\+World (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_int_point}{Int\+Point}}}]{tile\+Position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_tile_graph_a470894695f1deb2d9c127a1e50d0b859}\label{class_tile_graph_a470894695f1deb2d9c127a1e50d0b859}} 
+\index{Tile\+Graph@{Tile\+Graph}!World\+To\+Tile@{World\+To\+Tile}}
+\index{World\+To\+Tile@{World\+To\+Tile}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{World\+To\+Tile()}{WorldToTile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_int_point}{Int\+Point}} Tile\+Graph.\+World\+To\+Tile (\begin{DoxyParamCaption}\item[{Vector2}]{world\+Position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_tile_graph_a121a3327fefcf7009e2dc3c5d1c9d310}\label{class_tile_graph_a121a3327fefcf7009e2dc3c5d1c9d310}} 
+\index{Tile\+Graph@{Tile\+Graph}!World\+To\+Tile@{World\+To\+Tile}}
+\index{World\+To\+Tile@{World\+To\+Tile}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{World\+To\+Tile()}{WorldToTile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_int_point}{Int\+Point}} Tile\+Graph.\+World\+To\+Tile (\begin{DoxyParamCaption}\item[{Vector3}]{world\+Position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_tile_graph_a23609e10dfa34c3b498c3c0a35548e0f}\label{class_tile_graph_a23609e10dfa34c3b498c3c0a35548e0f}} 
+\index{Tile\+Graph@{Tile\+Graph}!World\+To\+Tile\+Center@{World\+To\+Tile\+Center}}
+\index{World\+To\+Tile\+Center@{World\+To\+Tile\+Center}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{World\+To\+Tile\+Center()}{WorldToTileCenter()}}
+{\footnotesize\ttfamily Vector3 Tile\+Graph.\+World\+To\+Tile\+Center (\begin{DoxyParamCaption}\item[{Vector3}]{world\+Position }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_tile_graph_a882d4a8adc35cb6a66f4d29d63dcb0c0}\label{class_tile_graph_a882d4a8adc35cb6a66f4d29d63dcb0c0}} 
+\index{Tile\+Graph@{Tile\+Graph}!blocking@{blocking}}
+\index{blocking@{blocking}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{blocking}{blocking}}
+{\footnotesize\ttfamily string \mbox{[}$\,$\mbox{]} Tile\+Graph.\+blocking = new string\mbox{[}1\mbox{]}}
+
+\mbox{\Hypertarget{class_tile_graph_a2d996c82ced0508bb04cbdf1a45ba144}\label{class_tile_graph_a2d996c82ced0508bb04cbdf1a45ba144}} 
+\index{Tile\+Graph@{Tile\+Graph}!graph\+Size@{graph\+Size}}
+\index{graph\+Size@{graph\+Size}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{graph\+Size}{graphSize}}
+{\footnotesize\ttfamily Vector3 Tile\+Graph.\+graph\+Size = new Vector3(40, 1, 40)}
+
+\mbox{\Hypertarget{class_tile_graph_a5e585742f9ecd6ce5e3a0abb55a9f89b}\label{class_tile_graph_a5e585742f9ecd6ce5e3a0abb55a9f89b}} 
+\index{Tile\+Graph@{Tile\+Graph}!height\+Values@{height\+Values}}
+\index{height\+Values@{height\+Values}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{height\+Values}{heightValues}}
+{\footnotesize\ttfamily float \mbox{[},\mbox{]} Tile\+Graph.\+height\+Values}
+
+\mbox{\Hypertarget{class_tile_graph_a064f51b86f086091ec4b9fff14c554e2}\label{class_tile_graph_a064f51b86f086091ec4b9fff14c554e2}} 
+\index{Tile\+Graph@{Tile\+Graph}!terrain@{terrain}}
+\index{terrain@{terrain}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{terrain}{terrain}}
+{\footnotesize\ttfamily Terrain Tile\+Graph.\+terrain}
+
+\mbox{\Hypertarget{class_tile_graph_ae6728f48acf48baa4400f8829cc29bc3}\label{class_tile_graph_ae6728f48acf48baa4400f8829cc29bc3}} 
+\index{Tile\+Graph@{Tile\+Graph}!tile\+Size@{tile\+Size}}
+\index{tile\+Size@{tile\+Size}!Tile\+Graph@{Tile\+Graph}}
+\subsubsection{\texorpdfstring{tile\+Size}{tileSize}}
+{\footnotesize\ttfamily float Tile\+Graph.\+tile\+Size = 1.\+0f}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Util/\+Containers/\+Graphs/\+Tile\+Graphs/\mbox{\hyperlink{_tile_graph_8cs}{Tile\+Graph.\+cs}}\end{DoxyCompactItemize}

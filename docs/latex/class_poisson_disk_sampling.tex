@@ -1,0 +1,181 @@
+\hypertarget{class_poisson_disk_sampling}{}\section{Poisson\+Disk\+Sampling Class Reference}
+\label{class_poisson_disk_sampling}\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+Inheritance diagram for Poisson\+Disk\+Sampling\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_poisson_disk_sampling}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_poisson_disk_sampling_a1a571483a8940424916aa1266576161e}{Init}} ()
+\item 
+override void \mbox{\hyperlink{class_poisson_disk_sampling_abd6053768abe24749eee699ce914eceb}{Init}} (Vector2\mbox{[}$\,$\mbox{]} source\+Points)
+\item 
+void \mbox{\hyperlink{class_poisson_disk_sampling_a5d3b4212b8f786be4e849b93ca096ab6}{Next\+Source\+Point}} ()
+\item 
+Vector2 \mbox{\hyperlink{class_poisson_disk_sampling_a4d173da254062579395c756861467e93}{Make\+Random\+Point}} ()
+\item 
+override Vector2 \mbox{\hyperlink{class_poisson_disk_sampling_a6e0e9060e58c98193329d0661a64a5ed}{Next\+Point}} ()
+\item 
+void \mbox{\hyperlink{class_poisson_disk_sampling_a96daccb88a2edb1f835d3ed8e19ace2e}{Generate\+Poisson}} ()
+\item 
+void \mbox{\hyperlink{class_poisson_disk_sampling_acfa775a97fe1210f2b28188464f8092b}{Add\+Point}} (Vector2 In\+Point)
+\item 
+Vector2 \mbox{\hyperlink{class_poisson_disk_sampling_aadc97855167d6531a56c9099101877d0}{Generate\+Random\+Point\+Around}} (Vector2 point, float min\+Dist)
+\item 
+\mbox{\hyperlink{struct_int_point}{Int\+Point}} \mbox{\hyperlink{class_poisson_disk_sampling_a3489e3f81cc5c5fa5087e8edb7042659}{Point\+To\+Grid\+Coord}} (Vector2 point)
+\item 
+override void \mbox{\hyperlink{class_poisson_disk_sampling_a93700de987a5b4bf64da7cd0db070534}{Generate}} (out List$<$ Vector2 $>$ results)
+\item 
+override void \mbox{\hyperlink{class_poisson_disk_sampling_af2aeccc94efa7d224044f730fc432bcf}{Generate}} (float \mbox{\hyperlink{class_poisson_disk_sampling_a0b32f3e1950036797fb17575da924b8e}{width}}, float \mbox{\hyperlink{class_poisson_disk_sampling_aa75a106477c40f9d1200f3ae71dd544f}{height}}, float min\+Dstance, int max\+Points\+Desired, out List$<$ Vector2 $>$ results)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_poisson_disk_sampling_a0b32f3e1950036797fb17575da924b8e}{width}} = 100
+\item 
+float \mbox{\hyperlink{class_poisson_disk_sampling_aa75a106477c40f9d1200f3ae71dd544f}{height}} = 100
+\item 
+float \mbox{\hyperlink{class_poisson_disk_sampling_a5e7060326d72754ea94c25df1d5afbaf}{min\+Distance}} = 5
+\item 
+int \mbox{\hyperlink{class_poisson_disk_sampling_a2ff267a5d6d3a2f30c613ce52ae48bf8}{new\+Points\+Count}} = 30
+\item 
+int \mbox{\hyperlink{class_poisson_disk_sampling_a1c7892b887f1405caedef95ab667735e}{max\+Total\+Points}} = 1000
+\item 
+\mbox{\hyperlink{struct_grid2_d}{Grid2D}} \mbox{\hyperlink{class_poisson_disk_sampling_a7cc5fef43fe82e98bb385d76f4df3727}{grid}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_poisson_disk_sampling_acfa775a97fe1210f2b28188464f8092b}\label{class_poisson_disk_sampling_acfa775a97fe1210f2b28188464f8092b}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Add\+Point@{Add\+Point}}
+\index{Add\+Point@{Add\+Point}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Add\+Point()}{AddPoint()}}
+{\footnotesize\ttfamily void Poisson\+Disk\+Sampling.\+Add\+Point (\begin{DoxyParamCaption}\item[{Vector2}]{In\+Point }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a93700de987a5b4bf64da7cd0db070534}\label{class_poisson_disk_sampling_a93700de987a5b4bf64da7cd0db070534}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Generate@{Generate}}
+\index{Generate@{Generate}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Generate()}{Generate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily override void Poisson\+Disk\+Sampling.\+Generate (\begin{DoxyParamCaption}\item[{out List$<$ Vector2 $>$}]{results }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_point_generator_aa952bfb78a0b3d97db614f9f8d062747}{Point\+Generator}}.
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_af2aeccc94efa7d224044f730fc432bcf}\label{class_poisson_disk_sampling_af2aeccc94efa7d224044f730fc432bcf}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Generate@{Generate}}
+\index{Generate@{Generate}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Generate()}{Generate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily override void Poisson\+Disk\+Sampling.\+Generate (\begin{DoxyParamCaption}\item[{float}]{width,  }\item[{float}]{height,  }\item[{float}]{min\+Dstance,  }\item[{int}]{max\+Points\+Desired,  }\item[{out List$<$ Vector2 $>$}]{results }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_point_generator_a9552a67546e0f4a0d96cd300c656c94e}{Point\+Generator}}.
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a96daccb88a2edb1f835d3ed8e19ace2e}\label{class_poisson_disk_sampling_a96daccb88a2edb1f835d3ed8e19ace2e}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Generate\+Poisson@{Generate\+Poisson}}
+\index{Generate\+Poisson@{Generate\+Poisson}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Generate\+Poisson()}{GeneratePoisson()}}
+{\footnotesize\ttfamily void Poisson\+Disk\+Sampling.\+Generate\+Poisson (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_aadc97855167d6531a56c9099101877d0}\label{class_poisson_disk_sampling_aadc97855167d6531a56c9099101877d0}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Generate\+Random\+Point\+Around@{Generate\+Random\+Point\+Around}}
+\index{Generate\+Random\+Point\+Around@{Generate\+Random\+Point\+Around}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Generate\+Random\+Point\+Around()}{GenerateRandomPointAround()}}
+{\footnotesize\ttfamily Vector2 Poisson\+Disk\+Sampling.\+Generate\+Random\+Point\+Around (\begin{DoxyParamCaption}\item[{Vector2}]{point,  }\item[{float}]{min\+Dist }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a1a571483a8940424916aa1266576161e}\label{class_poisson_disk_sampling_a1a571483a8940424916aa1266576161e}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Init@{Init}}
+\index{Init@{Init}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily override void Poisson\+Disk\+Sampling.\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_point_generator_ae254f890c9a38d044d77f981e0dfeb68}{Point\+Generator}}.
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_abd6053768abe24749eee699ce914eceb}\label{class_poisson_disk_sampling_abd6053768abe24749eee699ce914eceb}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Init@{Init}}
+\index{Init@{Init}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Init()}{Init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily override void Poisson\+Disk\+Sampling.\+Init (\begin{DoxyParamCaption}\item[{Vector2 \mbox{[}$\,$\mbox{]}}]{source\+Points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_point_generator_a46241ac6f86e8a9cd190bbecba41f6d1}{Point\+Generator}}.
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a4d173da254062579395c756861467e93}\label{class_poisson_disk_sampling_a4d173da254062579395c756861467e93}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Make\+Random\+Point@{Make\+Random\+Point}}
+\index{Make\+Random\+Point@{Make\+Random\+Point}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Make\+Random\+Point()}{MakeRandomPoint()}}
+{\footnotesize\ttfamily Vector2 Poisson\+Disk\+Sampling.\+Make\+Random\+Point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a6e0e9060e58c98193329d0661a64a5ed}\label{class_poisson_disk_sampling_a6e0e9060e58c98193329d0661a64a5ed}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Next\+Point@{Next\+Point}}
+\index{Next\+Point@{Next\+Point}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Next\+Point()}{NextPoint()}}
+{\footnotesize\ttfamily override Vector2 Poisson\+Disk\+Sampling.\+Next\+Point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_point_generator_a91e70f9d4939dfb00755b46937e6d26b}{Point\+Generator}}.
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a5d3b4212b8f786be4e849b93ca096ab6}\label{class_poisson_disk_sampling_a5d3b4212b8f786be4e849b93ca096ab6}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Next\+Source\+Point@{Next\+Source\+Point}}
+\index{Next\+Source\+Point@{Next\+Source\+Point}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Next\+Source\+Point()}{NextSourcePoint()}}
+{\footnotesize\ttfamily void Poisson\+Disk\+Sampling.\+Next\+Source\+Point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a3489e3f81cc5c5fa5087e8edb7042659}\label{class_poisson_disk_sampling_a3489e3f81cc5c5fa5087e8edb7042659}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!Point\+To\+Grid\+Coord@{Point\+To\+Grid\+Coord}}
+\index{Point\+To\+Grid\+Coord@{Point\+To\+Grid\+Coord}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{Point\+To\+Grid\+Coord()}{PointToGridCoord()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_int_point}{Int\+Point}} Poisson\+Disk\+Sampling.\+Point\+To\+Grid\+Coord (\begin{DoxyParamCaption}\item[{Vector2}]{point }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_poisson_disk_sampling_a7cc5fef43fe82e98bb385d76f4df3727}\label{class_poisson_disk_sampling_a7cc5fef43fe82e98bb385d76f4df3727}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!grid@{grid}}
+\index{grid@{grid}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{grid}{grid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_grid2_d}{Grid2D}} Poisson\+Disk\+Sampling.\+grid}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_aa75a106477c40f9d1200f3ae71dd544f}\label{class_poisson_disk_sampling_aa75a106477c40f9d1200f3ae71dd544f}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!height@{height}}
+\index{height@{height}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily float Poisson\+Disk\+Sampling.\+height = 100}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a1c7892b887f1405caedef95ab667735e}\label{class_poisson_disk_sampling_a1c7892b887f1405caedef95ab667735e}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!max\+Total\+Points@{max\+Total\+Points}}
+\index{max\+Total\+Points@{max\+Total\+Points}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{max\+Total\+Points}{maxTotalPoints}}
+{\footnotesize\ttfamily int Poisson\+Disk\+Sampling.\+max\+Total\+Points = 1000}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a5e7060326d72754ea94c25df1d5afbaf}\label{class_poisson_disk_sampling_a5e7060326d72754ea94c25df1d5afbaf}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!min\+Distance@{min\+Distance}}
+\index{min\+Distance@{min\+Distance}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{min\+Distance}{minDistance}}
+{\footnotesize\ttfamily float Poisson\+Disk\+Sampling.\+min\+Distance = 5}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a2ff267a5d6d3a2f30c613ce52ae48bf8}\label{class_poisson_disk_sampling_a2ff267a5d6d3a2f30c613ce52ae48bf8}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!new\+Points\+Count@{new\+Points\+Count}}
+\index{new\+Points\+Count@{new\+Points\+Count}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{new\+Points\+Count}{newPointsCount}}
+{\footnotesize\ttfamily int Poisson\+Disk\+Sampling.\+new\+Points\+Count = 30}
+
+\mbox{\Hypertarget{class_poisson_disk_sampling_a0b32f3e1950036797fb17575da924b8e}\label{class_poisson_disk_sampling_a0b32f3e1950036797fb17575da924b8e}} 
+\index{Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}!width@{width}}
+\index{width@{width}!Poisson\+Disk\+Sampling@{Poisson\+Disk\+Sampling}}
+\subsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily float Poisson\+Disk\+Sampling.\+width = 100}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Generation/\mbox{\hyperlink{_poisson_disk_sampling_8cs}{Poisson\+Disk\+Sampling.\+cs}}\end{DoxyCompactItemize}

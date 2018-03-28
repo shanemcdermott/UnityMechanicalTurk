@@ -1,0 +1,100 @@
+\hypertarget{class_generation_algorithm}{}\section{Generation\+Algorithm Class Reference}
+\label{class_generation_algorithm}\index{Generation\+Algorithm@{Generation\+Algorithm}}
+
+
+Wrapper for various generation algorithms that adds events.  
+
+
+Inheritance diagram for Generation\+Algorithm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.246377cm]{class_generation_algorithm}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract bool \mbox{\hyperlink{class_generation_algorithm_af7d03e24e3b7fecfe2ae43f06915986d}{Can\+Generate}} ()
+\begin{DoxyCompactList}\small\item\em Checks to see if generation prerequisites are met. \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_generation_algorithm_a5e891b08f0c1d8f4ccc9ad06667691ec}{Setup}} ()
+\begin{DoxyCompactList}\small\item\em Collects any prerequisites for generation. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_generation_algorithm_a9c0cc2cf748d7320651aa8d48d81c407}{Generate}} (bool Should\+Invoke\+On\+Complete)
+\begin{DoxyCompactList}\small\item\em Invokes On\+Generation\+Complete when finished. \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_generation_algorithm_ac2df20f7751c1b480ab958791d5c7d41}{Generate}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Unity\+Event \mbox{\hyperlink{class_generation_algorithm_a2f1af71393895b242a38b22e9e69b295}{On\+Generation\+Complete}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Wrapper for various generation algorithms that adds events. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_generation_algorithm_af7d03e24e3b7fecfe2ae43f06915986d}\label{class_generation_algorithm_af7d03e24e3b7fecfe2ae43f06915986d}} 
+\index{Generation\+Algorithm@{Generation\+Algorithm}!Can\+Generate@{Can\+Generate}}
+\index{Can\+Generate@{Can\+Generate}!Generation\+Algorithm@{Generation\+Algorithm}}
+\subsubsection{\texorpdfstring{Can\+Generate()}{CanGenerate()}}
+{\footnotesize\ttfamily abstract bool Generation\+Algorithm.\+Can\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks to see if generation prerequisites are met. 
+
+\begin{DoxyReturn}{Returns}
+true if ready for generation.
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_noise_generator_a9f6eefc7403c8d228dc1752086e8c745}{Noise\+Generator}}, \mbox{\hyperlink{class_generation_sequence_a33000b1383e18a453a592ed05a9e5e56}{Generation\+Sequence}}, \mbox{\hyperlink{class_terrain_generator_aecef659ebcfc0b012f4f8eb42e11f337}{Terrain\+Generator}}, \mbox{\hyperlink{class_city_generator_abae83261cf4eea2ed07339b644ed13af}{City\+Generator}}, and \mbox{\hyperlink{class_biome_generator_abe3d21283eef52d4c3ae631178ab69fc}{Biome\+Generator}}.
+
+\mbox{\Hypertarget{class_generation_algorithm_a9c0cc2cf748d7320651aa8d48d81c407}\label{class_generation_algorithm_a9c0cc2cf748d7320651aa8d48d81c407}} 
+\index{Generation\+Algorithm@{Generation\+Algorithm}!Generate@{Generate}}
+\index{Generate@{Generate}!Generation\+Algorithm@{Generation\+Algorithm}}
+\subsubsection{\texorpdfstring{Generate()}{Generate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void Generation\+Algorithm.\+Generate (\begin{DoxyParamCaption}\item[{bool}]{Should\+Invoke\+On\+Complete }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Invokes On\+Generation\+Complete when finished. 
+
+\mbox{\Hypertarget{class_generation_algorithm_ac2df20f7751c1b480ab958791d5c7d41}\label{class_generation_algorithm_ac2df20f7751c1b480ab958791d5c7d41}} 
+\index{Generation\+Algorithm@{Generation\+Algorithm}!Generate@{Generate}}
+\index{Generate@{Generate}!Generation\+Algorithm@{Generation\+Algorithm}}
+\subsubsection{\texorpdfstring{Generate()}{Generate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily abstract void Generation\+Algorithm.\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_terrain_generator_ace92d2a3406204b124c51e91f68a0aec}{Terrain\+Generator}}, \mbox{\hyperlink{class_noise_generator_af97b78b12d39a0ae2d05e1d28c970005}{Noise\+Generator}}, \mbox{\hyperlink{class_generation_sequence_ac594b809365f2af5e423bfd5830b796a}{Generation\+Sequence}}, \mbox{\hyperlink{class_city_generator_aa80ad8d8d723fd17f6bf9a4fe89dec4f}{City\+Generator}}, and \mbox{\hyperlink{class_biome_generator_ac8ac31b6e0276662994f0cd143457fdb}{Biome\+Generator}}.
+
+\mbox{\Hypertarget{class_generation_algorithm_a5e891b08f0c1d8f4ccc9ad06667691ec}\label{class_generation_algorithm_a5e891b08f0c1d8f4ccc9ad06667691ec}} 
+\index{Generation\+Algorithm@{Generation\+Algorithm}!Setup@{Setup}}
+\index{Setup@{Setup}!Generation\+Algorithm@{Generation\+Algorithm}}
+\subsubsection{\texorpdfstring{Setup()}{Setup()}}
+{\footnotesize\ttfamily abstract void Generation\+Algorithm.\+Setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Collects any prerequisites for generation. 
+
+
+
+Implemented in \mbox{\hyperlink{class_simplex_noise_a43164ec5960921789ce75e83651717cf}{Simplex\+Noise}}, \mbox{\hyperlink{class_noise_generator_ad87355d424b537a1a4065d525ec18400}{Noise\+Generator}}, \mbox{\hyperlink{class_terrain_generator_ada250260b370382c1ba5cad243a67f10}{Terrain\+Generator}}, \mbox{\hyperlink{class_generation_sequence_ad433bd211eb9ed7e39d6e354c40289ff}{Generation\+Sequence}}, \mbox{\hyperlink{class_biome_generator_aa1df38909c58ff7112ebfd285e65f6c0}{Biome\+Generator}}, and \mbox{\hyperlink{class_city_generator_a1b17b4a2ea1d8a4cc1b320829da286ae}{City\+Generator}}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_generation_algorithm_a2f1af71393895b242a38b22e9e69b295}\label{class_generation_algorithm_a2f1af71393895b242a38b22e9e69b295}} 
+\index{Generation\+Algorithm@{Generation\+Algorithm}!On\+Generation\+Complete@{On\+Generation\+Complete}}
+\index{On\+Generation\+Complete@{On\+Generation\+Complete}!Generation\+Algorithm@{Generation\+Algorithm}}
+\subsubsection{\texorpdfstring{On\+Generation\+Complete}{OnGenerationComplete}}
+{\footnotesize\ttfamily Unity\+Event Generation\+Algorithm.\+On\+Generation\+Complete}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Framework/\+Generation/\mbox{\hyperlink{_generation_algorithm_8cs}{Generation\+Algorithm.\+cs}}\end{DoxyCompactItemize}

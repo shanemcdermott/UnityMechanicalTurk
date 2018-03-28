@@ -1,0 +1,169 @@
+\hypertarget{class_delaunay_triangulation}{}\section{Delaunay\+Triangulation Class Reference}
+\label{class_delaunay_triangulation}\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+Inheritance diagram for Delaunay\+Triangulation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_delaunay_triangulation}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_delaunay_triangulation_a0edb936dc23053ec75ffecfb7a426c03}{Init}} ()
+\item 
+Vector2 \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_delaunay_triangulation_a1f871cd0ab4b06003e92c9aa02683f5a}{Corners}} ()
+\item 
+void \mbox{\hyperlink{class_delaunay_triangulation_a2880d1fc8f58a1c500da8276e31fbddc}{Add\+Point}} (Vector2 New\+Point)
+\item 
+bool \mbox{\hyperlink{class_delaunay_triangulation_a81fe4e7d4347425f00d973cad4215fc6}{Is\+Point\+Inside\+Circumcircle}} (Vector2 p, \mbox{\hyperlink{struct_delaunay_triangle}{Delaunay\+Triangle}} dt)
+\item 
+bool \mbox{\hyperlink{class_delaunay_triangulation_a1f1b19add4ee96d9613b47fe19106a94}{Is\+Point\+Inside\+Circumcircle}} (Vector2 p, \mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}} dt)
+\item 
+Vector2 \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_delaunay_triangulation_a44384b9db3229395f862673e9ec03296}{Get\+Points}} ()
+\item 
+\mbox{\hyperlink{struct_int_point}{Int\+Point}} \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_delaunay_triangulation_afcf101ed329a388d5b2c1e720f3cfb41}{Get\+Edges}} ()
+\item 
+\mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}} \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_delaunay_triangulation_a1b55615a70f1a68c150f397be89357bf}{Get\+Triangles}} ()
+\item 
+void \mbox{\hyperlink{class_delaunay_triangulation_ab740dde5362f8e54c4d000d6cd82d57c}{On\+Draw\+Gizmos\+Selected}} ()
+\item 
+Color \mbox{\hyperlink{class_delaunay_triangulation_a5c2e4b787760bd7aa248933bce6b97b2}{Get\+Point\+Color}} (Vector2 P)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Polygon\+Collider2D \mbox{\hyperlink{class_delaunay_triangulation_aeb242e46a6c940c61502ea5e08d4b5b6}{bounds}}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_delaunay_triangulation_aa4ae5153592df4ba083d810a6d809999}{Update\+Triangles}} (Vector2 New\+Point)
+\item 
+void \mbox{\hyperlink{class_delaunay_triangulation_aa4b708614e1c66fde876d036630804da}{Update\+Deltris}} (Vector2 New\+Point)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_delaunay_triangulation_a04fce817ac5bdbc5ac2891e0efc8626b}{Num\+Triangles}} = 0
+\item 
+int \mbox{\hyperlink{class_delaunay_triangulation_aecaad9bab22a717e9ec4e91191896d83}{Num\+Points}} = 0
+\item 
+List$<$ Vector2 $>$ \mbox{\hyperlink{class_delaunay_triangulation_abe36cb50d65f6fa86fa15dba1cb413a5}{points}} = new List$<$Vector2$>$()
+\item 
+List$<$ \mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}} $>$ \mbox{\hyperlink{class_delaunay_triangulation_a51e3e7d9301274730cba64afc6ce69cb}{triangles}} = new List$<$\mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}}$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_delaunay_triangulation_a2880d1fc8f58a1c500da8276e31fbddc}\label{class_delaunay_triangulation_a2880d1fc8f58a1c500da8276e31fbddc}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Add\+Point@{Add\+Point}}
+\index{Add\+Point@{Add\+Point}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Add\+Point()}{AddPoint()}}
+{\footnotesize\ttfamily void Delaunay\+Triangulation.\+Add\+Point (\begin{DoxyParamCaption}\item[{Vector2}]{New\+Point }\end{DoxyParamCaption})}
+
+~\newline
+ for each triangle in triangulation // done inserting points, now clean up if triangle contains a vertex from original super-\/triangle remove triangle from triangulation\mbox{\Hypertarget{class_delaunay_triangulation_a1f871cd0ab4b06003e92c9aa02683f5a}\label{class_delaunay_triangulation_a1f871cd0ab4b06003e92c9aa02683f5a}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Corners@{Corners}}
+\index{Corners@{Corners}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Corners()}{Corners()}}
+{\footnotesize\ttfamily Vector2 \mbox{[}$\,$\mbox{]} Delaunay\+Triangulation.\+Corners (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_afcf101ed329a388d5b2c1e720f3cfb41}\label{class_delaunay_triangulation_afcf101ed329a388d5b2c1e720f3cfb41}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Get\+Edges@{Get\+Edges}}
+\index{Get\+Edges@{Get\+Edges}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Get\+Edges()}{GetEdges()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_int_point}{Int\+Point}} \mbox{[}$\,$\mbox{]} Delaunay\+Triangulation.\+Get\+Edges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a5c2e4b787760bd7aa248933bce6b97b2}\label{class_delaunay_triangulation_a5c2e4b787760bd7aa248933bce6b97b2}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Get\+Point\+Color@{Get\+Point\+Color}}
+\index{Get\+Point\+Color@{Get\+Point\+Color}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Get\+Point\+Color()}{GetPointColor()}}
+{\footnotesize\ttfamily Color Delaunay\+Triangulation.\+Get\+Point\+Color (\begin{DoxyParamCaption}\item[{Vector2}]{P }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a44384b9db3229395f862673e9ec03296}\label{class_delaunay_triangulation_a44384b9db3229395f862673e9ec03296}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Get\+Points@{Get\+Points}}
+\index{Get\+Points@{Get\+Points}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Get\+Points()}{GetPoints()}}
+{\footnotesize\ttfamily Vector2 \mbox{[}$\,$\mbox{]} Delaunay\+Triangulation.\+Get\+Points (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a1b55615a70f1a68c150f397be89357bf}\label{class_delaunay_triangulation_a1b55615a70f1a68c150f397be89357bf}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Get\+Triangles@{Get\+Triangles}}
+\index{Get\+Triangles@{Get\+Triangles}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Get\+Triangles()}{GetTriangles()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}} \mbox{[}$\,$\mbox{]} Delaunay\+Triangulation.\+Get\+Triangles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a0edb936dc23053ec75ffecfb7a426c03}\label{class_delaunay_triangulation_a0edb936dc23053ec75ffecfb7a426c03}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Init@{Init}}
+\index{Init@{Init}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Delaunay\+Triangulation.\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a81fe4e7d4347425f00d973cad4215fc6}\label{class_delaunay_triangulation_a81fe4e7d4347425f00d973cad4215fc6}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Is\+Point\+Inside\+Circumcircle@{Is\+Point\+Inside\+Circumcircle}}
+\index{Is\+Point\+Inside\+Circumcircle@{Is\+Point\+Inside\+Circumcircle}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Is\+Point\+Inside\+Circumcircle()}{IsPointInsideCircumcircle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Delaunay\+Triangulation.\+Is\+Point\+Inside\+Circumcircle (\begin{DoxyParamCaption}\item[{Vector2}]{p,  }\item[{\mbox{\hyperlink{struct_delaunay_triangle}{Delaunay\+Triangle}}}]{dt }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a1f1b19add4ee96d9613b47fe19106a94}\label{class_delaunay_triangulation_a1f1b19add4ee96d9613b47fe19106a94}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Is\+Point\+Inside\+Circumcircle@{Is\+Point\+Inside\+Circumcircle}}
+\index{Is\+Point\+Inside\+Circumcircle@{Is\+Point\+Inside\+Circumcircle}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Is\+Point\+Inside\+Circumcircle()}{IsPointInsideCircumcircle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Delaunay\+Triangulation.\+Is\+Point\+Inside\+Circumcircle (\begin{DoxyParamCaption}\item[{Vector2}]{p,  }\item[{\mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}}}]{dt }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_ab740dde5362f8e54c4d000d6cd82d57c}\label{class_delaunay_triangulation_ab740dde5362f8e54c4d000d6cd82d57c}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!On\+Draw\+Gizmos\+Selected@{On\+Draw\+Gizmos\+Selected}}
+\index{On\+Draw\+Gizmos\+Selected@{On\+Draw\+Gizmos\+Selected}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{On\+Draw\+Gizmos\+Selected()}{OnDrawGizmosSelected()}}
+{\footnotesize\ttfamily void Delaunay\+Triangulation.\+On\+Draw\+Gizmos\+Selected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_aa4b708614e1c66fde876d036630804da}\label{class_delaunay_triangulation_aa4b708614e1c66fde876d036630804da}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Update\+Deltris@{Update\+Deltris}}
+\index{Update\+Deltris@{Update\+Deltris}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Update\+Deltris()}{UpdateDeltris()}}
+{\footnotesize\ttfamily void Delaunay\+Triangulation.\+Update\+Deltris (\begin{DoxyParamCaption}\item[{Vector2}]{New\+Point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_aa4ae5153592df4ba083d810a6d809999}\label{class_delaunay_triangulation_aa4ae5153592df4ba083d810a6d809999}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Update\+Triangles@{Update\+Triangles}}
+\index{Update\+Triangles@{Update\+Triangles}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Update\+Triangles()}{UpdateTriangles()}}
+{\footnotesize\ttfamily void Delaunay\+Triangulation.\+Update\+Triangles (\begin{DoxyParamCaption}\item[{Vector2}]{New\+Point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+~\newline
+ for each triangle in triangulation // done inserting points, now clean up if triangle contains a vertex from original super-\/triangle remove triangle from triangulation
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_delaunay_triangulation_aeb242e46a6c940c61502ea5e08d4b5b6}\label{class_delaunay_triangulation_aeb242e46a6c940c61502ea5e08d4b5b6}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!bounds@{bounds}}
+\index{bounds@{bounds}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{bounds}{bounds}}
+{\footnotesize\ttfamily Polygon\+Collider2D Delaunay\+Triangulation.\+bounds}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_aecaad9bab22a717e9ec4e91191896d83}\label{class_delaunay_triangulation_aecaad9bab22a717e9ec4e91191896d83}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Num\+Points@{Num\+Points}}
+\index{Num\+Points@{Num\+Points}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Num\+Points}{NumPoints}}
+{\footnotesize\ttfamily int Delaunay\+Triangulation.\+Num\+Points = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a04fce817ac5bdbc5ac2891e0efc8626b}\label{class_delaunay_triangulation_a04fce817ac5bdbc5ac2891e0efc8626b}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!Num\+Triangles@{Num\+Triangles}}
+\index{Num\+Triangles@{Num\+Triangles}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{Num\+Triangles}{NumTriangles}}
+{\footnotesize\ttfamily int Delaunay\+Triangulation.\+Num\+Triangles = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_abe36cb50d65f6fa86fa15dba1cb413a5}\label{class_delaunay_triangulation_abe36cb50d65f6fa86fa15dba1cb413a5}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!points@{points}}
+\index{points@{points}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{points}{points}}
+{\footnotesize\ttfamily List$<$Vector2$>$ Delaunay\+Triangulation.\+points = new List$<$Vector2$>$()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_delaunay_triangulation_a51e3e7d9301274730cba64afc6ce69cb}\label{class_delaunay_triangulation_a51e3e7d9301274730cba64afc6ce69cb}} 
+\index{Delaunay\+Triangulation@{Delaunay\+Triangulation}!triangles@{triangles}}
+\index{triangles@{triangles}!Delaunay\+Triangulation@{Delaunay\+Triangulation}}
+\subsubsection{\texorpdfstring{triangles}{triangles}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}}$>$ Delaunay\+Triangulation.\+triangles = new List$<$\mbox{\hyperlink{struct_int_triangle}{Int\+Triangle}}$>$()\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Util/\+Containers/\+Graphs/\+Triangle\+Graphs/\mbox{\hyperlink{_delaunay_triangulation_8cs}{Delaunay\+Triangulation.\+cs}}\end{DoxyCompactItemize}

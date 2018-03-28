@@ -1,0 +1,132 @@
+\hypertarget{class_poly_grid}{}\section{Poly\+Grid Class Reference}
+\label{class_poly_grid}\index{Poly\+Grid@{Poly\+Grid}}
+Inheritance diagram for Poly\+Grid\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_poly_grid}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_poly_grid_abdcb8932a005a5cbd833430662727faf}{Num\+Faces}} ()
+\item 
+void \mbox{\hyperlink{class_poly_grid_a0fc1f57b2840e01acfc2d7dbe49d2fd1}{Add\+Face}} (\mbox{\hyperlink{class_grid_face}{Grid\+Face}} new\+Face)
+\item 
+void \mbox{\hyperlink{class_poly_grid_a486c7e7a5829e4bb9966c064db28113d}{Add\+Vertex}} (\mbox{\hyperlink{class_node}{Node}} new\+Vertex)
+\item 
+List$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \mbox{\hyperlink{class_poly_grid_a35e759e3c28917350c1158e80a664a79}{Get\+Vertices}} ()
+\item 
+List$<$ \mbox{\hyperlink{class_grid_face}{Grid\+Face}} $>$ \mbox{\hyperlink{class_poly_grid_a4fd6191d005e389d329fc5f855732015}{Get\+Faces}} ()
+\item 
+void \mbox{\hyperlink{class_poly_grid_a9a19971fbde8f1aaa806d54771857d8b}{Flip\+Axes}} ()
+\item 
+void \mbox{\hyperlink{class_poly_grid_a1c99b63c71be2e28b2f1b1ccdbdf1c26}{On\+Draw\+Gizmos}} ()
+\item 
+void \mbox{\hyperlink{class_poly_grid_ae3c6db975b79d96ebb9ec0c16cfda518}{Draw\+Vertices}} ()
+\item 
+void \mbox{\hyperlink{class_poly_grid_a322dbff12283b94455ad415f554675c6}{Draw\+Faces}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \mbox{\hyperlink{class_poly_grid_aeebd9e2f028fa1d79b48a61cf65a6829}{Dimensions}}
+\item 
+Vector2\+Int \mbox{\hyperlink{class_poly_grid_aa3d72d505c3c008a5bd52a448d932840}{Faces\+Per\+Side}}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{class_grid_face}{Grid\+Face}} $>$ \mbox{\hyperlink{class_poly_grid_ad1f5acf9cfbd3a2ad7add30d87eb0416}{faces}} = new List$<$\mbox{\hyperlink{class_grid_face}{Grid\+Face}}$>$()
+\item 
+List$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \mbox{\hyperlink{class_poly_grid_a40f18bd5bd749337828beb314e43a36e}{vertices}} = new List$<$\mbox{\hyperlink{class_node}{Node}}$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_poly_grid_a0fc1f57b2840e01acfc2d7dbe49d2fd1}\label{class_poly_grid_a0fc1f57b2840e01acfc2d7dbe49d2fd1}} 
+\index{Poly\+Grid@{Poly\+Grid}!Add\+Face@{Add\+Face}}
+\index{Add\+Face@{Add\+Face}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Add\+Face()}{AddFace()}}
+{\footnotesize\ttfamily void Poly\+Grid.\+Add\+Face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_grid_face}{Grid\+Face}}}]{new\+Face }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_a486c7e7a5829e4bb9966c064db28113d}\label{class_poly_grid_a486c7e7a5829e4bb9966c064db28113d}} 
+\index{Poly\+Grid@{Poly\+Grid}!Add\+Vertex@{Add\+Vertex}}
+\index{Add\+Vertex@{Add\+Vertex}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Add\+Vertex()}{AddVertex()}}
+{\footnotesize\ttfamily void Poly\+Grid.\+Add\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{new\+Vertex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_a322dbff12283b94455ad415f554675c6}\label{class_poly_grid_a322dbff12283b94455ad415f554675c6}} 
+\index{Poly\+Grid@{Poly\+Grid}!Draw\+Faces@{Draw\+Faces}}
+\index{Draw\+Faces@{Draw\+Faces}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Draw\+Faces()}{DrawFaces()}}
+{\footnotesize\ttfamily void Poly\+Grid.\+Draw\+Faces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_ae3c6db975b79d96ebb9ec0c16cfda518}\label{class_poly_grid_ae3c6db975b79d96ebb9ec0c16cfda518}} 
+\index{Poly\+Grid@{Poly\+Grid}!Draw\+Vertices@{Draw\+Vertices}}
+\index{Draw\+Vertices@{Draw\+Vertices}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Draw\+Vertices()}{DrawVertices()}}
+{\footnotesize\ttfamily void Poly\+Grid.\+Draw\+Vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_a9a19971fbde8f1aaa806d54771857d8b}\label{class_poly_grid_a9a19971fbde8f1aaa806d54771857d8b}} 
+\index{Poly\+Grid@{Poly\+Grid}!Flip\+Axes@{Flip\+Axes}}
+\index{Flip\+Axes@{Flip\+Axes}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Flip\+Axes()}{FlipAxes()}}
+{\footnotesize\ttfamily void Poly\+Grid.\+Flip\+Axes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_a4fd6191d005e389d329fc5f855732015}\label{class_poly_grid_a4fd6191d005e389d329fc5f855732015}} 
+\index{Poly\+Grid@{Poly\+Grid}!Get\+Faces@{Get\+Faces}}
+\index{Get\+Faces@{Get\+Faces}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Get\+Faces()}{GetFaces()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_grid_face}{Grid\+Face}}$>$ Poly\+Grid.\+Get\+Faces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_a35e759e3c28917350c1158e80a664a79}\label{class_poly_grid_a35e759e3c28917350c1158e80a664a79}} 
+\index{Poly\+Grid@{Poly\+Grid}!Get\+Vertices@{Get\+Vertices}}
+\index{Get\+Vertices@{Get\+Vertices}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Get\+Vertices()}{GetVertices()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_node}{Node}}$>$ Poly\+Grid.\+Get\+Vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_abdcb8932a005a5cbd833430662727faf}\label{class_poly_grid_abdcb8932a005a5cbd833430662727faf}} 
+\index{Poly\+Grid@{Poly\+Grid}!Num\+Faces@{Num\+Faces}}
+\index{Num\+Faces@{Num\+Faces}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Num\+Faces()}{NumFaces()}}
+{\footnotesize\ttfamily int Poly\+Grid.\+Num\+Faces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_poly_grid_a1c99b63c71be2e28b2f1b1ccdbdf1c26}\label{class_poly_grid_a1c99b63c71be2e28b2f1b1ccdbdf1c26}} 
+\index{Poly\+Grid@{Poly\+Grid}!On\+Draw\+Gizmos@{On\+Draw\+Gizmos}}
+\index{On\+Draw\+Gizmos@{On\+Draw\+Gizmos}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{On\+Draw\+Gizmos()}{OnDrawGizmos()}}
+{\footnotesize\ttfamily void Poly\+Grid.\+On\+Draw\+Gizmos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_poly_grid_aeebd9e2f028fa1d79b48a61cf65a6829}\label{class_poly_grid_aeebd9e2f028fa1d79b48a61cf65a6829}} 
+\index{Poly\+Grid@{Poly\+Grid}!Dimensions@{Dimensions}}
+\index{Dimensions@{Dimensions}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Dimensions}{Dimensions}}
+{\footnotesize\ttfamily Vector2 Poly\+Grid.\+Dimensions}
+
+\mbox{\Hypertarget{class_poly_grid_ad1f5acf9cfbd3a2ad7add30d87eb0416}\label{class_poly_grid_ad1f5acf9cfbd3a2ad7add30d87eb0416}} 
+\index{Poly\+Grid@{Poly\+Grid}!faces@{faces}}
+\index{faces@{faces}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{faces}{faces}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_grid_face}{Grid\+Face}}$>$ Poly\+Grid.\+faces = new List$<$\mbox{\hyperlink{class_grid_face}{Grid\+Face}}$>$()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_poly_grid_aa3d72d505c3c008a5bd52a448d932840}\label{class_poly_grid_aa3d72d505c3c008a5bd52a448d932840}} 
+\index{Poly\+Grid@{Poly\+Grid}!Faces\+Per\+Side@{Faces\+Per\+Side}}
+\index{Faces\+Per\+Side@{Faces\+Per\+Side}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{Faces\+Per\+Side}{FacesPerSide}}
+{\footnotesize\ttfamily Vector2\+Int Poly\+Grid.\+Faces\+Per\+Side}
+
+\mbox{\Hypertarget{class_poly_grid_a40f18bd5bd749337828beb314e43a36e}\label{class_poly_grid_a40f18bd5bd749337828beb314e43a36e}} 
+\index{Poly\+Grid@{Poly\+Grid}!vertices@{vertices}}
+\index{vertices@{vertices}!Poly\+Grid@{Poly\+Grid}}
+\subsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_node}{Node}}$>$ Poly\+Grid.\+vertices = new List$<$\mbox{\hyperlink{class_node}{Node}}$>$()\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Util/\+Containers/\+Graphs/\+Grids/\mbox{\hyperlink{_poly_grid_8cs}{Poly\+Grid.\+cs}}\end{DoxyCompactItemize}

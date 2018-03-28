@@ -1,0 +1,126 @@
+\hypertarget{class_noise_generator}{}\section{Noise\+Generator Class Reference}
+\label{class_noise_generator}\index{Noise\+Generator@{Noise\+Generator}}
+Inheritance diagram for Noise\+Generator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_noise_generator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_noise_generator_ad87355d424b537a1a4065d525ec18400}{Setup}} ()
+\begin{DoxyCompactList}\small\item\em Collects any prerequisites for generation. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_noise_generator_a9f6eefc7403c8d228dc1752086e8c745}{Can\+Generate}} ()
+\begin{DoxyCompactList}\small\item\em Checks to see if generation prerequisites are met. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_noise_generator_af97b78b12d39a0ae2d05e1d28c970005}{Generate}} ()
+\item 
+abstract float \mbox{[},\mbox{]} \mbox{\hyperlink{class_noise_generator_a1d3983a9ad33c2734f373e9f2d8f13d7}{Generate\+Height\+Map}} (int map\+Width, int map\+Height)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_noise_map}{Noise\+Map}} \mbox{\hyperlink{class_noise_generator_a19e92d7669706bdd2cae8229dc6331f4}{noise\+Map}}
+\item 
+float \mbox{\hyperlink{class_noise_generator_a411009c00c7e62e99dccd0dd3b98c661}{scale}} = 1f
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_noise_generator_abf59a5335539de9b8a38feca31f8ffe5}{width}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_noise_generator_a73fd14bf579ffcf3118b81be3107c0d5}{height}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_noise_generator_a9f6eefc7403c8d228dc1752086e8c745}\label{class_noise_generator_a9f6eefc7403c8d228dc1752086e8c745}} 
+\index{Noise\+Generator@{Noise\+Generator}!Can\+Generate@{Can\+Generate}}
+\index{Can\+Generate@{Can\+Generate}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{Can\+Generate()}{CanGenerate()}}
+{\footnotesize\ttfamily override bool Noise\+Generator.\+Can\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Checks to see if generation prerequisites are met. 
+
+\begin{DoxyReturn}{Returns}
+true if ready for generation.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_generation_algorithm_af7d03e24e3b7fecfe2ae43f06915986d}{Generation\+Algorithm}}.
+
+\mbox{\Hypertarget{class_noise_generator_af97b78b12d39a0ae2d05e1d28c970005}\label{class_noise_generator_af97b78b12d39a0ae2d05e1d28c970005}} 
+\index{Noise\+Generator@{Noise\+Generator}!Generate@{Generate}}
+\index{Generate@{Generate}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{Generate()}{Generate()}}
+{\footnotesize\ttfamily override void Noise\+Generator.\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_generation_algorithm_ac2df20f7751c1b480ab958791d5c7d41}{Generation\+Algorithm}}.
+
+\mbox{\Hypertarget{class_noise_generator_a1d3983a9ad33c2734f373e9f2d8f13d7}\label{class_noise_generator_a1d3983a9ad33c2734f373e9f2d8f13d7}} 
+\index{Noise\+Generator@{Noise\+Generator}!Generate\+Height\+Map@{Generate\+Height\+Map}}
+\index{Generate\+Height\+Map@{Generate\+Height\+Map}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{Generate\+Height\+Map()}{GenerateHeightMap()}}
+{\footnotesize\ttfamily abstract float \mbox{[},\mbox{]} Noise\+Generator.\+Generate\+Height\+Map (\begin{DoxyParamCaption}\item[{int}]{map\+Width,  }\item[{int}]{map\+Height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_simplex_noise_aea5b04e1455da3c6eb8b29deb28a239c}{Simplex\+Noise}}, and \mbox{\hyperlink{class_perlin_octaves_ac5deb001801dbfe9666df3dea023ce7a}{Perlin\+Octaves}}.
+
+\mbox{\Hypertarget{class_noise_generator_ad87355d424b537a1a4065d525ec18400}\label{class_noise_generator_ad87355d424b537a1a4065d525ec18400}} 
+\index{Noise\+Generator@{Noise\+Generator}!Setup@{Setup}}
+\index{Setup@{Setup}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{Setup()}{Setup()}}
+{\footnotesize\ttfamily override void Noise\+Generator.\+Setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Collects any prerequisites for generation. 
+
+
+
+Implements \mbox{\hyperlink{class_generation_algorithm_a5e891b08f0c1d8f4ccc9ad06667691ec}{Generation\+Algorithm}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_simplex_noise_a43164ec5960921789ce75e83651717cf}{Simplex\+Noise}}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_noise_generator_a19e92d7669706bdd2cae8229dc6331f4}\label{class_noise_generator_a19e92d7669706bdd2cae8229dc6331f4}} 
+\index{Noise\+Generator@{Noise\+Generator}!noise\+Map@{noise\+Map}}
+\index{noise\+Map@{noise\+Map}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{noise\+Map}{noiseMap}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_noise_map}{Noise\+Map}} Noise\+Generator.\+noise\+Map}
+
+\mbox{\Hypertarget{class_noise_generator_a411009c00c7e62e99dccd0dd3b98c661}\label{class_noise_generator_a411009c00c7e62e99dccd0dd3b98c661}} 
+\index{Noise\+Generator@{Noise\+Generator}!scale@{scale}}
+\index{scale@{scale}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{scale}{scale}}
+{\footnotesize\ttfamily float Noise\+Generator.\+scale = 1f}
+
+
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_noise_generator_a73fd14bf579ffcf3118b81be3107c0d5}\label{class_noise_generator_a73fd14bf579ffcf3118b81be3107c0d5}} 
+\index{Noise\+Generator@{Noise\+Generator}!height@{height}}
+\index{height@{height}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily int Noise\+Generator.\+height\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_noise_generator_abf59a5335539de9b8a38feca31f8ffe5}\label{class_noise_generator_abf59a5335539de9b8a38feca31f8ffe5}} 
+\index{Noise\+Generator@{Noise\+Generator}!width@{width}}
+\index{width@{width}!Noise\+Generator@{Noise\+Generator}}
+\subsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily int Noise\+Generator.\+width\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Framework/\+Generation/\mbox{\hyperlink{_noise_generator_8cs}{Noise\+Generator.\+cs}}\end{DoxyCompactItemize}

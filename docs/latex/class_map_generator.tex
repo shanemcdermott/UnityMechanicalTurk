@@ -1,0 +1,176 @@
+\hypertarget{class_map_generator}{}\section{Map\+Generator Class Reference}
+\label{class_map_generator}\index{Map\+Generator@{Map\+Generator}}
+Inheritance diagram for Map\+Generator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_map_generator}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_map_generator_ad11b508087506616937d0dac5576c2ab}{Draw\+Mode}} \{ \mbox{\hyperlink{class_map_generator_ad11b508087506616937d0dac5576c2abaf1b803399772ec7c6b60c4dd5ee008e3}{Draw\+Mode.\+Noise\+Map}}, 
+\mbox{\hyperlink{class_map_generator_ad11b508087506616937d0dac5576c2abaf0a9eaea3a84d380edf51e2f1236abd0}{Draw\+Mode.\+Colour\+Map}}, 
+\mbox{\hyperlink{class_map_generator_ad11b508087506616937d0dac5576c2aba710fdb6adb881b408116ef95335e1961}{Draw\+Mode.\+Mesh}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_map_generator_adc8f9ffbc33e6d4b1593900c3059fdf7}{Generate\+Map}} ()
+\item 
+void \mbox{\hyperlink{class_map_generator_ac6e51a7c21ff6e6bae4ae637536b4c53}{Generate\+Map}} (float\mbox{[},\mbox{]} noise\+Map)
+\item 
+Color \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_map_generator_acfc52dd649037da30a270b6347b6c436}{Get\+Color\+Map}} (\mbox{\hyperlink{class_noise_map}{Noise\+Map}} noise\+Map)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_map_generator_ad11b508087506616937d0dac5576c2ab}{Draw\+Mode}} \mbox{\hyperlink{class_map_generator_ab7abc6f55e460a0778c8f9fb0922c0b2}{draw\+Mode}}
+\item 
+int \mbox{\hyperlink{class_map_generator_a36dc6ed804922345576a48c92ca2a7c5}{level\+Of\+Detail}}
+\item 
+float \mbox{\hyperlink{class_map_generator_a240eb7cb057720f6b650ba7f89f73857}{noise\+Scale}}
+\item 
+int \mbox{\hyperlink{class_map_generator_a89c8da977598552d30b0110669b09960}{octaves}}
+\item 
+float \mbox{\hyperlink{class_map_generator_afc59b0a77b7165a6654e08d0e8580e60}{persistance}}
+\item 
+float \mbox{\hyperlink{class_map_generator_ada5f0345bb8a65536c3aa911f63565af}{lacunarity}}
+\item 
+int \mbox{\hyperlink{class_map_generator_a7ad3b7337f5252b30d873f0d76a06fcb}{seed}}
+\item 
+Vector2 \mbox{\hyperlink{class_map_generator_a785c0d701c764003f0c7dfdd3be5077c}{offset}}
+\item 
+float \mbox{\hyperlink{class_map_generator_ad0ea5ea76e455736a4b831774fca1029}{mesh\+Height\+Multiplier}}
+\item 
+Animation\+Curve \mbox{\hyperlink{class_map_generator_a814ef92c835bac7d01e4c839bd4580ab}{mesh\+Height\+Curve}}
+\item 
+bool \mbox{\hyperlink{class_map_generator_af0843909ea371f9eee073691750482c3}{auto\+Update}}
+\item 
+\mbox{\hyperlink{struct_terrain_type}{Terrain\+Type}} \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_map_generator_adaca0c66c3812a547927a6fcdd353dc7}{regions}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_map_generator_ad11b508087506616937d0dac5576c2ab}\label{class_map_generator_ad11b508087506616937d0dac5576c2ab}} 
+\index{Map\+Generator@{Map\+Generator}!Draw\+Mode@{Draw\+Mode}}
+\index{Draw\+Mode@{Draw\+Mode}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{Draw\+Mode}{DrawMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_map_generator_ad11b508087506616937d0dac5576c2ab}{Map\+Generator.\+Draw\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Noise\+Map@{Noise\+Map}!Map\+Generator@{Map\+Generator}}\index{Map\+Generator@{Map\+Generator}!Noise\+Map@{Noise\+Map}}}\mbox{\Hypertarget{class_map_generator_ad11b508087506616937d0dac5576c2abaf1b803399772ec7c6b60c4dd5ee008e3}\label{class_map_generator_ad11b508087506616937d0dac5576c2abaf1b803399772ec7c6b60c4dd5ee008e3}} 
+Noise\+Map&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Colour\+Map@{Colour\+Map}!Map\+Generator@{Map\+Generator}}\index{Map\+Generator@{Map\+Generator}!Colour\+Map@{Colour\+Map}}}\mbox{\Hypertarget{class_map_generator_ad11b508087506616937d0dac5576c2abaf0a9eaea3a84d380edf51e2f1236abd0}\label{class_map_generator_ad11b508087506616937d0dac5576c2abaf0a9eaea3a84d380edf51e2f1236abd0}} 
+Colour\+Map&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mesh@{Mesh}!Map\+Generator@{Map\+Generator}}\index{Map\+Generator@{Map\+Generator}!Mesh@{Mesh}}}\mbox{\Hypertarget{class_map_generator_ad11b508087506616937d0dac5576c2aba710fdb6adb881b408116ef95335e1961}\label{class_map_generator_ad11b508087506616937d0dac5576c2aba710fdb6adb881b408116ef95335e1961}} 
+Mesh&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_map_generator_adc8f9ffbc33e6d4b1593900c3059fdf7}\label{class_map_generator_adc8f9ffbc33e6d4b1593900c3059fdf7}} 
+\index{Map\+Generator@{Map\+Generator}!Generate\+Map@{Generate\+Map}}
+\index{Generate\+Map@{Generate\+Map}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{Generate\+Map()}{GenerateMap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Map\+Generator.\+Generate\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_map_generator_ac6e51a7c21ff6e6bae4ae637536b4c53}\label{class_map_generator_ac6e51a7c21ff6e6bae4ae637536b4c53}} 
+\index{Map\+Generator@{Map\+Generator}!Generate\+Map@{Generate\+Map}}
+\index{Generate\+Map@{Generate\+Map}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{Generate\+Map()}{GenerateMap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Map\+Generator.\+Generate\+Map (\begin{DoxyParamCaption}\item[{float}]{noise\+Map\mbox{[},\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_map_generator_acfc52dd649037da30a270b6347b6c436}\label{class_map_generator_acfc52dd649037da30a270b6347b6c436}} 
+\index{Map\+Generator@{Map\+Generator}!Get\+Color\+Map@{Get\+Color\+Map}}
+\index{Get\+Color\+Map@{Get\+Color\+Map}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{Get\+Color\+Map()}{GetColorMap()}}
+{\footnotesize\ttfamily Color \mbox{[}$\,$\mbox{]} Map\+Generator.\+Get\+Color\+Map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_noise_map}{Noise\+Map}}}]{noise\+Map }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_map_generator_af0843909ea371f9eee073691750482c3}\label{class_map_generator_af0843909ea371f9eee073691750482c3}} 
+\index{Map\+Generator@{Map\+Generator}!auto\+Update@{auto\+Update}}
+\index{auto\+Update@{auto\+Update}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{auto\+Update}{autoUpdate}}
+{\footnotesize\ttfamily bool Map\+Generator.\+auto\+Update}
+
+\mbox{\Hypertarget{class_map_generator_ab7abc6f55e460a0778c8f9fb0922c0b2}\label{class_map_generator_ab7abc6f55e460a0778c8f9fb0922c0b2}} 
+\index{Map\+Generator@{Map\+Generator}!draw\+Mode@{draw\+Mode}}
+\index{draw\+Mode@{draw\+Mode}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{draw\+Mode}{drawMode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_map_generator_ad11b508087506616937d0dac5576c2ab}{Draw\+Mode}} Map\+Generator.\+draw\+Mode}
+
+\mbox{\Hypertarget{class_map_generator_ada5f0345bb8a65536c3aa911f63565af}\label{class_map_generator_ada5f0345bb8a65536c3aa911f63565af}} 
+\index{Map\+Generator@{Map\+Generator}!lacunarity@{lacunarity}}
+\index{lacunarity@{lacunarity}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{lacunarity}{lacunarity}}
+{\footnotesize\ttfamily float Map\+Generator.\+lacunarity}
+
+\mbox{\Hypertarget{class_map_generator_a36dc6ed804922345576a48c92ca2a7c5}\label{class_map_generator_a36dc6ed804922345576a48c92ca2a7c5}} 
+\index{Map\+Generator@{Map\+Generator}!level\+Of\+Detail@{level\+Of\+Detail}}
+\index{level\+Of\+Detail@{level\+Of\+Detail}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{level\+Of\+Detail}{levelOfDetail}}
+{\footnotesize\ttfamily int Map\+Generator.\+level\+Of\+Detail}
+
+\mbox{\Hypertarget{class_map_generator_a814ef92c835bac7d01e4c839bd4580ab}\label{class_map_generator_a814ef92c835bac7d01e4c839bd4580ab}} 
+\index{Map\+Generator@{Map\+Generator}!mesh\+Height\+Curve@{mesh\+Height\+Curve}}
+\index{mesh\+Height\+Curve@{mesh\+Height\+Curve}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{mesh\+Height\+Curve}{meshHeightCurve}}
+{\footnotesize\ttfamily Animation\+Curve Map\+Generator.\+mesh\+Height\+Curve}
+
+\mbox{\Hypertarget{class_map_generator_ad0ea5ea76e455736a4b831774fca1029}\label{class_map_generator_ad0ea5ea76e455736a4b831774fca1029}} 
+\index{Map\+Generator@{Map\+Generator}!mesh\+Height\+Multiplier@{mesh\+Height\+Multiplier}}
+\index{mesh\+Height\+Multiplier@{mesh\+Height\+Multiplier}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{mesh\+Height\+Multiplier}{meshHeightMultiplier}}
+{\footnotesize\ttfamily float Map\+Generator.\+mesh\+Height\+Multiplier}
+
+\mbox{\Hypertarget{class_map_generator_a240eb7cb057720f6b650ba7f89f73857}\label{class_map_generator_a240eb7cb057720f6b650ba7f89f73857}} 
+\index{Map\+Generator@{Map\+Generator}!noise\+Scale@{noise\+Scale}}
+\index{noise\+Scale@{noise\+Scale}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{noise\+Scale}{noiseScale}}
+{\footnotesize\ttfamily float Map\+Generator.\+noise\+Scale}
+
+\mbox{\Hypertarget{class_map_generator_a89c8da977598552d30b0110669b09960}\label{class_map_generator_a89c8da977598552d30b0110669b09960}} 
+\index{Map\+Generator@{Map\+Generator}!octaves@{octaves}}
+\index{octaves@{octaves}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{octaves}{octaves}}
+{\footnotesize\ttfamily int Map\+Generator.\+octaves}
+
+\mbox{\Hypertarget{class_map_generator_a785c0d701c764003f0c7dfdd3be5077c}\label{class_map_generator_a785c0d701c764003f0c7dfdd3be5077c}} 
+\index{Map\+Generator@{Map\+Generator}!offset@{offset}}
+\index{offset@{offset}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{offset}{offset}}
+{\footnotesize\ttfamily Vector2 Map\+Generator.\+offset}
+
+\mbox{\Hypertarget{class_map_generator_afc59b0a77b7165a6654e08d0e8580e60}\label{class_map_generator_afc59b0a77b7165a6654e08d0e8580e60}} 
+\index{Map\+Generator@{Map\+Generator}!persistance@{persistance}}
+\index{persistance@{persistance}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{persistance}{persistance}}
+{\footnotesize\ttfamily float Map\+Generator.\+persistance}
+
+\mbox{\Hypertarget{class_map_generator_adaca0c66c3812a547927a6fcdd353dc7}\label{class_map_generator_adaca0c66c3812a547927a6fcdd353dc7}} 
+\index{Map\+Generator@{Map\+Generator}!regions@{regions}}
+\index{regions@{regions}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{regions}{regions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_terrain_type}{Terrain\+Type}} \mbox{[}$\,$\mbox{]} Map\+Generator.\+regions}
+
+\mbox{\Hypertarget{class_map_generator_a7ad3b7337f5252b30d873f0d76a06fcb}\label{class_map_generator_a7ad3b7337f5252b30d873f0d76a06fcb}} 
+\index{Map\+Generator@{Map\+Generator}!seed@{seed}}
+\index{seed@{seed}!Map\+Generator@{Map\+Generator}}
+\subsubsection{\texorpdfstring{seed}{seed}}
+{\footnotesize\ttfamily int Map\+Generator.\+seed}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/sabienambrose/\+Documents/\+Coding/\+Unity\+Mechanical\+Turk/\+Mechanical\+Turk/\+Assets/\+Scripts/\+Generation/\mbox{\hyperlink{_map_generator_8cs}{Map\+Generator.\+cs}}\end{DoxyCompactItemize}
