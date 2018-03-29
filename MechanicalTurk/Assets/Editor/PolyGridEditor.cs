@@ -53,7 +53,7 @@ public class PolyGridEditor : Editor
 
     public void ShowGridProps()
     {
-        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.BeginVertical();
 
         showGridVertices = EditorGUILayout.Foldout(showGridVertices, "Vertices");
         if (showGridVertices)
