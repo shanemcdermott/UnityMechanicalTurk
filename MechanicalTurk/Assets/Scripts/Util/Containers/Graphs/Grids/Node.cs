@@ -7,7 +7,7 @@ using UnityEngine;
 public class Node : IHasConnections<Node>
 {
     protected Vector3 position;
-    protected List<Node> connections =new List<Node>();
+    protected List<Node> connections = new List<Node>();
 
     public Node()
     {
@@ -42,8 +42,6 @@ public class Node : IHasConnections<Node>
             connections.Add(connection);
             connection.AddConnection(this);
         }
-
-
     }
 
     public void RemoveConnection(Node connection)
@@ -98,7 +96,7 @@ public class Node : IHasConnections<Node>
         return position;
     }
 
-    public void DrawConnections()
+    public virtual void DrawConnections()
     {
         Vector3 pNorm = position.normalized;
        
@@ -110,6 +108,59 @@ public class Node : IHasConnections<Node>
                 Debug.DrawLine(position, c.position, color);
             }
         }
+    }
+
+    public List<Vector2Int> GiveConnectionLines()
+    {
+        List<Vector2Int> connectionPoints = new List<Vector2Int>();
+        
+        foreach (Node c in connections)
+        {
+            if (c != null)
+            {
+                connectionPoints.AddRange(GetConnectionLine(position, c.position));
+            }
+        }
+
+        return connectionPoints;
+    }
+
+    private List<Vector2Int> GetConnectionLine(Vector3 node, Vector3 connection)
+    {
+        List<Vector2Int> connectionLine = new List<Vector2Int>();
+
+        Vector3 difference = connection - node;
+
+        if(difference.x > 0)
+        {
+            for(int i = (int)node.x; i <= (int)connection.x; i++)
+            {
+                connectionLine.Add(new Vector2Int(i,(int)node.z));
+            }
+        }
+        else if(difference.x < 0)
+        {
+            for (int i = (int)connection.x; i <= (int)node.x; i++)
+            {
+                connectionLine.Add(new Vector2Int(i, (int)connection.z));
+            }
+        }
+
+        if (difference.z > 0)
+        {
+            for (int i = (int)node.z; i <= (int)connection.z; i++)
+            {
+                connectionLine.Add(new Vector2Int((int)node.x, i));
+            }
+        }
+        else if(difference.z < 0){
+            for (int i = (int)connection.z; i <= (int)node.z; i++)
+            {
+                connectionLine.Add(new Vector2Int((int)connection.x, i));
+            }
+        }
+
+        return connectionLine;
     }
 
 }

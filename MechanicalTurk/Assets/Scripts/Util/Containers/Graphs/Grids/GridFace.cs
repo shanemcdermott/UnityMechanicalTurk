@@ -96,4 +96,18 @@ public class GridFace : Node
         vertices[i] = vertices[j];
         vertices[j] = ni;
     }
+
+    public override void DrawConnections()
+    {
+        Vector3 pNorm = position.normalized;
+
+        Color color = Color.cyan;
+        foreach (GridFace c in connections)
+        {
+            if (c != null)
+            {
+                Debug.DrawLine(position, c.position, color);
+            }
+        }
+    }
 }
