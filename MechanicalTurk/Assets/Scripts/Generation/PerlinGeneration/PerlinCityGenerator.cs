@@ -27,9 +27,9 @@ public class PerlinCityGenerator : CityGenerator {
 
         if (polyGrid.NumFaces() == 0)
         {
-            polyGrid.FacesPerSide = new Vector2Int(2, 2);
+            polyGrid.FacesPerSide = new Vector2Int(5, 5);
             Debug.Log("PerlinCityGenerator: Populating perlin road grid");
-            GridFactory.GeneratePerlinGrid(ref polyGrid, lowRoadNumber, highRoadNumber);
+            GridFactory.GeneratePerlinGrid(ref polyGrid, 2, 4);
             //GridFactory.PopulateSquareGrid(ref polyGrid);
         }
     }
@@ -37,7 +37,7 @@ public class PerlinCityGenerator : CityGenerator {
     void PopulateRoadTexture()
     {
         Debug.Log("PerlinCityGenerator: Populating Road Texture");
-        roadTexture = new Texture2D(257, 257);
+        roadTexture = new Texture2D(terrainGenerator.terrain.terrainData.heightmapWidth, terrainGenerator.terrain.terrainData.heightmapHeight);
 
         Color color = Color.black;
 
@@ -135,7 +135,7 @@ public class PerlinCityGenerator : CityGenerator {
             for (int x = 0; x < tData.alphamapWidth; x++)
             {
                 //check if the road is at this x/y (normalized), if so, alpha=1, else alpha=0
-                float alphaVal = 1;
+                float alphaVal = 0.25f;
                 alphamaps[y, x, 1] = alphaVal;
                 alphamaps[y, x, 0] = 1 - alphaVal;
             }
