@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45127046, g: 0.5000895, b: 0.5687059, a: 1}
+  m_IndirectSpecularColor: {r: 0.45127034, g: 0.50008935, b: 0.5687055, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -486,8 +486,9 @@ MonoBehaviour:
   heightMap: {fileID: 876539227}
   polyGrid: {fileID: 1326181069}
   gameNode: {fileID: 1011579487013642, guid: dfb094f0359494445886c32d95191bf2, type: 2}
-  lowRoadNumber: 2
-  highRoadNumber: 4
+  tilingTexture: {fileID: 2800000, guid: c508b88e5ea5eb64cb980ffca6ba632e, type: 3}
+  lowRoadNumber: 4
+  highRoadNumber: 8
   terrainGenerator: {fileID: 876539225}
   testPlane: {fileID: 1390429355}
 --- !u!1 &1390429355
@@ -569,13 +570,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1390429355}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 75.64875, y: 96.71991, z: -39.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1949478399
 GameObject:
   m_ObjectHideFlags: 0

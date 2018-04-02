@@ -136,9 +136,11 @@ public class PerlinCityGenerator : CityGenerator {
         { 
             for (int x = 0; x < tData.alphamapWidth; x++)
             {
-
                 //check if the road is at this x/y (normalized), if so, alpha=1, else alpha=0
                 float alphaVal = roadTexture.GetPixel(x / 2, y / 2).grayscale;
+                if(alphaVal != 0){
+                    alphaVal = 1;
+                }
                 alphamaps[y, x, 0] = alphaVal;
                 alphamaps[y, x, 1] = 1 - alphaVal;
             }
