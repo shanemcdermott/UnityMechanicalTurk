@@ -129,15 +129,16 @@ public class PerlinCityGenerator : CityGenerator {
         textures[1].tileSize = heightMap.Dimensions;
 
         float[,,] alphamaps = new float[tData.alphamapWidth, tData.alphamapHeight, 2];
-
+        Debug.Log("Alphamap size: (w: " + tData.alphamapWidth + ",H: " + tData.alphamapHeight + ")");
         for (int y = 0; y < tData.alphamapHeight; y++)
         { 
             for (int x = 0; x < tData.alphamapWidth; x++)
             {
+
                 //check if the road is at this x/y (normalized), if so, alpha=1, else alpha=0
-                float alphaVal = 0.25f;
-                alphamaps[y, x, 1] = alphaVal;
-                alphamaps[y, x, 0] = 1 - alphaVal;
+                float alphaVal = roadTexture.GetPixel(x / 2, y / 2).grayscale;
+                alphamaps[y, x, 0] = alphaVal;
+                alphamaps[y, x, 1] = 1 - alphaVal;
             }
         }
         terrainGenerator.terrain.terrainData.splatPrototypes = textures;
