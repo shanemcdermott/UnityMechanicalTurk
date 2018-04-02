@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PerlinCityGenerator : CityGenerator {
     public GameObject gameNode;
+	public Texture2D tilingTexture;
+
     private Texture2D roadTexture;
 
     public int lowRoadNumber = 2;
@@ -125,8 +127,8 @@ public class PerlinCityGenerator : CityGenerator {
 
         textures[0] = tData.splatPrototypes[0];
         textures[1] = new SplatPrototype();
-        textures[1].texture = roadTexture;
-        textures[1].tileSize = heightMap.Dimensions;
+        textures[1].texture = tilingTexture;
+		textures[1].tileSize = new Vector2Int(1,1);
 
         float[,,] alphamaps = new float[tData.alphamapWidth, tData.alphamapHeight, 2];
         Debug.Log("Alphamap size: (w: " + tData.alphamapWidth + ",H: " + tData.alphamapHeight + ")");
