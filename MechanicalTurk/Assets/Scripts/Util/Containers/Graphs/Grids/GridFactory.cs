@@ -143,10 +143,7 @@ public class GridFactory
 
                 //random roads
                 int roadNumberEastWest = Random.Range(low, high + 1);
-                int roadNumberNorthSouth = Random.Range(low, high + 1);
-                
-                //int roadNumberEastWest = 2;
-                //int roadNumberNorthSouth = 2;
+                int roadNumberNorthSouth = Random.Range(low, high + 1)
 
                 float intervalEastWest = faceDimensions.x / roadNumberEastWest;
                 float intervalNorthSouth = faceDimensions.y / roadNumberNorthSouth;
@@ -158,8 +155,8 @@ public class GridFactory
                     {
                         Vector2 bottomLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + (z * intervalNorthSouth));
                         Vector2 topRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
+                        
                         Vector2 centerVert = MathOps.Midpoint(bottomLeft, topRight);
-                        Debug.Log("ew" + roadNumberEastWest + " ns " + roadNumberNorthSouth);
                         GridFace gridface = new GridFace(centerVert);
 
                         Vector2 bottomRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + (z * intervalNorthSouth));
