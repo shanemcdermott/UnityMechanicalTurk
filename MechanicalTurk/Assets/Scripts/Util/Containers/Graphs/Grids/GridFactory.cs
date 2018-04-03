@@ -143,7 +143,7 @@ public class GridFactory
 
                 //random roads
                 int roadNumberEastWest = Random.Range(low, high + 1);
-                int roadNumberNorthSouth = Random.Range(low, high + 1)
+                int roadNumberNorthSouth = Random.Range(low, high + 1);
 
                 float intervalEastWest = faceDimensions.x / roadNumberEastWest;
                 float intervalNorthSouth = faceDimensions.y / roadNumberNorthSouth;
