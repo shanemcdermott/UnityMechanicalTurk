@@ -16,6 +16,7 @@ public class GameNode : MonoBehaviour
     {
         this.node = node;
         transform.position = node.GetPosition();
+        gameObject.name = transform.position.ToString();
     }
 
 	// Use this for initialization

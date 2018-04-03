@@ -52,16 +52,15 @@ public class GridFactory
 
         Node[,] vertices = new Node[vertsPerSide.x, vertsPerSide.y];
         GridFace[,] faces = new GridFace[gridParams.FacesPerSide.x, gridParams.FacesPerSide.y];
-
-
+        
         //Add Vertices
         for(int x = 0; x < vertsPerSide.x; x++)
         {
             for(int y = 0; y < vertsPerSide.y; y++)
             {
                 Vector2 vertex = new Vector2(faceDimensions.x * x, faceDimensions.y * y);
+                
                 vertices[x, y] = new Node(vertex);
-
                 //Add vertex to grid
                 grid.AddVertex(vertices[x, y]); 
             }
@@ -95,23 +94,79 @@ public class GridFactory
             }
         }
 
-        //Connect Faces
-        for (int x = 0; x < gridParams.FacesPerSide.x; x++)
+        return grid != null;
+    }
+
+    public static void GeneratePerlinGrid(ref PolyGrid grid, int low, int high)
+    {
+        SquareGridParams gridParams = new SquareGridParams(grid);
+        Vector2 faceDimensions = gridParams.GetFaceDimensions();
+        Vector2Int vertsPerSide = gridParams.NumVertices();
+
+        Node[,] vertices = new Node[vertsPerSide.x, vertsPerSide.y];
+        
+
+        for (int x = 0; x < vertsPerSide.x; x++)
         {
-            for (int y = 0; y < gridParams.FacesPerSide.y; y++)
+            for (int y = 0; y < vertsPerSide.y; y++)
             {
-                if (x < gridParams.FacesPerSide.x - 1)
+                Vector2 vertex = new Vector2(faceDimensions.x * x, faceDimensions.y * y);
+                
+                vertices[x, y] = new Node(vertex);
+                
+                grid.AddVertex(vertices[x, y]);
+            }
+        }
+
+        //Connect Vertices
+        for (int x = 0; x < vertsPerSide.x; x++)
+        {
+            for (int y = 0; y < vertsPerSide.y; y++)
+            {
+                if (x < vertsPerSide.x - 1)
                 {
-                    faces[x, y].AddConnection(faces[x + 1, y]);
+                    vertices[x, y].AddConnection(vertices[x + 1, y]);
                 }
-                if (y < gridParams.FacesPerSide.y - 1)
+                if (y < vertsPerSide.y - 1)
                 {
-                    faces[x, y].AddConnection(faces[x, y + 1]);
+                    vertices[x, y].AddConnection(vertices[x, y + 1]);
                 }
             }
         }
 
-        return grid != null;
-    }
+        //Create Faces
+        for (int x = 0; x < grid.FacesPerSide.x; x++)
+        {
+            for (int y = 0; y < grid.FacesPerSide.y; y++)
+            {
+                Vector3 vertex = vertices[x, y].GetPosition();
 
+                //random roads
+                int roadNumberEastWest = Random.Range(low, high + 1);
+                int roadNumberNorthSouth = Random.Range(low, high + 1);
+
+                float intervalEastWest = faceDimensions.x / roadNumberEastWest;
+                float intervalNorthSouth = faceDimensions.y / roadNumberNorthSouth;
+
+                
+                for (int localx = 0; localx < roadNumberEastWest; localx++)
+                {
+                    for (int z = 0; z < roadNumberNorthSouth; z++)
+                    {
+                        Vector2 bottomLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + (z * intervalNorthSouth));
+                        Vector2 topRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
+                        
+                        Vector2 centerVert = MathOps.Midpoint(bottomLeft, topRight);
+                        GridFace gridface = new GridFace(centerVert);
+
+                        Vector2 bottomRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + (z * intervalNorthSouth));
+                        Vector2 topLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
+
+                        gridface.AddVertices(new Node[] {new Node(bottomLeft), new Node(bottomRight), new Node(topLeft), new Node(topRight)});
+                        grid.AddFace(gridface);
+                    }
+                }
+            }
+        }
+    }
 }

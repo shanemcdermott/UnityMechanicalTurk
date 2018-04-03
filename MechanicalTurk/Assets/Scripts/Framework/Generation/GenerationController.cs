@@ -58,6 +58,7 @@ public class GenerationController : MonoBehaviour
 
     public virtual void StartGenerationSequence()
     {
+        terrainGenerator.OnGenerationComplete.RemoveAllListeners();
         terrainGenerator.OnGenerationComplete.AddListener(GenerateCity);
         GenerateHeightmap();
     }
