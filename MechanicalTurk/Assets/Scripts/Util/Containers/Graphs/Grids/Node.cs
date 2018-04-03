@@ -163,4 +163,15 @@ public class Node : IHasConnections<Node>
         return connectionLine;
     }
 
+    public static Node Split(Node A, Node B)
+    {
+        Node res = new Node(MathOps.Midpoint(A.position, B.position));
+        if(A.IsConnectedTo(B))
+        {
+            A.RemoveConnection(B);
+            res.AddConnection(A);
+            res.AddConnection(B);
+        }
+        return res;
+    }
 }

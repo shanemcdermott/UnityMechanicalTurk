@@ -30,7 +30,7 @@ public class GridFace : Node
         this.vertices = toCopy.vertices;
     }
 
-    public void AddVertices(Node[] vertices)
+    public virtual void AddVertices(Node[] vertices)
     {
         this.vertices.AddRange(vertices);
     }
