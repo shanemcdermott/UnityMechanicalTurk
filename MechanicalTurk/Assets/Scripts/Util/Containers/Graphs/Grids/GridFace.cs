@@ -24,6 +24,12 @@ public class GridFace : Node
         vertices = new List<Node>();
     }
 
+    public GridFace(GridFace toCopy)
+    {
+        this.position = toCopy.position;
+        this.vertices = toCopy.vertices;
+    }
+
     public void AddVertices(Node[] vertices)
     {
         this.vertices.AddRange(vertices);

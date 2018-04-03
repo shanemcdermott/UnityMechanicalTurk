@@ -81,14 +81,14 @@ public class GridFactory
             }
         }
 
+        GridFaceFactory<GridFace> faceFactory = new GridFaceFactory<GridFace>();
         //Create Faces
         for (int x = 0; x < gridParams.FacesPerSide.x; x++)
         {
             for (int y = 0; y < gridParams.FacesPerSide.y; y++)
             {
                 Vector2 vertex = MathOps.Midpoint(vertices[x, y].GetPositionXZ(), vertices[x + 1, y + 1].GetPositionXZ());
-                faces[x, y] = new GridFace(vertex);
-                faces[x, y].AddVertices(new Node[] { vertices[x,y], vertices[x+1,y], vertices[x,y+1], vertices[x+1,y+1]});
+                faces[x, y] = faceFactory.GetNewGridFace(vertex, new Node[] { vertices[x,y], vertices[x+1,y], vertices[x,y+1], vertices[x+1,y+1]});
                 grid.AddFace(faces[x, y]);
                 
             }
