@@ -125,7 +125,7 @@ public class Node : IHasConnections<Node>
         return connectionPoints;
     }
 
-    private List<Vector2Int> GetConnectionLine(Vector3 node, Vector3 connection)
+    public List<Vector2Int> GetConnectionLine(Vector3 node, Vector3 connection)
     {
         List<Vector2Int> connectionLine = new List<Vector2Int>();
 

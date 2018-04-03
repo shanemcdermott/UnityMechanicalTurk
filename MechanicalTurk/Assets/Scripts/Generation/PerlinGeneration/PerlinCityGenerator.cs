@@ -10,11 +10,14 @@ public class PerlinCityGenerator : CityGenerator {
 
     public int lowRoadNumber = 2;
     public int highRoadNumber = 4;
+
+    public Vector2Int facesPerSide;
     
     public TerrainGenerator terrainGenerator;
 
     public GameObject testPlane;
     
+    public List<GameObject> spawnedGameNodes;
 
     public override void Generate()
     {
@@ -26,14 +29,21 @@ public class PerlinCityGenerator : CityGenerator {
 
     void GenerateRoadGrid()
     {
-
-        if (polyGrid.NumFaces() == 0)
+        for(int i = transform.childCount-1; i >= 0; i--)
         {
-            polyGrid.FacesPerSide = new Vector2Int(5, 5);
-            Debug.Log("PerlinCityGenerator: Populating perlin road grid");
-            GridFactory.GeneratePerlinGrid(ref polyGrid, 2, 4);
-            //GridFactory.PopulateSquareGrid(ref polyGrid);
+            Transform child = transform.GetChild(i);
+            DestroyImmediate(child.gameObject);
         }
+        
+        if (polyGrid.NumFaces() != 0)
+        {
+            polyGrid.Clean();
+        }
+        
+        polyGrid.FacesPerSide = new Vector2Int(facesPerSide.x, facesPerSide.y);
+        Debug.Log("PerlinCityGenerator: Populating perlin road grid");
+        GridFactory.GeneratePerlinGrid(ref polyGrid, lowRoadNumber, highRoadNumber);
+        
     }
 
     void PopulateRoadTexture()
@@ -57,18 +67,18 @@ public class PerlinCityGenerator : CityGenerator {
         }
 
         //draw connections between face verts
-        for(int i = 0; i < faces.Count;)
+        for(int i = 0; i < faces.Count;i++)
         {
-            List<Vector2Int> connectionPoints = GetConnectionPoints(faces[i].GetPosition(), faces[i + 1].GetPosition());
+            List<Vector2Int> connectionPoints = new List<Vector2Int>();
+            connectionPoints.AddRange(faces[i].GetConnectionLine(faces[i].GetVertex(0).GetPosition(), faces[i].GetVertex(1).GetPosition()));
+            connectionPoints.AddRange(faces[i].GetConnectionLine(faces[i].GetVertex(0).GetPosition(), faces[i].GetVertex(2).GetPosition()));
+            connectionPoints.AddRange(faces[i].GetConnectionLine(faces[i].GetVertex(2).GetPosition(), faces[i].GetVertex(3).GetPosition()));
+            connectionPoints.AddRange(faces[i].GetConnectionLine(faces[i].GetVertex(1).GetPosition(), faces[i].GetVertex(3).GetPosition()));
 
             foreach (Vector2Int v2 in connectionPoints)
             {
                 roadTexture.SetPixel(v2.x, v2.y, color);
             }
-
-
-
-            i += 2;
         }
 
         roadTexture.Apply();
@@ -76,48 +86,55 @@ public class PerlinCityGenerator : CityGenerator {
         testPlane.GetComponent<Renderer>().sharedMaterial.mainTexture = roadTexture;
     }
 
-    private List<Vector2Int> GetConnectionPoints(Vector3 node, Vector3 connection)
-    {
-        List<Vector2Int> connectionLine = new List<Vector2Int>();
+    // private List<Vector2Int> GetConnectionPoints(GridFace face)
+    // {
+    //     List<Vector2Int> connectionLine = new List<Vector2Int>();
 
-        Vector3 difference = connection - node;
+    //     List<Vector3> vertices = face.GetVertexPositions();
 
-        if (difference.x > 0)
-        {
-            Debug.Log("posdiffx");
-            for (int i = (int)node.x; i <= (int)connection.x; i++)
-            {
-                connectionLine.Add(new Vector2Int(i, (int)node.z));
-            }
-        }
-        else if (difference.x < 0)
-        {
-            Debug.Log("negdiffx");
-            for (int i = (int)connection.x; i <= (int)node.x; i++)
-            {
-                connectionLine.Add(new Vector2Int(i, (int)connection.z));
-            }
-        }
 
-        if (difference.z > 0)
-        {
-            Debug.Log("posdiffz");
-            for (int i = (int)node.z; i <= (int)connection.z; i++)
-            {
-                connectionLine.Add(new Vector2Int((int)node.x, i));
-            }
-        }
-        else if (difference.z < 0)
-        {
-            Debug.Log("negdiffz");
-            for (int i = (int)connection.z; i <= (int)node.z; i++)
-            {
-                connectionLine.Add(new Vector2Int((int)connection.x, i));
-            }
-        }
 
-        return connectionLine;
-    }
+    //     for(int i = 0; i < vertices.Count; i++){
+
+    //     }
+    //     Vector3 difference = connection - node;
+
+    //     if (difference.x > 0)
+    //     {
+    //         Debug.Log("posdiffx");
+    //         for (int i = (int)node.x; i <= (int)connection.x; i++)
+    //         {
+    //             connectionLine.Add(new Vector2Int(i, (int)node.z));
+    //         }
+    //     }
+    //     else if (difference.x < 0)
+    //     {
+    //         Debug.Log("negdiffx");
+    //         for (int i = (int)connection.x; i <= (int)node.x; i++)
+    //         {
+    //             connectionLine.Add(new Vector2Int(i, (int)connection.z));
+    //         }
+    //     }
+
+    //     if (difference.z > 0)
+    //     {
+    //         Debug.Log("posdiffz");
+    //         for (int i = (int)node.z; i <= (int)connection.z; i++)
+    //         {
+    //             connectionLine.Add(new Vector2Int((int)node.x, i));
+    //         }
+    //     }
+    //     else if (difference.z < 0)
+    //     {
+    //         Debug.Log("negdiffz");
+    //         for (int i = (int)connection.z; i <= (int)node.z; i++)
+    //         {
+    //             connectionLine.Add(new Vector2Int((int)connection.x, i));
+    //         }
+    //     }
+
+    //     return connectionLine;
+    // }
 
     void ApplyRoadToTerrain()
     {

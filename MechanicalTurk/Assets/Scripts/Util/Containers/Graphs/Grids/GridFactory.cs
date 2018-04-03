@@ -52,8 +52,7 @@ public class GridFactory
 
         Node[,] vertices = new Node[vertsPerSide.x, vertsPerSide.y];
         GridFace[,] faces = new GridFace[gridParams.FacesPerSide.x, gridParams.FacesPerSide.y];
-
-
+        
         //Add Vertices
         for(int x = 0; x < vertsPerSide.x; x++)
         {
@@ -105,7 +104,7 @@ public class GridFactory
         Vector2Int vertsPerSide = gridParams.NumVertices();
 
         Node[,] vertices = new Node[vertsPerSide.x, vertsPerSide.y];
-        GridFace[,] faces = new GridFace[gridParams.FacesPerSide.x * high, gridParams.FacesPerSide.y * high];
+        
 
         for (int x = 0; x < vertsPerSide.x; x++)
         {
@@ -136,9 +135,9 @@ public class GridFactory
         }
 
         //Create Faces
-        for (int x = 0; x < vertsPerSide.x; x++)
+        for (int x = 0; x < grid.FacesPerSide.x; x++)
         {
-            for (int y = 0; y < vertsPerSide.y; y++)
+            for (int y = 0; y < grid.FacesPerSide.y; y++)
             {
                 Vector3 vertex = vertices[x, y].GetPosition();
 
@@ -146,26 +145,29 @@ public class GridFactory
                 int roadNumberEastWest = Random.Range(low, high + 1);
                 int roadNumberNorthSouth = Random.Range(low, high + 1);
                 
+                //int roadNumberEastWest = 2;
+                //int roadNumberNorthSouth = 2;
+
                 float intervalEastWest = faceDimensions.x / roadNumberEastWest;
                 float intervalNorthSouth = faceDimensions.y / roadNumberNorthSouth;
 
-                Debug.Log("randomEW: " + roadNumberEastWest + " ns " + roadNumberNorthSouth + " intEW " + intervalEastWest + " ns " + intervalNorthSouth + " low " + low + " hi " + high);
-                //East/West Roads
-                for (int i = 1; i < roadNumberEastWest; i++)
+                
+                for (int localx = 0; localx < roadNumberEastWest; localx++)
                 {
-                    Vector2 randomVertexWest = new Vector2(vertex.x, vertex.z + (intervalEastWest * i));
-                    Vector2 randomVertexEast = new Vector2(vertex.x + faceDimensions.x, vertex.z + (intervalEastWest * i));
-                    grid.AddFace(new GridFace(randomVertexWest));
-                    grid.AddFace(new GridFace(randomVertexEast));
-                }
+                    for (int z = 0; z < roadNumberNorthSouth; z++)
+                    {
+                        Vector2 bottomLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + (z * intervalNorthSouth));
+                        Vector2 topRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
+                        Vector2 centerVert = MathOps.Midpoint(bottomLeft, topRight);
+                        Debug.Log("ew" + roadNumberEastWest + " ns " + roadNumberNorthSouth);
+                        GridFace gridface = new GridFace(centerVert);
 
-                //North/South Roads
-                for (int i = 1; i < roadNumberNorthSouth; i++)
-                {
-                    Vector2 randomVertexSouth = new Vector2(vertex.x + (intervalNorthSouth * i), vertex.z);
-                    Vector2 randomVertexNorth = new Vector2(vertex.x + (intervalNorthSouth * i), vertex.z + faceDimensions.y);
-                    grid.AddFace(new GridFace(randomVertexSouth));
-                    grid.AddFace(new GridFace(randomVertexNorth));
+                        Vector2 bottomRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + (z * intervalNorthSouth));
+                        Vector2 topLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
+
+                        gridface.AddVertices(new Node[] {new Node(bottomLeft), new Node(bottomRight), new Node(topLeft), new Node(topRight)});
+                        grid.AddFace(gridface);
+                    }
                 }
             }
         }

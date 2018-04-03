@@ -74,4 +74,9 @@ public class PolyGrid : MonoBehaviour
             node.DrawConnections();
         }
     }
+    
+    public void Clean(){
+        faces = new List<GridFace>();
+        vertices = new List<Node>();
+    }
 }

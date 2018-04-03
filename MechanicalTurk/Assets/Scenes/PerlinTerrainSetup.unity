@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Seed: 40
   terrainGenerator: {fileID: 876539225}
-  cityGenerator: {fileID: 1326181070}
+  cityGenerator: {fileID: 449122495}
 --- !u!4 &56636243
 Transform:
   m_ObjectHideFlags: 0
@@ -157,10 +157,79 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 876539231}
-  - {fileID: 1326181068}
+  - {fileID: 449122493}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &449122492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 449122493}
+  - component: {fileID: 449122495}
+  - component: {fileID: 449122494}
+  m_Layer: 0
+  m_Name: CityGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &449122493
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449122492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 56636243}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449122494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449122492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf29ae6a8b9556c40bbfedb72a740572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dimensions: {x: 256, y: 256}
+  FacesPerSide: {x: 4, y: 4}
+--- !u!114 &449122495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449122492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e037c388ce17e14199b88dd2d0daca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  heightMap: {fileID: 876539227}
+  polyGrid: {fileID: 449122494}
+  gameNode: {fileID: 1011579487013642, guid: dfb094f0359494445886c32d95191bf2, type: 2}
+  tilingTexture: {fileID: 2800000, guid: c508b88e5ea5eb64cb980ffca6ba632e, type: 3}
+  lowRoadNumber: 5
+  highRoadNumber: 10
+  facesPerSide: {x: 4, y: 4}
+  terrainGenerator: {fileID: 876539225}
+  testPlane: {fileID: 1390429355}
+  spawnedGameNodes: []
 --- !u!1 &827627315
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,75 +491,6 @@ Transform:
   m_Father: {fileID: 56636243}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1326181067
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1129722874832882, guid: 53170b587b1ac0243b24c86e3051f720,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1326181068}
-  - component: {fileID: 1326181069}
-  - component: {fileID: 1326181070}
-  m_Layer: 0
-  m_Name: CityGen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1326181068
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4533725330377316, guid: 53170b587b1ac0243b24c86e3051f720,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1326181067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 56636243}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1326181069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1326181067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf29ae6a8b9556c40bbfedb72a740572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dimensions: {x: 256, y: 256}
-  FacesPerSide: {x: 5, y: 5}
---- !u!114 &1326181070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1326181067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e037c388ce17e14199b88dd2d0daca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  heightMap: {fileID: 876539227}
-  polyGrid: {fileID: 1326181069}
-  gameNode: {fileID: 1011579487013642, guid: dfb094f0359494445886c32d95191bf2, type: 2}
-  tilingTexture: {fileID: 2800000, guid: c508b88e5ea5eb64cb980ffca6ba632e, type: 3}
-  lowRoadNumber: 4
-  highRoadNumber: 8
-  terrainGenerator: {fileID: 876539225}
-  testPlane: {fileID: 1390429355}
 --- !u!1 &1390429355
 GameObject:
   m_ObjectHideFlags: 0
