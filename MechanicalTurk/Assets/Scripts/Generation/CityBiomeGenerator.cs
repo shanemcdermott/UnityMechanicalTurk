@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CityBiomeGenerator : CityGenerator
 {
+    public Terrain terrain;
     public RoadPainter roadPainter;
     //Level of detail prefabs. Each should have a GameNode Component;
     public GameObject[] LOD_0_Prefabs = new GameObject[3];
+    public bool bShouldDrawFromCenter = true;
 
     public override void Setup()
     {
@@ -23,9 +25,9 @@ public class CityBiomeGenerator : CityGenerator
         
         Debug.Log("populating grid");
         GridFactory.PopulateSquareGrid(ref polyGrid);
-        CreateRoadsFromGrid();
         //AssignRegionTypes();
         SpawnBuildings();
+        CreateRoadsFromGrid();
     }
 
     public virtual void AssignRegionTypes()
@@ -57,13 +59,16 @@ public class CityBiomeGenerator : CityGenerator
         }
 
         //draw connections between face verts
-        for (int i = 0; i < faces.Count; i++)
+        
+        for (int i = 0; i < faces.Count &&bShouldDrawFromCenter; i++)
         {
-            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(0), faces[i].GetVertex(1));
-            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(0), faces[i].GetVertex(2));
-            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(2), faces[i].GetVertex(3));
-            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(1), faces[i].GetVertex(3));
+            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), faces[i].GetVertex(1).GetPosition());
+            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(0), faces[i].GetVertex(2));
+            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(2), faces[i].GetVertex(3));
+            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(1), faces[i].GetVertex(3));
         }
+        
+
         roadPainter.DrawRoads(ref connectionPoints);
         roadPainter.ApplyAlphaBlend();
     }
@@ -72,7 +77,7 @@ public class CityBiomeGenerator : CityGenerator
     {
         foreach (Node node in polyGrid.GetFaces())
         {
-            //SpawnBuilding(node);
+            SpawnBuilding(node);
         }
         
     }
@@ -83,6 +88,7 @@ public class CityBiomeGenerator : CityGenerator
         go.transform.SetParent(transform);
         GameNode gn = go.GetComponent<GameNode>();
         gn.SetNode(parentNode);
+        gn.SetTerrain(ref terrain);
         gn.SpawnBuildings();
     }
 }

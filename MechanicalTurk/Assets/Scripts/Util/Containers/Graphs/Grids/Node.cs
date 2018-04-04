@@ -110,6 +110,14 @@ public class Node : IHasConnections<Node>
         }
     }
 
+    public void FindOrAdd(ref Dictionary<Vector2Int, bool> points, Vector2Int key, bool value)
+    {
+        if(!points.ContainsKey(key))
+        {
+            points.Add(key, value);
+        }
+    }
+
     public void GetConnectionLines(ref Dictionary<Vector2Int, bool> connectionPoints)
     {
         foreach (Node c in connections)
@@ -134,14 +142,14 @@ public class Node : IHasConnections<Node>
         {
             for (int i = (int)node.x; i <= (int)connection.x; i++)
             {
-                connectionLine.Add(new Vector2Int(i, (int)node.z), false);
+                FindOrAdd(ref connectionLine, new Vector2Int(i, (int)node.z), false);
             }
         }
         else if (difference.x < 0)
         {
             for (int i = (int)connection.x; i <= (int)node.x; i++)
             {
-                connectionLine.Add(new Vector2Int(i, (int)connection.z), false);
+                FindOrAdd(ref connectionLine, new Vector2Int(i, (int)connection.z), false);
             }
         }
 
@@ -149,14 +157,14 @@ public class Node : IHasConnections<Node>
         {
             for (int i = (int)node.z; i <= (int)connection.z; i++)
             {
-                connectionLine.Add(new Vector2Int((int)node.x, i), true);
+                FindOrAdd(ref connectionLine, new Vector2Int((int)node.x, i), true);
             }
         }
         else if (difference.z < 0)
         {
             for (int i = (int)connection.z; i <= (int)node.z; i++)
             {
-                connectionLine.Add(new Vector2Int((int)connection.x, i), true);
+               FindOrAdd(ref connectionLine, new Vector2Int((int)connection.x, i), true);
             }
         }
     }
