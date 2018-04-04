@@ -75,10 +75,10 @@ public class CityBiomeGenerator : CityGenerator
     {
         int i = Random.Range(0, spawnWeights.Length);
         GameObject regionToSpawn = LOD_0_Prefabs[spawnWeights[i]];
-        if (i > 0)
+
+        if (Random.value > chanceToPersist)
         {
-            if (Random.value > chanceToPersist)
-                spawnWeights[i] = Random.Range(0, LOD_0_Prefabs.Length);
+            spawnWeights[i] = Random.Range(0, LOD_0_Prefabs.Length);
         }
         return regionToSpawn;
     }
