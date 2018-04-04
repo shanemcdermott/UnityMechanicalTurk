@@ -51,7 +51,7 @@ public class GridFactory
         Vector2Int vertsPerSide = gridParams.NumVertices();
 
         Node[,] vertices = new Node[vertsPerSide.x, vertsPerSide.y];
-        GridFace[,] faces = new GridFace[gridParams.FacesPerSide.x, gridParams.FacesPerSide.y];
+        GridNode[,] faces = new GridNode[gridParams.FacesPerSide.x, gridParams.FacesPerSide.y];
         
         //Add Vertices
         for(int x = 0; x < vertsPerSide.x; x++)
@@ -81,7 +81,7 @@ public class GridFactory
             }
         }
 
-        GridFaceFactory<GridFace> faceFactory = new GridFaceFactory<GridFace>();
+        GridFaceFactory<GridNode> faceFactory = new GridFaceFactory<GridNode>();
         //Create Faces
         for (int x = 0; x < gridParams.FacesPerSide.x; x++)
         {

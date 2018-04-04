@@ -184,5 +184,6 @@ public class RoadPainter : MonoBehaviour
     public void ApplyAlphaBlend()
     {
         terrainData.SetAlphamaps(0, 0, alphamaps);
+        alphamaps = null;
     }
 }
