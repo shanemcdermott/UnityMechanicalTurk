@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class GenerationController : MonoBehaviour
 {
-
+    public List<GameObject> buildings = new List<GameObject>();
     /*RNG Seed to be used for all generation processes*/
     public int Seed;
 

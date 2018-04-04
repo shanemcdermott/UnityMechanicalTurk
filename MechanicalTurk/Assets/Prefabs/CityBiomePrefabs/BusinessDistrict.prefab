@@ -125,6 +125,3 @@ MonoBehaviour:
   - {fileID: 100000, guid: fd0aff9be85e9d44c9e1177220ae796e, type: 3}
   - {fileID: 100000, guid: e0828b8951ddb5742b21325602b044b8, type: 3}
   - {fileID: 100000, guid: 53ec1bd968802e14b997a32f25e4c11c, type: 3}
-  spawnSpace: {x: 10, y: 0, z: 10}
-  minLocation: {x: -20, y: 0, z: -20}
-  maxLocation: {x: 20, y: 0, z: 20}

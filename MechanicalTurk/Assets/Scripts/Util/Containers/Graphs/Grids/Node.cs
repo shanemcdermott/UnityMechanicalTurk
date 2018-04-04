@@ -110,6 +110,65 @@ public class Node : IHasConnections<Node>
         }
     }
 
+    public void FindOrAdd(ref Dictionary<Vector2Int, bool> points, Vector2Int key, bool value)
+    {
+        if(!points.ContainsKey(key))
+        {
+            points.Add(key, value);
+        }
+    }
+
+    public void GetConnectionLines(ref Dictionary<Vector2Int, bool> connectionPoints)
+    {
+        foreach (Node c in connections)
+        {
+            if (c != null)
+            {
+                GetConnectionLine(ref connectionPoints, position, c.position);
+            }
+        }
+    }
+
+    public void GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLines, Node from, Node to)
+    {
+        GetConnectionLine(ref connectionLines, from.GetPosition(), to.GetPosition());
+    }
+
+    public void  GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLine, Vector3 node, Vector3 connection)
+    {
+        Vector3 difference = connection - node;
+
+        if (difference.x > 0)
+        {
+            for (int i = (int)node.x; i <= (int)connection.x; i++)
+            {
+                FindOrAdd(ref connectionLine, new Vector2Int(i, (int)node.z), false);
+            }
+        }
+        else if (difference.x < 0)
+        {
+            for (int i = (int)connection.x; i <= (int)node.x; i++)
+            {
+                FindOrAdd(ref connectionLine, new Vector2Int(i, (int)connection.z), false);
+            }
+        }
+
+        if (difference.z > 0)
+        {
+            for (int i = (int)node.z; i <= (int)connection.z; i++)
+            {
+                FindOrAdd(ref connectionLine, new Vector2Int((int)node.x, i), true);
+            }
+        }
+        else if (difference.z < 0)
+        {
+            for (int i = (int)connection.z; i <= (int)node.z; i++)
+            {
+               FindOrAdd(ref connectionLine, new Vector2Int((int)connection.x, i), true);
+            }
+        }
+    }
+
     public Dictionary<Vector2Int, bool> GiveConnectionLines()
     {
         Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
@@ -172,4 +231,15 @@ public class Node : IHasConnections<Node>
         return connectionLine;
     }
 
+    public static Node Split(Node A, Node B)
+    {
+        Node res = new Node(MathOps.Midpoint(A.position, B.position));
+        if(A.IsConnectedTo(B))
+        {
+            A.RemoveConnection(B);
+            res.AddConnection(A);
+            res.AddConnection(B);
+        }
+        return res;
+    }
 }

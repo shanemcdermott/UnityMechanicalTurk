@@ -24,7 +24,6 @@ public abstract class CityGenerator : GenerationAlgorithm
             {
                 polyGrid = gameObject.AddComponent<PolyGrid>();
                 polyGrid.Dimensions = heightMap.Dimensions;
-                polyGrid.FacesPerSide = new Vector2Int(2, 2);
             }
         }
     }
