@@ -20,6 +20,11 @@ public class PolyGrid : MonoBehaviour
         return faces.Count;
     }
 
+    public int NumVertices()
+    {
+        return vertices.Count;
+    }
+
     public void AddFace(GridFace newFace)
     {
         faces.Add(newFace);
@@ -30,6 +35,15 @@ public class PolyGrid : MonoBehaviour
 		vertices.Add (newVertex);
 	}
 
+    public void AddConnection(int index, Node connection)
+    {
+        vertices[index].AddConnection(connection);
+    }
+
+    public int NumVertexConnections(int index)
+    {
+        return vertices[index].NumConnections();
+    }
 	
     public List<Node> GetVertices()
     {

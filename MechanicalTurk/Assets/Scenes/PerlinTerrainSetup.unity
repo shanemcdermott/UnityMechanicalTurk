@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45127034, g: 0.50008935, b: 0.5687055, a: 1}
+  m_IndirectSpecularColor: {r: 0.45127076, g: 0.5000904, b: 0.5687064, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   noiseMap: {fileID: 876539227}
   scale: 20
   numOctaves: 5
-  offset: {x: 22, y: 0}
+  offset: {x: 22.32, y: 0}
   persistance: 0.5
   lacunarity: 1
 --- !u!4 &876539231

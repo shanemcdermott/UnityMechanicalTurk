@@ -121,7 +121,7 @@ public struct IntPoint
         return "(" + x + "," + y + ")";
     }
 
-    public override bool Equals(object obj)
+    /*public override bool Equals(object obj)
     {
         if (!(obj is IntPoint))
             return false;
@@ -130,7 +130,7 @@ public struct IntPoint
         // compare elements here
         return x == otherPoint.x && y == otherPoint.y;
 
-    }
+    }*/
 
     public bool GreaterThan(IntPoint p)
     {

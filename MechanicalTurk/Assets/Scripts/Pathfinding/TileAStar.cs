@@ -92,7 +92,7 @@ public class TileAStar : MonoBehaviour
                     //If true, this record doesn't need to be re-opened
                     if (endRecord.costSoFar <= endNodeCost)
                         continue;
-                    endNodeHeuristic = endNodeHeuristic = endRecord.estimatedTotalCost - endRecord.costSoFar;
+                    endNodeHeuristic = endRecord.estimatedTotalCost - endRecord.costSoFar;
                 }
                 else if (endRecord.category == NodeCategory.Open)
                 {
