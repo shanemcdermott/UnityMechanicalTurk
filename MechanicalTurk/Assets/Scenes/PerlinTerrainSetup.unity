@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45127034, g: 0.50008935, b: 0.5687055, a: 1}
+  m_IndirectSpecularColor: {r: 0.45127046, g: 0.5000895, b: 0.5687059, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -223,9 +223,10 @@ MonoBehaviour:
   heightMap: {fileID: 876539227}
   polyGrid: {fileID: 449122494}
   gameNode: {fileID: 1011579487013642, guid: dfb094f0359494445886c32d95191bf2, type: 2}
-  tilingTexture: {fileID: 2800000, guid: c508b88e5ea5eb64cb980ffca6ba632e, type: 3}
-  lowRoadNumber: 5
-  highRoadNumber: 10
+  roadHorizontal: {fileID: 2800000, guid: 2e2229bc0ca1a8c4da75c0225af23c28, type: 3}
+  roadVertical: {fileID: 2800000, guid: 15927896fc6c01b498cd9f2cb0ac9abf, type: 3}
+  lowRoadNumber: 4
+  highRoadNumber: 8
   facesPerSide: {x: 4, y: 4}
   terrainGenerator: {fileID: 876539225}
   testPlane: {fileID: 1390429355}
@@ -523,7 +524,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8361772db5b074f13a47ece154898939, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

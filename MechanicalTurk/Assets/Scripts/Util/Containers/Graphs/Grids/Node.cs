@@ -110,24 +110,33 @@ public class Node : IHasConnections<Node>
         }
     }
 
-    public List<Vector2Int> GiveConnectionLines()
+    public Dictionary<Vector2Int, bool> GiveConnectionLines()
     {
-        List<Vector2Int> connectionPoints = new List<Vector2Int>();
+        Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
         
         foreach (Node c in connections)
         {
             if (c != null)
             {
-                connectionPoints.AddRange(GetConnectionLine(position, c.position));
+                Dictionary<Vector2Int, bool> connections = GetConnectionLine(position, c.position);
+
+                foreach (KeyValuePair<Vector2Int, bool> kvp in connections)
+                {
+                    bool value;
+                    if (!connectionPoints.TryGetValue(kvp.Key, out value))
+                    {
+                        connectionPoints.Add(kvp.Key, kvp.Value);
+                    }
+                }
             }
         }
 
         return connectionPoints;
     }
 
-    public List<Vector2Int> GetConnectionLine(Vector3 node, Vector3 connection)
+    public Dictionary<Vector2Int, bool> GetConnectionLine(Vector3 node, Vector3 connection)
     {
-        List<Vector2Int> connectionLine = new List<Vector2Int>();
+        Dictionary<Vector2Int, bool> connectionLine = new Dictionary<Vector2Int, bool>();
 
         Vector3 difference = connection - node;
 
@@ -135,14 +144,14 @@ public class Node : IHasConnections<Node>
         {
             for(int i = (int)node.x; i <= (int)connection.x; i++)
             {
-                connectionLine.Add(new Vector2Int(i,(int)node.z));
+                connectionLine.Add(new Vector2Int(i,(int)node.z), false);
             }
         }
         else if(difference.x < 0)
         {
             for (int i = (int)connection.x; i <= (int)node.x; i++)
             {
-                connectionLine.Add(new Vector2Int(i, (int)connection.z));
+                connectionLine.Add(new Vector2Int(i, (int)connection.z), false);
             }
         }
 
@@ -150,13 +159,13 @@ public class Node : IHasConnections<Node>
         {
             for (int i = (int)node.z; i <= (int)connection.z; i++)
             {
-                connectionLine.Add(new Vector2Int((int)node.x, i));
+                connectionLine.Add(new Vector2Int((int)node.x, i), true);
             }
         }
         else if(difference.z < 0){
             for (int i = (int)connection.z; i <= (int)node.z; i++)
             {
-                connectionLine.Add(new Vector2Int((int)connection.x, i));
+                connectionLine.Add(new Vector2Int((int)connection.x, i), true);
             }
         }
 
