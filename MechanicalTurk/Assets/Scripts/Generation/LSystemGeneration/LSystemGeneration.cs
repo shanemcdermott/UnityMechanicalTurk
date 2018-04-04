@@ -56,9 +56,10 @@ public class LSystemGeneration : CityGenerator
             List<IConnection<Node>> connections = new List<IConnection<Node>>();
             node.GetConnections(out connections);
             int i = 0;
-            foreach(Node edge in connections)
+            foreach(IConnection<Node> edge in connections)
             {
-                Vector2 diff = edge.GetPositionXZ() - node.GetPositionXZ();
+                Node n = edge.GetToNode();
+                Vector2 diff = n.GetPositionXZ() - node.GetPositionXZ();
                 if (diff.x > 0)
                     i += 4;
                 if (diff.x < 0)
@@ -68,6 +69,7 @@ public class LSystemGeneration : CityGenerator
                 if (diff.y < 0)
                     i += 2;
             }
+            Debug.Log("number of connections is " +node.NumConnections());
             alphamaps[(int)node.GetPosition().x, (int)node.GetPosition().y, i] = 1;
             alphamaps[(int)node.GetPosition().x, (int)node.GetPosition().y, 0] = 0;
         }
