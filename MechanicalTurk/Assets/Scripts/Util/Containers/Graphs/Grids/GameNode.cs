@@ -15,7 +15,6 @@ public class GameNode : MonoBehaviour
         this.node = node;
         Vector3 pos = node.GetPosition();
         transform.position = new Vector3(pos.x, 0, pos.y);
-        gameObject.name = transform.position.ToString();
     }
 
     public void SetTerrain(ref Terrain terrain)
@@ -25,8 +24,8 @@ public class GameNode : MonoBehaviour
 
     public void SpawnBuildings()
     {
-        GameObject go = GameObject.Instantiate(GetRandomPrefab());
-        go.transform.SetParent(transform);
+        Debug.Log("Spawning Buildings");
+        GameObject go = GameObject.Instantiate(GetRandomPrefab(),transform);
         float y = terrain.SampleHeight(transform.position);
         go.transform.position = new Vector3(transform.position.x, y, transform.position.z);
         /*

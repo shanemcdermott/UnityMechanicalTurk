@@ -8,6 +8,11 @@ public class CityBiomeGenerator : CityGenerator
     public RoadPainter roadPainter;
     //Level of detail prefabs. Each should have a GameNode Component;
     public GameObject[] LOD_0_Prefabs = new GameObject[3];
+    public float chanceToPersist = 0.66f;
+    public int[] spawnWeights = new int[10] { 1, 0, 0, 0,
+                                                1, 1, 1,
+                                                2, 2, 2 };
+
     public bool bShouldDrawFromCenter = true;
 
     public override void Setup()
@@ -25,8 +30,9 @@ public class CityBiomeGenerator : CityGenerator
         
         Debug.Log("populating grid");
         GridFactory.PopulateSquareGrid(ref polyGrid);
+
         //AssignRegionTypes();
-        SpawnBuildings();
+        SpawnRegions();
         CreateRoadsFromGrid();
     }
 
@@ -46,6 +52,37 @@ public class CityBiomeGenerator : CityGenerator
         roadPainter.ApplyAlphaBlend();
     }
 
+    public virtual void SpawnRegions()
+    {
+        foreach (Node node in polyGrid.GetFaces())
+        {
+            SpawnRegion(node);
+        }
+        
+    }
+
+    public virtual void SpawnRegion(Node parentNode)
+    {
+        GameObject go = GameObject.Instantiate(ChooseRegionToSpawn(parentNode));
+        go.transform.SetParent(transform);
+        GameNode gn = go.GetComponent<GameNode>();
+        gn.SetNode(parentNode);
+        gn.SetTerrain(ref terrain);
+        gn.SpawnBuildings();
+    }
+
+    public virtual GameObject ChooseRegionToSpawn(Node parentNode)
+    {
+        int i = Random.Range(0, spawnWeights.Length);
+        GameObject regionToSpawn = LOD_0_Prefabs[spawnWeights[i]];
+        if (i > 0)
+        {
+            if (Random.value > chanceToPersist)
+                spawnWeights[i] = Random.Range(0, LOD_0_Prefabs.Length);
+        }
+        return regionToSpawn;
+    }
+
     public virtual void CreateRoadsFromGrid()
     {
         List<Node> vertices = polyGrid.GetVertices();
@@ -55,40 +92,27 @@ public class CityBiomeGenerator : CityGenerator
         //draw connections between verts
         foreach (Node node in vertices)
         {
-           node.GetConnectionLines(ref connectionPoints);
+            node.GetConnectionLines(ref connectionPoints);
         }
 
         //draw connections between face verts
-        
-        for (int i = 0; i < faces.Count &&bShouldDrawFromCenter; i++)
+
+        if (bShouldDrawFromCenter)
         {
-            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), faces[i].GetVertex(1).GetPosition());
-            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(0), faces[i].GetVertex(2));
-            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(2), faces[i].GetVertex(3));
-            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(1), faces[i].GetVertex(3));
+            for (int i = 0; i < faces.Count; i++)
+            {
+                int j = Random.value > 0.5f ? 1 : 2;
+
+                Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(0).GetPosition(), faces[i].GetVertex(j).GetPosition());
+                faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
+                //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(0), faces[i].GetVertex(2));
+                //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(2), faces[i].GetVertex(3));
+                //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(1), faces[i].GetVertex(3));
+            }
         }
-        
+
 
         roadPainter.DrawRoads(ref connectionPoints);
         roadPainter.ApplyAlphaBlend();
-    }
-
-    public virtual void SpawnBuildings()
-    {
-        foreach (Node node in polyGrid.GetFaces())
-        {
-            SpawnBuilding(node);
-        }
-        
-    }
-
-    public virtual void SpawnBuilding(Node parentNode)
-    {
-        GameObject go = GameObject.Instantiate(LOD_0_Prefabs[Random.Range(0, LOD_0_Prefabs.Length)]);
-        go.transform.SetParent(transform);
-        GameNode gn = go.GetComponent<GameNode>();
-        gn.SetNode(parentNode);
-        gn.SetTerrain(ref terrain);
-        gn.SpawnBuildings();
     }
 }
