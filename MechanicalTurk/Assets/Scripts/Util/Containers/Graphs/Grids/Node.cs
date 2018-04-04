@@ -110,6 +110,57 @@ public class Node : IHasConnections<Node>
         }
     }
 
+    public void GetConnectionLines(ref Dictionary<Vector2Int, bool> connectionPoints)
+    {
+        foreach (Node c in connections)
+        {
+            if (c != null)
+            {
+                GetConnectionLine(ref connectionPoints, position, c.position);
+            }
+        }
+    }
+
+    public void GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLines, Node from, Node to)
+    {
+        GetConnectionLine(ref connectionLines, from.GetPosition(), to.GetPosition());
+    }
+
+    public void  GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLine, Vector3 node, Vector3 connection)
+    {
+        Vector3 difference = connection - node;
+
+        if (difference.x > 0)
+        {
+            for (int i = (int)node.x; i <= (int)connection.x; i++)
+            {
+                connectionLine.Add(new Vector2Int(i, (int)node.z), false);
+            }
+        }
+        else if (difference.x < 0)
+        {
+            for (int i = (int)connection.x; i <= (int)node.x; i++)
+            {
+                connectionLine.Add(new Vector2Int(i, (int)connection.z), false);
+            }
+        }
+
+        if (difference.z > 0)
+        {
+            for (int i = (int)node.z; i <= (int)connection.z; i++)
+            {
+                connectionLine.Add(new Vector2Int((int)node.x, i), true);
+            }
+        }
+        else if (difference.z < 0)
+        {
+            for (int i = (int)connection.z; i <= (int)node.z; i++)
+            {
+                connectionLine.Add(new Vector2Int((int)connection.x, i), true);
+            }
+        }
+    }
+
     public Dictionary<Vector2Int, bool> GiveConnectionLines()
     {
         Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   heightMap: {fileID: 1385067026}
   polyGrid: {fileID: 13694871}
+  roadPainter: {fileID: 1385067031}
   LOD_0_Prefabs:
   - {fileID: 0}
   - {fileID: 0}
@@ -180,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dimensions: {x: 256, y: 256}
-  FacesPerSide: {x: 2, y: 2}
+  FacesPerSide: {x: 5, y: 5}
 --- !u!1 &266860098
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +385,8 @@ GameObject:
   - component: {fileID: 1385067028}
   - component: {fileID: 1385067027}
   - component: {fileID: 1385067025}
+  - component: {fileID: 1385067031}
+  - component: {fileID: 1385067032}
   m_Layer: 0
   m_Name: TerrainGen
   m_TagString: Untagged
@@ -549,6 +552,32 @@ Transform:
   m_Father: {fileID: 1654292736}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1385067031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1385067023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f01aba95dfbc7d4589a1beae1350b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapScale: {x: 0.5, y: 0.5}
+  roadHorizontal: {fileID: 2800000, guid: 2e2229bc0ca1a8c4da75c0225af23c28, type: 3}
+  roadVertical: {fileID: 2800000, guid: 15927896fc6c01b498cd9f2cb0ac9abf, type: 3}
+  roadTileSize: {x: 1, y: 1}
+  terrainData: {fileID: 15600000, guid: e19837662ba8dfc40a05f960c4fc26d5, type: 2}
+--- !u!154 &1385067032
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1385067023}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: e19837662ba8dfc40a05f960c4fc26d5, type: 2}
+  m_EnableTreeColliders: 1
 --- !u!1 &1468962532
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,9 +657,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915a15e98bbdd7943b857d4f1cc63f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Seed: 40
+  buildings: []
+  Seed: 41
   terrainGenerator: {fileID: 1385067024}
-  cityGenerator: {fileID: 0}
+  cityGenerator: {fileID: 13694870}
 --- !u!4 &1654292736
 Transform:
   m_ObjectHideFlags: 0

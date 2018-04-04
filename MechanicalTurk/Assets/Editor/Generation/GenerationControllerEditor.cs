@@ -16,6 +16,15 @@ public class GenerationControllerEditor : Editor
         {
             controller.SetupAndGenerate();
         }
+        if(GUILayout.Button("AddCollision"))
+        {
+            foreach(GameObject go in controller.buildings)
+            {
+
+                GameObject child = GameObject.Instantiate(go);
+                child.AddComponent<BoxCollider>();
+            }
+        }
         /*
         if (GUILayout.Button("Save Heightmap"))
         {
