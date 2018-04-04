@@ -20,12 +20,15 @@ public class PerlinCityGenerator : CityGenerator {
     
     public List<GameObject> spawnedGameNodes;
 
+    private PerlinOctaves perlinBuildingGeneration;
+    private NoiseMap buildingNoiseMap;
+
     public override void Generate()
     {
         GenerateRoadGrid();
         PopulateRoadTexture();
         ApplyRoadToTerrain();
-        //GenerateBuildings();
+        GenerateBuildings();
     }
 
     void GenerateRoadGrid()
@@ -165,7 +168,28 @@ public class PerlinCityGenerator : CityGenerator {
 
     void GenerateBuildings()
     {
+        GenerateBuildingHeightMap();
 
+        List<GridFace> faces = polyGrid.GetFaces();
+        foreach(GridFace face in faces)
+        {
+            List<Vector3> vertices = face.GetVertexPositions();
+        }
+
+        //go through roadtexture faces to find spots
+            //foreach gridface
+                //check size (add box collider to building, check x & z)
+                //check slope (xz and yz < .4)
+
+            //foreach valid spot
+                //spawn a building based on perlin
+    }
+    
+    void GenerateBuildingHeightMap()
+    {
+        perlinBuildingGeneration = GetComponent<PerlinOctaves>();
+        float[,] buildingHeightMap = perlinBuildingGeneration.GenerateHeightMap(heightMap.Dimensions.x, heightMap.Dimensions.y);
+        buildingNoiseMap.Values = buildingHeightMap;
     }
 
     public override void Setup()
