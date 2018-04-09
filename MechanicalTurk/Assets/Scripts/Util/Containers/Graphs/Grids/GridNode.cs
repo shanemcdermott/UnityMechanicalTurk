@@ -1,9 +1,34 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GridNode : GridFace
 {
     const int NUM_CHILDREN = 4;
+    public GridNode[] Children
+    {
+        get { return children; }
+        set
+        {
+            if(value.Length==NUM_CHILDREN)
+            {
+                children = value;
+            }
+        }
+    }
+
     protected GridNode[] children;
+
+    public GridNode()
+    {
+        position = new Vector3();
+        vertices = new List<Node>();
+    }
+
+    public GridNode(Vector3 center, ref List<Node> verts)
+    {
+        this.position = center;
+        this.vertices = verts;
+    }
 
     public void ConnectVertices()
     {
@@ -13,13 +38,15 @@ public class GridNode : GridFace
         vertices[3].AddConnection(vertices[1]);
     }
 
+
+
     public virtual void Subdivide()
     {
         if(children!=null)
         {
             for(int x=0;x<NUM_CHILDREN;x++)
             {
-                    children[x].Subdivide();
+                children[x].Subdivide();
             }
         }
         else
@@ -76,5 +103,47 @@ public class GridNode : GridFace
         }
     }
 
+
+    public bool IsLeaf()
+    {
+        return children == null;
+    }
+
+    public void GetLeaves(out List<GridNode> leafNodes)
+    {
+        leafNodes = new List<GridNode>();
+        GetChildLeaves(ref leafNodes);
+    }
+
+    private void GetChildLeaves(ref List<GridNode> leafNodes)
+    {
+        if(IsLeaf())
+        {
+            leafNodes.Add(this);
+        }
+        else
+        {
+            foreach(GridNode child in children)
+            {
+                child.GetChildLeaves(ref leafNodes);
+            }
+        }
+    }
+
+    public virtual List<Node> GetChildVertices()
+    {
+        List<Node> verts = new List<Node>(vertices);
+        if (!IsLeaf())
+        {
+            List<GridNode> childLeaves = new List<GridNode>();
+            GetChildLeaves(ref childLeaves);
+            foreach(GridNode child in childLeaves)
+            {
+                verts.AddRange(child.GetVertices());
+            }
+        }
+
+        return verts;
+    }
 
 }

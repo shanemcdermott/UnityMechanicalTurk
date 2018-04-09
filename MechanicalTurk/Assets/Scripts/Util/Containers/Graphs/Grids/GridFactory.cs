@@ -97,6 +97,7 @@ public class GridFactory
         return grid != null;
     }
 
+
     public static void GeneratePerlinGrid(ref PolyGrid grid, int low, int high)
     {
         SquareGridParams gridParams = new SquareGridParams(grid);

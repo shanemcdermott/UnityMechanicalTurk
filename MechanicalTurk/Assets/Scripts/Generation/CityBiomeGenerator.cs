@@ -14,6 +14,7 @@ public class CityBiomeGenerator : CityGenerator
                                                 2, 2, 2 };
 
     public bool bShouldDrawFromCenter = true;
+    public GridNode gridNode;
 
     public override void Setup()
     {
@@ -29,11 +30,23 @@ public class CityBiomeGenerator : CityGenerator
         }
         
         Debug.Log("populating grid");
-        GridFactory.PopulateSquareGrid(ref polyGrid);
+        // GridFactory.PopulateSquareGrid(ref polyGrid);
 
-        //AssignRegionTypes();
+        CreateGrid();
         SpawnRegions();
         CreateRoadsFromGrid();
+    }
+
+    public virtual void CreateGrid()
+    {
+        GridFaceFactory<GridNode> gFac = new GridFaceFactory<GridNode>();
+        Vector3 dimensions = new Vector3(polyGrid.Dimensions.x, 0, polyGrid.Dimensions.y);
+        Vector3 center = new Vector3(polyGrid.Dimensions.x * 0.5f,0, polyGrid.Dimensions.y * 0.5f);
+        gridNode = gFac.GetSquareNode(center, dimensions);
+        for(int i = 0; i < polyGrid.FacesPerSide.x; i++)
+        {
+            gridNode.Subdivide();
+        }
     }
 
     public virtual void AssignRegionTypes()
@@ -54,9 +67,11 @@ public class CityBiomeGenerator : CityGenerator
 
     public virtual void SpawnRegions()
     {
-        foreach (Node node in polyGrid.GetFaces())
+        List<GridNode> leaves;
+        gridNode.GetLeaves(out leaves);
+        foreach (GridNode child in leaves)
         {
-            SpawnRegion(node);
+            SpawnRegion(child);
         }
         
     }
@@ -85,8 +100,10 @@ public class CityBiomeGenerator : CityGenerator
 
     public virtual void CreateRoadsFromGrid()
     {
-        List<Node> vertices = polyGrid.GetVertices();
-        List<GridFace> faces = polyGrid.GetFaces();
+        List<Node> vertices = gridNode.GetChildVertices();
+
+        List<GridNode> faces;
+        gridNode.GetLeaves(out faces);
 
         Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
         //draw connections between verts
