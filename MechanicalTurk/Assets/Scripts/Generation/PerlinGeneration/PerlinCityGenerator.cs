@@ -26,13 +26,19 @@ public class PerlinCityGenerator : CityGenerator {
     public NoiseGenerator buildingNoiseGenerator;
 
     public BuildingGenerator buildingGenerator;
+
+    public RoadPainter roadPainter;
+
+    public GameObject testObject;
     private GameObject[] buildings;
 
     public override void Generate()
     {
         GenerateRoadGrid();
-        PopulateRoadTexture();
-        ApplyRoadToTerrain();
+        //SpawnTestObjects();
+        CreateRoadsFromGrid();
+        //PopulateRoadTexture();
+        //ApplyRoadToTerrain();
         //GenerateBuildings();
     }
 
@@ -53,6 +59,53 @@ public class PerlinCityGenerator : CityGenerator {
         Debug.Log("PerlinCityGenerator: Populating perlin road grid");
         GridFactory.GeneratePerlinGrid(ref polyGrid, lowRoadNumber, highRoadNumber);
         
+    }
+
+    private void SpawnTestObjects()
+    {
+        foreach(GridFace face in polyGrid.GetFaces()){
+            foreach(Node vert in face.GetVertices()){
+                GameObject test = GameObject.Instantiate(testObject, transform);
+                test.transform.position = vert.GetPosition();
+            }
+            
+            
+        }
+    }
+
+    public virtual void CreateRoadsFromGrid()
+    {
+        Debug.Log("PerlinCityGenerator: Creating roads from grid");
+        List<Node> vertices = polyGrid.GetVertices();
+        List<GridFace> faces = polyGrid.GetFaces();
+
+        Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
+        //draw connections between verts
+        foreach (Node node in vertices)
+        {
+            node.GetConnectionLines(ref connectionPoints);
+        }
+
+        //draw connections between face verts
+        for (int i = 0; i < faces.Count; i++)
+        {
+
+            int a = Random.value > 0.5f ? 0 : 3;
+            int b = Random.value > 0.5f ? 1 : 2; 
+
+            Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(a).GetPosition(), faces[i].GetVertex(b).GetPosition());
+            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
+            List<Node> verts = faces[i].GetVertices();
+            foreach (Node node in verts)
+            {
+                node.GetConnectionLines(ref connectionPoints);
+            }
+
+        }
+
+
+        roadPainter.DrawRoads(ref connectionPoints);
+        roadPainter.ApplyAlphaBlend();
     }
 
     void PopulateRoadTexture()
@@ -231,6 +284,7 @@ public class PerlinCityGenerator : CityGenerator {
         }
         polyGrid.Dimensions = heightMap.Dimensions;
         polyGrid.FacesPerSide = new Vector2Int(2, 2);
+        roadPainter.Setup();
     }
 
     // Use this for initialization

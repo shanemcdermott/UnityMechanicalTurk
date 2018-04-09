@@ -158,13 +158,22 @@ public class GridFactory
                         Vector2 topRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
                         
                         Vector2 centerVert = MathOps.Midpoint(bottomLeft, topRight);
-                        GridFace gridface = new GridFace(centerVert);
-
+                        
                         Vector2 bottomRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + (z * intervalNorthSouth));
                         Vector2 topLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
 
-                        gridface.AddVertices(new Node[] {new Node(bottomLeft), new Node(bottomRight), new Node(topLeft), new Node(topRight)});
-                        grid.AddFace(gridface);
+                        List<Node> vertList = new List<Node>(
+                            new Node[4]{
+                                new Node(bottomLeft), 
+                                new Node(bottomRight), 
+                                new Node(topLeft), 
+                                new Node(topRight)
+                            }
+                        );
+                        GridNode gridNode = new GridNode(new Vector3(centerVert.x, 0, centerVert.y), ref vertList);
+
+                        gridNode.ConnectVertices();
+                        grid.AddFace(gridNode);
                     }
                 }
             }
