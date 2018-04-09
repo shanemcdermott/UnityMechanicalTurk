@@ -220,6 +220,15 @@ public class PerlinCityGenerator : CityGenerator {
 
     public override void Setup()
     {
+        if (polyGrid == null)
+        {
+            polyGrid = gameObject.GetComponent<PolyGrid>();
+            if (polyGrid == null)
+            {
+                polyGrid = gameObject.AddComponent<PolyGrid>();
+                polyGrid.Dimensions = heightMap.Dimensions;
+            }
+        }
         polyGrid.Dimensions = heightMap.Dimensions;
         polyGrid.FacesPerSide = new Vector2Int(2, 2);
     }

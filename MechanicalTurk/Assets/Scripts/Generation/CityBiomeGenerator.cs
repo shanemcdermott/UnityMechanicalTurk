@@ -14,7 +14,7 @@ public class CityBiomeGenerator : CityGenerator
     public Vector3 MinLotSize = new Vector3(10f, 10f, 10f);
 
     //Level of detail prefabs. Each should have a GameNode Component;
-    public GameObject[] LOD_0_Prefabs = new GameObject[3];
+    public GameObject[] BiomePrefabs = new GameObject[3];
     public float chanceToPersist = 0.66f;
     public int[] spawnWeights = new int[10] { 1, 0, 0, 0,
                                                 1, 1, 1,
@@ -68,6 +68,15 @@ public class CityBiomeGenerator : CityGenerator
         go.transform.SetParent(transform);
         GameNode gn = go.GetComponent<GameNode>();
         gn.SetNode(parentNode);
+        CityBlockGenerator blockGen = gn.GetComponent<CityBlockGenerator>();
+        if(blockGen)
+        {
+            blockGen.Setup();
+            if(blockGen.CanGenerate())
+            {
+                blockGen.Generate();
+            }
+        }
         gn.SetTerrain(ref terrain);
         gn.SpawnBuildings();
     }
@@ -75,11 +84,11 @@ public class CityBiomeGenerator : CityGenerator
     public virtual GameObject ChooseRegionToSpawn(Node parentNode)
     {
         int i = Random.Range(0, spawnWeights.Length);
-        GameObject regionToSpawn = LOD_0_Prefabs[spawnWeights[i]];
+        GameObject regionToSpawn = BiomePrefabs[spawnWeights[i]];
 
         if (Random.value > chanceToPersist)
         {
-            spawnWeights[i] = Random.Range(0, LOD_0_Prefabs.Length);
+            spawnWeights[i] = Random.Range(0, BiomePrefabs.Length);
         }
         return regionToSpawn;
     }
