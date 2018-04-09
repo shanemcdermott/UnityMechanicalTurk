@@ -30,6 +30,15 @@ public class GridNode : GridFace
         this.vertices = verts;
     }
 
+
+    /*How many children this node has*/
+    public int Depth()
+    {
+        if (children == null) return 0;
+
+        return 1 + children[0].Depth();
+    }
+
     public void ConnectVertices()
     {
         vertices[0].AddConnection(vertices[1]);
@@ -38,15 +47,18 @@ public class GridNode : GridFace
         vertices[3].AddConnection(vertices[1]);
     }
 
-
-
     public virtual void Subdivide()
+    {
+        Subdivide(0.5f);
+    }
+
+    public virtual void Subdivide(float blend)
     {
         if(children!=null)
         {
             for(int x=0;x<NUM_CHILDREN;x++)
             {
-                children[x].Subdivide();
+                children[x].Subdivide(blend);
             }
         }
         else
@@ -56,7 +68,7 @@ public class GridNode : GridFace
             for(int x=0;x<NUM_CHILDREN;x++)
             {
                     children[x] = new GridNode();
-                    children[x].position = MathOps.Midpoint(position, vertices[x].GetPosition());
+                    children[x].position = Vector3.Lerp(position, vertices[x].GetPosition(), blend);
             }
             
             Node center = new Node(position);

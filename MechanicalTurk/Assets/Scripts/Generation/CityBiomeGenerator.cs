@@ -6,6 +6,13 @@ public class CityBiomeGenerator : CityGenerator
 {
     public Terrain terrain;
     public RoadPainter roadPainter;
+
+    [Header("Grid Settings")]
+    /*Total dimensions of the city*/
+    public Vector3 Dimensions = new Vector3(256f,0f,256f);
+    /*Minimum size a plot of land can be */
+    public Vector3 MinLotSize = new Vector3(10f, 10f, 10f);
+
     //Level of detail prefabs. Each should have a GameNode Component;
     public GameObject[] LOD_0_Prefabs = new GameObject[3];
     public float chanceToPersist = 0.66f;
@@ -24,14 +31,6 @@ public class CityBiomeGenerator : CityGenerator
 
     public override void Generate()
     {
-        if (polyGrid.NumFaces() != 0)
-        {
-            polyGrid.Clean();
-        }
-        
-        Debug.Log("populating grid");
-        // GridFactory.PopulateSquareGrid(ref polyGrid);
-
         CreateGrid();
         SpawnRegions();
         CreateRoadsFromGrid();
@@ -40,29 +39,16 @@ public class CityBiomeGenerator : CityGenerator
     public virtual void CreateGrid()
     {
         GridFaceFactory<GridNode> gFac = new GridFaceFactory<GridNode>();
-        Vector3 dimensions = new Vector3(polyGrid.Dimensions.x, 0, polyGrid.Dimensions.y);
-        Vector3 center = new Vector3(polyGrid.Dimensions.x * 0.5f,0, polyGrid.Dimensions.y * 0.5f);
-        gridNode = gFac.GetSquareNode(center, dimensions);
-        for(int i = 0; i < polyGrid.FacesPerSide.x; i++)
+        /*Also used as the center for the root node*/
+        Vector3 lotSize = Dimensions * 0.5f;
+        gridNode = gFac.GetSquareNode(lotSize, Dimensions);
+
+        /*Split the grid in half until the desired leaf size is achieved*/
+        while(lotSize.x >= MinLotSize.x && lotSize.z >= MinLotSize.z)
         {
             gridNode.Subdivide();
+            lotSize *= 0.5f;
         }
-    }
-
-    public virtual void AssignRegionTypes()
-    {
-        List<Node> roadVerts = polyGrid.GetVertices();
-        foreach(Node n in roadVerts)
-        {
-            List<IConnection<Node>> nodeLinks;
-            n.GetConnections(out nodeLinks);
-            foreach(IConnection<Node> nodeLink in nodeLinks)
-            {
-                roadPainter.DrawLine(nodeLink.GetFromNode(), nodeLink.GetToNode());
-            }
-        }
-
-        roadPainter.ApplyAlphaBlend();
     }
 
     public virtual void SpawnRegions()
@@ -118,13 +104,11 @@ public class CityBiomeGenerator : CityGenerator
         {
             for (int i = 0; i < faces.Count; i++)
             {
-                int j = Random.value > 0.5f ? 1 : 2;
+                int a = Random.value > 0.5f ? 0 : 3;
+                int b = Random.value > 0.5f ? 1 : 2; 
 
-                Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(0).GetPosition(), faces[i].GetVertex(j).GetPosition());
+                Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(a).GetPosition(), faces[i].GetVertex(b).GetPosition());
                 faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
-                //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(0), faces[i].GetVertex(2));
-                //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(2), faces[i].GetVertex(3));
-                //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetVertex(1), faces[i].GetVertex(3));
             }
         }
 

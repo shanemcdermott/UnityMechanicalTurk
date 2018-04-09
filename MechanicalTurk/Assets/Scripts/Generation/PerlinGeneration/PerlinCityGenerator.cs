@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PerlinCityGenerator : CityGenerator {
+
+    public PolyGrid polyGrid;
     public GameObject gameNode;
 	public Texture2D roadHorizontal;
     public Texture2D roadVertical;
