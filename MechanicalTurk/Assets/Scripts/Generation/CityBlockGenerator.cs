@@ -16,7 +16,7 @@ public class CityBlockGenerator : GenerationAlgorithm
 
     /*Root node of the block*/
     public GridNode blockNode;
-
+    public Terrain terrain;
 
     public override bool CanGenerate()
     {
@@ -25,21 +25,20 @@ public class CityBlockGenerator : GenerationAlgorithm
 
     public override void Setup()
     {
+
         //throw new NotImplementedException();
     }
 
     public override void Generate()
     {
-        CreateGrid();
+        FinishSubdivision();
         PopulateBlocks();
         //throw new NotImplementedException();
     }
 
-    public virtual void CreateGrid()
+    public virtual void FinishSubdivision()
     {
-        /*Also used as the center for the root node*/
         Vector3 lotSize = Dimensions * 0.5f;
-
         /*Split the grid in half until the desired leaf size is achieved*/
         while (lotSize.x >= MinLotSize.x && lotSize.z >= MinLotSize.z)
         {
@@ -54,6 +53,9 @@ public class CityBlockGenerator : GenerationAlgorithm
         blockNode.GetLeaves(out leaves);
         foreach (GridNode child in leaves)
         {
+            Vector3 v = child.GetPosition();
+            v.y = terrain.SampleHeight(v);
+            child.SetPosition(v);
             SpawnRegion(child);
         }
     }
