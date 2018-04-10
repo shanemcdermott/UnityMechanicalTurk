@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4027754849760650}
   - component: {fileID: 114413174572557756}
+  - component: {fileID: 114412554322757588}
   m_Layer: 0
   m_Name: BusinessBlock
   m_TagString: Untagged
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114412554322757588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1938313778877204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c9e494a29f98a47b7f105724c0f246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabOptions: []
 --- !u!114 &114413174572557756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -61,4 +74,4 @@ MonoBehaviour:
   - {fileID: 1181238431320972, guid: 2edef35e229e45b4aa178d3673347361, type: 2}
   - {fileID: 1660461208447572, guid: 10bb8d9e57207ac43bd0c0615a4dcc8b, type: 2}
   Dimensions: {x: 256, y: 0, z: 256}
-  MinLotSize: {x: 10, y: 10, z: 10}
+  MinLotSize: {x: 8, y: 8, z: 8}
