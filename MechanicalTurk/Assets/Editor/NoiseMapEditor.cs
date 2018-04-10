@@ -32,8 +32,8 @@ public class NoiseMapEditor : Editor
                 noiseMap.Height = noiseMap.Width;
                 break;
             case 2:
-                int w = EditorGUILayout.IntField("Width", noiseMap.GetWidth());
-                int h = EditorGUILayout.IntField("Height", noiseMap.GetHeight());
+                noiseMap.Width = EditorGUILayout.IntField("Width", noiseMap.GetWidth());
+                noiseMap.Height = EditorGUILayout.IntField("Height", noiseMap.GetHeight());
                 break;
         }
     }

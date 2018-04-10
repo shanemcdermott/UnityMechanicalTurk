@@ -60,7 +60,7 @@ public struct IntTriangle
         return (HasVertex(a) && HasVertex(b));
     }
 
-    public override bool Equals(object obj)
+    /*public override bool Equals(object obj)
     {
         if (!(obj is IntTriangle))
             return false;
@@ -69,7 +69,7 @@ public struct IntTriangle
         // compare elements here
         return dt.HasVertex(A) && dt.HasVertex(B) && dt.HasVertex(C);
 
-    }
+    }*/
 
     public override string ToString()
     {
@@ -150,7 +150,7 @@ public struct DelaunayTriangle
         return Triangle.HasEdge(a, b);
     }
 
-    public override bool Equals(object obj)
+    /*public override bool Equals(object obj)
     {
         if (!(obj is DelaunayTriangle))
             return false;
@@ -159,7 +159,7 @@ public struct DelaunayTriangle
         // compare elements here
         return Triangle.Equals(dt.Triangle);
 
-    }
+    }*/
 }
 
 public class DelaunayTriangulation : MonoBehaviour
