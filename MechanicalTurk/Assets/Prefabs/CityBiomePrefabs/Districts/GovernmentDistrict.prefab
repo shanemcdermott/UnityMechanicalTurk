@@ -61,7 +61,7 @@ MonoBehaviour:
   - {fileID: 1923103644727772, guid: e49d022c0df9d5f4a8c45864482ff064, type: 2}
   - {fileID: 1730246028818480, guid: 4dcc18f7b1b401d4ca87ff1a94a4203a, type: 2}
   Dimensions: {x: 64, y: 0, z: 64}
-  MinLotSize: {x: 8, y: 8, z: 8}
+  MinLotSize: {x: 16, y: 16, z: 16}
   terrain: {fileID: 0}
 --- !u!114 &114776926196029278
 MonoBehaviour:
