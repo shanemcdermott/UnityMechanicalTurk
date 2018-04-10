@@ -61,4 +61,9 @@ public class BuildingGenerator : GenerationAlgorithm {
 
         return 0;
     }
+
+    public override void Generate()
+    {
+        throw new System.NotImplementedException();
+    }
 }
