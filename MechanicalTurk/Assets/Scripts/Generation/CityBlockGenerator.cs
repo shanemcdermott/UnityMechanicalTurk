@@ -20,7 +20,7 @@ public class CityBlockGenerator : GenerationAlgorithm
 
     public override bool CanGenerate()
     {
-        return true;
+        return blockNode != null;
     }
 
     public override void Setup()
@@ -37,7 +37,6 @@ public class CityBlockGenerator : GenerationAlgorithm
 
     public virtual void CreateGrid()
     {
-        GridFaceFactory<GridNode> gFac = new GridFaceFactory<GridNode>();
         /*Also used as the center for the root node*/
         Vector3 lotSize = Dimensions * 0.5f;
 
