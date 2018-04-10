@@ -27,10 +27,10 @@ public class PerlinCityGenerator : CityGenerator {
     {
         CleanCityGen();
         GenerateRoadGrid();
-        //SpawnTestObjects();
+        SpawnTestObjects();
         CreateRoadsFromGrid();
         GenerateBuildingHeightMap();
-        //GenerateBuildings();
+        GenerateBuildings();
     }
 
     void CleanCityGen()
@@ -59,7 +59,10 @@ public class PerlinCityGenerator : CityGenerator {
     {
         Debug.Log("PerlinCityGenerator: Spawning test objects");
         foreach (GridFace face in polyGrid.GetFaces()){
-            foreach(Node vert in face.GetVertices()){
+            //GameObject test = GameObject.Instantiate(testObject, transform);
+            //test.transform.position = face.GetPosition();
+            foreach (Node vert in face.GetVertices())
+            {
                 GameObject test = GameObject.Instantiate(testObject, transform);
                 test.transform.position = vert.GetPosition();
             }
@@ -83,12 +86,12 @@ public class PerlinCityGenerator : CityGenerator {
         //draw connections between face verts
         for (int i = 0; i < faces.Count; i++)
         {
-
             int a = Random.value > 0.5f ? 0 : 3;
             int b = Random.value > 0.5f ? 1 : 2; 
 
             Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(a).GetPosition(), faces[i].GetVertex(b).GetPosition());
             faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
+
             List<Node> verts = faces[i].GetVertices();
             foreach (Node node in verts)
             {
@@ -98,6 +101,12 @@ public class PerlinCityGenerator : CityGenerator {
 
         roadPainter.DrawRoads(ref connectionPoints);
         roadPainter.ApplyAlphaBlend();
+    }
+
+    void GenerateBuildingHeightMap()
+    {
+        Debug.Log("PerlinCityGenerator: Generating Building heightmaps");
+        buildingNoiseGenerator.Generate();
     }
 
     void GenerateBuildings()
@@ -136,15 +145,7 @@ public class PerlinCityGenerator : CityGenerator {
 
         return false;
     }
-
-
-    void GenerateBuildingHeightMap()
-    {
-        Debug.Log("PerlinCityGenerator: Generating Building heightmaps");
-        buildingNoiseGenerator.Generate();
-        buildingGenerator.Generate();
-    }
-
+    
     public override void Setup()
     {
         polyGrid.Dimensions = heightMap.Dimensions;

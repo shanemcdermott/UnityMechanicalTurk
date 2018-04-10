@@ -32,18 +32,6 @@ public class BuildingGenerator : GenerationAlgorithm {
         }
     }
 
-    public override void Generate()
-    {
-        buildingMap = new int[heightMap.Width, heightMap.Height];
-        for (int x = 0; x < heightMap.Width; x++)
-        {
-            for (int y = 0; y < heightMap.Height; y++)
-            {
-                buildingMap[x, y] = FindBestTerrain(heightMap[x, y]);
-            }
-        }
-    }
-
     public GameObject GetBuilding(Vector2 midpoint, Vector2 faceSize)
     {
         float heightValue = heightMap.Values[(int)midpoint.x, (int)midpoint.y];
@@ -66,7 +54,6 @@ public class BuildingGenerator : GenerationAlgorithm {
         {
             if (heightValue <= buildingTypes[i].height)
             {
-                Debug.Log("best: " + i);
                 return i;
             }
                 

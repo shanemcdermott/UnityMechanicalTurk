@@ -163,13 +163,14 @@ public class GridFactory
                         Vector2 topLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
 
                         List<Node> vertList = new List<Node>(
-                            new Node[4]{
-                                new Node(bottomLeft), 
-                                new Node(bottomRight), 
-                                new Node(topLeft), 
-                                new Node(topRight)
+                            new Node[]{
+                                new Node(new Vector3(bottomLeft.x, 0, bottomLeft.y)), 
+                                new Node(new Vector3(bottomRight.x, 0, bottomRight.y)), 
+                                new Node(new Vector3(topLeft.x, 0, topLeft.y)), 
+                                new Node(new Vector3(topRight.x, 0, topRight.y))
                             }
                         );
+
                         GridNode gridNode = new GridNode(new Vector3(centerVert.x, 0, centerVert.y), ref vertList);
 
                         gridNode.ConnectVertices();
