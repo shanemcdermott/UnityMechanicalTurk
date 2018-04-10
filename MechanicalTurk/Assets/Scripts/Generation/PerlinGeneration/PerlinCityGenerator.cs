@@ -90,7 +90,8 @@ public class PerlinCityGenerator : CityGenerator {
             int b = Random.value > 0.5f ? 1 : 2; 
 
             Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(a).GetPosition(), faces[i].GetVertex(b).GetPosition());
-            faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
+            //TODO Check if there is a building here before drawing
+            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
 
             List<Node> verts = faces[i].GetVertices();
             foreach (Node node in verts)
@@ -118,7 +119,7 @@ public class PerlinCityGenerator : CityGenerator {
             Vector2 bottomLeft = face.GetVertex(0).GetPositionXZ();
             Vector2 midpoint = face.GetPositionXZ();
 
-            Vector2 faceSize = new Vector2(midpoint.x - bottomLeft.x, midpoint.y - bottomLeft.y);
+            Vector2 faceSize = new Vector2((midpoint.x - bottomLeft.x) * 2, (midpoint.y - bottomLeft.y) * 2);
             
             if (CheckSlope(midpoint))
             {
