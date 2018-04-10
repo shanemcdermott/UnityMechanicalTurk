@@ -33,6 +33,7 @@ public class CityBiomeGenerator : CityGenerator
     {
         CreateGrid();
         SpawnRegions();
+        CreateRoadsFromGrid();
     }
 
     public virtual void CreateGrid()
@@ -72,6 +73,7 @@ public class CityBiomeGenerator : CityGenerator
         {
             blockGen.blockNode = parentNode;
             blockGen.Dimensions = MinLotSize;
+            blockGen.terrain = terrain;
             blockGen.Setup();
             if(blockGen.CanGenerate())
             {

@@ -135,6 +135,8 @@ public class GridFactory
             }
         }
 
+        Dictionary<Vector2, Node> faceVertices = new Dictionary<Vector2, Node>();
+
         //Create Faces
         for (int x = 0; x < grid.FacesPerSide.x; x++)
         {
@@ -158,13 +160,49 @@ public class GridFactory
                         Vector2 topRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
                         
                         Vector2 centerVert = MathOps.Midpoint(bottomLeft, topRight);
-                        GridFace gridface = new GridFace(centerVert);
-
+                        
                         Vector2 bottomRight = new Vector2(vertex.x + ((localx + 1) * intervalEastWest), vertex.z + (z * intervalNorthSouth));
                         Vector2 topLeft = new Vector2(vertex.x + (localx * intervalEastWest), vertex.z + ((z + 1) * intervalNorthSouth));
 
-                        gridface.AddVertices(new Node[] {new Node(bottomLeft), new Node(bottomRight), new Node(topLeft), new Node(topRight)});
-                        grid.AddFace(gridface);
+                        Node bottomLeftNode;
+                        Node topRightNode;
+                        Node bottomRightNode;
+                        Node topLeftNode;
+
+                        if (!faceVertices.TryGetValue(bottomLeft, out bottomLeftNode))
+                        {
+                            bottomLeftNode = new Node(new Vector3(bottomLeft.x, 0, bottomLeft.y));
+                            faceVertices.Add(bottomLeft, bottomLeftNode);
+                        }
+
+                        if (!faceVertices.TryGetValue(topRight, out topRightNode))
+                        {
+                            topRightNode = new Node(new Vector3(topRight.x, 0, topRight.y));
+                            faceVertices.Add(topRight, topRightNode);
+                        }
+
+                        if (!faceVertices.TryGetValue(bottomRight, out bottomRightNode))
+                        {
+                            bottomRightNode = new Node(new Vector3(bottomRight.x, 0, bottomRight.y));
+                            faceVertices.Add(bottomRight, bottomRightNode);
+                        }
+
+                        if (!faceVertices.TryGetValue(topLeft, out topLeftNode))
+                        {
+                            topLeftNode = new Node(new Vector3(topLeft.x, 0, topLeft.y));
+                            faceVertices.Add(topLeft, topLeftNode);
+                        }
+
+                        List<Node> vertList = new List<Node>(
+                            new Node[]{
+                                bottomLeftNode, bottomRightNode, topLeftNode, topRightNode
+                            }
+                        );
+
+                        GridNode gridNode = new GridNode(new Vector3(centerVert.x, 0, centerVert.y), ref vertList);
+
+                        gridNode.ConnectVertices();
+                        grid.AddFace(gridNode);
                     }
                 }
             }

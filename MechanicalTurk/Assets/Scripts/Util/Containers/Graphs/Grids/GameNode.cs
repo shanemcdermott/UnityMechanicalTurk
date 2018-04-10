@@ -6,7 +6,7 @@ public class GameNode : MonoBehaviour
 {
     //Level of detail prefabs. Each should have a GameNode Component;
     public GameObject[] prefabOptions;
-
+    public Terrain terrain;
     protected Node node;
 
     public void SetNode(Node node)

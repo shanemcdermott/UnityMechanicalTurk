@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1730246028818480}
+  m_IsPrefabParent: 1
+--- !u!1 &1730246028818480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4641151755301258}
+  - component: {fileID: 114131992652907646}
+  m_Layer: 0
+  m_Name: GovernmentBlock_A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4641151755301258
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1730246028818480}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114131992652907646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1730246028818480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c9e494a29f98a47b7f105724c0f246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabOptions:
+  - {fileID: 1341036860166328, guid: e62dc034d6fb9a847ba22985011c3025, type: 2}
+  - {fileID: 1189121154384388, guid: 7617253c824225e478c24e508ab6db7f, type: 2}
+  - {fileID: 1415235884987166, guid: a9bd88caa1914ba458ab92e9b2514892, type: 2}
+  - {fileID: 1216022729362282, guid: b2b1354b4a7daf54eb0b97f2da546e0f, type: 2}
+  terrain: {fileID: 0}
