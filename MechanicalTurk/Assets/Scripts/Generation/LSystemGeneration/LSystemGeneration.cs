@@ -7,8 +7,6 @@ public class LSystemGeneration : CityGenerator
 {
     public TerrainGenerator terrainGenerator;
     public Texture2D[] tilingTextures;
-    public PolyGrid polyGrid;
-    private Node currentNode;
 
     private int seed;
     private string axiom;
@@ -156,9 +154,6 @@ public class LSystemGeneration : CityGenerator
         roadGrid.Clear();
         roadGrid.Add(new Vector2Int((int)transform.position.x,(int)transform.position.z), new Vector2Int[4]);
         roads.Add(transform.position);
-        currentNode = new Node(transform.position);
-        polyGrid.Clean();
-        polyGrid.AddVertex(currentNode);
         currString = axiom;
         for(int i =0; i < iterations; i++)
         {
@@ -196,13 +191,7 @@ public class LSystemGeneration : CityGenerator
                 prev = new Vector2Int((int)transform.position.x, (int)transform.position.z);
                 transform.Translate(Vector3.forward * length);
                 curr = new Vector2Int((int)transform.position.x, (int)transform.position.z);
-
-                Node newNode = polyGrid.GetNodeAt(curr);
-                if (newNode == null)
-                {
-                    newNode = new Node(new Vector2(curr.x, curr.y));
-                }
-
+  
                 if (!roadGrid.ContainsKey(curr))//dictionary does not contain new node
                 {
                    
@@ -223,28 +212,26 @@ public class LSystemGeneration : CityGenerator
                     {
                         CurrConnections[3] = prev;
                         PrevConnections[1] = curr;
-                        currentNode.AddConnection(newNode);
+                       
                     }  
                     if (diff.x < 0)//node curr is west of node prev
                     {
                         CurrConnections[1] = prev;
                         PrevConnections[3] = curr;
-                        currentNode.AddConnection(newNode);
+                 
                     }
                     if (diff.y > 0)//node curr is north of node prev
                     {
                         CurrConnections[2] = prev;
                         PrevConnections[0] = curr;
-                        currentNode.AddConnection(newNode);
+                       
                     }
                     if (diff.y < 0)//node curr is south of node prev
                     {
                         CurrConnections[0] = prev;
                         PrevConnections[2] = curr;
-                        currentNode.AddConnection(newNode);
+                        
                     }
-                    polyGrid.UpdateNodeAt(curr, newNode);
-                    currentNode = newNode;
                 }
                 else
                 {
