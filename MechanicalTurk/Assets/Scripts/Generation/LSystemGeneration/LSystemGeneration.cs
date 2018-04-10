@@ -13,6 +13,7 @@ public class LSystemGeneration : CityGenerator
     private string currString;
     private float length = 1f;
     private int iterations;
+    private List<Vector3> roads = new List<Vector3>();
     private Stack<TransformInfo> transformStack = new Stack<TransformInfo>();
     private Dictionary<Vector2Int, Vector2Int[]> roadGrid = new Dictionary<Vector2Int, Vector2Int[]>();
     private Dictionary<char, string> rules = new Dictionary<char, string>();
@@ -53,19 +54,22 @@ public class LSystemGeneration : CityGenerator
             }
         }
         List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
-        foreach (Vector2Int node in vertices)
+        foreach( Vector2Int node in vertices)
         {
             Vector2Int[] connections = new Vector2Int[4];
             if (roadGrid.TryGetValue(node, out connections))
             {
                 int i = 0;
+                int count = 0;
                 foreach (Vector2Int edge in connections)
                 {
                     if (edge == Vector2Int.zero)
                     {
-                        Debug.Log("Connection node of node (" + node.x + ", "+node.y + ") is zero!");
-                        break;
+                        //Debug.Log("Connection node of node (" + node.x + ", "+node.y + ") is zero!");
+
+                        continue;
                     }
+                    count++;
                     Vector2Int diff = edge - node;
                     if (diff.x > 0)
                         i += 4;
@@ -82,8 +86,17 @@ public class LSystemGeneration : CityGenerator
                     " 2nd connection: x:" + (int)connections[1].x + " y: " + (int)connections[1].y +
                     " 3rd connection: x:" + (int)connections[2].x + " y: " + (int)connections[2].y +
                     " 4th connection: x:" + (int)connections[3].x + " y: " + (int)connections[3].y);
-                alphamaps[(int)node.x, (int)node.y, i] = 1;
-                alphamaps[(int)node.x, (int)node.y, 0] = 0;
+                if (checkAlphaMap(node, new Vector2Int(tData.alphamapHeight, tData.alphamapWidth)))
+                {
+                    alphamaps[(int)node.x * 2, (int)node.y * 2, i] = 1;
+                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2, i] = 1;
+                    alphamaps[(int)node.x * 2, (int)node.y * 2 + 1, i] = 1;
+                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2 + 1, i] = 1;
+                    alphamaps[(int)node.x * 2, (int)node.y * 2, 0] = 0;
+                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2, 0] = 0;
+                    alphamaps[(int)node.x * 2, (int)node.y * 2 + 1, 0] = 0;
+                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2 + 1, 0] = 0;
+                }
             }
             else
             {
@@ -94,6 +107,14 @@ public class LSystemGeneration : CityGenerator
         
         terrainGenerator.terrain.terrainData.splatPrototypes = textures;
         terrainGenerator.terrain.terrainData.SetAlphamaps(0, 0, alphamaps);
+    }
+
+    private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
+    {
+        if (node.x * 2 + 1 > alphaMapDimensions.x || node.y * 2 + 1 > alphaMapDimensions.y)
+            return false;
+        else
+            return true;
     }
 
     private void PopulateRoadTexture()
@@ -116,6 +137,7 @@ public class LSystemGeneration : CityGenerator
     {
         seed = GameObject.Find("GenController").GetComponent<GenerationController>().Seed;
         UnityEngine.Random.InitState(seed);
+        rules.Clear();
         //*****RULES************
         //Random character '!' : random event (-,+,delete last command, or nothing)
         rules.Add('X', "X+Y!F+");
@@ -123,31 +145,22 @@ public class LSystemGeneration : CityGenerator
         angle = 90f;
         iterations = 12;
         axiom = "FX";
-        
-        roadGrid.Add(new Vector2Int((int)transform.position.x,(int)transform.position.z), new Vector2Int[4]);
 
+        roads.Clear();
+        roadGrid.Clear();
+        roadGrid.Add(new Vector2Int((int)transform.position.x,(int)transform.position.z), new Vector2Int[4]);
+        roads.Add(transform.position);
 
         currString = axiom;
-        for (int i = 0; i < iterations; i++)
+        for(int i =0; i < iterations; i++)
         {
             GenerateIteration();
-        }
-        DrawLines();
-    }
-
-    void DrawLines()
-    {
-        List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
-        for(int i=0; i<vertices.Count-1;i++)
-        {
-            Debug.DrawLine(new Vector3(vertices[i].x, 4, vertices[i].y), new Vector3(vertices[i+1].x,4,vertices[i+1].y), Color.black, 10000f, false);
         }
     }
 
     void GenerateIteration()
     {
         string newString = "";
-
         char[] stringCharacters = currString.ToCharArray();
 
         for (int i = 0; i < stringCharacters.Length; i++)
@@ -164,7 +177,6 @@ public class LSystemGeneration : CityGenerator
             }
         }
         currString = newString;
-
         stringCharacters = currString.ToCharArray();
         int index = 0;
         for (int i = 0; i < stringCharacters.Length; i++)
@@ -179,6 +191,7 @@ public class LSystemGeneration : CityGenerator
                 if (!roadGrid.ContainsKey(curr))//dictionary does not contain new node
                 {
                     roadGrid.Add(curr, new Vector2Int[4]);
+                    roads.Add(transform.position);
                 }
                 //add connection
                 /*Connections [0] - North
@@ -246,25 +259,19 @@ public class LSystemGeneration : CityGenerator
                 float num = UnityEngine.Random.value;
                 if(num < 0.1f)//Turn left
                 {
-                    stringCharacters.SetValue('-', i + 1);
+                    stringCharacters.SetValue('-', i);
                     i--;
                 }
                 else if( num < 0.2f)//Turn right
                 {
-                    stringCharacters.SetValue('+', i + 1);
+                    stringCharacters.SetValue('+', i);
                     i--;
                 }
-                else if(num < 0.3f)//Delete command
+                else if(num < 0.3f)//Do nothing
                 {
-                    stringCharacters.SetValue('n', i + 1);
-                    i--;
+                    stringCharacters.SetValue('n', i);
                 }
-                // Anything else
-                //Do nothing
-
-
-                //last segment +=  new Vector3( Random.next(),0, Random.next() );
-                //random needs to be 0,1,2,3 
+                //Need to change ^ to delete command and then do nothing
             }
         }
     }
