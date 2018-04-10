@@ -6,9 +6,8 @@ public class GameNode : MonoBehaviour
 {
     //Level of detail prefabs. Each should have a GameNode Component;
     public GameObject[] prefabOptions;
-
+    public Terrain terrain;
     protected Node node;
-    protected Terrain terrain;
 
     public void SetNode(Node node)
     {
@@ -18,17 +17,11 @@ public class GameNode : MonoBehaviour
 //       transform.position = new Vector3(pos.x, 0, pos.y);
     }
 
-    public void SetTerrain(ref Terrain terrain)
-    {
-        this.terrain = terrain;
-    }
-
     public void SpawnBuildings()
     {
         Debug.Log("Spawning Buildings");
         GameObject go = GameObject.Instantiate(GetRandomPrefab(),transform);
-        float y = terrain.SampleHeight(transform.position);
-        go.transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        go.transform.position = transform.position;
         /*
 
         float x = Random.value;

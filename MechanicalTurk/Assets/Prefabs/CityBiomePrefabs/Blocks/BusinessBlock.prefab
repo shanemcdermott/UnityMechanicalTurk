@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4260308036394054}
   - component: {fileID: 114559096070897196}
   m_Layer: 0
-  m_Name: BusinessDistrict
+  m_Name: BusinessBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabOptions:
-  - {fileID: 100000, guid: bab4f53fb5fc0634ea0c742bf2743d89, type: 3}
-  - {fileID: 100000, guid: d442faace18e73f44aebecb1a784bd8d, type: 3}
-  - {fileID: 100000, guid: b392c3200ebac344fbc91be43739f8c0, type: 3}
-  - {fileID: 100000, guid: fd0aff9be85e9d44c9e1177220ae796e, type: 3}
-  - {fileID: 100000, guid: e0828b8951ddb5742b21325602b044b8, type: 3}
-  - {fileID: 100000, guid: 53ec1bd968802e14b997a32f25e4c11c, type: 3}
+  - {fileID: 1841186364714330, guid: 5b1719a3ce32f764d8d9fa66b4221038, type: 2}
+  - {fileID: 1179762329905682, guid: d4c99446020ff9442a193de1b0a00b5a, type: 2}
+  - {fileID: 1019500377818456, guid: c2940daeaf12e5d44adda181422765b1, type: 2}
+  - {fileID: 1784141362679706, guid: 4ce0e065a3489d44faee881f98a5d7bb, type: 2}
+  - {fileID: 1691353807612870, guid: 37bcb278856ff0c458a3c16c5433e934, type: 2}
+  - {fileID: 1474336472740672, guid: 899fcbb5876626d4598dd292708e8941, type: 2}
+  terrain: {fileID: 0}

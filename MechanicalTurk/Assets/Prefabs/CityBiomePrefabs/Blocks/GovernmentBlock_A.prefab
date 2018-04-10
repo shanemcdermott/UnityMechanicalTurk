@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1660461208447572}
+  m_RootGameObject: {fileID: 1730246028818480}
   m_IsPrefabParent: 1
---- !u!1 &1660461208447572
+--- !u!1 &1730246028818480
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4848117549756144}
-  - component: {fileID: 114818263879718494}
+  - component: {fileID: 4641151755301258}
+  - component: {fileID: 114131992652907646}
   m_Layer: 0
-  m_Name: ResidentialDistrict
+  m_Name: GovernmentBlock_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4848117549756144
+--- !u!4 &4641151755301258
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1660461208447572}
+  m_GameObject: {fileID: 1730246028818480}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,21 +40,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114818263879718494
+--- !u!114 &114131992652907646
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1660461208447572}
+  m_GameObject: {fileID: 1730246028818480}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c9e494a29f98a47b7f105724c0f246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefabOptions:
-  - {fileID: 100000, guid: c8c0ac4c680f7704691118a770df51ba, type: 3}
-  - {fileID: 100000, guid: 9f122409af2c3464286d66eb2f28d8a3, type: 3}
-  - {fileID: 100000, guid: e7ba6850887ae694a970af5f171fa6d5, type: 3}
-  - {fileID: 100000, guid: 5bca2bbc38783b64996a209d6c901c21, type: 3}
-  - {fileID: 100000, guid: 2746675f4f1ec0d48933c668c549320f, type: 3}
-  - {fileID: 100000, guid: 3d92f881e27fa984bbe291e539cfda8d, type: 3}
+  - {fileID: 1341036860166328, guid: e62dc034d6fb9a847ba22985011c3025, type: 2}
+  - {fileID: 1189121154384388, guid: 7617253c824225e478c24e508ab6db7f, type: 2}
+  - {fileID: 1415235884987166, guid: a9bd88caa1914ba458ab92e9b2514892, type: 2}
+  - {fileID: 1216022729362282, guid: b2b1354b4a7daf54eb0b97f2da546e0f, type: 2}
+  terrain: {fileID: 0}

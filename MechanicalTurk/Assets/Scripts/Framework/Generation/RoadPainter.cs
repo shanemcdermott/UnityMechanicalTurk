@@ -134,15 +134,15 @@ public class RoadPainter : MonoBehaviour
                 {
                     if(result)
                     {
-                        alphamaps[x, y, 0] = 0;
-                        alphamaps[x, y, 1] = 1;
-                        alphamaps[x, y, 2] = 0;
-                    }
-                    else
-                    {
-                        alphamaps[x, y, 0] = 0;
-                        alphamaps[x, y, 1] = 0;
-                        alphamaps[x, y, 2] = 1;
+                        alphamaps[y, x, 0] = 0;
+                        alphamaps[y, x, 1] = 0;
+                        alphamaps[y, x, 2] = 1;
+                    }                
+                    else             
+                    {                
+                        alphamaps[y, x, 0] = 0;
+                        alphamaps[y, x, 1] = 1;
+                        alphamaps[y, x, 2] = 0;
                     }
                 }
             }
