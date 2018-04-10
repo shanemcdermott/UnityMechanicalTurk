@@ -4,23 +4,125 @@ using UnityEngine;
 
 public class CityBiomeGenerator : CityGenerator
 {
+    public Terrain terrain;
+    public RoadPainter roadPainter;
+
+    [Header("Grid Settings")]
+    /*Total dimensions of the city*/
+    public Vector3 Dimensions = new Vector3(256f,0f,256f);
+    /*Minimum size a plot of land can be */
+    public Vector3 MinLotSize = new Vector3(10f, 10f, 10f);
+
     //Level of detail prefabs. Each should have a GameNode Component;
-    public GameObject[] LOD_0_Prefabs = new GameObject[3];
+    public GameObject[] BiomePrefabs = new GameObject[3];
+    public float chanceToPersist = 0.66f;
+    public int[] spawnWeights = new int[10] { 1, 0, 0, 0,
+                                                1, 1, 1,
+                                                2, 2, 2 };
+
+    public bool bShouldDrawFromCenter = true;
+    public GridNode gridNode;
+
+    public override void Setup()
+    {
+        base.Setup();
+        roadPainter.Setup();
+    }
 
     public override void Generate()
     {
-        if (polyGrid.NumFaces() == 0)
+        CreateGrid();
+        SpawnRegions();
+        CreateRoadsFromGrid();
+    }
+
+    public virtual void CreateGrid()
+    {
+        GridFaceFactory<GridNode> gFac = new GridFaceFactory<GridNode>();
+        /*Also used as the center for the root node*/
+        Vector3 lotSize = Dimensions * 0.5f;
+        gridNode = gFac.GetSquareNode(lotSize, Dimensions);
+
+        /*Split the grid in half until the desired leaf size is achieved*/
+        while(lotSize.x >= MinLotSize.x && lotSize.z >= MinLotSize.z)
         {
-            Debug.Log("populating grid");
-            GridFactory.PopulateSquareGrid(ref polyGrid);
-            foreach (Node node in polyGrid.GetFaces())
+            gridNode.Subdivide();
+            lotSize *= 0.5f;
+        }
+    }
+
+    public virtual void SpawnRegions()
+    {
+        List<GridNode> leaves;
+        gridNode.GetLeaves(out leaves);
+        foreach (GridNode child in leaves)
+        {
+            SpawnRegion(child);
+        }
+        
+    }
+
+    public virtual void SpawnRegion(Node parentNode)
+    {
+        GameObject go = GameObject.Instantiate(ChooseRegionToSpawn(parentNode));
+        go.transform.SetParent(transform);
+        GameNode gn = go.GetComponent<GameNode>();
+        gn.SetNode(parentNode);
+        CityBlockGenerator blockGen = gn.GetComponent<CityBlockGenerator>();
+        if(blockGen)
+        {
+            blockGen.Setup();
+            if(blockGen.CanGenerate())
             {
-                GameObject go = GameObject.Instantiate(LOD_0_Prefabs[Random.Range(0, LOD_0_Prefabs.Length)]);
-                go.transform.SetParent(transform);
-                GameNode gn = go.GetComponent<GameNode>();
-                gn.SetNode(node);
-                gn.SpawnBuildings();
+                blockGen.Generate();
             }
         }
+        gn.SetTerrain(ref terrain);
+        gn.SpawnBuildings();
+    }
+
+    public virtual GameObject ChooseRegionToSpawn(Node parentNode)
+    {
+        int i = Random.Range(0, spawnWeights.Length);
+        GameObject regionToSpawn = BiomePrefabs[spawnWeights[i]];
+
+        if (Random.value > chanceToPersist)
+        {
+            spawnWeights[i] = Random.Range(0, BiomePrefabs.Length);
+        }
+        return regionToSpawn;
+    }
+
+    public virtual void CreateRoadsFromGrid()
+    {
+        List<Node> vertices = gridNode.GetChildVertices();
+
+        List<GridNode> faces;
+        gridNode.GetLeaves(out faces);
+
+        Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
+        //draw connections between verts
+        foreach (Node node in vertices)
+        {
+            node.GetConnectionLines(ref connectionPoints);
+        }
+
+        //draw connections between face verts
+
+        if (bShouldDrawFromCenter)
+        {
+            for (int i = 0; i < faces.Count; i++)
+            {
+                int a = Random.value > 0.5f ? 0 : 3;
+                int b = Random.value > 0.5f ? 1 : 2; 
+
+                Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(a).GetPosition(), faces[i].GetVertex(b).GetPosition());
+                faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
+            }
+        }
+
+
+        roadPainter.DrawRoads(ref connectionPoints);
+        roadPainter.ApplyAlphaBlend();
     }
 }

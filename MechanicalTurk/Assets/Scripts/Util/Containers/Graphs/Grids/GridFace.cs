@@ -24,7 +24,13 @@ public class GridFace : Node
         vertices = new List<Node>();
     }
 
-    public void AddVertices(Node[] vertices)
+    public GridFace(GridFace toCopy)
+    {
+        this.position = toCopy.position;
+        this.vertices = toCopy.vertices;
+    }
+
+    public virtual void AddVertices(Node[] vertices)
     {
         this.vertices.AddRange(vertices);
     }
@@ -75,19 +81,18 @@ public class GridFace : Node
         return -1;
     }
 
-    public List<Vector3> GetVertexPositions()
+    public virtual void GetVertexPositions(out List<Vector3> pos)
     {
-        List<Vector3> pos = new List<Vector3>();
+        pos = new List<Vector3>();
         foreach (Node node in vertices)
         {
             pos.Add(node.GetPosition());
         }
-        return pos;
     }
 
-    public Node[] GetVertices()
+    public virtual List<Node> GetVertices()
     {
-        return vertices.ToArray();
+        return vertices;
     }
 
     protected void SwapVertices(int i, int j)

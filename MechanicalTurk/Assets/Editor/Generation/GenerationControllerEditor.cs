@@ -16,6 +16,15 @@ public class GenerationControllerEditor : Editor
         {
             controller.SetupAndGenerate();
         }
+        if(GUILayout.Button("Clear Buildings"))
+        {
+            while(controller.cityGenerator.transform.childCount > 0)
+            {
+                Transform child = controller.cityGenerator.transform.GetChild(0);
+                DestroyImmediate(child.gameObject);
+            }
+        }
+
         /*
         if (GUILayout.Button("Save Heightmap"))
         {
