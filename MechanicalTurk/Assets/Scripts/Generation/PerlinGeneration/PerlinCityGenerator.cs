@@ -5,11 +5,6 @@ using UnityEngine;
 public class PerlinCityGenerator : CityGenerator {
 
     public PolyGrid polyGrid;
-    public GameObject gameNode;
-	public Texture2D roadHorizontal;
-    public Texture2D roadVertical;
-
-    private Texture2D roadTexture;
 
     public int lowRoadNumber = 2;
     public int highRoadNumber = 4;
@@ -17,10 +12,6 @@ public class PerlinCityGenerator : CityGenerator {
     public Vector2Int facesPerSide;
     
     public TerrainGenerator terrainGenerator;
-
-    public GameObject testPlane;
-    
-    public List<GameObject> spawnedGameNodes;
     
     [SerializeField]
     public NoiseGenerator buildingNoiseGenerator;
@@ -34,40 +25,44 @@ public class PerlinCityGenerator : CityGenerator {
 
     public override void Generate()
     {
+        CleanCityGen();
         GenerateRoadGrid();
         //SpawnTestObjects();
         CreateRoadsFromGrid();
+        GenerateBuildingHeightMap();
         //GenerateBuildings();
     }
 
-    void GenerateRoadGrid()
+    void CleanCityGen()
     {
-        for(int i = transform.childCount-1; i >= 0; i--)
+        Debug.Log("PerlinCityGenerator: Cleaning city");
+        for (int i = transform.childCount - 1; i >= 0; i--)
         {
             Transform child = transform.GetChild(i);
             DestroyImmediate(child.gameObject);
         }
-        
+
         if (polyGrid.NumFaces() != 0)
         {
             polyGrid.Clean();
         }
-        
-        polyGrid.FacesPerSide = new Vector2Int(facesPerSide.x, facesPerSide.y);
+    }
+
+    void GenerateRoadGrid()
+    {
         Debug.Log("PerlinCityGenerator: Populating perlin road grid");
+        polyGrid.FacesPerSide = new Vector2Int(facesPerSide.x, facesPerSide.y);
         GridFactory.GeneratePerlinGrid(ref polyGrid, lowRoadNumber, highRoadNumber);
-        
     }
 
     private void SpawnTestObjects()
     {
-        foreach(GridFace face in polyGrid.GetFaces()){
+        Debug.Log("PerlinCityGenerator: Spawning test objects");
+        foreach (GridFace face in polyGrid.GetFaces()){
             foreach(Node vert in face.GetVertices()){
                 GameObject test = GameObject.Instantiate(testObject, transform);
                 test.transform.position = vert.GetPosition();
             }
-            
-            
         }
     }
 
@@ -78,6 +73,7 @@ public class PerlinCityGenerator : CityGenerator {
         List<GridFace> faces = polyGrid.GetFaces();
 
         Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
+        
         //draw connections between verts
         foreach (Node node in vertices)
         {
@@ -98,9 +94,7 @@ public class PerlinCityGenerator : CityGenerator {
             {
                 node.GetConnectionLines(ref connectionPoints);
             }
-
         }
-
 
         roadPainter.DrawRoads(ref connectionPoints);
         roadPainter.ApplyAlphaBlend();
@@ -108,74 +102,56 @@ public class PerlinCityGenerator : CityGenerator {
 
     void GenerateBuildings()
     {
-        GenerateBuildingHeightMap();
-
-        //need a list of buildings with colliders (looks like they are set by biomeGenerator right now)
-
-        //need to check each gridface? but i should have multiple buildings in some spots
-
+        Debug.Log("PerlinCityGenerator: Generating Buildings");
         List<GridFace> faces = polyGrid.GetFaces();
         foreach(GridFace face in faces)
         {
             Vector2 bottomLeft = face.GetVertex(0).GetPositionXZ();
-            Vector2 topRight = face.GetVertex(3).GetPositionXZ();
+            Vector2 midpoint = face.GetPositionXZ();
 
-            Vector2 midpoint = MathOps.Midpoint(bottomLeft, topRight);
-            Vector2Int midpointInt = new Vector2Int((int)midpoint.x, (int)midpoint.y);
-
-            GameObject objectToSpawn = buildings[(midpointInt.x * buildingGenerator.heightMap.Width )+ midpointInt.y];
-            BoxCollider collider = objectToSpawn.AddComponent<BoxCollider>();
-            float faceX = topRight.x - bottomLeft.x;
-            float faceZ = topRight.y - bottomLeft.y;
-
-            if(collider.size.x < faceX && collider.size.z < faceZ)
+            Vector2 faceSize = new Vector2(midpoint.x - bottomLeft.x, midpoint.y - bottomLeft.y);
+            
+            if (CheckSlope(midpoint))
             {
-                GameObject instance = GameObject.Instantiate(objectToSpawn, transform);
-                instance.transform.position = new Vector3(midpoint.x, 1, midpoint.y);
+                GameObject objectToSpawn = buildingGenerator.GetBuilding(midpoint, faceSize);
+                if (objectToSpawn != null)
+                {
+                    GameObject instance = GameObject.Instantiate(objectToSpawn, transform);
+                    float height = terrainGenerator.terrain.SampleHeight(new Vector3(midpoint.x, 0, midpoint.y));
+                    instance.transform.position = new Vector3(midpoint.x, height, midpoint.y);
+                }
             }
         }
-
-        //go through roadtexture faces to find spots
-            //foreach gridface
-                //check size (add box collider to building, check x & z)
-                //check slope (xz and yz < .4)
-
-            //foreach valid spot
-                //spawn a building based on perlin
     }
-    
+
+    bool CheckSlope(Vector2 point)
+    {
+        TerrainData terrainData = terrainGenerator.terrain.terrainData;
+        Vector2 normalizedPoint = new Vector2(point.x / terrainData.size.x, point.y / terrainData.size.z);
+        float steepness = terrainData.GetSteepness(normalizedPoint.x, normalizedPoint.y);
+        if(steepness < 20)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
     void GenerateBuildingHeightMap()
     {
-        buildingNoiseGenerator.Setup();
+        Debug.Log("PerlinCityGenerator: Generating Building heightmaps");
         buildingNoiseGenerator.Generate();
-        buildingGenerator.Setup();
         buildingGenerator.Generate();
-        buildings = buildingGenerator.GetBuildingMap();
     }
 
     public override void Setup()
     {
-        if (polyGrid == null)
-        {
-            polyGrid = gameObject.GetComponent<PolyGrid>();
-            if (polyGrid == null)
-            {
-                polyGrid = gameObject.AddComponent<PolyGrid>();
-                polyGrid.Dimensions = heightMap.Dimensions;
-            }
-        }
         polyGrid.Dimensions = heightMap.Dimensions;
-        polyGrid.FacesPerSide = new Vector2Int(2, 2);
-        roadPainter.Setup();
-    }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        roadPainter.Setup();
+
+        buildingNoiseGenerator.Setup();
+        buildingGenerator.Setup();
+    }
 }

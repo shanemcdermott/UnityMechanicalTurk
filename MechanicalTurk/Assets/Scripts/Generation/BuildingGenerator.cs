@@ -44,21 +44,20 @@ public class BuildingGenerator : GenerationAlgorithm {
         }
     }
 
-    public GameObject[] GetBuildingMap()
+    public GameObject GetBuilding(Vector2 midpoint, Vector2 faceSize)
     {
-        GameObject[] flatBuildingMap = new GameObject[heightMap.Width * heightMap.Height];
-        for (int x = 0; x < heightMap.Width; x++)
+        float heightValue = heightMap.Values[(int)midpoint.x, (int)midpoint.y];
+        int buildingIndex = FindBestTerrain(heightValue);
+
+        GameObject buildingToSpawn = buildingTypes[buildingIndex].building;
+        BoxCollider collider = buildingToSpawn.GetComponent<BoxCollider>();
+
+        if (collider.size.x < faceSize.x && collider.size.z < faceSize.y)
         {
-            for (int y = 0; y < heightMap.Height; y++)
-            {
-                Debug.Log("types at " + buildingMap[x, y]);
-                
-                Debug.Log(" type " + buildingTypes[buildingMap[x, y]]);
-                flatBuildingMap[heightMap.ToIndex(x, y)] = buildingTypes[buildingMap[x, y]].building;
-            }
+            return buildingToSpawn;
         }
 
-        return flatBuildingMap;
+        return null;
     }
 
     public int FindBestTerrain(float heightValue)
