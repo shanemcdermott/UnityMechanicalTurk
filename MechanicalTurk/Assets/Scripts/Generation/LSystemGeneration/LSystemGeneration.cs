@@ -11,7 +11,7 @@ public class LSystemGeneration : CityGenerator
     private string axiom;
     private float angle;
     private string currString;
-    private float length = 1f;
+    private float length = 2f;
     private int iterations;
     private List<Vector3> roads = new List<Vector3>();
     private Stack<TransformInfo> transformStack = new Stack<TransformInfo>();
@@ -88,14 +88,14 @@ public class LSystemGeneration : CityGenerator
                     " 4th connection: x:" + (int)connections[3].x + " y: " + (int)connections[3].y);
                 if (checkAlphaMap(node, new Vector2Int(tData.alphamapHeight, tData.alphamapWidth)))
                 {
-                    alphamaps[(int)node.x * 2, (int)node.y * 2, i] = 1;
-                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2, i] = 1;
-                    alphamaps[(int)node.x * 2, (int)node.y * 2 + 1, i] = 1;
-                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2 + 1, i] = 1;
-                    alphamaps[(int)node.x * 2, (int)node.y * 2, 0] = 0;
-                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2, 0] = 0;
-                    alphamaps[(int)node.x * 2, (int)node.y * 2 + 1, 0] = 0;
-                    alphamaps[(int)node.x * 2 + 1, (int)node.y * 2 + 1, 0] = 0;
+                    alphamaps[(int)node.y * 2, (int)node.x * 2, i] = 1;
+                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2, i] = 1;
+                    alphamaps[(int)node.y * 2, (int)node.x * 2 + 1, i] = 1;
+                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2 + 1, i] = 1;
+                    alphamaps[(int)node.y * 2, (int)node.x * 2, 0] = 0;
+                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2, 0] = 0;
+                    alphamaps[(int)node.y * 2, (int)node.x * 2 + 1, 0] = 0;
+                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2 + 1, 0] = 0;
                 }
             }
             else
