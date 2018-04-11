@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UtilitySystem
+namespace Framework.Intelligence.UtilitySystem
 {
     /*Maps inputs into decision*/
     public abstract class Consideration : MonoBehaviour
@@ -13,6 +13,7 @@ namespace UtilitySystem
 
         //Input and parameters determined by child implementation of score
         //Response Curve
+        public AnimationCurve responseCurve;
 
         public float GetFloatParameter(int id)
         {
@@ -28,7 +29,12 @@ namespace UtilitySystem
         /*Compute a consideration score*/
         public abstract float Score(DecisionContext context, Consideration c);
 
-        public abstract float ComputeResponseCurve(float score);
+        public float ComputeResponseCurve(float score)
+        {
+            if (responseCurve == null) return score;
+
+            return responseCurve.Evaluate(score);
+        }
     }
 
 }

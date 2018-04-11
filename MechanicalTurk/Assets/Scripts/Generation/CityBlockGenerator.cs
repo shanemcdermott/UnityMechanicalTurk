@@ -15,12 +15,12 @@ public class CityBlockGenerator : GenerationAlgorithm
     public Vector3 MinLotSize = new Vector3(10f, 10f, 10f);
 
     /*Root node of the block*/
-    public GridNode blockNode;
+    public GridNode districtNode;
     public Terrain terrain;
 
     public override bool CanGenerate()
     {
-        return blockNode != null;
+        return districtNode != null;
     }
 
     public override void Setup()
@@ -42,7 +42,7 @@ public class CityBlockGenerator : GenerationAlgorithm
         /*Split the grid in half until the desired leaf size is achieved*/
         while (lotSize.x >= MinLotSize.x && lotSize.z >= MinLotSize.z)
         {
-            blockNode.Subdivide();
+            districtNode.Subdivide();
             lotSize *= 0.5f;
         }
     }
@@ -50,17 +50,17 @@ public class CityBlockGenerator : GenerationAlgorithm
     public virtual void PopulateBlocks()
     {
         List<GridNode> leaves;
-        blockNode.GetLeaves(out leaves);
+        districtNode.GetLeaves(out leaves);
         foreach (GridNode child in leaves)
         {
             Vector3 v = child.GetPosition();
             v.y = terrain.SampleHeight(v);
             child.SetPosition(v);
-            SpawnRegion(child);
+            SpawnCityBlock(child);
         }
     }
 
-    public virtual void SpawnRegion(Node parentNode)
+    public virtual void SpawnCityBlock(Node parentNode)
     {
         GameObject go = GameObject.Instantiate(ChooseLotToSpawn(parentNode));
         go.transform.SetParent(transform);

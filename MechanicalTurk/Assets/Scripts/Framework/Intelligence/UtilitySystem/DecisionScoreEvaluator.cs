@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UtilitySystem
+namespace Framework.Intelligence.UtilitySystem
 {
 
     public class DecisionScoreEvaluator : MonoBehaviour

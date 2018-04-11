@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UtilitySystem
+namespace Framework.Intelligence.UtilitySystem
 {
 
     public abstract class Decision : MonoBehaviour, IComparable

@@ -71,7 +71,7 @@ public class CityBiomeGenerator : CityGenerator
         CityBlockGenerator blockGen = gn.GetComponent<CityBlockGenerator>();
         if(blockGen)
         {
-            blockGen.blockNode = parentNode;
+            blockGen.districtNode = parentNode;
             blockGen.Dimensions = MinLotSize;
             blockGen.terrain = terrain;
             blockGen.Setup();

@@ -1,32 +1,37 @@
-﻿using System.Collections;
+﻿// Shane McDermott 2018
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomQueue<T>
+namespace Framework.Containers
 {
-    protected List<T> contents = new List<T>();
-
-    public void Push(T item)
+    public class RandomQueue<T>
     {
-        contents.Add(item);
-    }
+        protected List<T> contents = new List<T>();
 
-    public T Pop()
-    {
-        int index = Random.Range(0, contents.Count);
-        T t= contents[index];
-        contents.RemoveAt(index);
-        return t;
-    }
+        public void Push(T item)
+        {
+            contents.Add(item);
+        }
 
-    public int Count()
-    {
-        return contents.Count;
-    }
+        public T Pop()
+        {
+            int index = Random.Range(0, contents.Count);
+            T t = contents[index];
+            contents.RemoveAt(index);
+            return t;
+        }
 
-    public bool Empty()
-    {
-        return contents.Count == 0;
-    }
+        public int Count()
+        {
+            return contents.Count;
+        }
 
+        public bool Empty()
+        {
+            return contents.Count == 0;
+        }
+
+    }
 }

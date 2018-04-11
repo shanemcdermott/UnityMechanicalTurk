@@ -1,10 +1,11 @@
-﻿using System;
+﻿//Algorithm from http://devmag.org.za/2009/05/03/poisson-disk-sampling/
+// Shane McDermott 2018
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-//Algorithm from http://devmag.org.za/2009/05/03/poisson-disk-sampling/
-// Shane McDermott 2018
+using Framework.Containers;
 
 public class PoissonDiskSampling : PointGenerator
 {
