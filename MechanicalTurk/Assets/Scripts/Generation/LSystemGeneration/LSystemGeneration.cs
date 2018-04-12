@@ -11,8 +11,8 @@ public class LSystemGeneration : CityGenerator
     private string axiom;
     private float angle;
     private string currString;
-    private float length = 2f;
-    private int iterations;
+    public int length;
+    public int iterations;
     private List<Vector3> roads = new List<Vector3>();
     private Stack<TransformInfo> transformStack = new Stack<TransformInfo>();
     private Dictionary<Vector2Int, Vector2Int[]> roadGrid = new Dictionary<Vector2Int, Vector2Int[]>();
@@ -25,7 +25,6 @@ public class LSystemGeneration : CityGenerator
     {
         
         GenerateRoadGrid();
-        PopulateRoadTexture();
         ApplyRoadToTerrain();
         //GenerateBuildings();
     }
@@ -56,14 +55,17 @@ public class LSystemGeneration : CityGenerator
         List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
         foreach( Vector2Int node in vertices)
         {
-            Vector2Int[] connections = new Vector2Int[4];
+            Vector2Int[] connections = new Vector2Int[4] { new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue)};
             if (roadGrid.TryGetValue(node, out connections))
             {
                 int i = 0;
                 int count = 0;
                 foreach (Vector2Int edge in connections)
                 {
-                    if (edge == Vector2Int.zero)
+                    if (edge == new Vector2Int(int.MaxValue,int.MaxValue))
                     {
                         //Debug.Log("Connection node of node (" + node.x + ", "+node.y + ") is zero!");
 
@@ -117,33 +119,17 @@ public class LSystemGeneration : CityGenerator
             return true;
     }
 
-    private void PopulateRoadTexture()
-    {
-        roadTexture = new Texture2D(terrainGenerator.terrain.terrainData.heightmapWidth, terrainGenerator.terrain.terrainData.heightmapHeight);
-
-        Color color = Color.black;
-        List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
-
-        foreach (Vector2Int node in vertices)
-        {
-            Vector2Int v2 = node;
-            roadTexture.SetPixel((int)v2.x, (int)v2.y, color);
-        }
-
-        roadTexture.Apply();
-    }
-
     private void GenerateRoadGrid()
     {
         seed = GameObject.Find("GenController").GetComponent<GenerationController>().Seed;
         UnityEngine.Random.InitState(seed);
+        transform.position = new Vector3(terrainGenerator.terrain.terrainData.alphamapWidth / 4, 0f, terrainGenerator.terrain.terrainData.alphamapHeight / 4);
         rules.Clear();
         //*****RULES************
         //Random character '!' : random event (-,+,delete last command, or nothing)
         rules.Add('X', "X+Y!F+");
         rules.Add('Y', "-F!X-Y");
         angle = 90f;
-        iterations = 12;
         axiom = "FX";
 
         roads.Clear();
