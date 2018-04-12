@@ -19,6 +19,7 @@ public class LSystemGeneration : CityGenerator
     private Dictionary<char, string> rules = new Dictionary<char, string>();
     private Vector2Int prev, curr;
     private Texture2D roadTexture;
+    private float[,,] alphamaps;
 
 
     public override void Generate()
@@ -40,7 +41,7 @@ public class LSystemGeneration : CityGenerator
             textures[i].texture = tilingTextures[i - 1];
             textures[i].tileSize = Vector2Int.one;
         }
-        float[,,] alphamaps = new float[tData.alphamapWidth, tData.alphamapHeight, 16];
+        alphamaps = new float[tData.alphamapWidth, tData.alphamapHeight, 16];
         for (int x = 0; x < tData.alphamapWidth; x++) 
         {
             for (int y = 0; y < tData.alphamapHeight; y++)
@@ -62,16 +63,13 @@ public class LSystemGeneration : CityGenerator
             if (roadGrid.TryGetValue(node, out connections))
             {
                 int i = 0;
-                int count = 0;
                 foreach (Vector2Int edge in connections)
                 {
                     if (edge == new Vector2Int(int.MaxValue,int.MaxValue))
                     {
-                        //Debug.Log("Connection node of node (" + node.x + ", "+node.y + ") is zero!");
-
+                        //edge hasn't changed since initialization
                         continue;
                     }
-                    count++;
                     Vector2Int diff = edge - node;
                     if (diff.x > 0)
                         i += 4;
@@ -82,17 +80,8 @@ public class LSystemGeneration : CityGenerator
                     if (diff.y < 0)
                         i += 2;
                 }
-                Debug.Log("This iterator should be between 1-15: " + i);
-                Debug.Log("Connection Data for Vertex: x:" + (int)node.x + "  y: " + (int)node.y+
-                    " 1st connection: x:"+(int)connections[0].x+" y: "+(int)connections[0].y+
-                    " 2nd connection: x:" + (int)connections[1].x + " y: " + (int)connections[1].y +
-                    " 3rd connection: x:" + (int)connections[2].x + " y: " + (int)connections[2].y +
-                    " 4th connection: x:" + (int)connections[3].x + " y: " + (int)connections[3].y);
                 if (checkAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
                 {
-                    Debug.Log("node.y is " + node.y);
-                    Debug.Log("node.x is " + node.x);
-                    Debug.Log("i is " + i);
                     alphamaps[node.y * 2    , node.x * 2    , i] = 1;
                     alphamaps[node.y * 2 + 1, node.x * 2    , i] = 1;
                     alphamaps[node.y * 2    , node.x * 2 + 1, i] = 1;
@@ -101,7 +90,19 @@ public class LSystemGeneration : CityGenerator
                     alphamaps[node.y * 2 + 1, node.x * 2    , 0] = 0;
                     alphamaps[node.y * 2    , node.x * 2 + 1, 0] = 0;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, 0] = 0;
-                    DrawConnections(alphamaps, node, connections);
+                    DrawConnections(node, connections);
+
+                    //TODO: DrawConnections is assigning alphamap values incorrectly
+                    for (int j = 0; j < 16; j++)
+                    {
+                        if (j != i)
+                        {
+                            alphamaps[node.y * 2, node.x * 2, j] = 0;
+                            alphamaps[node.y * 2 + 1, node.x * 2, j] = 0;
+                            alphamaps[node.y * 2, node.x * 2 + 1, j] = 0;
+                            alphamaps[node.y * 2 + 1, node.x * 2 + 1, j] = 0;
+                        }
+                    }
                 }
             }
             else
@@ -115,18 +116,18 @@ public class LSystemGeneration : CityGenerator
         terrainGenerator.terrain.terrainData.SetAlphamaps(0, 0, alphamaps);
     }
 
-    private void DrawConnections(float[,,] alphamaps, Vector2Int node, Vector2Int[] connections)
+    private void DrawConnections( Vector2Int node, Vector2Int[] connections)
     {
         foreach(Vector2Int edge in connections)
         {
             Vector2 v = new Vector2(edge.x - node.x, edge.y - node.y);
             v.Normalize();
-            //NorthSouth road - 9
+            //NorthSouth road - 10
             //EastWest road - 5
-            int bitFlag = v.x != 0 ? 5 : 9;
-            for(int i =0; i < (int)Math.Ceiling((double)length/2f+1); i++)//Draw half the edge, other node will draw the rest if on the terrain
+            int bitFlag = v.x != 0 ? 5 : 10;
+            for(int i =1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
             {
-                Vector2Int offset = new Vector2Int((int)v.x*i, (int)v.y);
+                Vector2Int offset = new Vector2Int((int)v.x*i, (int)v.y*i);
                 if (checkAlphaMap(node + offset, new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight)))
                 {
                     alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2    , bitFlag] = 1;
@@ -165,7 +166,11 @@ public class LSystemGeneration : CityGenerator
 
         roads.Clear();
         roadGrid.Clear();
-        roadGrid.Add(new Vector2Int((int)transform.position.x,(int)transform.position.z), new Vector2Int[4]);
+        Vector2Int[] defaults = new Vector2Int[4] {new Vector2Int(int.MaxValue,int.MaxValue),
+                                                      new Vector2Int(int.MaxValue,int.MaxValue),
+                                                      new Vector2Int(int.MaxValue,int.MaxValue),
+                                                      new Vector2Int(int.MaxValue,int.MaxValue)};
+        roadGrid.Add(new Vector2Int((int)transform.position.x,(int)transform.position.z), defaults);
         roads.Add(transform.position);
 
         currString = axiom;
@@ -207,7 +212,11 @@ public class LSystemGeneration : CityGenerator
                 curr = new Vector2Int((int)transform.position.x, (int)transform.position.z);
                 if (!roadGrid.ContainsKey(curr))//dictionary does not contain new node
                 {
-                    roadGrid.Add(curr, new Vector2Int[4]);
+                    Vector2Int[] defaultConnections = new Vector2Int[4] { new Vector2Int(int.MaxValue,int.MaxValue),
+                                                                   new Vector2Int(int.MaxValue,int.MaxValue),
+                                                                   new Vector2Int(int.MaxValue,int.MaxValue),
+                                                                   new Vector2Int(int.MaxValue,int.MaxValue)};
+                    roadGrid.Add(curr, defaultConnections);
                     roads.Add(transform.position);
                 }
                 //add connection
