@@ -88,16 +88,20 @@ public class LSystemGeneration : CityGenerator
                     " 2nd connection: x:" + (int)connections[1].x + " y: " + (int)connections[1].y +
                     " 3rd connection: x:" + (int)connections[2].x + " y: " + (int)connections[2].y +
                     " 4th connection: x:" + (int)connections[3].x + " y: " + (int)connections[3].y);
-                if (checkAlphaMap(node, new Vector2Int(tData.alphamapHeight, tData.alphamapWidth)))
+                if (checkAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
                 {
-                    alphamaps[(int)node.y * 2, (int)node.x * 2, i] = 1;
-                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2, i] = 1;
-                    alphamaps[(int)node.y * 2, (int)node.x * 2 + 1, i] = 1;
-                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2 + 1, i] = 1;
-                    alphamaps[(int)node.y * 2, (int)node.x * 2, 0] = 0;
-                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2, 0] = 0;
-                    alphamaps[(int)node.y * 2, (int)node.x * 2 + 1, 0] = 0;
-                    alphamaps[(int)node.y * 2 + 1, (int)node.x * 2 + 1, 0] = 0;
+                    Debug.Log("node.y is " + node.y);
+                    Debug.Log("node.x is " + node.x);
+                    Debug.Log("i is " + i);
+                    alphamaps[node.y * 2    , node.x * 2    , i] = 1;
+                    alphamaps[node.y * 2 + 1, node.x * 2    , i] = 1;
+                    alphamaps[node.y * 2    , node.x * 2 + 1, i] = 1;
+                    alphamaps[node.y * 2 + 1, node.x * 2 + 1, i] = 1;
+                    alphamaps[node.y * 2    , node.x * 2    , 0] = 0;
+                    alphamaps[node.y * 2 + 1, node.x * 2    , 0] = 0;
+                    alphamaps[node.y * 2    , node.x * 2 + 1, 0] = 0;
+                    alphamaps[node.y * 2 + 1, node.x * 2 + 1, 0] = 0;
+                    DrawConnections(alphamaps, node, connections);
                 }
             }
             else
@@ -111,9 +115,36 @@ public class LSystemGeneration : CityGenerator
         terrainGenerator.terrain.terrainData.SetAlphamaps(0, 0, alphamaps);
     }
 
+    private void DrawConnections(float[,,] alphamaps, Vector2Int node, Vector2Int[] connections)
+    {
+        foreach(Vector2Int edge in connections)
+        {
+            Vector2 v = new Vector2(edge.x - node.x, edge.y - node.y);
+            v.Normalize();
+            //NorthSouth road - 9
+            //EastWest road - 5
+            int bitFlag = v.x != 0 ? 5 : 9;
+            for(int i =0; i < (int)Math.Ceiling((double)length/2f+1); i++)//Draw half the edge, other node will draw the rest if on the terrain
+            {
+                Vector2Int offset = new Vector2Int((int)v.x*i, (int)v.y);
+                if (checkAlphaMap(node + offset, new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight)))
+                {
+                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2    , bitFlag] = 1;
+                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2    , bitFlag] = 1;
+                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2 + 1, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2 + 1, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2    , 0] = 0;
+                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2    , 0] = 0;
+                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2 + 1, 0] = 0;
+                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2 + 1, 0] = 0;
+                }
+            }
+        }
+    }
+
     private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
     {
-        if (node.x * 2 + 1 > alphaMapDimensions.x || node.y * 2 + 1 > alphaMapDimensions.y)
+        if (node.x * 2 + 1 >= alphaMapDimensions.x || node.y * 2 + 1 >= alphaMapDimensions.y)
             return false;
         else
             return true;
