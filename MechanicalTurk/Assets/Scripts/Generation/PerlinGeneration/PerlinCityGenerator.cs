@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PerlinCityGenerator : CityGenerator {
 
+    [Header("Debugging")]
+    public GameObject testObject;
+    public bool spawnTestObjectsEnabled = false;
+
     public PolyGrid polyGrid;
 
     public int lowRoadNumber = 2;
@@ -14,20 +18,24 @@ public class PerlinCityGenerator : CityGenerator {
     public TerrainGenerator terrainGenerator;
     
     [SerializeField]
+    [Header("Buildings")]
     public NoiseGenerator buildingNoiseGenerator;
-
     public BuildingGenerator buildingGenerator;
 
+    [SerializeField]
+    [Header("Roads")]
     public RoadPainter roadPainter;
 
-    public GameObject testObject;
     private GameObject[] buildings;
 
     public override void Generate()
     {
         CleanCityGen();
         GenerateRoadGrid();
-        SpawnTestObjects();
+        if (spawnTestObjectsEnabled)
+        {
+            SpawnTestObjects();
+        }
         CreateRoadsFromGrid();
         GenerateBuildingHeightMap();
         GenerateBuildings();
@@ -108,6 +116,7 @@ public class PerlinCityGenerator : CityGenerator {
     {
         Debug.Log("PerlinCityGenerator: Generating Building heightmaps");
         buildingNoiseGenerator.Generate();
+
     }
 
     void GenerateBuildings()
@@ -128,7 +137,7 @@ public class PerlinCityGenerator : CityGenerator {
                 {
                     GameObject instance = GameObject.Instantiate(objectToSpawn, transform);
                     float height = terrainGenerator.terrain.SampleHeight(new Vector3(midpoint.x, 0, midpoint.y));
-                    instance.transform.position = new Vector3(midpoint.x, height, midpoint.y);
+                    instance.transform.localPosition = new Vector3(midpoint.x, height, midpoint.y);
                 }
             }
         }
