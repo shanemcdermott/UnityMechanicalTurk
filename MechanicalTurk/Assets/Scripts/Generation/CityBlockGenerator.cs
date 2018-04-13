@@ -6,7 +6,7 @@ using UnityEngine;
 public class CityBlockGenerator : GenerationAlgorithm
 {
 
-    public List<GameObject> LotPrefabs = new List<GameObject>();
+    public List<GameObject> blockPrefabs = new List<GameObject>();
 
     [Header("Grid Settings")]
     /*Total dimensions of the city*/
@@ -18,6 +18,8 @@ public class CityBlockGenerator : GenerationAlgorithm
     public GridNode districtNode;
     public Terrain terrain;
 
+    private GameObject cityBlock;
+
     public override bool CanGenerate()
     {
         return districtNode != null;
@@ -25,8 +27,19 @@ public class CityBlockGenerator : GenerationAlgorithm
 
     public override void Setup()
     {
-
+        cityBlock = new GameObject("CityBlock");
+        cityBlock.transform.SetParent(transform);
+        cityBlock.transform.position = transform.root.position;
         //throw new NotImplementedException();
+    }
+
+    public override void Clean()
+    {
+        base.Clean();
+        if (cityBlock != null)
+        {
+            DestroyImmediate(cityBlock);
+        }
     }
 
     public override void Generate()
@@ -54,7 +67,7 @@ public class CityBlockGenerator : GenerationAlgorithm
         foreach (GridNode child in leaves)
         {
             Vector3 v = child.GetPosition();
-            v.y = terrain.SampleHeight(v);
+            v.y = terrain.SampleHeight(v+transform.root.position);
             child.SetPosition(v);
             SpawnCityBlock(child);
         }
@@ -63,16 +76,20 @@ public class CityBlockGenerator : GenerationAlgorithm
     public virtual void SpawnCityBlock(Node parentNode)
     {
         GameObject go = GameObject.Instantiate(ChooseLotToSpawn(parentNode));
-        go.transform.SetParent(transform);
+        go.transform.SetParent(cityBlock.transform);
         GameNode gn = go.GetComponent<GameNode>();
+        if (gn == null)
+        {
+            gn = go.AddComponent<GameNode>();
+        }
         gn.SetNode(parentNode);
-        gn.SpawnBuildings();
+        //gn.SpawnBuildings();
     }
 
     public virtual GameObject ChooseLotToSpawn(Node parentNode)
     {
 
-        GameObject regionToSpawn = LotPrefabs[Random.Range(0, LotPrefabs.Count)];
+        GameObject regionToSpawn = blockPrefabs[Random.Range(0, blockPrefabs.Count)];
         return regionToSpawn;
     }
 }

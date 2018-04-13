@@ -14,7 +14,7 @@ public class CityBiomeGenerator : CityGenerator
     public Vector3 MinLotSize = new Vector3(10f, 10f, 10f);
 
     //Level of detail prefabs. Each should have a GameNode Component;
-    public GameObject[] RegionPrefabs = new GameObject[3];
+    public GameObject[] DistrictPrefabs = new GameObject[3];
     public float chanceToPersist = 0.66f;
     public int[] spawnWeights = new int[10] { 1, 0, 0, 0,
                                                 1, 1, 1,
@@ -27,6 +27,12 @@ public class CityBiomeGenerator : CityGenerator
     {
         base.Setup();
         roadPainter.Setup();
+    }
+
+    public override void Clean()
+    {
+        base.Clean();
+
     }
 
     public override void Generate()
@@ -85,11 +91,11 @@ public class CityBiomeGenerator : CityGenerator
     public virtual GameObject ChooseRegionToSpawn(Node parentNode)
     {
         int i = Random.Range(0, spawnWeights.Length);
-        GameObject regionToSpawn = RegionPrefabs[spawnWeights[i]];
+        GameObject regionToSpawn = DistrictPrefabs[spawnWeights[i]];
 
         if (Random.value > chanceToPersist)
         {
-            spawnWeights[i] = Random.Range(0, RegionPrefabs.Length);
+            spawnWeights[i] = Random.Range(0, DistrictPrefabs.Length);
         }
         return regionToSpawn;
     }

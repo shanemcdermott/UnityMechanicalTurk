@@ -12,7 +12,7 @@ public class GameNode : MonoBehaviour
     public void SetNode(Node node)
     {
         this.node = node;
-        transform.position = node.GetPosition();
+        transform.localPosition = node.GetPosition();
 //        Vector3 pos = node.GetPosition();
 //       transform.position = new Vector3(pos.x, 0, pos.y);
     }

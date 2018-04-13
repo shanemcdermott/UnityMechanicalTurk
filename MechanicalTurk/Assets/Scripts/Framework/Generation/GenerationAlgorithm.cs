@@ -43,6 +43,13 @@ public abstract class GenerationAlgorithm : MonoBehaviour
 
     public abstract void Generate();
 
+    /// <summary>
+    /// Clears the results of a previous generation.
+    /// </summary>
+    public virtual void Clean()
+    {
+        
+    }
 
     void OnDisable()
     {
