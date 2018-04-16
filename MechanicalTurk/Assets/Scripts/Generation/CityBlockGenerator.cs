@@ -22,7 +22,7 @@ public class CityBlockGenerator : GenerationAlgorithm
 
     public override bool CanGenerate()
     {
-        return districtNode != null;
+        return districtNode != null && terrain != null;
     }
 
     public override void Setup()
@@ -30,6 +30,10 @@ public class CityBlockGenerator : GenerationAlgorithm
         cityBlock = new GameObject("CityBlock");
         cityBlock.transform.SetParent(transform);
         cityBlock.transform.position = transform.root.position;
+        if (districtNode == null)
+        {
+            CreateGrid();
+        }
         //throw new NotImplementedException();
     }
 
@@ -40,16 +44,24 @@ public class CityBlockGenerator : GenerationAlgorithm
         {
             DestroyImmediate(cityBlock);
         }
+        districtNode = null;
     }
 
     public override void Generate()
     {
-        FinishSubdivision();
+        SubdivideGrid();
         PopulateBlocks();
-        //throw new NotImplementedException();
     }
 
-    public virtual void FinishSubdivision()
+    public virtual void CreateGrid()
+    {
+        GridFaceFactory<GridNode> gFac = new GridFaceFactory<GridNode>();
+        /*Also used as the center for the root node*/
+        Vector3 lotSize = Dimensions * 0.5f;
+        districtNode = gFac.GetSquareNode(lotSize, Dimensions);
+    }
+
+    public virtual void SubdivideGrid()
     {
         Vector3 lotSize = Dimensions * 0.5f;
         /*Split the grid in half until the desired leaf size is achieved*/
@@ -73,20 +85,26 @@ public class CityBlockGenerator : GenerationAlgorithm
         }
     }
 
-    public virtual void SpawnCityBlock(Node parentNode)
+    public virtual void SpawnCityBlock(GridNode parentNode)
     {
-        GameObject go = GameObject.Instantiate(ChooseLotToSpawn(parentNode));
+        GameObject go = GameObject.Instantiate(ChooseDistrictToSpawn(parentNode));
         go.transform.SetParent(cityBlock.transform);
-        GameNode gn = go.GetComponent<GameNode>();
-        if (gn == null)
+        go.transform.localPosition = parentNode.GetPosition();
+        CityBlockGenerator blockGen = go.GetComponent<CityBlockGenerator>();
+        if (blockGen)
         {
-            gn = go.AddComponent<GameNode>();
+            blockGen.districtNode = parentNode;
+            blockGen.Dimensions = MinLotSize;
+            blockGen.terrain = terrain;
+            blockGen.Setup();
+            if (blockGen.CanGenerate())
+            {
+                blockGen.Generate();
+            }
         }
-        gn.SetNode(parentNode);
-        //gn.SpawnBuildings();
     }
 
-    public virtual GameObject ChooseLotToSpawn(Node parentNode)
+    public virtual GameObject ChooseDistrictToSpawn(Node parentNode)
     {
 
         GameObject regionToSpawn = blockPrefabs[Random.Range(0, blockPrefabs.Count)];

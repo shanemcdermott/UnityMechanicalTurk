@@ -54,67 +54,82 @@ public class GridNode : GridFace
 
     public virtual void Subdivide(float blend)
     {
-        if(children!=null)
+        if(!SubdivideChildren(blend))
         {
-            for(int x=0;x<NUM_CHILDREN;x++)
-            {
-                children[x].Subdivide(blend);
-            }
+            SubdivideSelf(blend);
         }
-        else
+    }
+
+
+    /// <summary>
+    /// Attempts to subidivide children. If Children are null, returns false.
+    /// </summary>
+    /// <param name="blend">Midpoint lerp weight</param>
+    /// <returns>tTrue if successful.</returns>
+    protected virtual bool SubdivideChildren(float blend)
+    {
+        if (children == null) return false;
+
+        for (int x = 0; x < NUM_CHILDREN; x++)
         {
-            //Currently only works with squares
-            children = new GridNode[NUM_CHILDREN];
-            for(int x=0;x<NUM_CHILDREN;x++)
-            {
-                    children[x] = new GridNode();
-                    children[x].position = Vector3.Lerp(position, vertices[x].GetPosition(), blend);
-            }
-            
-            Node center = new Node(position);
-            Node bottomMid = Node.Split(vertices[0],vertices[1]);
-            bottomMid.AddConnection(center);
-            Node leftMid = Node.Split(vertices[0], vertices[2]);
-            leftMid.AddConnection(center);
-            Node rightMid = Node.Split(vertices[1], vertices[3]);
-            rightMid.AddConnection(center);
-            Node topMid = Node.Split(vertices[2], vertices[3]);
-            topMid.AddConnection(center);
-            int i = 0;
-            children[i].AddVertices(new Node[NUM_CHILDREN]{
+            children[x].Subdivide(blend);
+        }
+
+        return true;
+    }
+
+    protected virtual void SubdivideSelf(float blend)
+    {
+        //Currently only works with squares
+        children = new GridNode[NUM_CHILDREN];
+        for (int x = 0; x < NUM_CHILDREN; x++)
+        {
+            children[x] = new GridNode();
+            children[x].position = Vector3.Lerp(position, vertices[x].GetPosition(), blend);
+        }
+
+        Node center = new Node(position);
+        Node bottomMid = Node.Split(vertices[0], vertices[1]);
+        bottomMid.AddConnection(center);
+        Node leftMid = Node.Split(vertices[0], vertices[2]);
+        leftMid.AddConnection(center);
+        Node rightMid = Node.Split(vertices[1], vertices[3]);
+        rightMid.AddConnection(center);
+        Node topMid = Node.Split(vertices[2], vertices[3]);
+        topMid.AddConnection(center);
+        int i = 0;
+        children[i].AddVertices(new Node[NUM_CHILDREN]{
                 vertices[i],
                 bottomMid,
                 leftMid,
                 center
             });
-            children[i].ConnectVertices();
-            i++;
-            children[i].AddVertices(new Node[NUM_CHILDREN]{
+        children[i].ConnectVertices();
+        i++;
+        children[i].AddVertices(new Node[NUM_CHILDREN]{
                 bottomMid,
                 vertices[i],
                 center,
                 rightMid
             });
-            children[i].ConnectVertices();
-            i++;
-            children[i].AddVertices(new Node[NUM_CHILDREN]{
+        children[i].ConnectVertices();
+        i++;
+        children[i].AddVertices(new Node[NUM_CHILDREN]{
                 leftMid,
                 center,
                 vertices[i],
                 topMid
-            });     
-            children[i].ConnectVertices();
-            i++;  
-            children[i].AddVertices(new Node[NUM_CHILDREN]{
+            });
+        children[i].ConnectVertices();
+        i++;
+        children[i].AddVertices(new Node[NUM_CHILDREN]{
                 center,
                 rightMid,
                 topMid,
                 vertices[i]
-            }); 
-            children[i].ConnectVertices();
-        }
+            });
+        children[i].ConnectVertices();
     }
-
 
     public bool IsLeaf()
     {

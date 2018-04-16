@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1181238431320972}
+  m_IsPrefabParent: 1
+--- !u!1 &1181238431320972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4375526068574806}
+  - component: {fileID: 114059321937324660}
+  m_Layer: 0
+  m_Name: IndustrialBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4375526068574806
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181238431320972}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114059321937324660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181238431320972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a387e841cdcc149b55b283638f4ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  blockPrefabs:
+  - {fileID: 1455929282474896, guid: ede5b1771ac52ad4085fa3fc4c4022d9, type: 2}
+  - {fileID: 1936391880877980, guid: 0b965407c0b55de45ae7a25676b7e676, type: 2}
+  - {fileID: 1671206806833870, guid: 8a99301d43442764c861ff6d0a8202f3, type: 2}
+  - {fileID: 1009636429396040, guid: 061c7ad5cc7065c4faa9bd56a50bc830, type: 2}
+  - {fileID: 1151769339744704, guid: c6c6987fc37db954eb88f3636eaaf08b, type: 2}
+  - {fileID: 1085547114290564, guid: ac453c0c4983bf048b42cfdf41f868e4, type: 2}
+  - {fileID: 1047916958126044, guid: cbfa309cdae8f8f4e8c35f4c4bcb8297, type: 2}
+  - {fileID: 1058479197094748, guid: 74d9a8e5e1d7a5f40be3f440532e9206, type: 2}
+  - {fileID: 1786992787714282, guid: 0e4b03e49977b664bb8ea425693c6deb, type: 2}
+  Dimensions: {x: 256, y: 0, z: 256}
+  MinLotSize: {x: 8, y: 8, z: 8}
+  terrain: {fileID: 0}
