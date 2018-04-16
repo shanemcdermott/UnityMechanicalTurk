@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PerlinCityGenerator : CityGenerator {
-    public GameObject gameNode;
-	public Texture2D roadHorizontal;
-    public Texture2D roadVertical;
 
-    private Texture2D roadTexture;
+    public PolyGrid polyGrid;
 
     public int lowRoadNumber = 2;
     public int highRoadNumber = 4;
@@ -15,196 +12,148 @@ public class PerlinCityGenerator : CityGenerator {
     public Vector2Int facesPerSide;
     
     public TerrainGenerator terrainGenerator;
-
-    public GameObject testPlane;
     
-    public List<GameObject> spawnedGameNodes;
+    [SerializeField]
+    public NoiseGenerator buildingNoiseGenerator;
 
-    private PerlinOctaves perlinBuildingGeneration;
-    private NoiseMap buildingNoiseMap;
+    public BuildingGenerator buildingGenerator;
+
+    public RoadPainter roadPainter;
+
+    public GameObject testObject;
+    private GameObject[] buildings;
 
     public override void Generate()
     {
+        CleanCityGen();
         GenerateRoadGrid();
-        PopulateRoadTexture();
-        ApplyRoadToTerrain();
+        SpawnTestObjects();
+        CreateRoadsFromGrid();
+        GenerateBuildingHeightMap();
         GenerateBuildings();
     }
 
-    void GenerateRoadGrid()
+    void CleanCityGen()
     {
-        for(int i = transform.childCount-1; i >= 0; i--)
+        Debug.Log("PerlinCityGenerator: Cleaning city");
+        for (int i = transform.childCount - 1; i >= 0; i--)
         {
             Transform child = transform.GetChild(i);
             DestroyImmediate(child.gameObject);
         }
-        
+
         if (polyGrid.NumFaces() != 0)
         {
             polyGrid.Clean();
         }
-        
-        polyGrid.FacesPerSide = new Vector2Int(facesPerSide.x, facesPerSide.y);
-        Debug.Log("PerlinCityGenerator: Populating perlin road grid");
-        GridFactory.GeneratePerlinGrid(ref polyGrid, lowRoadNumber, highRoadNumber);
-        
     }
 
-    void PopulateRoadTexture()
+    void GenerateRoadGrid()
     {
-        Debug.Log("PerlinCityGenerator: Populating Road Texture");
-        roadTexture = new Texture2D(terrainGenerator.terrain.terrainData.heightmapWidth, terrainGenerator.terrain.terrainData.heightmapHeight);
+        Debug.Log("PerlinCityGenerator: Populating perlin road grid");
+        polyGrid.FacesPerSide = new Vector2Int(facesPerSide.x, facesPerSide.y);
+        GridFactory.GeneratePerlinGrid(ref polyGrid, lowRoadNumber, highRoadNumber);
+    }
 
+    private void SpawnTestObjects()
+    {
+        Debug.Log("PerlinCityGenerator: Spawning test objects");
+        foreach (GridFace face in polyGrid.GetFaces()){
+            //GameObject test = GameObject.Instantiate(testObject, transform);
+            //test.transform.position = face.GetPosition();
+            foreach (Node vert in face.GetVertices())
+            {
+                GameObject test = GameObject.Instantiate(testObject, transform);
+                test.transform.position = vert.GetPosition();
+            }
+        }
+    }
+
+    public virtual void CreateRoadsFromGrid()
+    {
+        Debug.Log("PerlinCityGenerator: Creating roads from grid");
         List<Node> vertices = polyGrid.GetVertices();
         List<GridFace> faces = polyGrid.GetFaces();
+
+        Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
         
         //draw connections between verts
-        foreach(Node node in vertices)
+        foreach (Node node in vertices)
         {
-            //if the value is true, it is horizontal, and should be red, vertical = green
-            Dictionary<Vector2Int, bool> connectionPoints = node.GiveConnectionLines();
-            foreach (KeyValuePair<Vector2Int,bool> kvp in connectionPoints)
-            {
-                if(kvp.Value == true)
-                {
-                    roadTexture.SetPixel(kvp.Key.x, kvp.Key.y, Color.red);
-                }
-                else
-                {
-                    roadTexture.SetPixel(kvp.Key.x, kvp.Key.y, Color.blue);
-                }
-                
-            }
+            node.GetConnectionLines(ref connectionPoints);
         }
 
         //draw connections between face verts
-        for(int i = 0; i < faces.Count;i++)
+        for (int i = 0; i < faces.Count; i++)
         {
-            Dictionary<Vector2Int, bool> connectionPoints = new Dictionary<Vector2Int, bool>();
-            CombineWith(connectionPoints, faces[i].GetConnectionLine(faces[i].GetVertex(0).GetPosition(), faces[i].GetVertex(1).GetPosition()));
-            CombineWith(connectionPoints, faces[i].GetConnectionLine(faces[i].GetVertex(0).GetPosition(), faces[i].GetVertex(2).GetPosition()));
-            CombineWith(connectionPoints, faces[i].GetConnectionLine(faces[i].GetVertex(2).GetPosition(), faces[i].GetVertex(3).GetPosition()));
-            CombineWith(connectionPoints, faces[i].GetConnectionLine(faces[i].GetVertex(1).GetPosition(), faces[i].GetVertex(3).GetPosition()));
+            int a = Random.value > 0.5f ? 0 : 3;
+            int b = Random.value > 0.5f ? 1 : 2; 
 
-            foreach (KeyValuePair<Vector2Int,bool> kvp in connectionPoints)
+            Vector3 midPoint = MathOps.Midpoint(faces[i].GetVertex(a).GetPosition(), faces[i].GetVertex(b).GetPosition());
+            //TODO Check if there is a building here before drawing
+            //faces[i].GetConnectionLine(ref connectionPoints, faces[i].GetPosition(), midPoint);
+
+            List<Node> verts = faces[i].GetVertices();
+            foreach (Node node in verts)
             {
-                if(kvp.Value == true)
-                {
-                    roadTexture.SetPixel(kvp.Key.x, kvp.Key.y, Color.red);
-                }
-                else
-                {
-                    roadTexture.SetPixel(kvp.Key.x, kvp.Key.y, Color.blue);
-                }
-                
+                node.GetConnectionLines(ref connectionPoints);
             }
         }
 
-        roadTexture.Apply();
-
-        Material planeMat = testPlane.GetComponent<Renderer>().sharedMaterial;
-        planeMat.mainTexture = roadTexture;
+        roadPainter.DrawRoads(ref connectionPoints);
+        roadPainter.ApplyAlphaBlend();
     }
 
-    void CombineWith(Dictionary<Vector2Int, bool> dict, Dictionary<Vector2Int, bool> dictToAdd)
+    void GenerateBuildingHeightMap()
     {
-        foreach (KeyValuePair<Vector2Int, bool> kvp in dictToAdd)
-        {
-            bool value;
-            if (!dict.TryGetValue(kvp.Key, out value))
-            {
-                dict.Add(kvp.Key, kvp.Value);
-            }
-        }
-    }
-
-    void ApplyRoadToTerrain()
-    {
-        Debug.Log("PerlinCityGenerator: Applying Road Texture to terrain");
-        TerrainData tData = terrainGenerator.terrain.terrainData;
-        SplatPrototype[] textures = new SplatPrototype[3];
-
-        textures[0] = tData.splatPrototypes[0];
-
-        textures[1] = new SplatPrototype();
-        textures[1].texture = roadHorizontal;
-		textures[1].tileSize = new Vector2Int(1,1);
-
-        textures[2] = new SplatPrototype();
-        textures[2].texture = roadVertical;
-        textures[2].tileSize = new Vector2Int(1, 1);
-
-        float[,,] alphamaps = new float[tData.alphamapWidth, tData.alphamapHeight, 3];
-
-        for (int y = 0; y < tData.alphamapHeight; y++)
-        { 
-            for (int x = 0; x < tData.alphamapWidth; x++)
-            {
-                //check if the road is at this x/y (normalized), if so, alpha=1, else alpha=0
-                Color color = roadTexture.GetPixel(x / 2, y / 2);
-                
-                if(color.b == 1){
-                    alphamaps[y, x, 0] = 0;
-                    alphamaps[y, x, 1] = 1;
-                    alphamaps[y, x, 2] = 0;
-                }
-                else if(color.r == 1)
-                {
-                    alphamaps[y, x, 0] = 0;
-                    alphamaps[y, x, 1] = 0;
-                    alphamaps[y, x, 2] = 1;
-                }
-                else
-                {
-                    alphamaps[y, x, 0] = 1;
-                    alphamaps[y, x, 1] = 0;
-                    alphamaps[y, x, 2] = 0;
-                }
-            }
-        }
-        terrainGenerator.terrain.terrainData.splatPrototypes = textures;
-        terrainGenerator.terrain.terrainData.SetAlphamaps(0, 0, alphamaps);
+        Debug.Log("PerlinCityGenerator: Generating Building heightmaps");
+        buildingNoiseGenerator.Generate();
     }
 
     void GenerateBuildings()
     {
-        GenerateBuildingHeightMap();
-
+        Debug.Log("PerlinCityGenerator: Generating Buildings");
         List<GridFace> faces = polyGrid.GetFaces();
         foreach(GridFace face in faces)
         {
-            List<Vector3> vertices = face.GetVertexPositions();
+            Vector2 bottomLeft = face.GetVertex(0).GetPositionXZ();
+            Vector2 midpoint = face.GetPositionXZ();
+
+            Vector2 faceSize = new Vector2((midpoint.x - bottomLeft.x) * 2, (midpoint.y - bottomLeft.y) * 2);
+            
+            if (CheckSlope(midpoint))
+            {
+                GameObject objectToSpawn = buildingGenerator.GetBuilding(midpoint, faceSize);
+                if (objectToSpawn != null)
+                {
+                    GameObject instance = GameObject.Instantiate(objectToSpawn, transform);
+                    float height = terrainGenerator.terrain.SampleHeight(new Vector3(midpoint.x, 0, midpoint.y));
+                    instance.transform.position = new Vector3(midpoint.x, height, midpoint.y);
+                }
+            }
+        }
+    }
+
+    bool CheckSlope(Vector2 point)
+    {
+        TerrainData terrainData = terrainGenerator.terrain.terrainData;
+        Vector2 normalizedPoint = new Vector2(point.x / terrainData.size.x, point.y / terrainData.size.z);
+        float steepness = terrainData.GetSteepness(normalizedPoint.x, normalizedPoint.y);
+        if(steepness < 20)
+        {
+            return true;
         }
 
-        //go through roadtexture faces to find spots
-            //foreach gridface
-                //check size (add box collider to building, check x & z)
-                //check slope (xz and yz < .4)
-
-            //foreach valid spot
-                //spawn a building based on perlin
+        return false;
     }
     
-    void GenerateBuildingHeightMap()
-    {
-        perlinBuildingGeneration = GetComponent<PerlinOctaves>();
-        float[,] buildingHeightMap = perlinBuildingGeneration.GenerateHeightMap(heightMap.Dimensions.x, heightMap.Dimensions.y);
-        buildingNoiseMap.Values = buildingHeightMap;
-    }
-
     public override void Setup()
     {
         polyGrid.Dimensions = heightMap.Dimensions;
-        polyGrid.FacesPerSide = new Vector2Int(2, 2);
-    }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        roadPainter.Setup();
+
+        buildingNoiseGenerator.Setup();
+        buildingGenerator.Setup();
+    }
 }
