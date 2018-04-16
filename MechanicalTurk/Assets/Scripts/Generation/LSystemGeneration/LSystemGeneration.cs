@@ -6,6 +6,7 @@ using UnityEngine;
 public class LSystemGeneration : CityGenerator
 {
     public TerrainGenerator terrainGenerator;
+    public BuildingGenerator buildingGenerator;
     public Texture2D[] tilingTextures;
     private int seed;
     private string axiom;
@@ -25,7 +26,7 @@ public class LSystemGeneration : CityGenerator
 
     public override void Generate()
     {
-        
+
         GenerateRoadGrid();
         ApplyRoadToTerrain();
         GenerateBuildings();
@@ -33,6 +34,7 @@ public class LSystemGeneration : CityGenerator
 
     private void GenerateBuildings()
     {
+        clearBuildings();
         //get road intersections
         List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
         foreach (Vector2Int node in vertices)
@@ -107,13 +109,31 @@ public class LSystemGeneration : CityGenerator
         }
     }
 
+    private void clearBuildings()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = transform.GetChild(i);
+            DestroyImmediate(child.gameObject);
+        }
+    }
+
     private void addBuilding(Vector2Int loc)
     {
-        if(!buildings.ContainsKey(loc))//Don't have key, add loc
+        if (!buildings.ContainsKey(loc))//Don't have key, add loc
         {
             //building picker
-
-            buildings.Add(loc, null);
+            //need to check face size
+            GameObject go = buildingGenerator.GetBuilding(loc, new Vector2(100, 100));
+            if (go != null)
+            {
+                GameObject instance = GameObject.Instantiate(go, transform);
+                float height = terrainGenerator.terrain.SampleHeight(new Vector3(loc.x, 0, loc.y));
+                instance.transform.position = new Vector3(loc.x, height, loc.y);
+            }
+            //make buildings smaller to proportionally match the roads
+            go.transform.localScale = new Vector3(.5f, .5f, .5f);
+            buildings.Add(loc, go);
         }
     }
 
@@ -122,14 +142,14 @@ public class LSystemGeneration : CityGenerator
         TerrainData tData = terrainGenerator.terrain.terrainData;
         SplatPrototype[] textures = new SplatPrototype[16];
         textures[0] = tData.splatPrototypes[0];
-        for(int i = 1; i < 16; i++)
+        for (int i = 1; i < 16; i++)
         {
             textures[i] = new SplatPrototype();
             textures[i].texture = tilingTextures[i - 1];
             textures[i].tileSize = Vector2Int.one;
         }
         alphamaps = new float[tData.alphamapWidth, tData.alphamapHeight, 16];
-        for (int x = 0; x < tData.alphamapWidth; x++) 
+        for (int x = 0; x < tData.alphamapWidth; x++)
         {
             for (int y = 0; y < tData.alphamapHeight; y++)
             {
@@ -141,7 +161,7 @@ public class LSystemGeneration : CityGenerator
             }
         }
         List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
-        foreach( Vector2Int node in vertices)
+        foreach (Vector2Int node in vertices)
         {
             Vector2Int[] connections = new Vector2Int[4] { new Vector2Int(int.MaxValue,int.MaxValue),
                                                            new Vector2Int(int.MaxValue,int.MaxValue),
@@ -152,7 +172,7 @@ public class LSystemGeneration : CityGenerator
                 int i = 0;
                 foreach (Vector2Int edge in connections)
                 {
-                    if (edge == new Vector2Int(int.MaxValue,int.MaxValue))
+                    if (edge == new Vector2Int(int.MaxValue, int.MaxValue))
                     {
                         //edge hasn't changed since initialization
                         continue;
@@ -169,13 +189,13 @@ public class LSystemGeneration : CityGenerator
                 }
                 if (checkAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
                 {
-                    alphamaps[node.y * 2    , node.x * 2    , i] = 1;
-                    alphamaps[node.y * 2 + 1, node.x * 2    , i] = 1;
-                    alphamaps[node.y * 2    , node.x * 2 + 1, i] = 1;
+                    alphamaps[node.y * 2, node.x * 2, i] = 1;
+                    alphamaps[node.y * 2 + 1, node.x * 2, i] = 1;
+                    alphamaps[node.y * 2, node.x * 2 + 1, i] = 1;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, i] = 1;
-                    alphamaps[node.y * 2    , node.x * 2    , 0] = 0;
-                    alphamaps[node.y * 2 + 1, node.x * 2    , 0] = 0;
-                    alphamaps[node.y * 2    , node.x * 2 + 1, 0] = 0;
+                    alphamaps[node.y * 2, node.x * 2, 0] = 0;
+                    alphamaps[node.y * 2 + 1, node.x * 2, 0] = 0;
+                    alphamaps[node.y * 2, node.x * 2 + 1, 0] = 0;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, 0] = 0;
                     DrawConnections(node, connections);
 
@@ -198,33 +218,33 @@ public class LSystemGeneration : CityGenerator
             }
         }
 
-        
+
         terrainGenerator.terrain.terrainData.splatPrototypes = textures;
         terrainGenerator.terrain.terrainData.SetAlphamaps(0, 0, alphamaps);
     }
 
-    private void DrawConnections( Vector2Int node, Vector2Int[] connections)
+    private void DrawConnections(Vector2Int node, Vector2Int[] connections)
     {
-        foreach(Vector2Int edge in connections)
+        foreach (Vector2Int edge in connections)
         {
             Vector2 v = new Vector2(edge.x - node.x, edge.y - node.y);
             v.Normalize();
             //NorthSouth road - 10
             //EastWest road - 5
             int bitFlag = v.x != 0 ? 5 : 10;
-            for(int i =1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
+            for (int i = 1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
             {
-                Vector2Int offset = new Vector2Int((int)v.x*i, (int)v.y*i);
+                Vector2Int offset = new Vector2Int((int)v.x * i, (int)v.y * i);
                 if (checkAlphaMap(node + offset, new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight)))
                 {
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2    , bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2    , bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2 + 1, bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2 + 1, bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2    , 0] = 0;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2    , 0] = 0;
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2 + 1, 0] = 0;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2 + 1, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2 + 1, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2 + 1, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2 + 1, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2 + 1, 0] = 0;
                 }
             }
         }
@@ -257,11 +277,11 @@ public class LSystemGeneration : CityGenerator
                                                       new Vector2Int(int.MaxValue,int.MaxValue),
                                                       new Vector2Int(int.MaxValue,int.MaxValue),
                                                       new Vector2Int(int.MaxValue,int.MaxValue)};
-        roadGrid.Add(new Vector2Int((int)transform.position.x,(int)transform.position.z), defaults);
+        roadGrid.Add(new Vector2Int((int)transform.position.x, (int)transform.position.z), defaults);
         roads.Add(transform.position);
 
         currString = axiom;
-        for(int i =0; i < iterations; i++)
+        for (int i = 0; i < iterations; i++)
         {
             GenerateIteration();
         }
@@ -320,7 +340,7 @@ public class LSystemGeneration : CityGenerator
                     {
                         CurrConnections[3] = prev;
                         PrevConnections[1] = curr;
-                    }  
+                    }
                     if (diff.x < 0)//node curr is west of node prev
                     {
                         CurrConnections[1] = prev;
@@ -370,17 +390,17 @@ public class LSystemGeneration : CityGenerator
             else if (currentCharacter == '!')//Insert Random Command
             {
                 float num = UnityEngine.Random.value;
-                if(num < 0.1f)//Turn left
+                if (num < 0.1f)//Turn left
                 {
                     stringCharacters.SetValue('-', i);
                     i--;
                 }
-                else if( num < 0.2f)//Turn right
+                else if (num < 0.2f)//Turn right
                 {
                     stringCharacters.SetValue('+', i);
                     i--;
                 }
-                else if(num < 0.3f)//Do nothing
+                else if (num < 0.3f)//Do nothing
                 {
                     stringCharacters.SetValue('n', i);
                 }
