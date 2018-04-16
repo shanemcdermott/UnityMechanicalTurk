@@ -5,8 +5,8 @@ using UnityEngine;
 public class PolyGrid : MonoBehaviour
 {
     //Spawn Parameters
-    public Vector2 Dimensions;
-    public Vector2Int FacesPerSide;
+    public Vector2 Dimensions = new Vector2Int(256,256);
+    public Vector2Int FacesPerSide = new Vector2Int(2,2);
 
 
     [SerializeField]

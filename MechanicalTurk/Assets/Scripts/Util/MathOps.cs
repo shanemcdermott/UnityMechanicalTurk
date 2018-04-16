@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class MathOps {
 
-
+    public static Vector3 Midpoint(Vector3 A, Vector3 B)
+    {
+        return (A+B) * 0.5f;
+    }
     public static Vector2 Midpoint(Vector2 A, Vector2 B)
     {
         return (A + B) * 0.5f;

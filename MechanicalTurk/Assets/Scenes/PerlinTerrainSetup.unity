@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.45127076, g: 0.5000904, b: 0.5687064, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.45127046, g: 0.5000895, b: 0.5687059, a: 1}
+>>>>>>> master
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -171,6 +175,8 @@ GameObject:
   - component: {fileID: 449122493}
   - component: {fileID: 449122495}
   - component: {fileID: 449122494}
+  - component: {fileID: 449122497}
+  - component: {fileID: 449122496}
   m_Layer: 0
   m_Name: CityGen
   m_TagString: Untagged
@@ -223,13 +229,49 @@ MonoBehaviour:
   heightMap: {fileID: 876539227}
   polyGrid: {fileID: 449122494}
   gameNode: {fileID: 1011579487013642, guid: dfb094f0359494445886c32d95191bf2, type: 2}
-  tilingTexture: {fileID: 2800000, guid: c508b88e5ea5eb64cb980ffca6ba632e, type: 3}
-  lowRoadNumber: 5
-  highRoadNumber: 10
+  roadHorizontal: {fileID: 2800000, guid: 2e2229bc0ca1a8c4da75c0225af23c28, type: 3}
+  roadVertical: {fileID: 2800000, guid: 15927896fc6c01b498cd9f2cb0ac9abf, type: 3}
+  lowRoadNumber: 4
+  highRoadNumber: 8
   facesPerSide: {x: 4, y: 4}
   terrainGenerator: {fileID: 876539225}
   testPlane: {fileID: 1390429355}
   spawnedGameNodes: []
+--- !u!114 &449122496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449122492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c6c05d30d007a4ca3e342a47116077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 256
+  height: 256
+--- !u!114 &449122497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449122492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ebb84aff138c14b9b803ff78c5ecd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  noiseMap: {fileID: 876539227}
+  scale: 20
+  numOctaves: 5
+  offset: {x: 22, y: 0}
+  persistance: 0.5
+  lacunarity: 1
 --- !u!1 &827627315
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +469,10 @@ MonoBehaviour:
     height: 0.5
     colour: {r: 0.47880623, g: 0.9044118, b: 0.56979775, a: 0}
   - name: 
-    height: 0.7
+    height: 0.75
+    colour: {r: 0.08285104, g: 0.36764705, b: 0.059472308, a: 0}
+  - name: 
+    height: 0.85
     colour: {r: 0.3897059, g: 0.29516467, b: 0.12608132, a: 0}
   - name: 
     height: 1
@@ -523,7 +568,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8361772db5b074f13a47ece154898939, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
