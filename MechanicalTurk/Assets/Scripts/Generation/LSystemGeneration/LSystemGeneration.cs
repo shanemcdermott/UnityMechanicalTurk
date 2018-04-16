@@ -11,11 +11,12 @@ public class LSystemGeneration : CityGenerator
     private string axiom;
     private float angle;
     private string currString;
-    public int length;
+    private int length = 4;
     public int iterations;
     private List<Vector3> roads = new List<Vector3>();
     private Stack<TransformInfo> transformStack = new Stack<TransformInfo>();
     private Dictionary<Vector2Int, Vector2Int[]> roadGrid = new Dictionary<Vector2Int, Vector2Int[]>();
+    private Dictionary<Vector2Int, GameObject> buildings = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<char, string> rules = new Dictionary<char, string>();
     private Vector2Int prev, curr;
     private Texture2D roadTexture;
@@ -27,7 +28,93 @@ public class LSystemGeneration : CityGenerator
         
         GenerateRoadGrid();
         ApplyRoadToTerrain();
-        //GenerateBuildings();
+        GenerateBuildings();
+    }
+
+    private void GenerateBuildings()
+    {
+        //get road intersections
+        List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
+        foreach (Vector2Int node in vertices)
+        {
+            Vector2Int[] connections = new Vector2Int[4] { new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue)};
+            if (roadGrid.TryGetValue(node, out connections))
+            {
+                foreach (Vector2Int edge in connections)
+                {
+                    if (edge == new Vector2Int(int.MaxValue, int.MaxValue))
+                    {
+                        //edge hasn't changed since initialization
+                        continue;
+                    }
+                    else//connection exists and therefore so does building lots, add lot locations
+                    {
+                        //check vector difference
+                        Vector2Int loc = new Vector2Int();
+                        Vector2Int diff = edge - node;
+                        if (diff.x > 0)//east
+                        {
+                            loc = node + new Vector2Int(1, 1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(1, -1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(3, 1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(3, -1);
+                            addBuilding(loc);
+                        }
+                        if (diff.x < 0)//west
+                        {
+                            loc = node + new Vector2Int(-1, 1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(-1, -1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(-3, 1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(-3, -1);
+                            addBuilding(loc);
+                        }
+                        if (diff.y > 0)//north
+                        {
+
+                            loc = node + new Vector2Int(1, -1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(1, -3);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(-1, -1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(-1, -3);
+                            addBuilding(loc);
+                        }
+                        if (diff.y < 0)//south
+                        {
+                            loc = node + new Vector2Int(1, 1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(1, 3);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(-1, 1);
+                            addBuilding(loc);
+                            loc = node + new Vector2Int(-1, 3);
+                            addBuilding(loc);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void addBuilding(Vector2Int loc)
+    {
+        if(!buildings.ContainsKey(loc))//Don't have key, add loc
+        {
+            //building picker
+
+            buildings.Add(loc, null);
+        }
     }
 
     private void ApplyRoadToTerrain()
