@@ -1,43 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class GridNode : GridFace
 {
     const int NUM_CHILDREN = 4;
-    public GridNode[] Children
-    {
-        get { return children; }
-        set
-        {
-            if(value.Length==NUM_CHILDREN)
-            {
-                children = value;
-            }
-        }
-    }
-
     protected GridNode[] children;
-
-    public GridNode()
-    {
-        position = new Vector3();
-        vertices = new List<Node>();
-    }
-
-    public GridNode(Vector3 center, ref List<Node> verts)
-    {
-        this.position = center;
-        this.vertices = verts;
-    }
-
-
-    /*How many children this node has*/
-    public int Depth()
-    {
-        if (children == null) return 0;
-
-        return 1 + children[0].Depth();
-    }
 
     public void ConnectVertices()
     {
@@ -49,16 +15,11 @@ public class GridNode : GridFace
 
     public virtual void Subdivide()
     {
-        Subdivide(0.5f);
-    }
-
-    public virtual void Subdivide(float blend)
-    {
         if(children!=null)
         {
             for(int x=0;x<NUM_CHILDREN;x++)
             {
-                children[x].Subdivide(blend);
+                    children[x].Subdivide();
             }
         }
         else
@@ -68,7 +29,7 @@ public class GridNode : GridFace
             for(int x=0;x<NUM_CHILDREN;x++)
             {
                     children[x] = new GridNode();
-                    children[x].position = Vector3.Lerp(position, vertices[x].GetPosition(), blend);
+                    children[x].position = MathOps.Midpoint(position, vertices[x].GetPosition());
             }
             
             Node center = new Node(position);
@@ -115,47 +76,5 @@ public class GridNode : GridFace
         }
     }
 
-
-    public bool IsLeaf()
-    {
-        return children == null;
-    }
-
-    public void GetLeaves(out List<GridNode> leafNodes)
-    {
-        leafNodes = new List<GridNode>();
-        GetChildLeaves(ref leafNodes);
-    }
-
-    private void GetChildLeaves(ref List<GridNode> leafNodes)
-    {
-        if(IsLeaf())
-        {
-            leafNodes.Add(this);
-        }
-        else
-        {
-            foreach(GridNode child in children)
-            {
-                child.GetChildLeaves(ref leafNodes);
-            }
-        }
-    }
-
-    public virtual List<Node> GetChildVertices()
-    {
-        List<Node> verts = new List<Node>(vertices);
-        if (!IsLeaf())
-        {
-            List<GridNode> childLeaves = new List<GridNode>();
-            GetChildLeaves(ref childLeaves);
-            foreach(GridNode child in childLeaves)
-            {
-                verts.AddRange(child.GetVertices());
-            }
-        }
-
-        return verts;
-    }
 
 }

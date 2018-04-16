@@ -81,18 +81,19 @@ public class GridFace : Node
         return -1;
     }
 
-    public virtual void GetVertexPositions(out List<Vector3> pos)
+    public List<Vector3> GetVertexPositions()
     {
-        pos = new List<Vector3>();
+        List<Vector3> pos = new List<Vector3>();
         foreach (Node node in vertices)
         {
             pos.Add(node.GetPosition());
         }
+        return pos;
     }
 
-    public virtual List<Node> GetVertices()
+    public Node[] GetVertices()
     {
-        return vertices;
+        return vertices.ToArray();
     }
 
     protected void SwapVertices(int i, int j)

@@ -15,26 +15,6 @@ public class PolyGrid : MonoBehaviour
     [SerializeField]
 	protected List<Node> vertices = new List<Node>();
 
-    /// <summary>
-    /// Adds all Leaf nodes of a GridNode to the polygrid
-    /// </summary>
-    /// <param name="rootNode">
-    /// The root node of the grid to add
-    /// </param>
-    public void AddGridLeaves(ref GridNode rootNode)
-    {
-        List<GridNode> leaves;
-        rootNode.GetLeaves(out leaves);
-        foreach (GridNode leaf in leaves)
-        {
-            faces.Add(leaf);
-            foreach(Node vertex in leaf.GetVertices())
-            {
-                vertices.Add(vertex);
-            }
-        }
-    }
-
     public int NumFaces()
     {
         return faces.Count;
