@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915a15e98bbdd7943b857d4f1cc63f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildings: []
   Seed: 15
   terrainGenerator: {fileID: 1187632334}
   cityGenerator: {fileID: 233997507}
@@ -168,6 +169,9 @@ GameObject:
   - component: {fileID: 233997506}
   - component: {fileID: 233997507}
   - component: {fileID: 233997508}
+  - component: {fileID: 233997511}
+  - component: {fileID: 233997510}
+  - component: {fileID: 233997509}
   m_Layer: 0
   m_Name: CityGen
   m_TagString: Untagged
@@ -181,7 +185,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 233997505}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: -0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 100, y: 0, z: 52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -205,8 +209,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   heightMap: {fileID: 1187632335}
-  polyGrid: {fileID: 233997508}
   terrainGenerator: {fileID: 1187632334}
+  buildingGenerator: {fileID: 233997511}
   tilingTextures:
   - {fileID: 2800000, guid: cab27ac890cd461418804b0d7c3b6513, type: 3}
   - {fileID: 2800000, guid: f24646de0dba48142b9c09d6f8b324bc, type: 3}
@@ -223,7 +227,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 92abb77657bdd224592ff6ffa748f3d1, type: 3}
   - {fileID: 2800000, guid: 47a81fb9562617049b6ae24dc2a1c2cc, type: 3}
   - {fileID: 2800000, guid: a29cb9896e47a3141a129074134c7d7a, type: 3}
-  length: 4
+  buildnoise: {fileID: 233997509}
   iterations: 9
 --- !u!114 &233997508
 MonoBehaviour:
@@ -238,6 +242,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dimensions: {x: 256, y: 256}
   FacesPerSide: {x: 1, y: 1}
+--- !u!114 &233997509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 233997505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ebb84aff138c14b9b803ff78c5ecd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  noiseMap: {fileID: 233997510}
+  scale: 1
+  numOctaves: 5
+  offset: {x: 51.11, y: 0}
+  persistance: 0.5
+  lacunarity: 2
+--- !u!114 &233997510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 233997505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c6c05d30d007a4ca3e342a47116077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 256
+  height: 256
+--- !u!114 &233997511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 233997505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3335d155b1b54d548add1fca4d4c872b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  buildingTypes:
+  - name: d
+    height: 0
+    building: {fileID: 1858989361496882, guid: 67b26b3ebb9be504c9f8fad7377a2fee, type: 2}
+  - name: f
+    height: 0.2
+    building: {fileID: 1923519745111986, guid: 256fab3f1124ed84b91edd1b0765050e, type: 2}
+  - name: a
+    height: 0.4
+    building: {fileID: 1305018252622850, guid: 497851966ff11414cb573809c14ad0ff, type: 2}
+  - name: s
+    height: 0.6
+    building: {fileID: 1727847396293432, guid: bdc4aa0bb080df3428980ee5c3d49cce, type: 2}
+  - name: e
+    height: 0.8
+    building: {fileID: 1426875101962796, guid: 22578fac17fe4274bbc4e53666ff1532, type: 2}
+  heightMap: {fileID: 233997510}
 --- !u!1 &665245218
 GameObject:
   m_ObjectHideFlags: 0

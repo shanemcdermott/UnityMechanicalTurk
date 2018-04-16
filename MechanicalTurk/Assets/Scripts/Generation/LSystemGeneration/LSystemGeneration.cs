@@ -9,6 +9,7 @@ public class LSystemGeneration : CityGenerator
     public BuildingGenerator buildingGenerator;
     public Texture2D[] tilingTextures;
     private int seed;
+    public NoiseGenerator buildnoise;
     private string axiom;
     private float angle;
     private string currString;
@@ -23,6 +24,13 @@ public class LSystemGeneration : CityGenerator
     private Texture2D roadTexture;
     private float[,,] alphamaps;
 
+    public override void Setup()
+    {
+        base.Setup();
+        buildnoise.Setup();
+        buildnoise.Generate();
+        buildingGenerator.Setup();
+    }
 
     public override void Generate()
     {
