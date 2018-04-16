@@ -68,7 +68,8 @@ public class GraphBuilder : MonoBehaviour
     public void CreateMeshesFromFaces(Mesh mesh)
     {
 
-        List<Vector3> verts = polyGrid.GetFaces()[0].GetVertexPositions();
+        List<Vector3> verts;
+        polyGrid.GetFaces()[0].GetVertexPositions(out verts);
         //For now, assuming 4 sides
         mesh.vertices = verts.ToArray();
         foreach (Vector3 v3 in verts)
