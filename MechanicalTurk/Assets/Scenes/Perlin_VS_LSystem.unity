@@ -70917,6 +70917,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 114145791829080808, guid: 8130c1e27f9258145ba38b2df648a654,
+        type: 2}
+      propertyPath: biomeTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: a8a5199229d57574d8d3b65826f248c3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
   m_IsPrefabParent: 0

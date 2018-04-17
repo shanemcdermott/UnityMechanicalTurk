@@ -1000,9 +1000,9 @@ MonoBehaviour:
   testObject: {fileID: 0}
   spawnTestObjectsEnabled: 0
   polyGrid: {fileID: 114255495984643270}
-  lowRoadNumber: 1
-  highRoadNumber: 2
-  facesPerSide: {x: 2, y: 2}
+  lowRoadNumber: 3
+  highRoadNumber: 8
+  facesPerSide: {x: 4, y: 4}
   terrainGenerator: {fileID: 114145791829080808}
   buildingNoiseGenerator: {fileID: 114317279034803702}
   buildingGenerator: {fileID: 114008572338282392}
