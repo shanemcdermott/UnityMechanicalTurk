@@ -6,28 +6,144 @@ using UnityEngine;
 public class LSystemGeneration : CityGenerator
 {
     public TerrainGenerator terrainGenerator;
+    public BuildingGenerator buildingGenerator;
     public Texture2D[] tilingTextures;
     private int seed;
+    public NoiseGenerator buildnoise;
     private string axiom;
     private float angle;
     private string currString;
-    public int length;
+    private int length = 4;
     public int iterations;
     private List<Vector3> roads = new List<Vector3>();
     private Stack<TransformInfo> transformStack = new Stack<TransformInfo>();
     private Dictionary<Vector2Int, Vector2Int[]> roadGrid = new Dictionary<Vector2Int, Vector2Int[]>();
+    private Dictionary<Vector2Int, GameObject> buildings = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<char, string> rules = new Dictionary<char, string>();
     private Vector2Int prev, curr;
     private Texture2D roadTexture;
+    public Transform BuildingContainer;
     private float[,,] alphamaps;
 
+    public override void Setup()
+    {
+        base.Setup();
+        buildnoise.Setup();
+        buildnoise.Generate();
+        buildingGenerator.Setup();
+    }
 
     public override void Generate()
     {
-        
+
         GenerateRoadGrid();
         ApplyRoadToTerrain();
-        //GenerateBuildings();
+        GenerateBuildings();
+    }
+
+    private void GenerateBuildings()
+    {
+        clearBuildings();
+        //get road intersections
+        List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
+        foreach (Vector2Int node in vertices)
+        {
+            Vector2Int[] connections = new Vector2Int[4] { new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue),
+                                                           new Vector2Int(int.MaxValue,int.MaxValue)};
+            if (roadGrid.TryGetValue(node, out connections))
+            {
+                foreach (Vector2Int edge in connections)
+                {
+                    if (edge == new Vector2Int(int.MaxValue, int.MaxValue))
+                    {
+                        //edge hasn't changed since initialization
+                        continue;
+                    }
+
+                    else//connection exists and therefore so does building lots, add lot locations
+                    {
+                        //check vector difference
+                        Vector2Int loc = new Vector2Int();
+                        Vector2Int diff = edge - node;
+                        if (diff.x > 0)//east
+                        {
+                            loc = new Vector2Int(1, 1);
+                            addBuilding(node + loc,node);
+                            loc = new Vector2Int(1, -1);
+                            addBuilding(node + loc,node);
+                            loc = new Vector2Int(3, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(3, -1);
+                            addBuilding(node + loc, node);
+                        }
+                        if (diff.x < 0)//west
+                        {
+                            loc = new Vector2Int(-1, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-1, -1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-3, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-3, -1);
+                            addBuilding(node + loc, node);
+                        }
+                        if (diff.y > 0)//north
+                        {
+                            loc = new Vector2Int(1, 1);
+                            addBuilding(node+loc, node);
+                            loc = new Vector2Int(1, 3);
+                            addBuilding(node+loc, node);
+                            loc = new Vector2Int(-1, -1);
+                            addBuilding(node+loc, node);
+                            loc = new Vector2Int(-1, -3);
+                            addBuilding(node + loc, node);
+                        }
+                        if (diff.y < 0)//south
+                        {
+                            loc = new Vector2Int(1, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(1, 3);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-1, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-1, 3);
+                            addBuilding(node + loc, node);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void clearBuildings()
+    {
+        while (BuildingContainer.childCount > 0)
+        {
+            Transform child = BuildingContainer.GetChild(0);
+            DestroyImmediate(child.gameObject);
+        }
+    }
+
+    private void addBuilding(Vector2Int buildingCenter, Vector2Int node)
+    {
+        if (!buildings.ContainsKey(buildingCenter))//Don't have key, add loc
+        {
+            //building picker
+            //need to check face size
+            GameObject go = buildingGenerator.GetBuilding(node, new Vector2(100, 100));
+            if (go != null)
+            {
+                GameObject instance = GameObject.Instantiate(go, transform.parent.Find("Buildings"));
+                float height = terrainGenerator.terrain.SampleHeight(new Vector3(buildingCenter.x, 0, buildingCenter.y));
+                instance.transform.localPosition = new Vector3(buildingCenter.x-BuildingContainer.position.x+.5f, height, buildingCenter.y-BuildingContainer.position.z+.5f);
+            }
+            //make buildings smaller to proportionally match the roads
+            go.transform.localScale = new Vector3(.5f, .5f, .5f);
+            buildings.Add(buildingCenter, go);
+        }
     }
 
     private void ApplyRoadToTerrain()
@@ -35,14 +151,14 @@ public class LSystemGeneration : CityGenerator
         TerrainData tData = terrainGenerator.terrain.terrainData;
         SplatPrototype[] textures = new SplatPrototype[16];
         textures[0] = tData.splatPrototypes[0];
-        for(int i = 1; i < 16; i++)
+        for (int i = 1; i < 16; i++)
         {
             textures[i] = new SplatPrototype();
             textures[i].texture = tilingTextures[i - 1];
             textures[i].tileSize = Vector2Int.one;
         }
         alphamaps = new float[tData.alphamapWidth, tData.alphamapHeight, 16];
-        for (int x = 0; x < tData.alphamapWidth; x++) 
+        for (int x = 0; x < tData.alphamapWidth; x++)
         {
             for (int y = 0; y < tData.alphamapHeight; y++)
             {
@@ -54,7 +170,7 @@ public class LSystemGeneration : CityGenerator
             }
         }
         List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
-        foreach( Vector2Int node in vertices)
+        foreach (Vector2Int node in vertices)
         {
             Vector2Int[] connections = new Vector2Int[4] { new Vector2Int(int.MaxValue,int.MaxValue),
                                                            new Vector2Int(int.MaxValue,int.MaxValue),
@@ -65,7 +181,7 @@ public class LSystemGeneration : CityGenerator
                 int i = 0;
                 foreach (Vector2Int edge in connections)
                 {
-                    if (edge == new Vector2Int(int.MaxValue,int.MaxValue))
+                    if (edge == new Vector2Int(int.MaxValue, int.MaxValue))
                     {
                         //edge hasn't changed since initialization
                         continue;
@@ -82,17 +198,16 @@ public class LSystemGeneration : CityGenerator
                 }
                 if (checkAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
                 {
-                    alphamaps[node.y * 2    , node.x * 2    , i] = 1;
-                    alphamaps[node.y * 2 + 1, node.x * 2    , i] = 1;
-                    alphamaps[node.y * 2    , node.x * 2 + 1, i] = 1;
+                    alphamaps[node.y * 2, node.x * 2, i] = 1;
+                    alphamaps[node.y * 2 + 1, node.x * 2, i] = 1;
+                    alphamaps[node.y * 2, node.x * 2 + 1, i] = 1;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, i] = 1;
-                    alphamaps[node.y * 2    , node.x * 2    , 0] = 0;
-                    alphamaps[node.y * 2 + 1, node.x * 2    , 0] = 0;
-                    alphamaps[node.y * 2    , node.x * 2 + 1, 0] = 0;
+                    alphamaps[node.y * 2, node.x * 2, 0] = 0;
+                    alphamaps[node.y * 2 + 1, node.x * 2, 0] = 0;
+                    alphamaps[node.y * 2, node.x * 2 + 1, 0] = 0;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, 0] = 0;
                     DrawConnections(node, connections);
-
-                    //TODO: DrawConnections is assigning alphamap values incorrectly
+                    
                     for (int j = 0; j < 16; j++)
                     {
                         if (j != i)
@@ -111,33 +226,33 @@ public class LSystemGeneration : CityGenerator
             }
         }
 
-        
+
         terrainGenerator.terrain.terrainData.splatPrototypes = textures;
         terrainGenerator.terrain.terrainData.SetAlphamaps(0, 0, alphamaps);
     }
 
-    private void DrawConnections( Vector2Int node, Vector2Int[] connections)
+    private void DrawConnections(Vector2Int node, Vector2Int[] connections)
     {
-        foreach(Vector2Int edge in connections)
+        foreach (Vector2Int edge in connections)
         {
             Vector2 v = new Vector2(edge.x - node.x, edge.y - node.y);
             v.Normalize();
             //NorthSouth road - 10
             //EastWest road - 5
             int bitFlag = v.x != 0 ? 5 : 10;
-            for(int i =1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
+            for (int i = 1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
             {
-                Vector2Int offset = new Vector2Int((int)v.x*i, (int)v.y*i);
+                Vector2Int offset = new Vector2Int((int)v.x * i, (int)v.y * i);
                 if (checkAlphaMap(node + offset, new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight)))
                 {
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2    , bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2    , bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2 + 1, bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2 + 1, bitFlag] = 1;
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2    , 0] = 0;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2    , 0] = 0;
-                    alphamaps[(node.y + offset.y)* 2    , (node.x + offset.x ) * 2 + 1, 0] = 0;
-                    alphamaps[(node.y + offset.y)* 2 + 1, (node.x + offset.x ) * 2 + 1, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2 + 1, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2 + 1, bitFlag] = 1;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2 + 1, 0] = 0;
+                    alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2 + 1, 0] = 0;
                 }
             }
         }
@@ -145,7 +260,7 @@ public class LSystemGeneration : CityGenerator
 
     private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
     {
-        if (node.x * 2 + 1 >= alphaMapDimensions.x || node.y * 2 + 1 >= alphaMapDimensions.y)
+        if (node.x * 2 >= alphaMapDimensions.x || node.y * 2 >= alphaMapDimensions.y)
             return false;
         else
             return true;
@@ -170,11 +285,11 @@ public class LSystemGeneration : CityGenerator
                                                       new Vector2Int(int.MaxValue,int.MaxValue),
                                                       new Vector2Int(int.MaxValue,int.MaxValue),
                                                       new Vector2Int(int.MaxValue,int.MaxValue)};
-        roadGrid.Add(new Vector2Int((int)transform.position.x,(int)transform.position.z), defaults);
+        roadGrid.Add(new Vector2Int((int)transform.position.x, (int)transform.position.z), defaults);
         roads.Add(transform.position);
 
         currString = axiom;
-        for(int i =0; i < iterations; i++)
+        for (int i = 0; i < iterations; i++)
         {
             GenerateIteration();
         }
@@ -233,7 +348,7 @@ public class LSystemGeneration : CityGenerator
                     {
                         CurrConnections[3] = prev;
                         PrevConnections[1] = curr;
-                    }  
+                    }
                     if (diff.x < 0)//node curr is west of node prev
                     {
                         CurrConnections[1] = prev;
@@ -283,17 +398,17 @@ public class LSystemGeneration : CityGenerator
             else if (currentCharacter == '!')//Insert Random Command
             {
                 float num = UnityEngine.Random.value;
-                if(num < 0.1f)//Turn left
+                if (num < 0.1f)//Turn left
                 {
                     stringCharacters.SetValue('-', i);
                     i--;
                 }
-                else if( num < 0.2f)//Turn right
+                else if (num < 0.2f)//Turn right
                 {
                     stringCharacters.SetValue('+', i);
                     i--;
                 }
-                else if(num < 0.3f)//Do nothing
+                else if (num < 0.3f)//Do nothing
                 {
                     stringCharacters.SetValue('n', i);
                 }
