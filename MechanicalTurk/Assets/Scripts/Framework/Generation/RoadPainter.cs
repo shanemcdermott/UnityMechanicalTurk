@@ -152,10 +152,12 @@ public class RoadPainter : MonoBehaviour
     public void DrawRoads(ref Dictionary<Vector2Int, bool> roadPoints)
     {
 
+        
         foreach (KeyValuePair<Vector2Int, bool> roadPoint in roadPoints)
         {
             DrawTextureAt(roadPoint.Key, roadPoint.Value ? 2 : 1);
         }
+        
         /*
         for(int x = 0; x < terrainData.alphamapWidth; x++)
         {

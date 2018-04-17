@@ -102,6 +102,23 @@ public class CityBlockGenerator : GenerationAlgorithm
                 blockGen.Generate();
             }
         }
+        else
+        {
+            BoxCollider collider = go.GetComponent<BoxCollider>();
+            if(collider)
+            {
+                Vector3 v = new Vector3(-collider.center.x, 0f, -collider.center.z);//new Vector3(collider.size.x * 0.5f,0f, collider.size.z * -0.5f);
+                //v.y = 0;
+                go.transform.localPosition += v;
+                
+                // Renderer rend = go.transform.GetComponent<Renderer>();
+                // Vector3 v = go.GetComponent<MeshFilter>().sharedMesh.bounds.center;
+                //Vector3 v = collider.size * 0.5f;
+                // go.transform.localPosition += new Vector3(collider.size.x * 0.5f, 0f, collider.size.z * -0.25f);
+                //go.transform.localPosition += new Vector3(collider.bounds.center.x * 0.5f, 0f, collider.bounds.center.z * 0.5f);
+                //go.transform.localPosition += new Vector3(1f, 0f, 1f);//new Vector3(collider.center.x, 0f, collider.center.z);
+            }
+        }
     }
 
     public virtual GameObject ChooseDistrictToSpawn(Node parentNode)
