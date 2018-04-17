@@ -196,7 +196,7 @@ public class LSystemGeneration : CityGenerator
                     if (diff.y < 0)
                         i += 2;
                 }
-                if (checkAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
+                if (CheckAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
                 {
                     alphamaps[node.y * 2, node.x * 2, i] = 1;
                     alphamaps[node.y * 2 + 1, node.x * 2, i] = 1;
@@ -240,10 +240,10 @@ public class LSystemGeneration : CityGenerator
             //NorthSouth road - 10
             //EastWest road - 5
             int bitFlag = v.x != 0 ? 5 : 10;
-            for (int i = 1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
+            for (int i = 1; i < length; i++)//TODO: Both nodes draw towards each other
             {
                 Vector2Int offset = new Vector2Int((int)v.x * i, (int)v.y * i);
-                if (checkAlphaMap(node + offset, new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight)))
+                if (CheckAlphaMap(node + offset, new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight)))
                 {
                     alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, bitFlag] = 1;
                     alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, bitFlag] = 1;
@@ -258,7 +258,7 @@ public class LSystemGeneration : CityGenerator
         }
     }
 
-    private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
+    private bool CheckAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
     {
         if (node.x * 2 >= alphaMapDimensions.x || node.y * 2 >= alphaMapDimensions.y)
             return false;
