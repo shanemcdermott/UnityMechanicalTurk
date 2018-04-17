@@ -27,6 +27,11 @@ public class CityBiomeGenerator : CityGenerator
         {
             regionGenerator.Clean();
         }
+        while(transform.childCount > 0)
+        {
+            Transform child = transform.GetChild(0);
+            DestroyImmediate(child.gameObject);
+        }
     }
 
     public override void Generate()

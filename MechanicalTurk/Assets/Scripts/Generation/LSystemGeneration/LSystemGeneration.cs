@@ -125,6 +125,7 @@ public class LSystemGeneration : CityGenerator
             Transform child = BuildingContainer.GetChild(0);
             DestroyImmediate(child.gameObject);
         }
+        buildings.Clear();
     }
 
     private void addBuilding(Vector2Int buildingCenter, Vector2Int node)
@@ -139,10 +140,10 @@ public class LSystemGeneration : CityGenerator
                 GameObject instance = GameObject.Instantiate(go, transform.parent.Find("Buildings"));
                 float height = terrainGenerator.terrain.SampleHeight(new Vector3(buildingCenter.x, 0, buildingCenter.y));
                 instance.transform.localPosition = new Vector3(buildingCenter.x-BuildingContainer.position.x+.5f, height, buildingCenter.y-BuildingContainer.position.z+.5f);
+                go.transform.localScale = new Vector3(.5f, .5f, .5f);
+                buildings.Add(buildingCenter, go);
             }
             //make buildings smaller to proportionally match the roads
-            go.transform.localScale = new Vector3(.5f, .5f, .5f);
-            buildings.Add(buildingCenter, go);
         }
     }
 
@@ -260,7 +261,7 @@ public class LSystemGeneration : CityGenerator
 
     private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
     {
-        if (node.x * 2 >= alphaMapDimensions.x || node.y * 2 >= alphaMapDimensions.y)
+        if (node.y * 2 >= alphaMapDimensions.x || node.x * 2 >= alphaMapDimensions.y)
             return false;
         else
             return true;
@@ -268,9 +269,11 @@ public class LSystemGeneration : CityGenerator
 
     private void GenerateRoadGrid()
     {
-        seed = GameObject.Find("GenController").GetComponent<GenerationController>().Seed;
+        GameObject controller = GameObject.Find("GenController");
+        seed = controller.GetComponent<GenerationController>().Seed;
         UnityEngine.Random.InitState(seed);
-        transform.position = new Vector3(terrainGenerator.terrain.terrainData.alphamapWidth / 4, 0f, terrainGenerator.terrain.terrainData.alphamapHeight / 4);
+        transform.position =  new Vector3(terrainGenerator.terrain.terrainData.alphamapWidth / 4, 0f, terrainGenerator.terrain.terrainData.alphamapHeight / 4);
+        transform.rotation = new Quaternion(0, 0, 0, 1);
         rules.Clear();
         //*****RULES************
         //Random character '!' : random event (-,+,delete last command, or nothing)
