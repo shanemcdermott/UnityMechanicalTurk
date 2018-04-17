@@ -22,6 +22,7 @@ public class LSystemGeneration : CityGenerator
     private Dictionary<char, string> rules = new Dictionary<char, string>();
     private Vector2Int prev, curr;
     private Texture2D roadTexture;
+    public Transform BuildingContainer;
     private float[,,] alphamaps;
 
     public override void Setup()
@@ -60,6 +61,7 @@ public class LSystemGeneration : CityGenerator
                         //edge hasn't changed since initialization
                         continue;
                     }
+
                     else//connection exists and therefore so does building lots, add lot locations
                     {
                         //check vector difference
@@ -67,48 +69,47 @@ public class LSystemGeneration : CityGenerator
                         Vector2Int diff = edge - node;
                         if (diff.x > 0)//east
                         {
-                            loc = node + new Vector2Int(1, 1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(1, -1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(3, 1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(3, -1);
-                            addBuilding(loc);
+                            loc = new Vector2Int(1, 1);
+                            addBuilding(node + loc,node);
+                            loc = new Vector2Int(1, -1);
+                            addBuilding(node + loc,node);
+                            loc = new Vector2Int(3, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(3, -1);
+                            addBuilding(node + loc, node);
                         }
                         if (diff.x < 0)//west
                         {
-                            loc = node + new Vector2Int(-1, 1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(-1, -1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(-3, 1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(-3, -1);
-                            addBuilding(loc);
+                            loc = new Vector2Int(-1, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-1, -1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-3, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-3, -1);
+                            addBuilding(node + loc, node);
                         }
                         if (diff.y > 0)//north
                         {
-
-                            loc = node + new Vector2Int(1, -1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(1, -3);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(-1, -1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(-1, -3);
-                            addBuilding(loc);
+                            loc = new Vector2Int(1, 1);
+                            addBuilding(node+loc, node);
+                            loc = new Vector2Int(1, 3);
+                            addBuilding(node+loc, node);
+                            loc = new Vector2Int(-1, -1);
+                            addBuilding(node+loc, node);
+                            loc = new Vector2Int(-1, -3);
+                            addBuilding(node + loc, node);
                         }
                         if (diff.y < 0)//south
                         {
-                            loc = node + new Vector2Int(1, 1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(1, 3);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(-1, 1);
-                            addBuilding(loc);
-                            loc = node + new Vector2Int(-1, 3);
-                            addBuilding(loc);
+                            loc = new Vector2Int(1, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(1, 3);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-1, 1);
+                            addBuilding(node + loc, node);
+                            loc = new Vector2Int(-1, 3);
+                            addBuilding(node + loc, node);
                         }
                     }
                 }
@@ -119,29 +120,29 @@ public class LSystemGeneration : CityGenerator
 
     private void clearBuildings()
     {
-        for (int i = transform.childCount - 1; i >= 0; i--)
+        while (BuildingContainer.childCount > 0)
         {
-            Transform child = transform.GetChild(i);
+            Transform child = BuildingContainer.GetChild(0);
             DestroyImmediate(child.gameObject);
         }
     }
 
-    private void addBuilding(Vector2Int loc)
+    private void addBuilding(Vector2Int buildingCenter, Vector2Int node)
     {
-        if (!buildings.ContainsKey(loc))//Don't have key, add loc
+        if (!buildings.ContainsKey(buildingCenter))//Don't have key, add loc
         {
             //building picker
             //need to check face size
-            GameObject go = buildingGenerator.GetBuilding(loc, new Vector2(100, 100));
+            GameObject go = buildingGenerator.GetBuilding(node, new Vector2(100, 100));
             if (go != null)
             {
-                GameObject instance = GameObject.Instantiate(go, transform);
-                float height = terrainGenerator.terrain.SampleHeight(new Vector3(loc.x, 0, loc.y));
-                instance.transform.position = new Vector3(loc.x, height, loc.y);
+                GameObject instance = GameObject.Instantiate(go, transform.parent.Find("Buildings"));
+                float height = terrainGenerator.terrain.SampleHeight(new Vector3(buildingCenter.x, 0, buildingCenter.y));
+                instance.transform.localPosition = new Vector3(buildingCenter.x-BuildingContainer.position.x+.5f, height, buildingCenter.y-BuildingContainer.position.z+.5f);
             }
             //make buildings smaller to proportionally match the roads
             go.transform.localScale = new Vector3(.5f, .5f, .5f);
-            buildings.Add(loc, go);
+            buildings.Add(buildingCenter, go);
         }
     }
 
@@ -206,8 +207,7 @@ public class LSystemGeneration : CityGenerator
                     alphamaps[node.y * 2, node.x * 2 + 1, 0] = 0;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, 0] = 0;
                     DrawConnections(node, connections);
-
-                    //TODO: DrawConnections is assigning alphamap values incorrectly
+                    
                     for (int j = 0; j < 16; j++)
                     {
                         if (j != i)
@@ -260,7 +260,7 @@ public class LSystemGeneration : CityGenerator
 
     private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
     {
-        if (node.x * 2 + 1 >= alphaMapDimensions.x || node.y * 2 + 1 >= alphaMapDimensions.y)
+        if (node.x * 2 >= alphaMapDimensions.x || node.y * 2 >= alphaMapDimensions.y)
             return false;
         else
             return true;
