@@ -30,6 +30,7 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        
         cameraA.transform.position = Vector3.Lerp(cameraA.transform.position, cameraAsequence[seqIndex].position, Time.deltaTime);
         cameraA.transform.rotation = Quaternion.Lerp( cameraA.transform.rotation, cameraAsequence[seqIndex].rotation, Time.deltaTime);
 
@@ -46,7 +47,7 @@ public class CameraController : MonoBehaviour
     IEnumerator CameraView()
     {
         seqIndex = 0;
-        while(seqIndex+1 < cameraAsequence.Length)
+        while(seqIndex < cameraAsequence.Length)
         {
             yield return new WaitForSeconds(cameraAsequenceDuration[seqIndex]);
             seqIndex++;
