@@ -40,11 +40,25 @@ public class BuildingGenerator : GenerationAlgorithm {
         int buildingIndex = FindBestTerrain(heightValue);
 
         GameObject buildingToSpawn = buildingTypes[buildingIndex].building;
-        BoxCollider collider = buildingToSpawn.GetComponent<BoxCollider>();
+        CityBlockGenerator blockGenerator = buildingToSpawn.GetComponent<CityBlockGenerator>();
 
-        if (collider.size.x < faceSize.x && collider.size.z < faceSize.y)
+        if(blockGenerator != null)
         {
-            return buildingToSpawn;
+            if(blockGenerator.MinLotSize.x < faceSize.x && blockGenerator.MinLotSize.y < faceSize.y)
+            {
+                return blockGenerator.gameObject;
+            }
+        }
+        else
+        {
+            BoxCollider collider = buildingToSpawn.GetComponent<BoxCollider>();
+            if(collider != null)
+            {
+                if (collider.size.x < faceSize.x && collider.size.z < faceSize.y)
+                {
+                    return buildingToSpawn;
+                }
+            }
         }
 
         return null;
