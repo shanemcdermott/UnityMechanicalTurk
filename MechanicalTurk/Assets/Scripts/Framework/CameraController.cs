@@ -41,6 +41,14 @@ public class CameraController : MonoBehaviour
     public void StartNextSequence()
     {
         StopAllCoroutines();
+        Transform t = controllerB.transform.Find("Buildings");
+        if (t != null)
+        {
+            Vector3 pos = controllerB.cityGenerator.transform.position;
+            pos.y = 20f;
+            cameraBsequence[2].position = pos;
+            cameraBsequence[2].LookAt(t);
+        }
         StartCoroutine(CameraView());
     }
 
