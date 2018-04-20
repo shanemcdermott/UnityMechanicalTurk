@@ -34,7 +34,7 @@ public class BuildingGenerator : GenerationAlgorithm {
 
     public GameObject GetBuilding(Vector2 midpoint, Vector2 faceSize)
     {
-        //if (midpoint.x < heightMap.Width || midpoint.y < heightMap.Height) return null;// buildingTypes[0].building;
+        if (midpoint.x >= heightMap.Width || midpoint.y >= heightMap.Height || midpoint.x < 0 || midpoint.y < 0) return null;// buildingTypes[0].building;
 
         float heightValue = heightMap.Values[(int)midpoint.x, (int)midpoint.y];
         int buildingIndex = FindBestTerrain(heightValue);

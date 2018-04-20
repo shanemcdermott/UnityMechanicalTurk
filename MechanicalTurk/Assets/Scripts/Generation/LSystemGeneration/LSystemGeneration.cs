@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -142,6 +143,7 @@ public class LSystemGeneration : CityGenerator
                 instance.transform.localPosition = new Vector3(buildingCenter.x-BuildingContainer.position.x+.5f, height, buildingCenter.y-BuildingContainer.position.z+.5f);
                 go.transform.localScale = new Vector3(.5f, .5f, .5f);
                 buildings.Add(buildingCenter, go);
+
             }
             //make buildings smaller to proportionally match the roads
         }
@@ -234,6 +236,7 @@ public class LSystemGeneration : CityGenerator
 
     private void DrawConnections(Vector2Int node, Vector2Int[] connections)
     {
+        Vector2 alphamapDimensions = new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight);
         foreach (Vector2Int edge in connections)
         {
             Vector2 v = new Vector2(edge.x - node.x, edge.y - node.y);
@@ -244,7 +247,7 @@ public class LSystemGeneration : CityGenerator
             for (int i = 1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
             {
                 Vector2Int offset = new Vector2Int((int)v.x * i, (int)v.y * i);
-                if (checkAlphaMap(node + offset, new Vector2(terrainGenerator.terrain.terrainData.alphamapWidth, terrainGenerator.terrain.terrainData.alphamapHeight)))
+                if (checkAlphaMap(node + offset, alphamapDimensions))
                 {
                     alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, bitFlag] = 1;
                     alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, bitFlag] = 1;
@@ -261,10 +264,9 @@ public class LSystemGeneration : CityGenerator
 
     private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
     {
-        if (node.y * 2 >= alphaMapDimensions.x || node.x * 2 >= alphaMapDimensions.y)
-            return false;
-        else
-            return true;
+        return node.x >= 0 && node.y >= 0 &&
+                node.x * 2 + 1 < alphamaps.GetLength(1) &&
+                node.y *2 + 1 < alphamaps.GetLength(0);
     }
 
     private void GenerateRoadGrid()
