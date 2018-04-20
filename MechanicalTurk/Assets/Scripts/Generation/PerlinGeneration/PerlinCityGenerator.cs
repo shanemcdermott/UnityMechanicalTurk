@@ -130,16 +130,30 @@ public class PerlinCityGenerator : CityGenerator {
 
             Vector2 faceSize = new Vector2((midpoint.x - bottomLeft.x) * 2, (midpoint.y - bottomLeft.y) * 2);
             
-            if (CheckSlope(midpoint))
+            if (CheckSlope(bottomLeft))
             {
-                GameObject objectToSpawn = buildingGenerator.GetBuilding(midpoint, faceSize);
-                if (objectToSpawn != null)
+                GameObject district = buildingGenerator.GetBuilding(bottomLeft, faceSize);
+                if (district != null)
                 {
-                    GameObject instance = GameObject.Instantiate(objectToSpawn, transform);
-                    float height = terrainGenerator.terrain.SampleHeight(new Vector3(midpoint.x, 0, midpoint.y));
-                    instance.transform.localPosition = new Vector3(midpoint.x, height, midpoint.y);
+                    GameObject instance = GameObject.Instantiate(district, transform);
+                    float height = terrainGenerator.terrain.SampleHeight(new Vector3(bottomLeft.x, 0, bottomLeft.y));
+                    instance.transform.localPosition = new Vector3(bottomLeft.x, height, bottomLeft.y);
+
+                    CityBlockGenerator districtBlockGenerator = instance.GetComponent<CityBlockGenerator>();
+                    if(districtBlockGenerator != null)
+                    {
+                        districtBlockGenerator.Dimensions = new Vector3(faceSize.x, 0, faceSize.y);
+                        districtBlockGenerator.terrain = terrainGenerator.terrain;
+                        districtBlockGenerator.Setup();
+                        districtBlockGenerator.Generate();
+                    }
+
+                    Transform child = districtBlockGenerator.gameObject.transform.GetChild(0);
+                    child.localPosition = Vector3.zero;
                 }
             }
+
+
         }
     }
 
