@@ -11,7 +11,6 @@ public class TerrainGenerator : GenerationAlgorithm
     public NoiseMap heightMap;
     public Terrain terrain;
     public Texture2D biomeTexture;
-   
 
     public override bool CanGenerate()
     {

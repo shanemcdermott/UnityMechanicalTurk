@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 
 public static class TextureGenerator {
 
@@ -27,4 +29,25 @@ public static class TextureGenerator {
 		return TextureFromColourMap (colourMap, width, height);
 	}
 
+    public static void RoadsAsTexture(ref Dictionary<Vector2Int, bool> connectionPoints, int width, int height)
+    {
+        Debug.Log("Saving road splatmap...");
+        Color[] colorMap = new Color[width * height];
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                if (connectionPoints.ContainsKey(new Vector2Int(x, y)))
+                    colorMap[y * width + x] = Color.red;
+                else
+                    colorMap[y * width + x] = Color.black;
+
+            }
+        }
+        Texture2D roadMap = TextureFromColourMap(colorMap, width, height);
+
+        string fileName = Application.persistentDataPath + "/roadSplat.png";
+        File.WriteAllBytes(fileName, roadMap.EncodeToPNG());
+        Debug.Log("Saved to " + fileName);
+    }
 }

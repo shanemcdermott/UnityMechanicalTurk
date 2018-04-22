@@ -53,6 +53,8 @@ public class CityBiomeGenerator : CityGenerator
             DrawRoadsFromCenters(ref connectionPoints);
         }
 
+        TextureGenerator.RoadsAsTexture(ref connectionPoints, heightMap.Width, heightMap.Height);
+        //roadPainter.DrawRoadsFromTexture
         roadPainter.DrawRoads(ref connectionPoints);
         roadPainter.ApplyAlphaBlend();
     }
