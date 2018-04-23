@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
 
 public class GridFace : Node
 {
@@ -114,5 +116,13 @@ public class GridFace : Node
                 Debug.DrawLine(position, c.position, color);
             }
         }
+    }
+
+    public virtual bool Contains(Vector2 point)
+    {
+
+        Vector3 min = vertices[0].GetPosition();
+        Vector3 max = vertices[3].GetPosition();
+        return point.x > min.x && point.x < max.x && point.y > min.z && point.y < max.z;
     }
 }

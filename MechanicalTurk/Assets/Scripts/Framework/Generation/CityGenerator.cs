@@ -19,5 +19,8 @@ public abstract class CityGenerator : GenerationAlgorithm
         }
     }
 
-
+    public virtual Vector3 GetCityCenter()
+    {
+        return transform.root.position + new Vector3(heightMap.Width * 0.5f, 20f, heightMap.Height * 0.5f);
+    }
 }

@@ -34,15 +34,31 @@ public class BuildingGenerator : GenerationAlgorithm {
 
     public GameObject GetBuilding(Vector2 midpoint, Vector2 faceSize)
     {
+        if (midpoint.x >= heightMap.Width || midpoint.y >= heightMap.Height || midpoint.x < 0 || midpoint.y < 0) return null;// buildingTypes[0].building;
+
         float heightValue = heightMap.Values[(int)midpoint.x, (int)midpoint.y];
         int buildingIndex = FindBestTerrain(heightValue);
 
         GameObject buildingToSpawn = buildingTypes[buildingIndex].building;
-        BoxCollider collider = buildingToSpawn.GetComponent<BoxCollider>();
+        CityBlockGenerator blockGenerator = buildingToSpawn.GetComponent<CityBlockGenerator>();
 
-        if (collider.size.x < faceSize.x && collider.size.z < faceSize.y)
+        if(blockGenerator != null)
         {
-            return buildingToSpawn;
+            if(blockGenerator.MinLotSize.x < faceSize.x && blockGenerator.MinLotSize.y < faceSize.y)
+            {
+                return blockGenerator.gameObject;
+            }
+        }
+        else
+        {
+            BoxCollider collider = buildingToSpawn.GetComponent<BoxCollider>();
+            if(collider != null)
+            {
+                if (collider.size.x < faceSize.x && collider.size.z < faceSize.y)
+                {
+                    return buildingToSpawn;
+                }
+            }
         }
 
         return null;

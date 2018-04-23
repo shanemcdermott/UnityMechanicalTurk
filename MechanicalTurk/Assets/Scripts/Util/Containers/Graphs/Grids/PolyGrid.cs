@@ -13,7 +13,22 @@ public class PolyGrid : MonoBehaviour
     protected List<GridFace> faces = new List<GridFace>();
 
     [SerializeField]
-	protected List<Node> vertices = new List<Node>();
+    protected List<Node> vertices
+    {
+        get
+        {
+            return new List<Node>(verts.Values);
+        }
+        set
+        {
+            foreach(Node n in value)
+            {
+                FindOrAdd(n);
+            }
+        }
+    }
+
+    private Dictionary<Vector2Int, Node> verts = new Dictionary<Vector2Int, Node>();
 
     /// <summary>
     /// Adds all Leaf nodes of a GridNode to the polygrid
@@ -48,6 +63,32 @@ public class PolyGrid : MonoBehaviour
     public void AddFace(GridFace newFace)
     {
         faces.Add(newFace);
+    }
+
+    public void FindOrAdd(Node newVertex)
+    {
+        if(!verts.ContainsValue(newVertex))
+        {
+            Vector2 v = newVertex.GetPosition();
+            verts.Add(new Vector2Int((int)v.x,(int)v.y), newVertex);
+        }
+    }
+
+    public void UpdateNodeAt(Vector2Int position, Node node)
+    {
+        if(!verts.ContainsKey(position))
+        {
+            verts.Add(position, node);
+        }
+        verts[position] = node;
+    }
+
+    public Node GetNodeAt(Vector2Int position)
+    {
+        if (!verts.ContainsKey(position))
+            return null;
+
+        return verts[position];
     }
 
 	public void AddVertex(Node newVertex)
@@ -112,5 +153,6 @@ public class PolyGrid : MonoBehaviour
     public void Clean(){
         faces = new List<GridFace>();
         vertices = new List<Node>();
+        verts = new Dictionary<Vector2Int, Node>();
     }
 }

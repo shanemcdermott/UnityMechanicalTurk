@@ -19,8 +19,18 @@ public class RoadPainter : MonoBehaviour
 
     public TerrainData terrainData;
     private int NumTerrainTextures = 3;
-
     private float[,,] alphamaps;
+
+    public int alphaMapWidth
+    {
+        get { return terrainData.alphamapWidth; }
+    }
+    public int alphaMapHeight
+    {
+        get { return terrainData.alphamapHeight; }
+    }
+
+
 
     public void Setup()
     {
@@ -75,6 +85,23 @@ public class RoadPainter : MonoBehaviour
         }
     }
 
+    public void DrawTextureAt(Vector2Int worldPoint, int TextureID)
+    {
+        if (worldPoint.x * 2 + 1 >= alphaMapWidth ||
+            worldPoint.y * 2 +1 >= alphaMapHeight)
+        {
+            return;
+        }
+
+        for(int z = 0; z < NumTerrainTextures; z++)
+        {
+            alphamaps[worldPoint.y*2, worldPoint.x * 2 , z] = (z == TextureID) ? 1f : 0f;
+            alphamaps[worldPoint.y*2, worldPoint.x * 2 + 1, z] = (z == TextureID) ? 1f : 0f;
+            alphamaps[worldPoint.y*2 + 1, worldPoint.x * 2, z] = (z == TextureID) ? 1f : 0f;
+            alphamaps[worldPoint.y*2 + 1, worldPoint.x * 2 + 1, z] = (z == TextureID) ? 1f : 0f;
+        }
+    }
+
     public void DrawLine(Node from, Node to)
     {
         Vector2 fromPos = from.GetPositionXZ();
@@ -117,36 +144,45 @@ public class RoadPainter : MonoBehaviour
         }
     }
 
-    public Vector2Int ScaledValue(int x, int y)
+    public Vector2Int ScaleAlphaToTerrain(int x, int y)
     {
-        return new Vector2Int((int)(x * 0.5f),(int)( y * 0.5f));
+        return new Vector2Int((int)(x * mapScale.x),(int)( y * mapScale.y));
     }
 
     public void DrawRoads(ref Dictionary<Vector2Int, bool> roadPoints)
     {
+
+        
+        foreach (KeyValuePair<Vector2Int, bool> roadPoint in roadPoints)
+        {
+            DrawTextureAt(roadPoint.Key, roadPoint.Value ? 2 : 1);
+        }
+        
+        /*
         for(int x = 0; x < terrainData.alphamapWidth; x++)
         {
             for(int y = 0; y < terrainData.alphamapHeight; y++)
             {
                 bool result = true;
 
-                if(roadPoints.TryGetValue(ScaledValue(x,y), out result))
+                if(roadPoints.TryGetValue(ScaleAlphaToTerrain(x,y), out result))
                 {
                     if(result)
                     {
-                        alphamaps[x, y, 0] = 0;
-                        alphamaps[x, y, 1] = 1;
-                        alphamaps[x, y, 2] = 0;
-                    }
-                    else
-                    {
-                        alphamaps[x, y, 0] = 0;
-                        alphamaps[x, y, 1] = 0;
-                        alphamaps[x, y, 2] = 1;
+                        alphamaps[y, x, 0] = 0;
+                        alphamaps[y, x, 1] = 0;
+                        alphamaps[y, x, 2] = 1;
+                    }                
+                    else             
+                    {                
+                        alphamaps[y, x, 0] = 0;
+                        alphamaps[y, x, 1] = 1;
+                        alphamaps[y, x, 2] = 0;
                     }
                 }
             }
         }
+        */
     }
 
     public void DrawRoadsFromTexture(Texture2D srcTexture)

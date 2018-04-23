@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Framework.Containers;
 
 //Algorithm from http://devmag.org.za/2009/05/03/poisson-disk-sampling/
 // Shane McDermott 2018
@@ -30,20 +31,17 @@ public class PoissonDiskSampling : PointGenerator
 
     public override void Init()
     {
-        width = bounds.bounds.extents.x * 2;
-        height = bounds.bounds.extents.y * 2;
-        minDistance = width / 15;
         cellSize = minDistance / Mathf.Sqrt(2);
         grid = new Grid2D(Mathf.CeilToInt(width / cellSize), Mathf.CeilToInt(height / cellSize));
         processList = new RandomQueue<Vector2>();
         samplePoints = new List<Vector2>();
-        AddPoint(gameObject.transform.position);
+        SetBounds(width, height);
     }
 
     public override void Init(Vector2[] sourcePoints)
     {
         Init();
-        foreach(Vector2 v in sourcePoints)
+        foreach (Vector2 v in sourcePoints)
         {
             AddPoint(v);
         }
@@ -64,16 +62,15 @@ public class PoissonDiskSampling : PointGenerator
     {
         if (sampleCount >= newPointsCount)
         {
-            if(processList.Empty())
+            if (processList.Empty())
                 return Vector2.positiveInfinity;
 
             NextSourcePoint();
         }
-        for(;sampleCount < newPointsCount; sampleCount++)
+        for (; sampleCount < newPointsCount; sampleCount++)
         {
             Vector2 newPoint = GenerateRandomPointAround(sourcePoint, minDistance);
-            
-            if (bounds.OverlapPoint(newPoint) && !IsInNeighborhood(newPoint))
+            if (bounds.Contains(newPoint) && !IsInNeighborhood(newPoint))
             {
                 AddPoint(newPoint);
                 return newPoint;
