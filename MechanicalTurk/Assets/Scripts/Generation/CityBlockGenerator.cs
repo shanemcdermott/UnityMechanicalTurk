@@ -7,6 +7,7 @@ public class CityBlockGenerator : GenerationAlgorithm
 {
 
     public List<GameObject> blockPrefabs = new List<GameObject>();
+    public PointGenerator pointGenerator;
 
     [Header("Grid Settings")]
     /*Total dimensions of the city*/
@@ -74,14 +75,36 @@ public class CityBlockGenerator : GenerationAlgorithm
 
     public virtual void PopulateBlocks()
     {
-        List<GridNode> leaves;
-        districtNode.GetLeaves(out leaves);
-        foreach (GridNode child in leaves)
+        if (pointGenerator)
         {
-            Vector3 v = child.GetPosition();
-            v.y = terrain.SampleHeight(v+transform.root.position);
-            child.SetPosition(v);
-            SpawnCityBlock(child);
+            List<Vector2> points;
+            pointGenerator.Generate(Dimensions.x, Dimensions.z, MinLotSize.x, 500, out points);
+            foreach (Vector2 p in points)
+            {
+               
+                Vector2 point = p + districtNode.GetVertex(0).GetPositionXZ();
+                GridNode node;
+                if (districtNode.GetChildContainingPoint(point, out node))
+                {
+                    Vector3 v = node.GetPosition();
+                                //new Vector3(point.x, 0f, point.y);
+                    v.y = terrain.SampleHeight(v + transform.root.position);
+                    node.SetPosition(v);
+                    SpawnCityBlock(node);
+                }
+            }
+        }
+        else
+        {
+            List<GridNode> leaves;
+            districtNode.GetLeaves(out leaves);
+            foreach (GridNode child in leaves)
+            {
+                Vector3 v = child.GetPosition();
+                v.y = terrain.SampleHeight(v + transform.root.position);
+                child.SetPosition(v);
+                SpawnCityBlock(child);
+            }
         }
     }
 

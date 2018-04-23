@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4027754849760650}
   - component: {fileID: 114413174572557756}
+  - component: {fileID: 114195301111298240}
   m_Layer: 0
   m_Name: BusinessDistrict
   m_TagString: Untagged
@@ -40,6 +41,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114195301111298240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1938313778877204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3cdca6eac904144b2de34edb3cc500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 100
+    height: 100
+  samplePoints: []
+  width: 100
+  height: 100
+  minDistance: 5
+  newPointsCount: 30
+  maxTotalPoints: 1000
+  cellSize: 0
 --- !u!114 &114413174572557756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -60,6 +85,7 @@ MonoBehaviour:
   - {fileID: 1181238431320972, guid: 2edef35e229e45b4aa178d3673347361, type: 2}
   - {fileID: 1697090419774358, guid: dcfac42cd36a1d042a548b6bb661e9fa, type: 2}
   - {fileID: 1806757274652684, guid: 400c0d6d64f98ec46bac2dab0c879ba2, type: 2}
+  pointGenerator: {fileID: 114195301111298240}
   Dimensions: {x: 64, y: 0, z: 64}
   MinLotSize: {x: 16, y: 16, z: 16}
   terrain: {fileID: 0}

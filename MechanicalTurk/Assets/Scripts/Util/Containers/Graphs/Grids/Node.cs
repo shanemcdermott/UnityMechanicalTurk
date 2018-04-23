@@ -9,6 +9,24 @@ public class Node : IHasConnections<Node>
     protected Vector3 position;
     protected List<Node> connections = new List<Node>();
 
+    public float x
+    {
+        get { return position.x;}
+        set { position.x = value;}
+    }
+
+    public float y
+    {
+        get { return position.y; }
+        set { position.y = value; }
+    }
+
+    public float z
+    {
+        get { return position.z; }
+        set { position.z = value; }
+    }
+
     public Node()
     {
         position = new Vector3();

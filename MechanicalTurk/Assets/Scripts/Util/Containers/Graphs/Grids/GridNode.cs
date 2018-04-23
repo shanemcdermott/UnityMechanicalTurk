@@ -173,4 +173,26 @@ public class GridNode : GridFace
         return verts;
     }
 
+    public virtual bool GetChildContainingPoint(Vector2 point, out GridNode child)
+    {
+        if(this.Contains(point))
+        {
+            if(IsLeaf())
+            {
+                child = this;
+                return true;
+            }
+            foreach(GridNode childNode in children)
+            {
+                if(childNode.GetChildContainingPoint(point, out child))
+                {
+                    return true;
+                }
+            }
+        }
+
+        child = null;
+        return false;
+    }
+
 }

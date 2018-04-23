@@ -39,7 +39,7 @@ public class GraphEditorWindow : EditorWindow {
                 collider = dummyObject.AddComponent<PolygonCollider2D>();
                 ResizeColliderPoints();
                 pointGenerator = dummyObject.AddComponent<PoissonDiskSampling>();
-                pointGenerator.bounds = collider;
+                //pointGenerator.bounds = collider;
                 pointGenerator.Init();
                 delTri = dummyObject.AddComponent<DelaunayTriangulation>();
                 delTri.bounds = collider;
