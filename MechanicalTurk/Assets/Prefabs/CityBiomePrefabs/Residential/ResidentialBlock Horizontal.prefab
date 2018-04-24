@@ -54,7 +54,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bShouldDrawFromCenter: 1
   wantsVerticalConnections: 0
+  wantsVerticalFaceConnections: 1
   wantsHorizontalConnections: 1
+  wantsHorizontalFaceConnections: 0
 --- !u!114 &114397124158399994
 MonoBehaviour:
   m_ObjectHideFlags: 1

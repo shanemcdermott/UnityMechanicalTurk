@@ -51,4 +51,5 @@ public class RoadDesigner : MonoBehaviour
         Vector3 midPoint = MathOps.Midpoint(leaf.GetVertex(a).GetPosition(), leaf.GetVertex(b).GetPosition());
         Node.GetConnectionLine(ref connectionPoints, leaf.GetPosition(), midPoint);
     }
+
 }

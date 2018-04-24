@@ -334,8 +334,13 @@ public class Node : IHasConnections<Node>
 
     public static Node Split(Node A, Node B)
     {
-        Node res = new Node(MathOps.Midpoint(A.position, B.position));
-        if(A.IsConnectedTo(B))
+        return Split(A, B, 0.5f);
+    }
+
+    public static Node Split(Node A, Node B, float weight)
+    {
+        Node res = new Node(Vector3.Lerp(A.position, B.position, weight));
+        if (A.IsConnectedTo(B))
         {
             A.RemoveConnection(B);
             res.AddConnection(A);

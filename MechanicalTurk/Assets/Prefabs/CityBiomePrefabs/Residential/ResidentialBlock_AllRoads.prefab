@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4181311401861186}
   - component: {fileID: 114413796125246762}
-  - component: {fileID: 114294444552197412}
+  - component: {fileID: 114303167905181080}
   m_Layer: 0
   m_Name: ResidentialBlock_AllRoads
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114294444552197412
+--- !u!114 &114303167905181080
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,10 +49,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1322460241736658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41a10c6af9c0ea844ae4cb5677cad630, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fc0c874db4a0684280deacaa1b3d118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bShouldDrawFromCenter: 1
+  bShouldDrawFromCenter: 0
+  wantsVerticalConnections: 1
+  wantsVerticalFaceConnections: 1
+  wantsHorizontalConnections: 1
+  wantsHorizontalFaceConnections: 1
 --- !u!114 &114413796125246762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,4 +98,4 @@ MonoBehaviour:
   Dimensions: {x: 256, y: 0, z: 256}
   MinLotSize: {x: 4, y: 4, z: 4}
   terrain: {fileID: 0}
-  roadDesigner: {fileID: 0}
+  roadDesigner: {fileID: 114303167905181080}

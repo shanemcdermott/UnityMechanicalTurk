@@ -83,8 +83,6 @@ MonoBehaviour:
     width: 100
     height: 100
   samplePoints: []
-  width: 100
-  height: 100
   minDistance: 5
   newPointsCount: 30
   maxTotalPoints: 1000

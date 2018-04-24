@@ -1,72 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+
+
 //Shane McDermott 2018
-public class ClutterPlacement : MonoBehaviour
+public class ClutterPlacement : GenerationAlgorithm
 {
 
     //Prefabs
-    public GameObject[] clutterPrefabs;
+    public ObjectSpawnParams[] clutterPrefabs;
 
     //PlacementAlgorithm
     public PointGenerator pointGenerator;
 
     public List<GameObject> spawnedClutter;
 
-    //Map Mesh
-    public MeshFilter mapMeshFilter;
+    //Terrain object
+    public Terrain terrain;
+    public Transform clutterParent;
 
-    public void placeClutter()
+    public override void Generate()
     {
         List<Vector2> points;
         pointGenerator.Generate(out points);
         foreach (Vector2 v in points)
         {
-            float mapHeight = GetHeightAtPostion(v);
-            Vector3 v3 = new Vector3(v.x, mapHeight, v.y) + transform.position;
-            GameObject go = (GameObject)Instantiate(GetRandomClutter(), v3, transform.rotation);
-            if(go)
+            Vector3 v3 = new Vector3(v.x, 0f, v.y) + clutterParent.position;
+            v3.y = terrain.SampleHeight(v3);
+            GameObject prefab = GetRandomClutterPrefab(GetSteepnessAt(v3));
+            if(prefab != null)
             {
-                go.transform.SetParent(transform);
-                spawnedClutter.Add(go);
+                GameObject go = (GameObject)Instantiate(prefab, v3, clutterParent.rotation);
+                if (go)
+                {
+                    go.transform.SetParent(clutterParent);
+                    spawnedClutter.Add(go);
+                }
             }
         }
     }
 
-    float GetHeightAtPostion(Vector2 v2)
+
+
+    protected float GetSteepnessAt(Vector3 position)
     {
-        Mesh mapMesh = mapMeshFilter.sharedMesh;
-        Vector3[] meshVerts = mapMesh.vertices;
-        
-
-        for(int x = 0; x < meshVerts.Length; x++)
-        {
-            if (meshVerts[x].x - v2.x < 3 && meshVerts[x].z - v2.y < 3 && CheckSlopeForPlacement(x))
-            {
-                return meshVerts[x].y;
-            }
-        }
-
-        return 0;
+        return Mathf.Abs(terrain.terrainData.GetSteepness(position.x, position.z));
     }
 
-    bool CheckSlopeForPlacement(int meshIndice)
-    {
-        Mesh mapMesh = mapMeshFilter.sharedMesh;
-        Vector3[] meshNormals = mapMesh.normals;
-        Vector3 normalToCheck = meshNormals[meshIndice];
-        float zySlope = normalToCheck.y / normalToCheck.z;
-        float xySlope = normalToCheck.y / normalToCheck.x;
-
-        if(Mathf.Abs(zySlope) < 0.2f && Mathf.Abs(xySlope) < 0.2f)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public void clearClutter()
+    public override void Clean()
     {
         foreach(GameObject go in spawnedClutter)
         {
@@ -76,9 +59,45 @@ public class ClutterPlacement : MonoBehaviour
         spawnedClutter.Clear();
     }
 
-    public GameObject GetRandomClutter()
+    public GameObject GetRandomClutterPrefab(float steepness)
     {
-        return clutterPrefabs[Random.Range(0, clutterPrefabs.Length)];
+        int i = GetRandomClutterIndex(steepness);
+        if(i >=0)
+        {
+            return clutterPrefabs[i].randomObject;
+        }
+        return null;
+    }
+
+    public int GetRandomClutterIndex(float steepness)
+    {
+        for(int i = 0; i < clutterPrefabs.Length; i++)
+        {
+            if(steepness <= clutterPrefabs[i].maxSteepness)
+            {
+                return Random.Range(i, clutterPrefabs.Length);
+            }
+        }
+        return -1;
+    }
+
+    public override bool CanGenerate()
+    {
+        return pointGenerator != null && clutterPrefabs.Length > 0 && terrain != null;
+    }
+
+    public override void Setup()
+    {
+        if(pointGenerator == null)
+        {
+            pointGenerator = GetComponent<PointGenerator>();
+        }
+        if(terrain == null)
+        {
+            terrain = GetComponent<Terrain>();
+        }
+        Clean();
+        clutterPrefabs.OrderBy(i => i.maxSteepness).ThenBy(i => i.minDimensions.x).ThenBy(i => i.minDimensions.y);
     }
 
 }

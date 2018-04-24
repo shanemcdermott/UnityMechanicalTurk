@@ -8,6 +8,26 @@ public class GridFace : Node
 {
     protected List<Node> vertices;
 
+    public List<Node> Vertices
+    {
+        get
+        {
+            return vertices;
+        }
+    }
+
+
+    public Vector3 Dimensions
+    {
+        get
+        {
+            Vector3 min = GetMin();
+            Vector3 max = GetMax();
+            return new Vector3(max.x - min.x, max.y - min.y, max.z - min.z);
+        }
+    }
+
+
     public GridFace()
     {
         position = new Vector3();
@@ -41,6 +61,11 @@ public class GridFace : Node
     {
         vertices.Add(vertex);
         return vertices.Count - 1;
+    }
+
+    public bool IsSquare()
+    {
+        return vertices.Count == 4;
     }
 
     public int NumVertices()
@@ -118,11 +143,54 @@ public class GridFace : Node
         }
     }
 
+    public virtual Vector3 GetMin()
+    {
+        return vertices[0].GetPosition();
+    }
+
+    public virtual Vector3 GetMax()
+    {
+        return vertices[3].GetPosition();
+    }
+
     public virtual bool Contains(Vector2 point)
     {
-
-        Vector3 min = vertices[0].GetPosition();
-        Vector3 max = vertices[3].GetPosition();
+        Vector3 min = GetMin();
+        Vector3 max = GetMax();
         return point.x > min.x && point.x < max.x && point.y > min.z && point.y < max.z;
     }
+
+    /// Returns a circle represented as a vector, where x and y are its center and z is its radius
+    public Vector3 GetCircumCircle(Vector2 p)
+    {
+        if(IsSquare())
+        {
+            float r = MathOps.CircumRadius(p, Vertices[0].GetPositionXZ(), Vertices[3].GetPositionXZ());
+            Vector2 c = MathOps.CircumCenter(p, Vertices[0].GetPositionXZ(), Vertices[3].GetPositionXZ());
+            return new Vector3(c.x, c.y, r);
+        }
+        else
+        {
+             float r = MathOps.CircumRadius(p, Vertices[1].GetPositionXZ(), Vertices[2].GetPositionXZ());
+            Vector2 c = MathOps.CircumCenter(p, Vertices[1].GetPositionXZ(), Vertices[2].GetPositionXZ());
+
+            return new Vector3(c.x, c.y, r);
+        }
+    }
+
+    /*
+    public static GridFace Merge(GridFace A, GridFace B)
+    {
+        List<Node> sharedVerts = new List<Node>();
+        List<Node> exclusiveVerts = new List<Node>();
+        foreach(Node node in A.Vertices)
+        {
+            Node shared = B.GetConnectionWithVertex(node);
+            if (shared != null)
+                sharedVerts.Add(shared);
+        }
+
+
+    }
+    */
 }

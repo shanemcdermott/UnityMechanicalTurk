@@ -10,6 +10,20 @@ abstract public class PointGenerator : MonoBehaviour
 
     public List<Vector2> samplePoints;
 
+    public float width
+    {
+        get { return bounds.width; }
+        set
+        {
+            bounds.width = value;
+        }
+    }
+    public float height
+    {
+        get { return bounds.height; }
+        set { bounds.height = value; }
+    }
+
     public void SetBounds(float width, float height)
     {
         bounds = new Rect(0, 0, width, height);

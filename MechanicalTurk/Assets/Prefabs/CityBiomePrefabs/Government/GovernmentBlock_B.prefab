@@ -63,7 +63,7 @@ MonoBehaviour:
   - {fileID: 1189121154384388, guid: 7617253c824225e478c24e508ab6db7f, type: 2}
   pointGenerator: {fileID: 0}
   Dimensions: {x: 256, y: 0, z: 256}
-  MinLotSize: {x: 8, y: 8, z: 8}
+  MinLotSize: {x: 16, y: 16, z: 16}
   terrain: {fileID: 0}
   roadDesigner: {fileID: 0}
 --- !u!114 &114903631981386802

@@ -27,7 +27,7 @@ public class GameLogicTest {
 		//SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
 		yield return null;
 		var map = GameObject.Find("Map Generator");
-		var mapGen = map.GetComponent<MapGenerator>();
+		var mapGen = map.GetComponent<TerrainGenerator>();
 		Assert.True(mapGen != null);
 	}
 

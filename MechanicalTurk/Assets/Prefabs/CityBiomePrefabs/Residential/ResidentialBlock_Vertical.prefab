@@ -52,9 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc0c874db4a0684280deacaa1b3d118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bShouldDrawFromCenter: 1
+  bShouldDrawFromCenter: 0
   wantsVerticalConnections: 1
+  wantsVerticalFaceConnections: 0
   wantsHorizontalConnections: 0
+  wantsHorizontalFaceConnections: 1
 --- !u!114 &114656647949992734
 MonoBehaviour:
   m_ObjectHideFlags: 1

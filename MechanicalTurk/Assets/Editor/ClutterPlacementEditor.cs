@@ -15,11 +15,11 @@ public class ClutterPlacementEditor : Editor
         ClutterPlacement clutter = (ClutterPlacement)target;
         if(GUILayout.Button("Place Clutter"))
         {
-            clutter.placeClutter();
+            clutter.Generate();
         }
         if(GUILayout.Button("Clear Clutter"))
         {
-            clutter.clearClutter();
+            clutter.Clean();
         }
     }
 }
