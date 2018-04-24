@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -71,9 +71,9 @@ public class LSystemGeneration : CityGenerator
                         if (diff.x > 0)//east
                         {
                             loc = new Vector2Int(1, 1);
-                            addBuilding(node + loc,node);
+                            addBuilding(node + loc, node);
                             loc = new Vector2Int(1, -1);
-                            addBuilding(node + loc,node);
+                            addBuilding(node + loc, node);
                             loc = new Vector2Int(3, 1);
                             addBuilding(node + loc, node);
                             loc = new Vector2Int(3, -1);
@@ -93,11 +93,11 @@ public class LSystemGeneration : CityGenerator
                         if (diff.y > 0)//north
                         {
                             loc = new Vector2Int(1, 1);
-                            addBuilding(node+loc, node);
+                            addBuilding(node + loc, node);
                             loc = new Vector2Int(1, 3);
-                            addBuilding(node+loc, node);
+                            addBuilding(node + loc, node);
                             loc = new Vector2Int(-1, -1);
-                            addBuilding(node+loc, node);
+                            addBuilding(node + loc, node);
                             loc = new Vector2Int(-1, -3);
                             addBuilding(node + loc, node);
                         }
@@ -140,8 +140,11 @@ public class LSystemGeneration : CityGenerator
             {
                 GameObject instance = GameObject.Instantiate(go, transform.parent.Find("Buildings"));
                 float height = terrainGenerator.terrain.SampleHeight(new Vector3(buildingCenter.x, 0, buildingCenter.y));
-                instance.transform.localPosition = new Vector3(buildingCenter.x-BuildingContainer.position.x+.5f, height, buildingCenter.y-BuildingContainer.position.z+.5f);
+                instance.transform.localPosition = new Vector3(buildingCenter.x - BuildingContainer.position.x + .5f, height, buildingCenter.y - BuildingContainer.position.z + .5f);
                 go.transform.localScale = new Vector3(.5f, .5f, .5f);
+                int angle = 90*UnityEngine.Random.Range(0, 4);
+                go.transform.rotation = new Quaternion();
+                go.transform.Rotate(Vector3.up*angle);
                 buildings.Add(buildingCenter, go);
 
             }
@@ -210,7 +213,7 @@ public class LSystemGeneration : CityGenerator
                     alphamaps[node.y * 2, node.x * 2 + 1, 0] = 0;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, 0] = 0;
                     DrawConnections(node, connections);
-                    
+
                     for (int j = 0; j < 16; j++)
                     {
                         if (j != i)
@@ -266,7 +269,7 @@ public class LSystemGeneration : CityGenerator
     {
         return node.x >= 0 && node.y >= 0 &&
                 node.x * 2 + 1 < alphamaps.GetLength(1) &&
-                node.y *2 + 1 < alphamaps.GetLength(0);
+                node.y * 2 + 1 < alphamaps.GetLength(0);
     }
 
     private void GenerateRoadGrid()
@@ -274,7 +277,7 @@ public class LSystemGeneration : CityGenerator
         GameObject controller = GameObject.Find("GenController");
         seed = controller.GetComponent<GenerationController>().Seed;
         UnityEngine.Random.InitState(seed);
-        transform.position =  new Vector3(terrainGenerator.terrain.terrainData.alphamapWidth / 4, 0f, terrainGenerator.terrain.terrainData.alphamapHeight / 4);
+        transform.position = new Vector3(terrainGenerator.terrain.terrainData.alphamapWidth / 4, 0f, terrainGenerator.terrain.terrainData.alphamapHeight / 4);
         transform.rotation = new Quaternion(0, 0, 0, 1);
         rules.Clear();
         //*****RULES************
