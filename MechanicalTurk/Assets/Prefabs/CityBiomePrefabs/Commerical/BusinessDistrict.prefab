@@ -89,3 +89,4 @@ MonoBehaviour:
   Dimensions: {x: 64, y: 0, z: 64}
   MinLotSize: {x: 16, y: 16, z: 16}
   terrain: {fileID: 0}
+  roadDesigner: {fileID: 0}

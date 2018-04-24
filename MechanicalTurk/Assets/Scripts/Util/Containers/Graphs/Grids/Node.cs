@@ -128,13 +128,47 @@ public class Node : IHasConnections<Node>
         }
     }
 
-    public void FindOrAdd(ref Dictionary<Vector2Int, bool> points, Vector2Int key, bool value)
+    public static void FindOrAdd(ref Dictionary<Vector2Int, bool> points, Vector2Int key, bool value)
     {
         if(!points.ContainsKey(key))
         {
             points.Add(key, value);
         }
     }
+
+    public void GetConnectionLines(ref List<Vector2Int> connectionPoints)
+    {
+        foreach (Node c in connections)
+        {
+            if (c != null)
+            {
+                GetConnectionLine(ref connectionPoints, position, c.position);
+            }
+        }
+    }
+
+    public void GetVerticalConnections(ref Dictionary<Vector2Int, bool> connectionPoints)
+    {
+        foreach (Node c in connections)
+        {
+            if (c != null && c.z == z)
+            {
+                GetConnectionLine(ref connectionPoints, position, c.position);
+            }
+        }
+    }
+
+    public void GetHorizontalConnections(ref Dictionary<Vector2Int, bool> connectionPoints)
+    {
+        foreach (Node c in connections)
+        {
+            if (c != null && c.x == x)
+            {
+                GetConnectionLine(ref connectionPoints, position, c.position);
+            }
+        }
+    }
+
 
     public void GetConnectionLines(ref Dictionary<Vector2Int, bool> connectionPoints)
     {
@@ -147,12 +181,61 @@ public class Node : IHasConnections<Node>
         }
     }
 
-    public void GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLines, Node from, Node to)
+    public static void GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLines, Node from, Node to)
     {
         GetConnectionLine(ref connectionLines, from.GetPosition(), to.GetPosition());
     }
 
-    public void  GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLine, Vector3 node, Vector3 connection)
+    public static void GetConnectionLine(ref List<Vector2Int> connectionLine, Vector3 node, Vector3 connection)
+    {
+        for (int x = (int)node.x; x <= (int)connection.x; x++)
+        {
+            for (int z = (int)node.z; z <= (int)connection.z; z++)
+            {
+                Vector2Int v = new Vector2Int(x, z);
+                if (!connectionLine.Contains(v))
+                {
+                    connectionLine.Add(v);
+                }
+            }
+
+            for (int z = (int)node.z; z > (int)connection.z; z--)
+            {
+                Vector2Int v = new Vector2Int(x, z);
+                if (!connectionLine.Contains(v))
+                {
+                    connectionLine.Add(v);
+                }
+            }
+
+        }
+
+
+        for (int x = (int)node.x; x > (int)connection.x; x--)
+        {
+            for (int z = (int)node.z; z <= (int)connection.z; z++)
+            {
+                Vector2Int v = new Vector2Int(x, z);
+                if (!connectionLine.Contains(v))
+                {
+                    connectionLine.Add(v);
+                }
+            }
+
+            for (int z = (int)node.z; z > (int)connection.z; z--)
+            {
+                Vector2Int v = new Vector2Int(x, z);
+                if (!connectionLine.Contains(v))
+                {
+                    connectionLine.Add(v);
+                }
+            }
+
+        }
+
+    }
+
+    public static void  GetConnectionLine(ref Dictionary<Vector2Int, bool> connectionLine, Vector3 node, Vector3 connection)
     {
         Vector3 difference = connection - node;
 

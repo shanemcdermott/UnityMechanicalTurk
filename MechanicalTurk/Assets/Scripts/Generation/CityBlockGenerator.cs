@@ -19,6 +19,7 @@ public class CityBlockGenerator : GenerationAlgorithm
     public GridNode districtNode;
     public Terrain terrain;
 
+    public RoadDesigner roadDesigner;
     private GameObject cityBlock;
 
     public override bool CanGenerate()
@@ -34,6 +35,10 @@ public class CityBlockGenerator : GenerationAlgorithm
         if (districtNode == null)
         {
             CreateGrid();
+        }
+        if(roadDesigner == null)
+        {
+            roadDesigner = GetComponent<RoadDesigner>();
         }
         //throw new NotImplementedException();
     }
@@ -149,5 +154,13 @@ public class CityBlockGenerator : GenerationAlgorithm
 
         GameObject regionToSpawn = blockPrefabs[Random.Range(0, blockPrefabs.Count)];
         return regionToSpawn;
+    }
+
+    public virtual void GetRoads(ref Dictionary<Vector2Int,bool> roads)
+    {
+        if(roadDesigner)
+        {
+            roadDesigner.GetRoads(districtNode, ref roads);
+        }
     }
 }

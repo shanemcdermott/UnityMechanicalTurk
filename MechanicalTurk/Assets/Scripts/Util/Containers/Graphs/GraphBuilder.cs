@@ -27,7 +27,7 @@ public class GraphBuilder : MonoBehaviour
                 go.transform.SetParent(transform);
                 GameNode gn = go.GetComponent<GameNode>();
                 gn.SetNode(node);
-                gn.SpawnBuildings();
+               // gn.SpawnBuildings();
             }
         }
     }

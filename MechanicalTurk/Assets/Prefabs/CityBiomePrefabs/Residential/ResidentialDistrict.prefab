@@ -83,7 +83,10 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   blockPrefabs:
   - {fileID: 1660461208447572, guid: 10bb8d9e57207ac43bd0c0615a4dcc8b, type: 2}
+  - {fileID: 1322460241736658, guid: c5568ac46584e4448a2ce9bdfe3c75a7, type: 2}
+  - {fileID: 1999119434732032, guid: 2f83c1ec92b6d2f4c8e1554cd4460a92, type: 2}
   pointGenerator: {fileID: 114481010403169316}
   Dimensions: {x: 64, y: 0, z: 64}
   MinLotSize: {x: 8, y: 8, z: 8}
   terrain: {fileID: 0}
+  roadDesigner: {fileID: 0}

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257342111705136}
   - component: {fileID: 114924514245704018}
+  - component: {fileID: 114647642817547128}
   m_Layer: 0
   m_Name: RetailBlock
   m_TagString: Untagged
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114647642817547128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1806757274652684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a10c6af9c0ea844ae4cb5677cad630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bShouldDrawFromCenter: 1
 --- !u!114 &114924514245704018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -61,6 +74,8 @@ MonoBehaviour:
   - {fileID: 1707334973555932, guid: 5981cb2c1f3f1154591db334c17f980f, type: 2}
   - {fileID: 1585515407390122, guid: 51092fbea2b95334e8b158e4f367e1a1, type: 2}
   - {fileID: 1921583229834540, guid: 1e72a63f82d422e4eb56fcac25fd0ab1, type: 2}
+  pointGenerator: {fileID: 0}
   Dimensions: {x: 256, y: 0, z: 256}
   MinLotSize: {x: 8, y: 8, z: 8}
   terrain: {fileID: 0}
+  roadDesigner: {fileID: 0}

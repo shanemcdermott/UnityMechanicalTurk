@@ -136,6 +136,30 @@ public class GridNode : GridFace
         return children == null;
     }
 
+    public void GetChildrenAtDepth(int depth, out List<GridNode> outChildren)
+    {
+        outChildren = new List<GridNode>();
+        GetNodesAtDepth(depth, ref outChildren);
+    }
+
+    private void GetNodesAtDepth(int depth, ref List<GridNode> leafNodes)
+    {
+        int currentDepth = Depth();
+
+        if(currentDepth== depth)
+        {
+            leafNodes.Add(this);
+        }
+        else if(currentDepth < depth)
+        {
+            foreach (GridNode child in children)
+            {
+                child.GetNodesAtDepth(depth, ref leafNodes);
+            }
+        }
+    }
+
+
     public void GetLeaves(out List<GridNode> leafNodes)
     {
         leafNodes = new List<GridNode>();
@@ -156,6 +180,8 @@ public class GridNode : GridFace
             }
         }
     }
+
+
 
     public virtual List<Node> GetChildVertices()
     {

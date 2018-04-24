@@ -8,7 +8,6 @@ public class CityBiomeGenerator : CityGenerator
     public RoadPainter roadPainter;
     public CityBlockGenerator regionGenerator;
 
-    public bool bShouldDrawFromCenter = true;
     public GridNode gridNode;
 
     public override void Setup()
@@ -38,9 +37,24 @@ public class CityBiomeGenerator : CityGenerator
     {
         regionGenerator.Generate();
         gridNode = regionGenerator.districtNode;
-        CreateRoadsFromGrid();
+        CreateRoadsByDesign();
+        //CreateRoadsFromGrid();
     }
     
+    public virtual void CreateRoadsByDesign()
+    {
+        Dictionary<Vector2Int, bool> roads = new Dictionary<Vector2Int, bool>();
+        CityBlockGenerator[] cityBlocks = transform.GetComponentsInChildren<CityBlockGenerator>();
+        foreach(CityBlockGenerator cityBlock in cityBlocks)
+        {
+            cityBlock.GetRoads(ref roads);
+        }
+
+        roadPainter.DrawRoads(ref roads);
+        roadPainter.ApplyAlphaBlend();
+
+    }
+
     public virtual void CreateRoadsFromGrid()
     {
 
@@ -48,10 +62,7 @@ public class CityBiomeGenerator : CityGenerator
         //draw connections between face verts
         DrawEdgeRoads(ref connectionPoints);
 
-        if (bShouldDrawFromCenter)
-        {
-            DrawRoadsFromCenters(ref connectionPoints);
-        }
+
 
         roadPainter.DrawRoads(ref connectionPoints);
         roadPainter.ApplyAlphaBlend();
@@ -59,7 +70,6 @@ public class CityBiomeGenerator : CityGenerator
 
     public virtual void DrawEdgeRoads(ref Dictionary<Vector2Int, bool> connectionPoints)
     {
-        
         List<Node> vertices = gridNode.GetChildVertices();
         //draw connections between verts
 
@@ -112,7 +122,7 @@ public class CityBiomeGenerator : CityGenerator
     protected void GetRoadsFromLeaf(ref Dictionary<Vector2Int, bool> connectionPoints, GridNode leaf, int a, int b)
     {
         Vector3 midPoint = MathOps.Midpoint(leaf.GetVertex(a).GetPosition(), leaf.GetVertex(b).GetPosition());
-        leaf.GetConnectionLine(ref connectionPoints, leaf.GetPosition(), midPoint);
+        Node.GetConnectionLine(ref connectionPoints, leaf.GetPosition(), midPoint);
     }
 
 }

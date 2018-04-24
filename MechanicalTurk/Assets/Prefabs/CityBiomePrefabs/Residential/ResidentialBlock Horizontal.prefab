@@ -9,30 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1660461208447572}
+  m_RootGameObject: {fileID: 1999119434732032}
   m_IsPrefabParent: 1
---- !u!1 &1660461208447572
+--- !u!1 &1999119434732032
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4848117549756144}
-  - component: {fileID: 114656647949992734}
+  - component: {fileID: 4838295790841492}
+  - component: {fileID: 114397124158399994}
+  - component: {fileID: 114147717468203470}
   m_Layer: 0
-  m_Name: ResidentialBlock
+  m_Name: ResidentialBlock Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4848117549756144
+--- !u!4 &4838295790841492
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1660461208447572}
+  m_GameObject: {fileID: 1999119434732032}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,12 +41,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114656647949992734
+--- !u!114 &114147717468203470
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1660461208447572}
+  m_GameObject: {fileID: 1999119434732032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc0c874db4a0684280deacaa1b3d118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bShouldDrawFromCenter: 1
+  wantsVerticalConnections: 0
+  wantsHorizontalConnections: 1
+--- !u!114 &114397124158399994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1999119434732032}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9a387e841cdcc149b55b283638f4ef7, type: 3}
@@ -72,31 +87,8 @@ MonoBehaviour:
   - {fileID: 1729032696951768, guid: d27b0739ccab82040b05cf6b3d72af46, type: 2}
   - {fileID: 1575666294584998, guid: 9891448b9838e984ba5c9a9f249c3bd1, type: 2}
   - {fileID: 1643180542855640, guid: d7b837ac915eb5c4ea389f79a9d1b21f, type: 2}
-  - {fileID: 1305018252622850, guid: 497851966ff11414cb573809c14ad0ff, type: 2}
-  - {fileID: 1527236160238084, guid: 21d14356ec8dfb040bd3b9e2bf4b531e, type: 2}
-  - {fileID: 1182628892176246, guid: ec96d1c4460c50c4fbadc91d65ed5e7b, type: 2}
-  - {fileID: 1099219197568456, guid: b4470017251837b4195b3f76e658d662, type: 2}
-  - {fileID: 1727847396293432, guid: bdc4aa0bb080df3428980ee5c3d49cce, type: 2}
-  - {fileID: 1073402424652422, guid: 2d886b5ae10e917409a53e3355c308d7, type: 2}
-  - {fileID: 1303908663247876, guid: df068c7a87e20fd439b00f1d0871e563, type: 2}
-  - {fileID: 1093807287998206, guid: e57dd45a62985704a908e0c519b9172d, type: 2}
-  - {fileID: 1487461054125458, guid: 5daf457a8a0a1014aa916929395064ce, type: 2}
-  - {fileID: 1718371060426540, guid: c586c5b453008dc46b8c165b52e8f9b0, type: 2}
-  - {fileID: 1426875101962796, guid: 22578fac17fe4274bbc4e53666ff1532, type: 2}
-  - {fileID: 1600516065112844, guid: b97ed3da6c30f1147bb2e19ac29b5508, type: 2}
-  - {fileID: 1926166741811876, guid: 55ce3164d7e7a104097de812f9ff5d26, type: 2}
-  - {fileID: 1095742250494978, guid: c78481dd92f842c44915621923e12baa, type: 2}
-  - {fileID: 1576438752123608, guid: 751dd0173dd8ce54d914e69341bd406c, type: 2}
-  - {fileID: 1458760180863178, guid: 5749de655c3b76b43a7227c0a06bb94f, type: 2}
-  - {fileID: 1683445183348148, guid: b786fce9b1b6bc34499431f14972f5cd, type: 2}
-  - {fileID: 1624614653111212, guid: 9ea65119add09734390647a594d2eb60, type: 2}
-  - {fileID: 1648481699770716, guid: 10b843a0ff9e6ae43a420fce35fdc121, type: 2}
-  - {fileID: 1732070649228314, guid: e4ef5fc2db3cc124b8a1eca0f8a0d373, type: 2}
-  - {fileID: 1300675807661484, guid: cea1eeb4466368c4d9c913bc7ed6f5c9, type: 2}
-  - {fileID: 1202221094450918, guid: ec1ff255043bff24080681692f5e6d84, type: 2}
-  - {fileID: 1315842034925192, guid: df668f924b3ef804796aee58215c1eca, type: 2}
-  - {fileID: 1655981990633782, guid: bc72227d6acfe314fa55e45afbfdb255, type: 2}
-  - {fileID: 1332961958129294, guid: a695280f8ef732b43823b5d399ff8cd7, type: 2}
+  pointGenerator: {fileID: 0}
   Dimensions: {x: 256, y: 0, z: 256}
   MinLotSize: {x: 4, y: 4, z: 4}
   terrain: {fileID: 0}
+  roadDesigner: {fileID: 0}

@@ -149,6 +149,14 @@ public class RoadPainter : MonoBehaviour
         return new Vector2Int((int)(x * mapScale.x),(int)( y * mapScale.y));
     }
 
+    public void DrawRoads(ref List<Vector2Int> roads)
+    {
+        foreach(Vector2Int point in roads)
+        {
+            DrawTextureAt(point, 1);
+        }
+    }
+
     public void DrawRoads(ref Dictionary<Vector2Int, bool> roadPoints)
     {
 
