@@ -55,7 +55,7 @@ public class LSystemGeneration : CityGenerator
         clearBuildings();
         foreach (Vector2Int lot in buildingLots)
         {
-            if (CheckSlope(lot))
+            if (CheckSlope(lot)&&lot.x >= 0 && lot.y >= 0 && lot.x <= buildingNoiseMap.Dimensions.x && lot.y <= buildingNoiseMap.Dimensions.y)
             {
                 float noiseValue = buildingNoiseMap.Values[lot.x, lot.y];
                 // Layouts: Residential 4 corners [0], Business 2 Long buildings [1], and Large Government building [2] 
@@ -236,7 +236,7 @@ public class LSystemGeneration : CityGenerator
                     if (diff.y < 0)
                         i += 2;
                 }
-                if (checkAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
+                if (checkAlphaMap(node))
                 {
                     alphamaps[node.y * 2, node.x * 2, i] = 1;
                     alphamaps[node.y * 2 + 1, node.x * 2, i] = 1;
@@ -284,7 +284,7 @@ public class LSystemGeneration : CityGenerator
             for (int i = 1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
             {
                 Vector2Int offset = new Vector2Int((int)v.x * i, (int)v.y * i);
-                if (checkAlphaMap(node + offset, alphamapDimensions))
+                if (checkAlphaMap(node + offset))
                 {
                     alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, bitFlag] = 1;
                     alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, bitFlag] = 1;
@@ -299,7 +299,7 @@ public class LSystemGeneration : CityGenerator
         }
     }
 
-    private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
+    private bool checkAlphaMap(Vector2Int node)
     {
         return node.x >= 0 && node.y >= 0 &&
                 node.x * 2 + 1 < alphamaps.GetLength(1) &&
