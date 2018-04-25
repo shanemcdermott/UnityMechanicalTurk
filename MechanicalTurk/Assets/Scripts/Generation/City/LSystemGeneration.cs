@@ -40,11 +40,12 @@ public class LSystemGeneration : CityGenerator
         buildnoise.Setup();
         buildnoise.Generate();
         buildingNoiseMap = GetComponent<NoiseMap>();
+        buildingLots.Clear();
     }
 
     public override void Generate()
     {
-
+        
         GenerateRoadGrid();
         ApplyRoadToTerrain();
         GenerateBuildings();
@@ -55,6 +56,7 @@ public class LSystemGeneration : CityGenerator
         clearBuildings();
         foreach (Vector2Int lot in buildingLots)
         {
+            if(lot.x >= 0 && lot.y >= 0 && lot.x<buildingNoiseMap.Width && lot.y < buildingNoiseMap.Height)
             if (CheckSlope(lot))
             {
                 float noiseValue = buildingNoiseMap.Values[lot.x, lot.y];

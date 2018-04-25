@@ -84,6 +84,7 @@ public class BlockGenerator : GenerationAlgorithm
     {
         List<GridNode> leaves;
         districtNode.GetLeaves(out leaves);
+        List<GridNode> unvisited = new List<GridNode>(leaves);
         Vector2 worldOffset = districtNode.GetVertex(0).GetPositionXZ();
         if (pointGenerator)
         {
@@ -95,13 +96,17 @@ public class BlockGenerator : GenerationAlgorithm
                 GridNode childNode;
                 if (districtNode.GetChildContainingPoint(point, out childNode))
                 {
-                    Vector3 v = childNode.GetPosition();
-                    //new Vector3(point.x, 0f, point.y);
-                    v.y = terrain.SampleHeight(v + transform.root.position);
-                    childNode.SetPosition(v);
-                    SpawnBlockObject(childNode);
+                    if (unvisited.Remove(childNode))
+                    {
+                        Vector3 v = childNode.GetPosition();
+                        //new Vector3(point.x, 0f, point.y);
+                        v.y = terrain.SampleHeight(v + transform.root.position);
+                        childNode.SetPosition(v);
+                        SpawnBlockObject(childNode);
+                    }
                 }
             }
+            PopulateUnvisitedNodes(unvisited);
         }
         else
         {
@@ -133,58 +138,13 @@ public class BlockGenerator : GenerationAlgorithm
                 blockGen.Generate();
             }
         }
-        ClutterPlacement clutterPlacer = gameObject.GetComponent<ClutterPlacement>();
-        if(clutterPlacer)
-        {
-            if(clutterPlacer.pointGenerator==null)
-            {
-                clutterPlacer.pointGenerator = pointGenerator;
-            }
-            clutterPlacer.terrain = terrain;
-            clutterPlacer.clutterParent = go.transform;
-            clutterPlacer.Setup();
-            if(clutterPlacer.CanGenerate())
-            {
-                clutterPlacer.Generate();
-            }
-            else
-            {
-                Debug.Log("Clutter placer can't spawn anything!");
-            }
-        }
         return go;
     }
 
-    protected virtual void PopulateNodes(IEnumerable<GridNode> nodes)
+    /*By default, does nothing*/
+    protected virtual void PopulateUnvisitedNodes(IEnumerable<GridNode> nodes)
     {
-        Vector2 worldOffset = districtNode.GetVertex(0).GetPositionXZ();
-        if (pointGenerator)
-        {
-            List<Vector2> points;
-            pointGenerator.Generate(districtNode.Dimensions.x, districtNode.Dimensions.z, MinLotSize.x, 1000, out points);
-            List<GridNode> unvisited = new List<GridNode>(nodes);
-            foreach (Vector2 p in points)
-            {
-                Vector2 point = p + worldOffset;
-                GridNode childNode;
-                if (districtNode.GetChildContainingPoint(point, out childNode))
-                {
-                    Vector3 v = childNode.GetPosition();
-                    //new Vector3(point.x, 0f, point.y);
-                    v.y = terrain.SampleHeight(v + transform.root.position);
-                    childNode.SetPosition(v);
-                    SpawnBlockObject(childNode);
-                    unvisited.Remove(childNode);
-                }
-            }
-        }
-        else
-        {
-            foreach (GridNode node in nodes)
-            {
-                SpawnBlockObject(node);
-            }
-        }
+
     }
 
     public virtual GameObject ChooseDistrictToSpawn(Node parentNode)

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257342111705136}
   - component: {fileID: 114924514245704018}
-  - component: {fileID: 114647642817547128}
+  - component: {fileID: 114645800012695880}
   m_Layer: 0
   m_Name: RetailBlock
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114647642817547128
+--- !u!114 &114645800012695880
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,10 +49,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1806757274652684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41a10c6af9c0ea844ae4cb5677cad630, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fc0c874db4a0684280deacaa1b3d118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bShouldDrawFromCenter: 1
+  wantsVerticalConnections: 1
+  wantsVerticalFaceConnections: 0
+  wantsHorizontalConnections: 0
+  wantsHorizontalFaceConnections: 1
 --- !u!114 &114924514245704018
 MonoBehaviour:
   m_ObjectHideFlags: 1

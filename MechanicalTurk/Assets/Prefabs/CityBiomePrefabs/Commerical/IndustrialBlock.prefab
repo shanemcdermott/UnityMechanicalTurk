@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4375526068574806}
   - component: {fileID: 114059321937324660}
-  - component: {fileID: 114210047513527250}
+  - component: {fileID: 114276935042460046}
   m_Layer: 0
   m_Name: IndustrialBlock
   m_TagString: Untagged
@@ -72,7 +72,7 @@ MonoBehaviour:
   MinLotSize: {x: 8, y: 8, z: 8}
   terrain: {fileID: 0}
   roadDesigner: {fileID: 0}
---- !u!114 &114210047513527250
+--- !u!114 &114276935042460046
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -80,7 +80,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1181238431320972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41a10c6af9c0ea844ae4cb5677cad630, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fc0c874db4a0684280deacaa1b3d118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bShouldDrawFromCenter: 1
+  wantsVerticalConnections: 1
+  wantsVerticalFaceConnections: 0
+  wantsHorizontalConnections: 1
+  wantsHorizontalFaceConnections: 0

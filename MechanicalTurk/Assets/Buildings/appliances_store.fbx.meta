@@ -10,7 +10,27 @@ ModelImporter:
     3300000: //RootNode
     4300000: appliances_store
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blue_2
+    second: {fileID: 2100000, guid: 7bbb6349256a5e545b62a498145ad7db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red_2
+    second: {fileID: 2100000, guid: dd85904dbff75324591e64896cddd928, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white_2P
+    second: {fileID: 2100000, guid: 151a15f6b7b721d4786866f9983d5d34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window
+    second: {fileID: 2100000, guid: 327f45092c16f2d4e9f498d1b5c84175, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

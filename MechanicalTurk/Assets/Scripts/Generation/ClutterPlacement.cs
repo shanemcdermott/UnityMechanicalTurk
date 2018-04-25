@@ -6,98 +6,43 @@ using UnityEngine;
 
 
 //Shane McDermott 2018
-public class ClutterPlacement : GenerationAlgorithm
+public class ClutterPlacement : CityBlockGenerator
 {
+    public int maxItemsPerNode = 10;
 
-    //Prefabs
-    public ObjectSpawnParams[] clutterPrefabs;
-
-    //PlacementAlgorithm
-    public PointGenerator pointGenerator;
-
-    public List<GameObject> spawnedClutter;
-
-    //Terrain object
-    public Terrain terrain;
-    public Transform clutterParent;
-
-    public override void Generate()
+    protected override void PopulateUnvisitedNodes(IEnumerable<GridNode> nodes)
     {
-        List<Vector2> points;
-        pointGenerator.Generate(out points);
-        foreach (Vector2 v in points)
+        if(pointGenerator)
         {
-            Vector3 v3 = new Vector3(v.x, 0f, v.y) + clutterParent.position;
-            v3.y = terrain.SampleHeight(v3);
-            GameObject prefab = GetRandomClutterPrefab(GetSteepnessAt(v3));
-            if(prefab != null)
+            List<Vector2> points;
+            foreach (GridNode node in nodes)
             {
-                GameObject go = (GameObject)Instantiate(prefab, v3, clutterParent.rotation);
-                if (go)
+                Vector3 offset = node.GetVertex(0).GetPositionXZ();
+                pointGenerator.Generate(node.Dimensions.x, node.Dimensions.z, MinLotSize.x, maxItemsPerNode, out points);
+                foreach(Vector2 p in points)
                 {
-                    go.transform.SetParent(clutterParent);
-                    spawnedClutter.Add(go);
+                    Vector3 v = new Vector3(p.x, 0f, p.y) + offset;
+                    //new Vector3(point.x, 0f, point.y);
+                    v.y = terrain.SampleHeight(v + transform.root.position);
+                    GameObject go = SpawnBlockObject(node);
+                    if(go)
+                    {
+                        go.transform.localPosition = v;
+                    }
                 }
             }
+
         }
-    }
-
-
-
-    protected float GetSteepnessAt(Vector3 position)
-    {
-        return Mathf.Abs(terrain.terrainData.GetSteepness(position.x, position.z));
-    }
-
-    public override void Clean()
-    {
-        foreach(GameObject go in spawnedClutter)
+        else
         {
-            if (go != null)
-                DestroyImmediate(go);
-        }
-        spawnedClutter.Clear();
-    }
-
-    public GameObject GetRandomClutterPrefab(float steepness)
-    {
-        int i = GetRandomClutterIndex(steepness);
-        if(i >=0)
-        {
-            return clutterPrefabs[i].randomObject;
-        }
-        return null;
-    }
-
-    public int GetRandomClutterIndex(float steepness)
-    {
-        for(int i = 0; i < clutterPrefabs.Length; i++)
-        {
-            if(steepness <= clutterPrefabs[i].maxSteepness)
+            foreach (GridNode node in nodes)
             {
-                return Random.Range(i, clutterPrefabs.Length);
+                Vector3 v = node.GetPosition();
+                //new Vector3(point.x, 0f, point.y);
+                v.y = terrain.SampleHeight(v + transform.root.position);
+                node.SetPosition(v);
+                SpawnBlockObject(node);
             }
         }
-        return -1;
     }
-
-    public override bool CanGenerate()
-    {
-        return pointGenerator != null && clutterPrefabs.Length > 0 && terrain != null;
-    }
-
-    public override void Setup()
-    {
-        if(pointGenerator == null)
-        {
-            pointGenerator = GetComponent<PointGenerator>();
-        }
-        if(terrain == null)
-        {
-            terrain = GetComponent<Terrain>();
-        }
-        Clean();
-        clutterPrefabs.OrderBy(i => i.maxSteepness).ThenBy(i => i.minDimensions.x).ThenBy(i => i.minDimensions.y);
-    }
-
 }

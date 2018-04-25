@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4011671288586526}
   - component: {fileID: 114191256449974056}
+  - component: {fileID: 114583800880636422}
   m_Layer: 0
   m_Name: NatureBlock
   m_TagString: Untagged
@@ -56,22 +57,35 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  clutterPrefabs:
-  - prefabOptions:
-    - {fileID: 100000, guid: 4c7bd49592cc8da4dae5f568c91f1fde, type: 3}
-    - {fileID: 100000, guid: 0925b7ce84eeacc48b2cbcfa10a97db9, type: 3}
-    maxSteepness: 0.6
-    minDimensions: {x: 1, y: 1}
-  - prefabOptions:
-    - {fileID: 100000, guid: 4c7bd49592cc8da4dae5f568c91f1fde, type: 3}
-    - {fileID: 100000, guid: f50dab112d46ea34fbff45c9297dfa9b, type: 3}
-    maxSteepness: 0.4
-    minDimensions: {x: 1, y: 1}
-  - prefabOptions:
-    - {fileID: 100000, guid: f50dab112d46ea34fbff45c9297dfa9b, type: 3}
-    maxSteepness: 0.2
-    minDimensions: {x: 1, y: 1}
-  pointGenerator: {fileID: 0}
-  spawnedClutter: []
+  blockPrefabs:
+  - {fileID: 1806942527090010, guid: b1c9ceb762eaded4c8bb2064afc420b5, type: 2}
+  - {fileID: 1826131239407874, guid: e6d6bd0e5b0dfed48bafc66d9e116884, type: 2}
+  - {fileID: 1445478518982214, guid: 82586f9fc6f2c55439a5c220416f9ee9, type: 2}
+  pointGenerator: {fileID: 114583800880636422}
+  Dimensions: {x: 256, y: 0, z: 256}
+  MinLotSize: {x: 4, y: 4, z: 4}
   terrain: {fileID: 0}
-  clutterParent: {fileID: 0}
+  roadDesigner: {fileID: 0}
+  maxItemsPerNode: 7
+--- !u!114 &114583800880636422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1563404890388494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3cdca6eac904144b2de34edb3cc500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 100
+    height: 100
+  samplePoints: []
+  minDistance: 5
+  newPointsCount: 30
+  maxTotalPoints: 1000
+  cellSize: 0
