@@ -54,6 +54,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2527fd77c3b954c99268f62bb997fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  noiseMap: {fileID: 0}
+  scale: 1
+  offsetX: 100
+  offsetY: 100
 --- !u!114 &114542220511628816
 MonoBehaviour:
   m_ObjectHideFlags: 1
