@@ -40,12 +40,11 @@ public class LSystemGeneration : CityGenerator
         buildnoise.Setup();
         buildnoise.Generate();
         buildingNoiseMap = GetComponent<NoiseMap>();
-        buildingLots.Clear();
     }
 
     public override void Generate()
     {
-        
+
         GenerateRoadGrid();
         ApplyRoadToTerrain();
         GenerateBuildings();
@@ -56,8 +55,7 @@ public class LSystemGeneration : CityGenerator
         clearBuildings();
         foreach (Vector2Int lot in buildingLots)
         {
-            if(lot.x >= 0 && lot.y >= 0 && lot.x<buildingNoiseMap.Width && lot.y < buildingNoiseMap.Height)
-            if (CheckSlope(lot))
+            if (CheckSlope(lot)&&lot.x >= 0 && lot.y >= 0 && lot.x <= buildingNoiseMap.Dimensions.x && lot.y <= buildingNoiseMap.Dimensions.y)
             {
                 float noiseValue = buildingNoiseMap.Values[lot.x, lot.y];
                 // Layouts: Residential 4 corners [0], Business 2 Long buildings [1], and Large Government building [2] 
@@ -101,17 +99,17 @@ public class LSystemGeneration : CityGenerator
 
     private BuildingType FindBestTerrain(float noiseValue)
     {
-        if(noiseValue <= .33f)
+        if(noiseValue <= .25f)
         {
-            return BuildingType.Residential;
+            return BuildingType.Government;
         }
-        else if(noiseValue<= .66f)
+        else if(noiseValue<= .5f)
         {
             return BuildingType.Business;
         }
         else
         {
-            return BuildingType.Government;
+            return BuildingType.Residential;
         }
     }
 
@@ -151,37 +149,39 @@ public class LSystemGeneration : CityGenerator
                 float height = terrainGenerator.terrain.SampleHeight(new Vector3(buildingCenter.x, 0, buildingCenter.y));
                 //TODO: might need to change offsets per building type
                 BoxCollider boxCollider = instance.GetComponent<BoxCollider>();
-                instance.transform.localPosition = new Vector3(buildingCenter.x - BuildingContainer.position.x,
+                if(boxCollider==null)
+                    boxCollider = instance.GetComponentInChildren<BoxCollider>();
+                instance.transform.localPosition = new Vector3(buildingCenter.x - BuildingContainer.position.x + .5f,
                                                                height,
                                                                buildingCenter.y - BuildingContainer.position.z + .5f);
                 if (type == BuildingType.Residential)
                 {//TODO:Update hardcoded values to calculations based on @length
-                    go.transform.localScale = new Vector3(1/boxCollider.size.x,
-                                                          1/boxCollider.size.y, 
+                    instance.transform.localScale = new Vector3(1/boxCollider.size.x,
+                                                          .5f/boxCollider.size.y, 
                                                           1/boxCollider.size.z);
                 }
                 else if(type == BuildingType.Business)
                 {
-                    go.transform.localScale = new Vector3(1 / boxCollider.size.x,
-                                                          1 / boxCollider.size.x,
-                                                          1 / boxCollider.size.x);
+                    instance.transform.localScale = new Vector3(1f/ boxCollider.size.x,
+                                                          1 / boxCollider.size.y,
+                                                          1.5f / boxCollider.size.z);
                 }
                 else
                 {
-                    go.transform.localScale = new Vector3(3/boxCollider.size.x, 
-                                                          3/boxCollider.size.x,
-                                                          3/boxCollider.size.x);
+                    instance.transform.localScale = new Vector3(3/boxCollider.size.x, 
+                                                          1/boxCollider.size.y,
+                                                          3/boxCollider.size.z);
                 }
                 
-                if(type != BuildingType.Business)
+                if(type == BuildingType.Residential)
                 {
                     //Rotate Randomly
                     int angle = 90 * UnityEngine.Random.Range(0, 4);
-                    go.transform.rotation = new Quaternion();
-                    go.transform.Rotate(Vector3.up * angle);
+                    instance.transform.rotation = new Quaternion();
+                    instance.transform.Rotate(Vector3.up * angle);
                 }
                 //TODO: Rotate building according to gradient value at buildingCenter
-                buildings.Add(buildingCenter, go);
+                buildings.Add(buildingCenter, instance);
             }
         }
     }
@@ -236,7 +236,7 @@ public class LSystemGeneration : CityGenerator
                     if (diff.y < 0)
                         i += 2;
                 }
-                if (checkAlphaMap(node, new Vector2Int(tData.alphamapWidth, tData.alphamapHeight)))
+                if (checkAlphaMap(node))
                 {
                     alphamaps[node.y * 2, node.x * 2, i] = 1;
                     alphamaps[node.y * 2 + 1, node.x * 2, i] = 1;
@@ -284,7 +284,7 @@ public class LSystemGeneration : CityGenerator
             for (int i = 1; i < length; i++)//Draw half the edge, other node will draw the rest if on the terrain
             {
                 Vector2Int offset = new Vector2Int((int)v.x * i, (int)v.y * i);
-                if (checkAlphaMap(node + offset, alphamapDimensions))
+                if (checkAlphaMap(node + offset))
                 {
                     alphamaps[(node.y + offset.y) * 2, (node.x + offset.x) * 2, bitFlag] = 1;
                     alphamaps[(node.y + offset.y) * 2 + 1, (node.x + offset.x) * 2, bitFlag] = 1;
@@ -299,7 +299,7 @@ public class LSystemGeneration : CityGenerator
         }
     }
 
-    private bool checkAlphaMap(Vector2Int node, Vector2 alphaMapDimensions)
+    private bool checkAlphaMap(Vector2Int node)
     {
         return node.x >= 0 && node.y >= 0 &&
                 node.x * 2 + 1 < alphamaps.GetLength(1) &&
@@ -321,6 +321,7 @@ public class LSystemGeneration : CityGenerator
         angle = 90f;
         axiom = "FX";
 
+        buildingLots.Clear();
         roads.Clear();
         roadGrid.Clear();
         Vector2Int[] defaults = new Vector2Int[4] {new Vector2Int(int.MaxValue,int.MaxValue),
