@@ -130,28 +130,34 @@ public class PerlinCityGenerator : CityGenerator {
 
             Vector2 faceSize = new Vector2((midpoint.x - bottomLeft.x) * 2, (midpoint.y - bottomLeft.y) * 2);
             
-            if (CheckSlope(bottomLeft))
+            //if (CheckSlope(bottomLeft))
+            //{
+            GameObject district = buildingGenerator.GetBuilding(midpoint, faceSize);
+            if (district != null)
             {
-                GameObject district = buildingGenerator.GetBuilding(bottomLeft, faceSize);
-                if (district != null)
+                GameObject instance = GameObject.Instantiate(district, transform);
+
+                float height = terrainGenerator.terrain.SampleHeight(new Vector3(midpoint.x + transform.root.position.x, 0, midpoint.y + transform.root.position.z));
+                instance.transform.localPosition = new Vector3(midpoint.x, height, midpoint.y);
+
+                CityBlockGenerator districtBlockGenerator = instance.GetComponent<CityBlockGenerator>();
+                if(districtBlockGenerator != null)
                 {
-                    GameObject instance = GameObject.Instantiate(district, transform);
-                    float height = terrainGenerator.terrain.SampleHeight(new Vector3(bottomLeft.x, 0, bottomLeft.y));
-                    instance.transform.localPosition = new Vector3(bottomLeft.x, height, bottomLeft.y);
-
-                    CityBlockGenerator districtBlockGenerator = instance.GetComponent<CityBlockGenerator>();
-                    if(districtBlockGenerator != null)
-                    {
-                        districtBlockGenerator.Dimensions = new Vector3(faceSize.x, 0, faceSize.y);
-                        districtBlockGenerator.terrain = terrainGenerator.terrain;
-                        districtBlockGenerator.Setup();
-                        districtBlockGenerator.Generate();
-                    }
-
-                    Transform child = districtBlockGenerator.gameObject.transform.GetChild(0);
-                    child.localPosition = Vector3.zero;
+                    districtBlockGenerator.Dimensions = new Vector3(faceSize.x, 0, faceSize.y);
+                    districtBlockGenerator.terrain = terrainGenerator.terrain;
+                    List<Node> verts = face.GetVertices();
+                    GridNode parentNode = new GridNode(new Vector3(midpoint.x, 0, midpoint.y), ref verts);
+                    districtBlockGenerator.districtNode = parentNode;
+                    districtBlockGenerator.Setup();
+                    districtBlockGenerator.Generate();
                 }
+
+                
+                //Transform child = districtBlockGenerator.gameObject.transform.GetChild(0);
+                //child.localPosition = Vector3.zero;
+                //instance.transform.localPosition = new Vector3(bottomLeft.x, 0, bottomLeft.y);
             }
+            //}
 
 
         }
