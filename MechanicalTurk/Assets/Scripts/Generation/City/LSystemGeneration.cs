@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,32 +6,40 @@ using UnityEngine;
 
 public class LSystemGeneration : CityGenerator
 {
+    [Header("Terrain")]
     public TerrainGenerator terrainGenerator;
-    public BuildingGenerator buildingGenerator;
     public Texture2D[] tilingTextures;
-    private int seed;
+    [Header("Buildings")]
+    public GameObject[] Residential;
+    public GameObject[] Business;
+    public GameObject[] Government;
     public NoiseGenerator buildnoise;
+    public Transform BuildingContainer;
+    [Header("Roads")]
+    public int iterations;
+
     private string axiom;
     private float angle;
     private string currString;
     private int length = 4;
-    public int iterations;
     private List<Vector3> roads = new List<Vector3>();
     private Stack<TransformInfo> transformStack = new Stack<TransformInfo>();
     private Dictionary<Vector2Int, Vector2Int[]> roadGrid = new Dictionary<Vector2Int, Vector2Int[]>();
+    private List<Vector2Int> buildingLots = new List<Vector2Int>();
     private Dictionary<Vector2Int, GameObject> buildings = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<char, string> rules = new Dictionary<char, string>();
     private Vector2Int prev, curr;
     private Texture2D roadTexture;
-    public Transform BuildingContainer;
     private float[,,] alphamaps;
+    private int seed;
+    private NoiseMap buildingNoiseMap;
 
     public override void Setup()
     {
         base.Setup();
         buildnoise.Setup();
         buildnoise.Generate();
-        buildingGenerator.Setup();
+        buildingNoiseMap = GetComponent<NoiseMap>();
     }
 
     public override void Generate()
@@ -45,81 +53,67 @@ public class LSystemGeneration : CityGenerator
     private void GenerateBuildings()
     {
         clearBuildings();
-        //get road intersections
-        List<Vector2Int> vertices = new List<Vector2Int>(roadGrid.Keys);
-        foreach (Vector2Int node in vertices)
+        foreach (Vector2Int lot in buildingLots)
         {
-            Vector2Int[] connections = new Vector2Int[4] { new Vector2Int(int.MaxValue,int.MaxValue),
-                                                           new Vector2Int(int.MaxValue,int.MaxValue),
-                                                           new Vector2Int(int.MaxValue,int.MaxValue),
-                                                           new Vector2Int(int.MaxValue,int.MaxValue)};
-            if (roadGrid.TryGetValue(node, out connections))
+            if (CheckSlope(lot))
             {
-                foreach (Vector2Int edge in connections)
+                float noiseValue = buildingNoiseMap.Values[lot.x, lot.y];
+                // Layouts: Residential 4 corners [0], Business 2 Long buildings [1], and Large Government building [2] 
+                BuildingType buildingLayout = FindBestTerrain(noiseValue);
+                switch (buildingLayout)
                 {
-                    if (edge == new Vector2Int(int.MaxValue, int.MaxValue))
-                    {
-                        //edge hasn't changed since initialization
-                        continue;
-                    }
+                    case BuildingType.Residential:
+                        //TODO: Update hardcoded value to calculations based on @length
+                        addBuilding(lot + new Vector2Int(1, 1), buildingLayout);
+                        addBuilding(lot + new Vector2Int(1, -1), buildingLayout);
+                        addBuilding(lot + new Vector2Int(-1, 1), buildingLayout);
+                        addBuilding(lot + new Vector2Int(-1, -1), buildingLayout);
+                        break;
+                    case BuildingType.Business:
+                        addBuilding(lot + new Vector2Int( 1, 0), buildingLayout);
+                        addBuilding(lot + new Vector2Int(-1, 0), buildingLayout);
 
-                    else//connection exists and therefore so does building lots, add lot locations
-                    {
-                        //check vector difference
-                        Vector2Int loc = new Vector2Int();
-                        Vector2Int diff = edge - node;
-                        if (diff.x > 0)//east
-                        {
-                            loc = new Vector2Int(1, 1);
-                            addBuilding(node + loc,node);
-                            loc = new Vector2Int(1, -1);
-                            addBuilding(node + loc,node);
-                            loc = new Vector2Int(3, 1);
-                            addBuilding(node + loc, node);
-                            loc = new Vector2Int(3, -1);
-                            addBuilding(node + loc, node);
-                        }
-                        if (diff.x < 0)//west
-                        {
-                            loc = new Vector2Int(-1, 1);
-                            addBuilding(node + loc, node);
-                            loc = new Vector2Int(-1, -1);
-                            addBuilding(node + loc, node);
-                            loc = new Vector2Int(-3, 1);
-                            addBuilding(node + loc, node);
-                            loc = new Vector2Int(-3, -1);
-                            addBuilding(node + loc, node);
-                        }
-                        if (diff.y > 0)//north
-                        {
-                            loc = new Vector2Int(1, 1);
-                            addBuilding(node+loc, node);
-                            loc = new Vector2Int(1, 3);
-                            addBuilding(node+loc, node);
-                            loc = new Vector2Int(-1, -1);
-                            addBuilding(node+loc, node);
-                            loc = new Vector2Int(-1, -3);
-                            addBuilding(node + loc, node);
-                        }
-                        if (diff.y < 0)//south
-                        {
-                            loc = new Vector2Int(1, 1);
-                            addBuilding(node + loc, node);
-                            loc = new Vector2Int(1, 3);
-                            addBuilding(node + loc, node);
-                            loc = new Vector2Int(-1, 1);
-                            addBuilding(node + loc, node);
-                            loc = new Vector2Int(-1, 3);
-                            addBuilding(node + loc, node);
-                        }
-                    }
+                        //addBuilding(lot + new Vector2Int( 1, 0));
+                        //addBuilding(lot + new Vector2Int(-1, 0));
+                        break;
+                    case BuildingType.Government:
+                        addBuilding(lot, buildingLayout);
+                        break;
                 }
             }
-
         }
     }
 
-    private void clearBuildings()
+    private bool CheckSlope(Vector2Int lot)
+    {
+        TerrainData terrainData = terrainGenerator.terrain.terrainData;
+        Vector2 normalizedPoint = new Vector2(lot.x / terrainData.size.x, lot.y / terrainData.size.z);
+        float steepness = terrainData.GetSteepness(normalizedPoint.x,normalizedPoint.y);
+        if(steepness < 40)
+        {
+            return true;
+        }
+        Debug.Log("Steepness: " + steepness);
+        return false;
+    }
+
+    private BuildingType FindBestTerrain(float noiseValue)
+    {
+        if(noiseValue <= .33f)
+        {
+            return BuildingType.Residential;
+        }
+        else if(noiseValue<= .66f)
+        {
+            return BuildingType.Business;
+        }
+        else
+        {
+            return BuildingType.Government;
+        }
+    }
+
+    public void clearBuildings()
     {
         while (BuildingContainer.childCount > 0)
         {
@@ -129,23 +123,64 @@ public class LSystemGeneration : CityGenerator
         buildings.Clear();
     }
 
-    private void addBuilding(Vector2Int buildingCenter, Vector2Int node)
+    private GameObject GetBuilding(BuildingType t)
+    {
+        switch (t)
+        {
+            case BuildingType.Business:
+                return Business[UnityEngine.Random.Range(0, Business.Length)];
+            case BuildingType.Residential:
+                return Residential[UnityEngine.Random.Range(0, Residential.Length)];
+            case BuildingType.Government:
+                return Government[UnityEngine.Random.Range(0, Government.Length)];
+            default:
+                return null;
+        }
+    }
+
+    private void addBuilding(Vector2Int buildingCenter, BuildingType type)
     {
         if (!buildings.ContainsKey(buildingCenter))//Don't have key, add loc
         {
-            //building picker
-            //need to check face size
-            GameObject go = buildingGenerator.GetBuilding(node, new Vector2(100, 100));
+            GameObject go = GetBuilding(type);
             if (go != null)
             {
                 GameObject instance = GameObject.Instantiate(go, transform.parent.Find("Buildings"));
                 float height = terrainGenerator.terrain.SampleHeight(new Vector3(buildingCenter.x, 0, buildingCenter.y));
-                instance.transform.localPosition = new Vector3(buildingCenter.x-BuildingContainer.position.x+.5f, height, buildingCenter.y-BuildingContainer.position.z+.5f);
-                go.transform.localScale = new Vector3(.5f, .5f, .5f);
+                //TODO: might need to change offsets per building type
+                BoxCollider boxCollider = instance.GetComponent<BoxCollider>();
+                instance.transform.localPosition = new Vector3(buildingCenter.x - BuildingContainer.position.x,
+                                                               height,
+                                                               buildingCenter.y - BuildingContainer.position.z + .5f);
+                if (type == BuildingType.Residential)
+                {//TODO:Update hardcoded values to calculations based on @length
+                    go.transform.localScale = new Vector3(1/boxCollider.size.x,
+                                                          1/boxCollider.size.y, 
+                                                          1/boxCollider.size.z);
+                }
+                else if(type == BuildingType.Business)
+                {
+                    go.transform.localScale = new Vector3(1 / boxCollider.size.x,
+                                                          1 / boxCollider.size.x,
+                                                          1 / boxCollider.size.x);
+                }
+                else
+                {
+                    go.transform.localScale = new Vector3(3/boxCollider.size.x, 
+                                                          3/boxCollider.size.x,
+                                                          3/boxCollider.size.x);
+                }
+                
+                if(type != BuildingType.Business)
+                {
+                    //Rotate Randomly
+                    int angle = 90 * UnityEngine.Random.Range(0, 4);
+                    go.transform.rotation = new Quaternion();
+                    go.transform.Rotate(Vector3.up * angle);
+                }
+                //TODO: Rotate building according to gradient value at buildingCenter
                 buildings.Add(buildingCenter, go);
-
             }
-            //make buildings smaller to proportionally match the roads
         }
     }
 
@@ -210,7 +245,7 @@ public class LSystemGeneration : CityGenerator
                     alphamaps[node.y * 2, node.x * 2 + 1, 0] = 0;
                     alphamaps[node.y * 2 + 1, node.x * 2 + 1, 0] = 0;
                     DrawConnections(node, connections);
-                    
+
                     for (int j = 0; j < 16; j++)
                     {
                         if (j != i)
@@ -266,7 +301,7 @@ public class LSystemGeneration : CityGenerator
     {
         return node.x >= 0 && node.y >= 0 &&
                 node.x * 2 + 1 < alphamaps.GetLength(1) &&
-                node.y *2 + 1 < alphamaps.GetLength(0);
+                node.y * 2 + 1 < alphamaps.GetLength(0);
     }
 
     private void GenerateRoadGrid()
@@ -274,7 +309,7 @@ public class LSystemGeneration : CityGenerator
         GameObject controller = GameObject.Find("GenController");
         seed = controller.GetComponent<GenerationController>().Seed;
         UnityEngine.Random.InitState(seed);
-        transform.position =  new Vector3(terrainGenerator.terrain.terrainData.alphamapWidth / 4, 0f, terrainGenerator.terrain.terrainData.alphamapHeight / 4);
+        transform.position = new Vector3(terrainGenerator.terrain.terrainData.alphamapWidth / 4, 0f, terrainGenerator.terrain.terrainData.alphamapHeight / 4);
         transform.rotation = new Quaternion(0, 0, 0, 1);
         rules.Clear();
         //*****RULES************
@@ -351,21 +386,29 @@ public class LSystemGeneration : CityGenerator
                     Vector2Int diff = curr - prev;
                     if (diff.x > 0)//node curr is east of node prev
                     {
+                        AddBuildingLot(new Vector2Int(curr.x + length / 2, curr.y + length / 2),
+                                       new Vector2Int(curr.x + length / 2, curr.y - length / 2));
                         CurrConnections[3] = prev;
                         PrevConnections[1] = curr;
                     }
                     if (diff.x < 0)//node curr is west of node prev
                     {
+                        AddBuildingLot(new Vector2Int(curr.x - length / 2, curr.y + length / 2),
+                                       new Vector2Int(curr.x - length / 2, curr.y - length / 2));
                         CurrConnections[1] = prev;
                         PrevConnections[3] = curr;
                     }
                     if (diff.y > 0)//node curr is north of node prev
                     {
+                        AddBuildingLot(new Vector2Int(curr.x + length / 2, curr.y + length / 2),
+                                       new Vector2Int(curr.x - length / 2, curr.y + length / 2));
                         CurrConnections[2] = prev;
                         PrevConnections[0] = curr;
                     }
                     if (diff.y < 0)//node curr is south of node prev
                     {
+                        AddBuildingLot(new Vector2Int(curr.x + length / 2, curr.y - length / 2),
+                                       new Vector2Int(curr.x - length / 2, curr.y - length / 2));
                         CurrConnections[0] = prev;
                         PrevConnections[2] = curr;
                     }
@@ -422,9 +465,24 @@ public class LSystemGeneration : CityGenerator
         }
     }
 
+    private void AddBuildingLot(Vector2Int lot1, Vector2Int lot2)
+    {
+        //Add building lots if not added already
+        if (!buildingLots.Contains(lot1))
+        {
+            buildingLots.Add(lot1);
+        }
+        if (!buildingLots.Contains(lot2))
+        {
+            buildingLots.Add(lot2);
+        }
+    }
+
     private class TransformInfo
     {
         public Vector3 position;
         public Quaternion rotation;
     }
+    enum BuildingType { Residential, Business, Government };
+
 }

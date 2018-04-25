@@ -23,6 +23,10 @@ public class GenerationControllerEditor : Editor
                 Transform child = controller.cityGenerator.transform.GetChild(0);
                 DestroyImmediate(child.gameObject);
             }
+            if(controller.cityGenerator is LSystemGeneration)
+            {
+                ((LSystemGeneration)controller.cityGenerator).clearBuildings();
+            }
         }
 
         /*
