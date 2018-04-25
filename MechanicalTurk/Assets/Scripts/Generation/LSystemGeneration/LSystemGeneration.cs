@@ -99,17 +99,17 @@ public class LSystemGeneration : CityGenerator
 
     private BuildingType FindBestTerrain(float noiseValue)
     {
-        if(noiseValue <= .33f)
+        if(noiseValue <= .25f)
         {
-            return BuildingType.Residential;
+            return BuildingType.Government;
         }
-        else if(noiseValue<= .66f)
+        else if(noiseValue<= .5f)
         {
             return BuildingType.Business;
         }
         else
         {
-            return BuildingType.Government;
+            return BuildingType.Residential;
         }
     }
 
@@ -149,37 +149,39 @@ public class LSystemGeneration : CityGenerator
                 float height = terrainGenerator.terrain.SampleHeight(new Vector3(buildingCenter.x, 0, buildingCenter.y));
                 //TODO: might need to change offsets per building type
                 BoxCollider boxCollider = instance.GetComponent<BoxCollider>();
-                instance.transform.localPosition = new Vector3(buildingCenter.x - BuildingContainer.position.x,
+                if(boxCollider==null)
+                    boxCollider = instance.GetComponentInChildren<BoxCollider>();
+                instance.transform.localPosition = new Vector3(buildingCenter.x - BuildingContainer.position.x + .5f,
                                                                height,
                                                                buildingCenter.y - BuildingContainer.position.z + .5f);
                 if (type == BuildingType.Residential)
                 {//TODO:Update hardcoded values to calculations based on @length
-                    go.transform.localScale = new Vector3(1/boxCollider.size.x,
-                                                          1/boxCollider.size.y, 
+                    instance.transform.localScale = new Vector3(1/boxCollider.size.x,
+                                                          .5f/boxCollider.size.y, 
                                                           1/boxCollider.size.z);
                 }
                 else if(type == BuildingType.Business)
                 {
-                    go.transform.localScale = new Vector3(1 / boxCollider.size.x,
-                                                          1 / boxCollider.size.x,
-                                                          1 / boxCollider.size.x);
+                    instance.transform.localScale = new Vector3(1f/ boxCollider.size.x,
+                                                          1 / boxCollider.size.y,
+                                                          1.5f / boxCollider.size.z);
                 }
                 else
                 {
-                    go.transform.localScale = new Vector3(3/boxCollider.size.x, 
-                                                          3/boxCollider.size.x,
-                                                          3/boxCollider.size.x);
+                    instance.transform.localScale = new Vector3(3/boxCollider.size.x, 
+                                                          1/boxCollider.size.y,
+                                                          3/boxCollider.size.z);
                 }
                 
-                if(type != BuildingType.Business)
+                if(type == BuildingType.Residential)
                 {
                     //Rotate Randomly
                     int angle = 90 * UnityEngine.Random.Range(0, 4);
-                    go.transform.rotation = new Quaternion();
-                    go.transform.Rotate(Vector3.up * angle);
+                    instance.transform.rotation = new Quaternion();
+                    instance.transform.Rotate(Vector3.up * angle);
                 }
                 //TODO: Rotate building according to gradient value at buildingCenter
-                buildings.Add(buildingCenter, go);
+                buildings.Add(buildingCenter, instance);
             }
         }
     }
@@ -319,6 +321,7 @@ public class LSystemGeneration : CityGenerator
         angle = 90f;
         axiom = "FX";
 
+        buildingLots.Clear();
         roads.Clear();
         roadGrid.Clear();
         Vector2Int[] defaults = new Vector2Int[4] {new Vector2Int(int.MaxValue,int.MaxValue),
