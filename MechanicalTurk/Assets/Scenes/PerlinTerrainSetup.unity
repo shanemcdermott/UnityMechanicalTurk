@@ -113,197 +113,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &56636241
-GameObject:
+--- !u!1001 &465034874
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1386501171657838, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 56636243}
-  - component: {fileID: 56636242}
-  m_Layer: 0
-  m_Name: GenControllerPerlin
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &56636242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114052142573760480, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56636241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 915a15e98bbdd7943b857d4f1cc63f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildings: []
-  Seed: 40
-  terrainGenerator: {fileID: 876539225}
-  cityGenerator: {fileID: 449122495}
---- !u!4 &56636243
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4631331337737712, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56636241}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 876539231}
-  - {fileID: 449122493}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &449122492
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1896572067555700, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 449122493}
-  - component: {fileID: 449122495}
-  - component: {fileID: 449122494}
-  - component: {fileID: 449122497}
-  - component: {fileID: 449122496}
-  - component: {fileID: 449122498}
-  m_Layer: 0
-  m_Name: CityGen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &449122493
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4472990652041980, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 449122492}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 56636243}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &449122494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114255495984643270, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 449122492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf29ae6a8b9556c40bbfedb72a740572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dimensions: {x: 256, y: 256}
-  FacesPerSide: {x: 4, y: 4}
---- !u!114 &449122495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114901582451393178, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 449122492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e037c388ce17e14199b88dd2d0daca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  heightMap: {fileID: 876539227}
-  testObject: {fileID: 1089239519}
-  spawnTestObjectsEnabled: 0
-  polyGrid: {fileID: 449122494}
-  lowRoadNumber: 4
-  highRoadNumber: 8
-  facesPerSide: {x: 3, y: 3}
-  terrainGenerator: {fileID: 876539225}
-  buildingNoiseGenerator: {fileID: 449122497}
-  buildingGenerator: {fileID: 449122498}
-  roadPainter: {fileID: 876539232}
---- !u!114 &449122496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114753715096503196, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 449122492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c6c05d30d007a4ca3e342a47116077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 256
-  height: 256
---- !u!114 &449122497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114317279034803702, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 449122492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ebb84aff138c14b9b803ff78c5ecd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  noiseMap: {fileID: 449122496}
-  scale: 20
-  numOctaves: 5
-  offset: {x: 22, y: 0}
-  persistance: 0.5
-  lacunarity: 1
---- !u!114 &449122498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114008572338282392, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 449122492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3335d155b1b54d548add1fca4d4c872b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  buildingTypes:
-  - name: d
-    height: 0
-    building: {fileID: 1908704848923660, guid: e698297b2a3b82a42a2aab3cf73f4c26, type: 2}
-  - name: f
-    height: 0.2
-    building: {fileID: 1938313778877204, guid: e0734a0c464e9d34f88b7987e13e552e, type: 2}
-  - name: a
-    height: 0.4
-    building: {fileID: 1036081809498088, guid: dddccc696ce86654c8b264beedc1b495, type: 2}
-  heightMap: {fileID: 449122496}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727468738757900, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266168376404384, guid: 8130c1e27f9258145ba38b2df648a654,
+        type: 2}
+      propertyPath: testObject
+      value: 
+      objectReference: {fileID: 1089239519}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8130c1e27f9258145ba38b2df648a654, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &827627315
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,219 +241,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
---- !u!1 &876539224
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1451061524251650, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 876539231}
-  - component: {fileID: 876539225}
-  - component: {fileID: 876539227}
-  - component: {fileID: 876539230}
-  - component: {fileID: 876539229}
-  - component: {fileID: 876539228}
-  - component: {fileID: 876539226}
-  - component: {fileID: 876539232}
-  - component: {fileID: 876539233}
-  m_Layer: 0
-  m_Name: TerrainGen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &876539225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114145791829080808, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75b7f032e914cb4593e025e6c7c0ca0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  heightMapGenerator: {fileID: 876539230}
-  biomeGenerator: {fileID: 876539228}
-  heightScale: 0
-  heightMap: {fileID: 876539227}
-  terrain: {fileID: 876539226}
-  biomeTexture: {fileID: 2800000, guid: daf1ffdbdbe1d0348a8ceb61aab952f5, type: 3}
---- !u!218 &876539226
-Terrain:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 218453496027260812, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_TerrainData: {fileID: 15600000, guid: e19837662ba8dfc40a05f960c4fc26d5, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMaximumLOD: 0
-  m_CastShadows: 1
-  m_DrawHeightmap: 1
-  m_DrawTreesAndFoliage: 1
-  m_ReflectionProbeUsage: 1
-  m_MaterialType: 0
-  m_LegacySpecular:
-    serializedVersion: 2
-    rgba: 4286545791
-  m_LegacyShininess: 0.078125
-  m_MaterialTemplate: {fileID: 0}
-  m_BakeLightProbesForTrees: 1
-  m_ScaleInLightmap: 1
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
---- !u!114 &876539227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114554763513174650, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c6c05d30d007a4ca3e342a47116077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 256
-  height: 256
---- !u!114 &876539228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114010916038583072, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed6ad2e9c0a621d4d8dbe61c19e31799, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  biomeTypes:
-  - name: 
-    height: 0.2
-    colour: {r: 0.8980392, g: 0.85490197, b: 0.52156866, a: 0}
-  - name: 
-    height: 0.5
-    colour: {r: 0.47880623, g: 0.9044118, b: 0.56979775, a: 0}
-  - name: 
-    height: 0.75
-    colour: {r: 0.08285104, g: 0.36764705, b: 0.059472308, a: 0}
-  - name: 
-    height: 0.85
-    colour: {r: 0.3897059, g: 0.29516467, b: 0.12608132, a: 0}
-  - name: 
-    height: 1
-    colour: {r: 0.31764707, g: 0.27450982, b: 0.101960786, a: 0}
-  heightMap: {fileID: 876539227}
---- !u!114 &876539229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114639807525740184, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c2527fd77c3b954c99268f62bb997fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  noiseMap: {fileID: 876539227}
-  scale: 1
-  offsetX: 100
-  offsetY: 100
---- !u!114 &876539230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114297190816743640, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ebb84aff138c14b9b803ff78c5ecd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGenerationComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  noiseMap: {fileID: 876539227}
-  scale: 20
-  numOctaves: 5
-  offset: {x: 22, y: 0}
-  persistance: 0.5
-  lacunarity: 1
---- !u!4 &876539231
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4365642249550658, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 56636243}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &876539232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114775481104869444, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f01aba95dfbc7d4589a1beae1350b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapScale: {x: 0.5, y: 0.5}
-  roadHorizontal: {fileID: 2800000, guid: 2e2229bc0ca1a8c4da75c0225af23c28, type: 3}
-  roadVertical: {fileID: 2800000, guid: 15927896fc6c01b498cd9f2cb0ac9abf, type: 3}
-  roadTileSize: {x: 1, y: 1}
-  terrainData: {fileID: 15600000, guid: e19837662ba8dfc40a05f960c4fc26d5, type: 2}
---- !u!154 &876539233
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 154856387699721130, guid: 8130c1e27f9258145ba38b2df648a654,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 876539224}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: e19837662ba8dfc40a05f960c4fc26d5, type: 2}
-  m_EnableTreeColliders: 1
 --- !u!1 &1089239519
 GameObject:
   m_ObjectHideFlags: 0
