@@ -58,15 +58,15 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   blockPrefabs:
-  - {fileID: 1806942527090010, guid: b1c9ceb762eaded4c8bb2064afc420b5, type: 2}
-  - {fileID: 1826131239407874, guid: e6d6bd0e5b0dfed48bafc66d9e116884, type: 2}
-  - {fileID: 1445478518982214, guid: 82586f9fc6f2c55439a5c220416f9ee9, type: 2}
+  - {fileID: 1806942527090010, guid: 3db2ac297ec4f854ebbd49514f27399b, type: 2}
+  - {fileID: 1826131239407874, guid: dd673106d3e81824a92480b62569a1b4, type: 2}
+  - {fileID: 1445478518982214, guid: 1a22d79606a3c2a4e9ea2d5eeea60222, type: 2}
   pointGenerator: {fileID: 114583800880636422}
   Dimensions: {x: 256, y: 0, z: 256}
-  MinLotSize: {x: 4, y: 4, z: 4}
+  MinLotSize: {x: 10, y: 10, z: 10}
   terrain: {fileID: 0}
   roadDesigner: {fileID: 0}
-  maxItemsPerNode: 7
+  maxItemsPerNode: 10
 --- !u!114 &114583800880636422
 MonoBehaviour:
   m_ObjectHideFlags: 1
