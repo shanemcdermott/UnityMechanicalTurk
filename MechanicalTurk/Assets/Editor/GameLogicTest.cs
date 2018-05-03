@@ -4,6 +4,7 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
+using Framework.Generation;
 
 public class GameLogicTest {
 

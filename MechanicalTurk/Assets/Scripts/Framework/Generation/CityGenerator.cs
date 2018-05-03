@@ -2,25 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CityGenerator : GenerationAlgorithm
+using Framework.Collections;
+
+namespace Framework.Generation
 {
-    public NoiseMap heightMap;
 
-    public override bool CanGenerate()
+    public abstract class CityGenerator : GenerationAlgorithm
     {
-        return heightMap != null;
-    }
+        public NoiseMap heightMap;
 
-    public override void Setup()
-    {
-        if (heightMap == null)
+        public override bool CanGenerate()
         {
-            heightMap = gameObject.GetComponent<NoiseMap>();
+            return heightMap != null;
         }
-    }
 
-    public virtual Vector3 GetCityCenter()
-    {
-        return transform.root.position + new Vector3(heightMap.Width * 0.5f, 20f, heightMap.Height * 0.5f);
+        public override void Setup()
+        {
+            if (heightMap == null)
+            {
+                heightMap = gameObject.GetComponent<NoiseMap>();
+            }
+        }
+
+        public virtual Vector3 GetCityCenter()
+        {
+            return transform.root.position + new Vector3(heightMap.Width * 0.5f, 20f, heightMap.Height * 0.5f);
+        }
     }
 }

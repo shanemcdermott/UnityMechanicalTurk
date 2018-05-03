@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+using Framework.Collections;
+
 [CustomEditor(typeof(NoiseMap))]
 public class NoiseMapEditor : Editor
 {

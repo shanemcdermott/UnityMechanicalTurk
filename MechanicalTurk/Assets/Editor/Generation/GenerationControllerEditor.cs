@@ -4,6 +4,10 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 
+using Framework.Generation;
+using Algorithms.City;
+
+/*Editor Inspector UI for interacting with GenerationController */
 [CustomEditor(typeof(GenerationController))]
 public class GenerationControllerEditor : Editor
 {

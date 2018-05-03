@@ -3,57 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// Wrapper for various generation algorithms that adds events
-public abstract class GenerationAlgorithm : MonoBehaviour
+namespace Framework.Generation
 {
-    
-    public UnityEvent OnGenerationComplete;
 
-    void Awake()
+    /// Wrapper for various generation algorithms that adds events
+    public abstract class GenerationAlgorithm : MonoBehaviour
     {
-        if (OnGenerationComplete == null)
+        /// <summary>
+        /// Unity Event dispatcher that triggers when Generate has finished.
+        /// </summary>
+        public UnityEvent OnGenerationComplete;
+
+        void Awake()
         {
-            OnGenerationComplete = new UnityEvent();
+            if (OnGenerationComplete == null)
+            {
+                OnGenerationComplete = new UnityEvent();
+            }
         }
-    }
 
-    /// <summary>
-    /// Checks to see if generation prerequisites are met.
-    /// </summary>
-    /// <returns>true if ready for generation.</returns>
-    public abstract bool CanGenerate();
+        /// <summary>
+        /// Checks to see if generation prerequisites are met.
+        /// </summary>
+        /// <returns>true if ready for generation.</returns>
+        public abstract bool CanGenerate();
 
-    
-    /// <summary>
-    /// Collects any prerequisites for generation.
-    /// </summary>
-    public abstract void Setup();
 
-    /// <summary>
-    /// Invokes OnGenerationComplete when finished.
-    /// </summary>
-    public virtual void Generate(bool ShouldInvokeOnComplete)
-    {
-        Generate();
-        if (ShouldInvokeOnComplete)
+        /// <summary>
+        /// Collects any prerequisites for generation.
+        /// </summary>
+        public abstract void Setup();
+
+        /// <summary>
+        /// Invokes OnGenerationComplete when finished.
+        /// </summary>
+        public virtual void Generate(bool ShouldInvokeOnComplete)
         {
-            OnGenerationComplete.Invoke();
+            Generate();
+            if (ShouldInvokeOnComplete)
+            {
+                OnGenerationComplete.Invoke();
+            }
         }
+
+        public abstract void Generate();
+
+        /// <summary>
+        /// Clears the results of a previous generation.
+        /// </summary>
+        public virtual void Clean()
+        {
+
+        }
+
+        /// <summary>
+        /// Removes all event listeners from #OnGenerationComplete
+        /// </summary>
+        void OnDisable()
+        {
+            OnGenerationComplete.RemoveAllListeners();
+        }
+
     }
 
-    public abstract void Generate();
-
-    /// <summary>
-    /// Clears the results of a previous generation.
-    /// </summary>
-    public virtual void Clean()
-    {
-        
-    }
-
-    void OnDisable()
-    {
-        OnGenerationComplete.RemoveAllListeners();
-    }
-	
 }

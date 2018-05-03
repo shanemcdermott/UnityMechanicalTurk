@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+using Framework.Collections;
+
 [CustomEditor(typeof(PolyGrid))]
 public class PolyGridEditor : Editor
 {
     private PolyGrid polyGrid;
     private int tab = 0;
     private string[] typeNames = new string[1] { "Square" };
-
-    private GridWindow[] gridWindows = new GridWindow[1] {new SquareGridWindow() };
 
     private bool showGridProperties = true;
     private bool showGridVertices;
@@ -26,8 +26,6 @@ public class PolyGridEditor : Editor
         polyGrid = (PolyGrid)target;
 
         tab = GUILayout.Toolbar(tab, typeNames);
-
-        gridWindows[tab].grid = polyGrid;
  
         if(polyGrid.NumFaces() ==0)
         {
@@ -100,10 +98,6 @@ public class PolyGridEditor : Editor
         if (GUILayout.Button("Flip Y and Z"))
         {
             polyGrid.FlipAxes();
-        }
-        if(GUILayout.Button("Subdivide"))
-        {
-            gridWindows[tab].Subdivide();
         }
     }
 
