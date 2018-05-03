@@ -6,7 +6,8 @@ using UnityEditor;
 public class CityGenEditorWindow : EditorWindow
 {
 
-    [MenuItem("Window/Feature Comparison")]
+
+    [MenuItem("GameObject/City Generator")]
     public static void ShowWindow()
     {
         EditorWindow.GetWindow(typeof(CityGenEditorWindow));
