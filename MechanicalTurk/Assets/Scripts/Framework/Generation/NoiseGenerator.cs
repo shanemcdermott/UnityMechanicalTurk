@@ -3,45 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NoiseGenerator : GenerationAlgorithm
+using Framework.Collections;
+
+namespace Framework.Generation
 {
-    [SerializeField]
-    public NoiseMap noiseMap;
-
-    public float scale = 1f;
-
-    public int width
+    /*Populates a NoiseMap with random values */
+    public abstract class NoiseGenerator : GenerationAlgorithm
     {
-        get { return noiseMap.Width; }
-        set
+        [SerializeField] /*The NoiseMap to populate*/
+        public NoiseMap noiseMap;
+
+        /*Generated values are scaled by this amount*/
+        public float scale = 1f;
+
+        /*Width of #noiseMap*/
+        public int width
         {
-            noiseMap.Width = value;
+            get { return noiseMap.Width; }
+            set
+            {
+                noiseMap.Width = value;
+            }
         }
-    }
 
-    public int height
-    {
-        get { return noiseMap.Height; }
-        set
+        /*Height of #noiseMap*/
+        public int height
         {
-            noiseMap.Height = value;
+            get { return noiseMap.Height; }
+            set
+            {
+                noiseMap.Height = value;
+            }
         }
-    }
 
-    public override void Setup()
-    {
-        if (noiseMap == null)
-            noiseMap = GetComponent<NoiseMap>();
-    }
+        /**Searches for #noiseMap if one is not currently assigned*/
+        public override void Setup()
+        {
+            if (noiseMap == null)
+                noiseMap = GetComponent<NoiseMap>();
+        }
 
-    public override bool CanGenerate()
-    {
-        return noiseMap != null;
-    }
+        /**Returns true if all generation requirements are met. False otherwise*/
+        public override bool CanGenerate()
+        {
+            return noiseMap != null;
+        }
 
-    public override void Generate()
-    {
-        noiseMap.Values = GenerateHeightMap(noiseMap.Width, noiseMap.Height);
+        /**Calls NoiseGenerator#Generate(int, int) using the width and height of #noiseMap as parameters */ 
+        public override void Generate()
+        {
+            noiseMap.Values = GenerateHeightMap(noiseMap.Width, noiseMap.Height);
+        }
+
+        /*Populates #noiseMap with random values */
+        public abstract float[,] GenerateHeightMap(int mapWidth, int mapHeight);
     }
-    public abstract float[,] GenerateHeightMap(int mapWidth, int mapHeight);
 }

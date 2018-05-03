@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -113,48 +113,362 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &266860098
+--- !u!1 &417888755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1215636328797832, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 417888759}
+  - component: {fileID: 417888756}
+  - component: {fileID: 417888757}
+  - component: {fileID: 417888758}
+  m_Layer: 0
+  m_Name: CityGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &417888756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114101755733280034, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 417888755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571abfdf1d97f0a4e8a367c98f2fa4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  heightMap: {fileID: 537695470}
+  terrain: {fileID: 537695469}
+  roadPainter: {fileID: 537695463}
+  regionGenerator: {fileID: 417888757}
+--- !u!114 &417888757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114914023462100974, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 417888755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a387e841cdcc149b55b283638f4ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  blockPrefabs:
+  - {fileID: 1938313778877204, guid: e0734a0c464e9d34f88b7987e13e552e, type: 2}
+  - {fileID: 1036081809498088, guid: dddccc696ce86654c8b264beedc1b495, type: 2}
+  - {fileID: 1908704848923660, guid: e698297b2a3b82a42a2aab3cf73f4c26, type: 2}
+  - {fileID: 1563404890388494, guid: cae0191183501ee409800a334b126104, type: 2}
+  pointGenerator: {fileID: 0}
+  Dimensions: {x: 256, y: 0, z: 256}
+  MinLotSize: {x: 32, y: 32, z: 32}
+  terrain: {fileID: 537695469}
+  roadDesigner: {fileID: 0}
+--- !u!114 &417888758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114721571595004774, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 417888755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3cdca6eac904144b2de34edb3cc500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 100
+    height: 100
+  samplePoints: []
+  minDistance: 5
+  newPointsCount: 30
+  maxTotalPoints: 1000
+  cellSize: 0
+--- !u!4 &417888759
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4812519183723216, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 417888755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 484037829}
+  m_Father: {fileID: 998488589}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &484037828
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 266860100}
-  - component: {fileID: 266860099}
+  - component: {fileID: 484037829}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: CityBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &266860099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 266860098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf29ae6a8b9556c40bbfedb72a740572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dimensions: {x: 255, y: 255}
-  FacesPerSide: {x: 4, y: 4}
---- !u!4 &266860100
+--- !u!4 &484037829
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 266860098}
+  m_GameObject: {fileID: 484037828}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1479983233}
+  m_Father: {fileID: 417888759}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &537695462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1930256960245954, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 537695468}
+  - component: {fileID: 537695471}
+  - component: {fileID: 537695470}
+  - component: {fileID: 537695467}
+  - component: {fileID: 537695466}
+  - component: {fileID: 537695465}
+  - component: {fileID: 537695463}
+  - component: {fileID: 537695464}
+  - component: {fileID: 537695469}
+  m_Layer: 0
+  m_Name: TerrainGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &537695463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114307422031745614, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f01aba95dfbc7d4589a1beae1350b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapScale: {x: 0.5, y: 0.5}
+  roadHorizontal: {fileID: 2800000, guid: ef78cd63eee47404bb2c0d584e5c4639, type: 3}
+  roadVertical: {fileID: 2800000, guid: 9671befe2081fbb49ba143c52c6af447, type: 3}
+  roadTileSize: {x: 1, y: 1}
+  terrainData: {fileID: 15600000, guid: 26ec1d01cc68fed4688a8e36ce56f308, type: 2}
+--- !u!154 &537695464
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 154590250531549296, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: 26ec1d01cc68fed4688a8e36ce56f308, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!114 &537695465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114605004414949634, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6ad2e9c0a621d4d8dbe61c19e31799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  biomeTypes:
+  - name: 
+    height: 0.2
+    colour: {r: 0.16470589, g: 0.31764707, b: 0.101960786, a: 0}
+  - name: 
+    height: 0.4
+    colour: {r: 0.18625648, g: 0.47794116, b: 0.21174686, a: 0}
+  - name: 
+    height: 0.6
+    colour: {r: 0.27902845, g: 0.5735294, b: 0.22350779, a: 0}
+  - name: 
+    height: 0.8
+    colour: {r: 0.38614875, g: 0.3897059, b: 0.1318123, a: 0}
+  - name: 
+    height: 0.9
+    colour: {r: 0.31764707, g: 0.27450982, b: 0.101960786, a: 0}
+  - name: 
+    height: 1
+    colour: {r: 0.31764707, g: 0.27450982, b: 0.101960786, a: 0}
+  - name: 
+    height: 0.7
+    colour: {r: 0.3897059, g: 0.29516467, b: 0.12608132, a: 0}
+  - name: 
+    height: 1
+    colour: {r: 0.31764707, g: 0.27450982, b: 0.101960786, a: 0}
+  heightMap: {fileID: 537695470}
+--- !u!114 &537695466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114843227339876012, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2527fd77c3b954c99268f62bb997fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  noiseMap: {fileID: 537695470}
+  scale: 5
+  offsetX: 100
+  offsetY: 100
+--- !u!114 &537695467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114010078204590818, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ebb84aff138c14b9b803ff78c5ecd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  noiseMap: {fileID: 537695470}
+  scale: 10
+  numOctaves: 5
+  offset: {x: 22, y: 0}
+  persistance: 0.25
+  lacunarity: 2
+--- !u!4 &537695468
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4927357155329908, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1468962534}
+  m_Father: {fileID: 998488589}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!218 &537695469
+Terrain:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 218685132815542488, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_TerrainData: {fileID: 15600000, guid: 26ec1d01cc68fed4688a8e36ce56f308, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_CastShadows: 1
+  m_DrawHeightmap: 1
+  m_DrawTreesAndFoliage: 1
+  m_ReflectionProbeUsage: 1
+  m_MaterialType: 0
+  m_LegacySpecular:
+    serializedVersion: 2
+    rgba: 4286545791
+  m_LegacyShininess: 0.078125
+  m_MaterialTemplate: {fileID: 0}
+  m_BakeLightProbesForTrees: 1
+  m_ScaleInLightmap: 1
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &537695470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114540280040962340, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c6c05d30d007a4ca3e342a47116077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 256
+  height: 256
+--- !u!114 &537695471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114808665798500894, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537695462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75b7f032e914cb4593e025e6c7c0ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  heightMapGenerator: {fileID: 537695466}
+  biomeGenerator: {fileID: 537695465}
+  heightScale: 12
+  heightMap: {fileID: 537695470}
+  terrain: {fileID: 537695469}
+  biomeTexture: {fileID: 2800000, guid: bb68f89111fe78d42ae271e51dc86829, type: 3}
 --- !u!1 &740382435
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +532,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &987947935
 GameObject:
@@ -301,95 +615,164 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 34.923, y: 0, z: 0}
---- !u!1 &1468962532
+--- !u!1 &998488587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1681151532954050, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 998488589}
+  - component: {fileID: 998488588}
+  m_Layer: 0
+  m_Name: GenControllerBiomes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &998488588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114487847182284330, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 998488587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915a15e98bbdd7943b857d4f1cc63f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildings: []
+  Seed: 43
+  terrainGenerator: {fileID: 537695471}
+  cityGenerator: {fileID: 417888756}
+--- !u!4 &998488589
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 998488587}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 537695468}
+  - {fileID: 417888759}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1479983232
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1468962534}
-  - component: {fileID: 1468962533}
+  - component: {fileID: 1479983233}
+  - component: {fileID: 1479983235}
+  - component: {fileID: 1479983234}
   m_Layer: 0
-  m_Name: GraphBuilder
+  m_Name: NatureBlock(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1468962533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1468962532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9f59e933a205244badc71920e3242d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delTri: {fileID: 0}
-  drawTriangles: 0
-  pointGenerator: {fileID: 0}
-  drawPoints: 1
-  polyGrid: {fileID: 266860099}
-  LOD_0_Prefabs:
-  - {fileID: 1697090419774358, guid: dcfac42cd36a1d042a548b6bb661e9fa, type: 2}
-  - {fileID: 1181238431320972, guid: 2edef35e229e45b4aa178d3673347361, type: 2}
-  - {fileID: 1660461208447572, guid: 10bb8d9e57207ac43bd0c0615a4dcc8b, type: 2}
---- !u!4 &1468962534
+--- !u!4 &1479983233
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1468962532}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1479983232}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 16, y: 10.543124, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 266860100}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  - {fileID: 2118348450}
+  m_Father: {fileID: 484037829}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1859137771
-Prefab:
+--- !u!114 &1479983234
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254231418156166, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: aeb782a4a6f6c1b41ab3cc2d6917f194, type: 2}
-  m_IsPrefabParent: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1479983232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3cdca6eac904144b2de34edb3cc500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 32
+    height: 32
+  samplePoints:
+  - {x: 2.465828, y: 9.22019}
+  - {x: 22.262701, y: 11.795917}
+  - {x: 6.5390224, y: 26.174356}
+  - {x: 11.157678, y: 2.4661956}
+  - {x: 10.925665, y: 16.636045}
+  - {x: 24.75924, y: 1.272471}
+  - {x: 27.138071, y: 26.800104}
+  - {x: 17.059309, y: 25.865255}
+  minDistance: 10
+  newPointsCount: 30
+  maxTotalPoints: 1000
+  cellSize: 7.071068
+--- !u!114 &1479983235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1479983232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ebb45aa94efd54f9905e026a16249e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  blockPrefabs: []
+  pointGenerator: {fileID: 1479983234}
+  Dimensions: {x: 32, y: 0, z: 32}
+  MinLotSize: {x: 10, y: 10, z: 10}
+  terrain: {fileID: 537695469}
+  roadDesigner: {fileID: 0}
+  maxItemsPerNode: 10
+--- !u!1 &2118348449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2118348450}
+  m_Layer: 0
+  m_Name: CityBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2118348450
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118348449}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16, y: -10.543124, z: -16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1479983233}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+using Algorithms.Util;
+
 //Shane McDermott 2018
 
 [CustomEditor(typeof(ClutterPlacement))]
@@ -15,11 +17,11 @@ public class ClutterPlacementEditor : Editor
         ClutterPlacement clutter = (ClutterPlacement)target;
         if(GUILayout.Button("Place Clutter"))
         {
-            clutter.placeClutter();
+            clutter.Generate();
         }
         if(GUILayout.Button("Clear Clutter"))
         {
-            clutter.clearClutter();
+            clutter.Clean();
         }
     }
 }

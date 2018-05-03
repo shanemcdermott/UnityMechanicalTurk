@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4981835644981810}
   - component: {fileID: 114571573535914012}
+  - component: {fileID: 114903631981386802}
   m_Layer: 0
   m_Name: GovernmentBlock_B
   m_TagString: Untagged
@@ -60,6 +61,20 @@ MonoBehaviour:
   - {fileID: 1189121154384388, guid: 7617253c824225e478c24e508ab6db7f, type: 2}
   - {fileID: 1415235884987166, guid: a9bd88caa1914ba458ab92e9b2514892, type: 2}
   - {fileID: 1189121154384388, guid: 7617253c824225e478c24e508ab6db7f, type: 2}
+  pointGenerator: {fileID: 0}
   Dimensions: {x: 256, y: 0, z: 256}
-  MinLotSize: {x: 8, y: 8, z: 8}
+  MinLotSize: {x: 16, y: 16, z: 16}
   terrain: {fileID: 0}
+  roadDesigner: {fileID: 0}
+--- !u!114 &114903631981386802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923103644727772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a10c6af9c0ea844ae4cb5677cad630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bShouldDrawFromCenter: 1

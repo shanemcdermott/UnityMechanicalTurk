@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4115063461840902}
   - component: {fileID: 114685894119768556}
+  - component: {fileID: 114848952077936862}
   m_Layer: 0
   m_Name: GovernmentDistrict
   m_TagString: Untagged
@@ -59,6 +60,30 @@ MonoBehaviour:
   blockPrefabs:
   - {fileID: 1923103644727772, guid: e49d022c0df9d5f4a8c45864482ff064, type: 2}
   - {fileID: 1730246028818480, guid: 4dcc18f7b1b401d4ca87ff1a94a4203a, type: 2}
+  pointGenerator: {fileID: 114848952077936862}
   Dimensions: {x: 64, y: 0, z: 64}
   MinLotSize: {x: 16, y: 16, z: 16}
   terrain: {fileID: 0}
+  roadDesigner: {fileID: 0}
+--- !u!114 &114848952077936862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036081809498088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3cdca6eac904144b2de34edb3cc500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 100
+    height: 100
+  samplePoints: []
+  minDistance: 5
+  newPointsCount: 30
+  maxTotalPoints: 1000
+  cellSize: 0

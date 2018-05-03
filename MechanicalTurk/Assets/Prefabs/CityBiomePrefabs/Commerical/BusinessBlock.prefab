@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4260308036394054}
   - component: {fileID: 114055967592657582}
+  - component: {fileID: 114810727654987438}
   m_Layer: 0
   m_Name: BusinessBlock
   m_TagString: Untagged
@@ -63,6 +64,24 @@ MonoBehaviour:
   - {fileID: 1784141362679706, guid: 4ce0e065a3489d44faee881f98a5d7bb, type: 2}
   - {fileID: 1691353807612870, guid: 37bcb278856ff0c458a3c16c5433e934, type: 2}
   - {fileID: 1474336472740672, guid: 899fcbb5876626d4598dd292708e8941, type: 2}
+  pointGenerator: {fileID: 0}
   Dimensions: {x: 256, y: 0, z: 256}
   MinLotSize: {x: 8, y: 8, z: 8}
   terrain: {fileID: 0}
+  roadDesigner: {fileID: 114810727654987438}
+--- !u!114 &114810727654987438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697090419774358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc0c874db4a0684280deacaa1b3d118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bShouldDrawFromCenter: 1
+  wantsVerticalConnections: 1
+  wantsVerticalFaceConnections: 0
+  wantsHorizontalConnections: 1
+  wantsHorizontalFaceConnections: 1

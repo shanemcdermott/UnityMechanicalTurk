@@ -4,6 +4,7 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
+using Framework.Generation;
 
 public class GameLogicTest {
 
@@ -27,7 +28,7 @@ public class GameLogicTest {
 		//SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
 		yield return null;
 		var map = GameObject.Find("Map Generator");
-		var mapGen = map.GetComponent<MapGenerator>();
+		var mapGen = map.GetComponent<TerrainGenerator>();
 		Assert.True(mapGen != null);
 	}
 

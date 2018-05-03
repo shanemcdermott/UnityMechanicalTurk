@@ -1,0 +1,11 @@
+<map id="Algorithms.Util.ClutterPlacement" name="Algorithms.Util.ClutterPlacement">
+<area shape="rect" id="node2" href="$class_algorithms_1_1_city_1_1_city_block_generator.html" title="CityBlockGenerator" alt="" coords="1284,73,1419,100"/>
+<area shape="rect" id="node3" href="$class_algorithms_1_1_city_1_1_block_generator.html" title="Fills a square region with random objects " alt="" coords="1123,73,1235,100"/>
+<area shape="rect" id="node4" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="389,39,529,65"/>
+<area shape="rect" id="node7" href="$class_framework_1_1_generation_1_1_point_generator.html" title="Generates a set of points within a specified range " alt="" coords="786,31,973,73"/>
+<area shape="rect" id="node6" href="$class_algorithms_1_1_city_1_1_road_designer.html" title="Algorithms.City.RoadDesigner" alt="" coords="553,96,749,123"/>
+<area shape="rect" id="node8" href="$class_framework_1_1_collections_1_1_grid_node.html" title="Framework.Collections.GridNode" alt="" coords="773,199,985,225"/>
+<area shape="rect" id="node9" href="$class_framework_1_1_collections_1_1_grid_face.html" title="GridFace" alt="" coords="422,199,497,225"/>
+<area shape="rect" id="node10" href="$class_framework_1_1_collections_1_1_node.html" title="Node" alt="" coords="259,199,311,225"/>
+<area shape="rect" id="node11" href="$interface_framework_1_1_collections_1_1_i_has_connections.html" title="IHasConnections\&lt; Node \&gt;" alt="" coords="5,199,180,225"/>
+</map>

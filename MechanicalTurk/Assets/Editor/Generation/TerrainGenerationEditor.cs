@@ -4,6 +4,8 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 
+using Framework.Generation;
+
 [CustomEditor(typeof(TerrainGenerator))]
 public class TerrainGenerationEditor : Editor
 {

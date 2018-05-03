@@ -2,51 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerationSequence : GenerationAlgorithm
+namespace Framework.Generation
 {
-    public List<GenerationAlgorithm> generationSequence = new List<GenerationAlgorithm>();
-    public int seqIndex;
 
-    public GenerationAlgorithm GetCurrentAlgorithm()
+    public class GenerationSequence : GenerationAlgorithm
     {
-         if (seqIndex >= generationSequence.Count)
-               return null;
+        public List<GenerationAlgorithm> generationSequence = new List<GenerationAlgorithm>();
+        public int seqIndex;
 
-         return generationSequence[seqIndex];
-    }
-
-    public override bool CanGenerate()
-    {
-        return generationSequence.Count > 0 && seqIndex == 0;
-    }
-
-    public override void Setup()
-    {
-        seqIndex = 0;
-        GetCurrentAlgorithm().Setup();
-    }
-
-    /// <summary>
-    /// Increments @seqIndex and calls StartCurrentAlgorithm
-    /// </summary>
-    public virtual void StartNextAlgorithm()
-    {
-        seqIndex++;
-        Generate();
-    }
-
-    public override void Generate()
-    {
-        GenerationAlgorithm alg = GetCurrentAlgorithm();
-        if (alg)
+        public GenerationAlgorithm GetCurrentAlgorithm()
         {
-            alg.OnGenerationComplete.AddListener(StartNextAlgorithm);
-            alg.Setup();
-            if (alg.CanGenerate())
+            if (seqIndex >= generationSequence.Count)
+                return null;
+
+            return generationSequence[seqIndex];
+        }
+
+        public override bool CanGenerate()
+        {
+            return generationSequence.Count > 0 && seqIndex == 0;
+        }
+
+        public override void Setup()
+        {
+            seqIndex = 0;
+            GetCurrentAlgorithm().Setup();
+        }
+
+        /// <summary>
+        /// Increments @seqIndex and calls StartCurrentAlgorithm
+        /// </summary>
+        public virtual void StartNextAlgorithm()
+        {
+            seqIndex++;
+            Generate();
+        }
+
+        public override void Generate()
+        {
+            GenerationAlgorithm alg = GetCurrentAlgorithm();
+            if (alg)
             {
-                alg.Generate(true);
+                alg.OnGenerationComplete.AddListener(StartNextAlgorithm);
+                alg.Setup();
+                if (alg.CanGenerate())
+                {
+                    alg.Generate(true);
+                }
             }
         }
-    }
 
+    }
 }
