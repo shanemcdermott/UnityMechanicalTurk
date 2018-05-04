@@ -241,7 +241,7 @@ namespace Algorithms.City
                         if (diff.y < 0)
                             i += 2;
                     }
-                    if (checkAlphaMap(node))
+                    if (checkAlphaMap(node,i))
                     {
                         alphamaps[node.y * 2, node.x * 2, i] = 1;
                         alphamaps[node.y * 2 + 1, node.x * 2, i] = 1;
@@ -304,9 +304,20 @@ namespace Algorithms.City
             }
         }
 
+        private bool checkAlphaMap(Vector2Int node, int i)
+        {
+            return node.x >= 0 &&
+                    node.y >= 0 &&
+                    node.x * 2 + 1 < alphamaps.GetLength(1) &&
+                    node.y * 2 + 1 < alphamaps.GetLength(0) &&
+                    i >= 0 &&
+                    i < alphamaps.GetLength(2);
+        }
+
         private bool checkAlphaMap(Vector2Int node)
         {
-            return node.x >= 0 && node.y >= 0 &&
+            return  node.x >= 0 && 
+                    node.y >= 0 &&
                     node.x * 2 + 1 < alphamaps.GetLength(1) &&
                     node.y * 2 + 1 < alphamaps.GetLength(0);
         }
