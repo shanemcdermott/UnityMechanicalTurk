@@ -5,15 +5,14 @@ var hierarchy =
     ] ],
     [ "Algorithms.City.BuildingGenerator.BuildingType", "struct_algorithms_1_1_city_1_1_building_generator_1_1_building_type.html", null ],
     [ "Editor", null, [
-      [ "ClutterPlacementEditor", "class_clutter_placement_editor.html", null ],
+      [ "CameraControllerEditor", "class_camera_controller_editor.html", null ],
+      [ "CameraViewTargetEditor", "class_camera_view_target_editor.html", null ],
       [ "GenerationControllerEditor", "class_generation_controller_editor.html", null ],
+      [ "GeneratorCameraControllerEditor", "class_generator_camera_controller_editor.html", null ],
       [ "NoiseMapEditor", "class_noise_map_editor.html", null ],
       [ "PointGeneratorEditor", "class_point_generator_editor.html", null ],
       [ "PolyGridEditor", "class_poly_grid_editor.html", null ],
       [ "TerrainGenerationEditor", "class_terrain_generation_editor.html", null ]
-    ] ],
-    [ "EditorWindow", null, [
-      [ "CityGenEditorWindow", "class_city_gen_editor_window.html", null ]
     ] ],
     [ "GameLogicTest", "class_game_logic_test.html", null ],
     [ "Algorithms.Noise.SimplexNoise.Grad", "class_algorithms_1_1_noise_1_1_simplex_noise_1_1_grad.html", null ],
@@ -68,7 +67,10 @@ var hierarchy =
         [ "Framework.Generation.TerrainGenerator", "class_framework_1_1_generation_1_1_terrain_generator.html", null ]
       ] ],
       [ "Framework.Generation.GenerationController", "class_framework_1_1_generation_1_1_generation_controller.html", null ],
-      [ "Framework.Util.CameraController", "class_framework_1_1_util_1_1_camera_controller.html", null ],
+      [ "Framework.Util.CameraController", "class_framework_1_1_util_1_1_camera_controller.html", [
+        [ "Algorithms.Util.GeneratorCameraController", "class_algorithms_1_1_util_1_1_generator_camera_controller.html", null ]
+      ] ],
+      [ "Framework.Util.CameraViewObject", "class_framework_1_1_util_1_1_camera_view_object.html", null ],
       [ "Framework.Util.RandomTransform", "class_framework_1_1_util_1_1_random_transform.html", null ]
     ] ],
     [ "Algorithms.City.ObjectSpawnParams", "struct_algorithms_1_1_city_1_1_object_spawn_params.html", null ],
@@ -80,7 +82,13 @@ var hierarchy =
     ] ],
     [ "Framework.Collections.RandomQueue< T >", "class_framework_1_1_collections_1_1_random_queue.html", null ],
     [ "Framework.Collections.RandomQueue< Vector2 >", "class_framework_1_1_collections_1_1_random_queue.html", null ],
+    [ "ScriptableObject", null, [
+      [ "Framework.Util.CameraViewTarget", "class_framework_1_1_util_1_1_camera_view_target.html", null ]
+    ] ],
     [ "Framework.Collections.SquareGridParams", "struct_framework_1_1_collections_1_1_square_grid_params.html", null ],
     [ "Framework.Generation.TerrainType", "struct_framework_1_1_generation_1_1_terrain_type.html", null ],
-    [ "Framework.Collections.TileRecord", "struct_framework_1_1_collections_1_1_tile_record.html", null ]
+    [ "Framework.Collections.TileRecord", "struct_framework_1_1_collections_1_1_tile_record.html", null ],
+    [ "UnityEvent", null, [
+      [ "Framework.Util.ViewTargetEvent", "class_framework_1_1_util_1_1_view_target_event.html", null ]
+    ] ]
 ];

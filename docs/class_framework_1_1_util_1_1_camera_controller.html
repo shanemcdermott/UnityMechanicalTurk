@@ -90,6 +90,7 @@ $(document).ready(function(){initNavTree('class_framework_1_1_util_1_1_camera_co
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_framework_1_1_util_1_1_camera_controller-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Framework.Util.CameraController Class Reference</div>  </div>
@@ -99,59 +100,211 @@ $(document).ready(function(){initNavTree('class_framework_1_1_util_1_1_camera_co
 Inheritance diagram for Framework.Util.CameraController:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_framework_1_1_util_1_1_camera_controller__inherit__graph.png" border="0" usemap="#_framework_8_util_8_camera_controller_inherit__map" alt="Inheritance graph"/></div>
+<map name="_framework_8_util_8_camera_controller_inherit__map" id="_framework_8_util_8_camera_controller_inherit__map">
+<area shape="rect" id="node3" href="class_algorithms_1_1_util_1_1_generator_camera_controller.html" title="Algorithms.Util.Generator\lCameraController" alt="" coords="28,155,196,196"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Framework.Util.CameraController:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_framework_1_1_util_1_1_camera_controller__coll__graph.png" border="0" usemap="#_framework_8_util_8_camera_controller_coll__map" alt="Collaboration graph"/></div>
 <map name="_framework_8_util_8_camera_controller_coll__map" id="_framework_8_util_8_camera_controller_coll__map">
-<area shape="rect" id="node3" href="class_framework_1_1_generation_1_1_generation_controller.html" title="Manages Random Seed, Generation Sequences. " alt="" coords="1217,77,1437,118"/>
-<area shape="rect" id="node5" href="class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="207,121,347,148"/>
-<area shape="rect" id="node6" href="class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="169,268,385,295"/>
-<area shape="rect" id="node4" href="class_framework_1_1_generation_1_1_city_generator.html" title="Framework.Generation.City\lGenerator" alt="" coords="519,94,699,135"/>
-<area shape="rect" id="node7" href="class_framework_1_1_generation_1_1_terrain_generator.html" title="Framework.Generation.Terrain\lGenerator" alt="" coords="876,214,1072,255"/>
-<area shape="rect" id="node8" href="class_framework_1_1_generation_1_1_noise_generator.html" title="Framework.Generation.Noise\lGenerator" alt="" coords="514,214,705,255"/>
-<area shape="rect" id="node9" href="class_framework_1_1_generation_1_1_biome_generator.html" title="Framework.Generation.Biome\lGenerator" alt="" coords="512,286,707,327"/>
-<area shape="rect" id="node10" href="struct_framework_1_1_generation_1_1_terrain_type.html" title="Framework.Generation.TerrainType" alt="" coords="165,392,389,419"/>
+<area shape="rect" id="node3" href="class_framework_1_1_util_1_1_view_target_event.html" title="Framework.Util.ViewTarget\lEvent" alt="" coords="140,96,317,137"/>
+<area shape="rect" id="node5" href="class_framework_1_1_util_1_1_camera_view_target.html" title="Represents a target view transform for a camera to lerp to. " alt="" coords="342,96,529,137"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa60b188c5c8d96642d4b3128a45d5b16"><td class="memItemLeft" align="right" valign="top"><a id="aa60b188c5c8d96642d4b3128a45d5b16"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StartNextSequence</b> ()</td></tr>
-<tr class="separator:aa60b188c5c8d96642d4b3128a45d5b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f66cf9f0a2307da7574923c383c896"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_framework_1_1_util_1_1_camera_controller.html#ae6f66cf9f0a2307da7574923c383c896">AddCameras</a> (int numCamerasToAdd)</td></tr>
+<tr class="memdesc:ae6f66cf9f0a2307da7574923c383c896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds numCamerasToAdd cameras.  <a href="#ae6f66cf9f0a2307da7574923c383c896">More...</a><br /></td></tr>
+<tr class="separator:ae6f66cf9f0a2307da7574923c383c896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6800b803904f0116855d8a3f86e5462f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_framework_1_1_util_1_1_camera_controller.html#a6800b803904f0116855d8a3f86e5462f">AddCamera</a> ()</td></tr>
+<tr class="memdesc:a6800b803904f0116855d8a3f86e5462f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and attaches a child game object with a camera.  <a href="#a6800b803904f0116855d8a3f86e5462f">More...</a><br /></td></tr>
+<tr class="separator:a6800b803904f0116855d8a3f86e5462f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0d2ead871b53f8fb8fe4657fc0e74f"><td class="memItemLeft" align="right" valign="top"><a id="aba0d2ead871b53f8fb8fe4657fc0e74f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveCamera</b> (int cameraId)</td></tr>
+<tr class="separator:aba0d2ead871b53f8fb8fe4657fc0e74f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971989b644771b53375f386948c7c7af"><td class="memItemLeft" align="right" valign="top"><a id="a971989b644771b53375f386948c7c7af"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateCameraRatios</b> ()</td></tr>
+<tr class="separator:a971989b644771b53375f386948c7c7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a168c472899eccaa2899669ed205474c5"><td class="memItemLeft" align="right" valign="top"><a id="a168c472899eccaa2899669ed205474c5"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>AddCameraView</b> (int viewCameraId, <a class="el" href="class_framework_1_1_util_1_1_camera_view_target.html">CameraViewTarget</a> viewTarget)</td></tr>
+<tr class="separator:a168c472899eccaa2899669ed205474c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac45a73f5bd7cc0b1f2ce200698a31bc7"><td class="memItemLeft" align="right" valign="top"><a id="ac45a73f5bd7cc0b1f2ce200698a31bc7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>AlignCamerasWithStartView</b> ()</td></tr>
+<tr class="separator:ac45a73f5bd7cc0b1f2ce200698a31bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a998327b4c9d12ac0577eac99968f7e9b"><td class="memItemLeft" align="right" valign="top"><a id="a998327b4c9d12ac0577eac99968f7e9b"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>StartSequences</b> ()</td></tr>
+<tr class="separator:a998327b4c9d12ac0577eac99968f7e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41151e15d9dbe6d9211c96e35ac7cd86"><td class="memItemLeft" align="right" valign="top"><a id="a41151e15d9dbe6d9211c96e35ac7cd86"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>RestartSequences</b> ()</td></tr>
+<tr class="separator:a41151e15d9dbe6d9211c96e35ac7cd86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f744627a366c8591e8e8f69695d2829"><td class="memItemLeft" align="right" valign="top"><a id="a7f744627a366c8591e8e8f69695d2829"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>MakeSequencesFinite</b> ()</td></tr>
+<tr class="separator:a7f744627a366c8591e8e8f69695d2829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad33d6704ebabc3d6c4bb98110621765"><td class="memItemLeft" align="right" valign="top"><a id="aad33d6704ebabc3d6c4bb98110621765"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>MakeSequencesCircular</b> ()</td></tr>
+<tr class="separator:aad33d6704ebabc3d6c4bb98110621765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f1f4ba0da559414bb1e3c02d9b304c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_framework_1_1_util_1_1_camera_controller.html#a93f1f4ba0da559414bb1e3c02d9b304c">BeginView</a> (Camera targetCamera, <a class="el" href="class_framework_1_1_util_1_1_camera_view_target.html">CameraViewTarget</a> viewTarget)</td></tr>
+<tr class="memdesc:a93f1f4ba0da559414bb1e3c02d9b304c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the LerpView coroutine  <a href="#a93f1f4ba0da559414bb1e3c02d9b304c">More...</a><br /></td></tr>
+<tr class="separator:a93f1f4ba0da559414bb1e3c02d9b304c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a5ff48aaf8f8f73a7762b3f937754ce04"><td class="memItemLeft" align="right" valign="top"><a id="a5ff48aaf8f8f73a7762b3f937754ce04"></a>
-<a class="el" href="class_framework_1_1_generation_1_1_generation_controller.html">GenerationController</a>&#160;</td><td class="memItemRight" valign="bottom"><b>controllerA</b></td></tr>
-<tr class="separator:a5ff48aaf8f8f73a7762b3f937754ce04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1b059c8c908441396b9e234e4f77e70"><td class="memItemLeft" align="right" valign="top"><a id="ae1b059c8c908441396b9e234e4f77e70"></a>
-<a class="el" href="class_framework_1_1_generation_1_1_generation_controller.html">GenerationController</a>&#160;</td><td class="memItemRight" valign="bottom"><b>controllerB</b></td></tr>
-<tr class="separator:ae1b059c8c908441396b9e234e4f77e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6fb70f97a953021a8fdc14171bf6a6c"><td class="memItemLeft" align="right" valign="top"><a id="ac6fb70f97a953021a8fdc14171bf6a6c"></a>
-Camera&#160;</td><td class="memItemRight" valign="bottom"><b>cameraA</b></td></tr>
-<tr class="separator:ac6fb70f97a953021a8fdc14171bf6a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05aef14cd021d157dabb02f3a8c88b76"><td class="memItemLeft" align="right" valign="top"><a id="a05aef14cd021d157dabb02f3a8c88b76"></a>
-Camera&#160;</td><td class="memItemRight" valign="bottom"><b>cameraB</b></td></tr>
-<tr class="separator:a05aef14cd021d157dabb02f3a8c88b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00fecd090b6922e80c6b1efead8f1dcf"><td class="memItemLeft" align="right" valign="top"><a id="a00fecd090b6922e80c6b1efead8f1dcf"></a>
-Transform []&#160;</td><td class="memItemRight" valign="bottom"><b>cameraAsequence</b></td></tr>
-<tr class="separator:a00fecd090b6922e80c6b1efead8f1dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab87e8d1cdd2a750bd812cccd9a74150"><td class="memItemLeft" align="right" valign="top"><a id="aab87e8d1cdd2a750bd812cccd9a74150"></a>
-float []&#160;</td><td class="memItemRight" valign="bottom"><b>cameraAsequenceDuration</b></td></tr>
-<tr class="separator:aab87e8d1cdd2a750bd812cccd9a74150"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e21540d3ffb277eb6d356f076595cfc"><td class="memItemLeft" align="right" valign="top"><a id="a7e21540d3ffb277eb6d356f076595cfc"></a>
-Transform []&#160;</td><td class="memItemRight" valign="bottom"><b>cameraBsequence</b></td></tr>
-<tr class="separator:a7e21540d3ffb277eb6d356f076595cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee6ed18af468d2bb56259863856ddfe9"><td class="memItemLeft" align="right" valign="top"><a id="aee6ed18af468d2bb56259863856ddfe9"></a>
-float []&#160;</td><td class="memItemRight" valign="bottom"><b>cameraBsequenceDuration</b></td></tr>
-<tr class="separator:aee6ed18af468d2bb56259863856ddfe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a139b43a549aa932f1f6f6ede8a34e385"><td class="memItemLeft" align="right" valign="top"><a id="a139b43a549aa932f1f6f6ede8a34e385"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>seqIndex</b> = 0</td></tr>
-<tr class="separator:a139b43a549aa932f1f6f6ede8a34e385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0ba30ec295bfde1129234c7c0b8fcb7"><td class="memItemLeft" align="right" valign="top"><a id="af0ba30ec295bfde1129234c7c0b8fcb7"></a>
+Camera []&#160;</td><td class="memItemRight" valign="bottom"><b>cameras</b></td></tr>
+<tr class="separator:af0ba30ec295bfde1129234c7c0b8fcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7788c5d543294737172514716b317536"><td class="memItemLeft" align="right" valign="top"><a id="a7788c5d543294737172514716b317536"></a>
+<a class="el" href="class_framework_1_1_util_1_1_camera_view_target.html">CameraViewTarget</a> []&#160;</td><td class="memItemRight" valign="bottom"><b>viewSequences</b></td></tr>
+<tr class="separator:a7788c5d543294737172514716b317536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af61ea3c8dcf508957bec31ab86c9df00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_framework_1_1_util_1_1_view_target_event.html">ViewTargetEvent</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_framework_1_1_util_1_1_camera_controller.html#af61ea3c8dcf508957bec31ab86c9df00">OnViewSequenceComplete</a></td></tr>
+<tr class="memdesc:af61ea3c8dcf508957bec31ab86c9df00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unity Event dispatcher that triggers when LerpView has finished  <a href="#af61ea3c8dcf508957bec31ab86c9df00">More...</a><br /></td></tr>
+<tr class="separator:af61ea3c8dcf508957bec31ab86c9df00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a767e019cdcab286522346ec9f1018674"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_framework_1_1_util_1_1_camera_controller.html#a767e019cdcab286522346ec9f1018674">LerpSequenceComplete</a> (Camera targetCamera, <a class="el" href="class_framework_1_1_util_1_1_camera_view_target.html">CameraViewTarget</a> viewTarget)</td></tr>
+<tr class="memdesc:a767e019cdcab286522346ec9f1018674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when duration has been reached. If nextView is valid, BeginView is called again.  <a href="#a767e019cdcab286522346ec9f1018674">More...</a><br /></td></tr>
+<tr class="separator:a767e019cdcab286522346ec9f1018674"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6800b803904f0116855d8a3f86e5462f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6800b803904f0116855d8a3f86e5462f">&#9670;&nbsp;</a></span>AddCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Framework.Util.CameraController.AddCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates and attaches a child game object with a camera. </p>
+
+</div>
+</div>
+<a id="ae6f66cf9f0a2307da7574923c383c896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f66cf9f0a2307da7574923c383c896">&#9670;&nbsp;</a></span>AddCameras()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Framework.Util.CameraController.AddCameras </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numCamerasToAdd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds numCamerasToAdd cameras. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numCamerasToAdd</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a93f1f4ba0da559414bb1e3c02d9b304c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93f1f4ba0da559414bb1e3c02d9b304c">&#9670;&nbsp;</a></span>BeginView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Framework.Util.CameraController.BeginView </td>
+          <td>(</td>
+          <td class="paramtype">Camera&#160;</td>
+          <td class="paramname"><em>targetCamera</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_framework_1_1_util_1_1_camera_view_target.html">CameraViewTarget</a>&#160;</td>
+          <td class="paramname"><em>viewTarget</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts the LerpView coroutine </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">targetCamera</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a767e019cdcab286522346ec9f1018674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767e019cdcab286522346ec9f1018674">&#9670;&nbsp;</a></span>LerpSequenceComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Framework.Util.CameraController.LerpSequenceComplete </td>
+          <td>(</td>
+          <td class="paramtype">Camera&#160;</td>
+          <td class="paramname"><em>targetCamera</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_framework_1_1_util_1_1_camera_view_target.html">CameraViewTarget</a>&#160;</td>
+          <td class="paramname"><em>viewTarget</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when duration has been reached. If nextView is valid, BeginView is called again. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="af61ea3c8dcf508957bec31ab86c9df00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af61ea3c8dcf508957bec31ab86c9df00">&#9670;&nbsp;</a></span>OnViewSequenceComplete</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_framework_1_1_util_1_1_view_target_event.html">ViewTargetEvent</a> Framework.Util.CameraController.OnViewSequenceComplete</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unity Event dispatcher that triggers when LerpView has finished </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>MechanicalTurk/Assets/Scripts/Framework/Util/CameraController.cs</li>
 </ul>
