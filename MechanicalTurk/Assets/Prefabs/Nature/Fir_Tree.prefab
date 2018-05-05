@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4482691931808314}
   - component: {fileID: 33617019501200674}
   - component: {fileID: 23071623705054268}
-  - component: {fileID: 114021782912849586}
   m_Layer: 0
   m_Name: Fir_Tree
   m_TagString: Untagged
@@ -82,17 +81,4 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806942527090010}
-  m_Mesh: {fileID: 4300000, guid: 0925b7ce84eeacc48b2cbcfa10a97db9, type: 3}
---- !u!114 &114021782912849586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1806942527090010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e705bfb171fbd4881d788500a0e48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleMin: 0.85
-  scaleMax: 1.15
+  m_Mesh: {fileID: 4300000, guid: eb65545c2e84b6e4684fecd86055a929, type: 3}

@@ -2,18 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using Framework.Generation;
 
 namespace Framework.Util
 {
+    [System.Serializable]
+    public class ViewTargetEvent : UnityEvent<Camera, CameraViewTarget>
+    { }
+
     public class CameraController : MonoBehaviour
     {
         
         public Camera[] cameras;
-        public CameraView[] viewSequences;
+        public CameraViewTarget[] viewSequences;
 
-        protected Transform[] sequenceTransformRoots;
+        /// <summary>
+        /// Stores active coroutine for each camera/viewSequence
+        /// </summary>
+        private Dictionary<Camera, IEnumerator> viewLerpCoroutines;
+
+        /// <summary>
+        /// Unity Event dispatcher that triggers when LerpView has finished
+        /// </summary>
+        public ViewTargetEvent OnViewSequenceComplete;
+
+
+        private void Awake()
+        {
+            if (OnViewSequenceComplete == null)
+            {
+                OnViewSequenceComplete = new ViewTargetEvent();
+            }
+
+            viewLerpCoroutines = new Dictionary<Camera, IEnumerator>();
+        }
 
         // Use this for initialization
         void Start()
@@ -48,64 +72,74 @@ namespace Framework.Util
 
             Array.Resize(ref cameras, last + 1);
             Array.Resize(ref viewSequences, last + 1);
-            Array.Resize(ref sequenceTransformRoots, last + 1);
 
             string camobjName = "Camera" + last;
 
-            GameObject goRoot = new GameObject(camobjName + "_ViewRoot");
-            goRoot.transform.SetParent(transform);
-            sequenceTransformRoots[last] = goRoot.transform;
-
             GameObject go = new GameObject(camobjName);
-            go.transform.SetParent(goRoot.transform);
+            go.transform.SetParent(transform);
 
             cameras[last] = go.AddComponent<Camera>();
             cameras[last].depth = last;
+            UpdateCameraRatios();
+            AlignCamerasWithStartView();
         }
 
-        public virtual void AddCameraView(int viewCameraId,
-                                            float viewDuration,
-                                            Vector3 viewLocation,
-                                            Vector3 viewRotation)
+        public void RemoveCamera(int cameraId)
         {
+            if(cameraId >= 0 && cameraId < cameras.Length)
+            {
+                DestroyImmediate(cameras[cameraId].gameObject);
+                cameras[cameraId] = cameras[cameras.Length - 1];
+                viewSequences[cameraId] = viewSequences[viewSequences.Length - 1];
+                Array.Resize(ref cameras, cameras.Length - 1);
+                Array.Resize(ref viewSequences, viewSequences.Length - 1);
 
+                UpdateCameraRatios();
+            }
+        }
 
-            string camViewName = "Camera" + viewCameraId + "_View" + (viewSequences[viewCameraId] == null ? 0 : viewSequences[viewCameraId].GetNumRemaining() + 1);
+        public virtual void UpdateCameraRatios()
+        {
+            float ratio = 1f / cameras.Length;
+            for(int i =0; i < cameras.Length; i++)
+            {
+                cameras[i].rect = new Rect(new Vector2(i * ratio, 0), new Vector2(ratio, 1f));
+            }
+        }
 
-            GameObject go = new GameObject(camViewName);
-            go.transform.SetParent(sequenceTransformRoots[viewCameraId]);
-
-
-
+        public virtual void AddCameraView(int viewCameraId, CameraViewTarget viewTarget)
+        {
+            
             if (viewSequences[viewCameraId] == null)
             {
-                viewSequences[viewCameraId] = go.AddComponent<CameraView>();
-                viewSequences[viewCameraId].duration = viewDuration;
-                viewSequences[viewCameraId].transform.position = viewLocation;
-                viewSequences[viewCameraId].transform.rotation = Quaternion.Euler(viewRotation);
+                viewSequences[viewCameraId] = viewTarget;
             }
             else
             {
 
-                CameraView lastView = viewSequences[viewCameraId].GetLast();
+                CameraViewTarget lastView = viewSequences[viewCameraId].GetLast();
 
                 if (lastView == null)
                 {
-                    lastView = go.AddComponent<CameraView>();
-                    lastView.duration = viewDuration;
-                    lastView.transform.position = viewLocation;
-                    lastView.transform.rotation = Quaternion.Euler(viewRotation);
-                    viewSequences[viewCameraId].nextView = lastView;
+                    viewSequences[viewCameraId].nextView = viewTarget;
                 }
                 else
                 {
-                    lastView.nextView = go.AddComponent<CameraView>();
-                    lastView.nextView.duration = viewDuration;
-                    lastView.nextView.transform.position = viewLocation;
-                    lastView.nextView.transform.rotation = Quaternion.Euler(viewRotation);
+                    lastView.nextView = viewTarget;
                 }
             }
-       
+        }
+
+        public void AlignCamerasWithStartView()
+        {
+            for(int i = 0; i < cameras.Length; i++)
+            {
+                if(viewSequences[i])
+                {
+                    cameras[i].gameObject.transform.position = viewSequences[i].viewPosition;
+                    cameras[i].gameObject.transform.rotation = Quaternion.Euler(viewSequences[i].viewRotation);
+                }
+            }
         }
 
 
@@ -119,7 +153,7 @@ namespace Framework.Util
         {
             for (int i = 0; i < viewSequences.Length; i++)
             {
-                viewSequences[i].BeginView(cameras[i]);
+                BeginView(cameras[i], viewSequences[i]);
             }
         }
 
@@ -127,7 +161,7 @@ namespace Framework.Util
         {
             for (int i = 0; i < viewSequences.Length; i++)
             {
-                CameraView lastView = viewSequences[i].GetLast();
+                CameraViewTarget lastView = viewSequences[i].GetLast();
                 if (lastView.nextView != null)
                 {
                     lastView.nextView = null;
@@ -139,12 +173,62 @@ namespace Framework.Util
         {
             for (int i = 0; i < viewSequences.Length; i++)
             {
-                CameraView lastView = viewSequences[i].GetLast();
+                CameraViewTarget lastView = viewSequences[i].GetLast();
                 if (lastView.nextView == null)
                 {
                     lastView.nextView = viewSequences[i];
                 }
             }
+        }
+
+        /// <summary>
+        /// Starts the LerpView coroutine
+        /// </summary>
+        /// <param name="targetCamera"></param>
+        public void BeginView(Camera targetCamera, CameraViewTarget viewTarget)
+        {
+            viewLerpCoroutines.Add(targetCamera, LerpView(targetCamera, viewTarget));
+            StartCoroutine(viewLerpCoroutines[targetCamera]);
+        }
+
+
+        /// <summary>
+        /// Lerps between camera's current position and transform position.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator LerpView(Camera targetCamera, CameraViewTarget rootViewTarget)
+        {
+            for (CameraViewTarget viewTarget = rootViewTarget; viewTarget != null; viewTarget = viewTarget.nextView)
+            {
+                for (float timeElapsed = 0f; timeElapsed < viewTarget.duration; timeElapsed += Time.deltaTime)
+                {
+                    targetCamera.transform.position = Vector3.Lerp(targetCamera.transform.position, viewTarget.viewPosition, Time.deltaTime);
+                    targetCamera.transform.rotation = Quaternion.Lerp(targetCamera.transform.rotation, Quaternion.Euler(viewTarget.viewRotation), Time.deltaTime);
+                    yield return null;
+                }
+            }
+            LerpSequenceComplete(targetCamera, rootViewTarget);
+        }
+
+
+        /// <summary>
+        /// Called when duration has been reached.
+        /// If nextView is valid, BeginView is called again.
+        /// </summary>
+        protected virtual void LerpSequenceComplete(Camera targetCamera, CameraViewTarget viewTarget)
+        {
+            StopCoroutine(viewLerpCoroutines[targetCamera]);
+            viewLerpCoroutines.Remove(targetCamera);
+            OnViewSequenceComplete.Invoke(targetCamera, viewTarget);
+        }
+
+        /// <summary>
+        /// Stops all coroutines and removes all event listeners
+        /// </summary>
+        private void OnDisable()
+        {
+            OnViewSequenceComplete.RemoveAllListeners();
+            StopAllCoroutines();
         }
     }
 }

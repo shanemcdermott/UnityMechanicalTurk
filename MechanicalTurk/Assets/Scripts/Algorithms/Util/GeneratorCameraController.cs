@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,31 +14,64 @@ namespace Algorithms.Util
 
         public GenerationController[] generationControllers;
 
+        private int numReadyGenerators = 0;
+
+        public virtual void AddAllGenControllersInScene()
+        {
+            generationControllers = FindObjectsOfType<GenerationController>();
+        }
+
+        public virtual void AddGenerationController(int viewCameraId, GenerationController controller)
+        {
+            if(generationControllers == null || generationControllers.Length < viewCameraId)
+            {
+                Array.Resize(ref generationControllers, cameras.Length);
+                generationControllers[viewCameraId] = controller;
+            }
+        }
+
+        /// <summary>
+        /// Disables all circular view sequences before starting.
+        /// Once each sequence is complete, GenerateAndRestartSequence is called.
+        /// </summary>
         public override void StartSequences()
         {
             MakeSequencesFinite();
-
+            OnViewSequenceComplete.AddListener(GenerateAndRestartSequence);
             RestartSequences();
         }
 
-        public override void RestartSequences()
+        /// <summary>
+        /// Finds the GenerationController associated with targetCamera and starts the next generation sequence.
+        /// The GenerationController's seed is incremented by one.
+        /// </summary>
+        /// <param name="targetCamera"></param>
+        /// <param name="viewTarget"></param>
+        public virtual void GenerateAndRestartSequence(Camera targetCamera, CameraViewTarget viewTarget)
         {
-            for(int i = 0; i < generationControllers.Length; i++)
+            if(numReadyGenerators < 0)
             {
-                generationControllers[i].cityGenerator.OnGenerationComplete.RemoveListener(RestartSequences);
+                numReadyGenerators = 0;
             }
-            CameraView lastView = viewSequences[0].GetLast();
-            lastView.OnLerpViewComplete.AddListener(GenerateAndRestartSequences);
-            base.RestartSequences();
+
+            int i = Array.IndexOf(cameras, targetCamera);
+            generationControllers[i].Seed++;
+            generationControllers[i].cityGenerator.OnGenerationComplete.AddListener(UpdateReadyGenerators);
+            generationControllers[i].SetupAndGenerate();
         }
 
-        public virtual void GenerateAndRestartSequences()
+        ///Updates the number of generators that have finished. Once all are done, the view sequence restarts
+        public virtual void UpdateReadyGenerators()
         {
-            for(int i = 0; i < generationControllers.Length; i++)
+            numReadyGenerators++;
+            if(numReadyGenerators>=generationControllers.Length)
             {
-                generationControllers[i].Seed++;
-                generationControllers[i].cityGenerator.OnGenerationComplete.AddListener(RestartSequences);
-                generationControllers[i].SetupAndGenerate();
+                for(int i = 0; i < generationControllers.Length; i++)
+                {
+                    generationControllers[i].cityGenerator.OnGenerationComplete.RemoveListener(UpdateReadyGenerators);
+                }
+                numReadyGenerators = 0;
+                RestartSequences();
             }
         }
     }
