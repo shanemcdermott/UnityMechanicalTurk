@@ -58,9 +58,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   blockPrefabs:
-  - {fileID: 1806942527090010, guid: 3db2ac297ec4f854ebbd49514f27399b, type: 2}
-  - {fileID: 1826131239407874, guid: dd673106d3e81824a92480b62569a1b4, type: 2}
-  - {fileID: 1445478518982214, guid: 1a22d79606a3c2a4e9ea2d5eeea60222, type: 2}
+  - {fileID: 1806942527090010, guid: fa8339f172c3c7f4fa9b0a4d28128c7a, type: 2}
+  - {fileID: 1826131239407874, guid: 6e07787ab9d1b9f4ea66d8c0ee194ecf, type: 2}
+  - {fileID: 1445478518982214, guid: 3cc5a9230e19d974caeaebb574f30bf2, type: 2}
   pointGenerator: {fileID: 114583800880636422}
   Dimensions: {x: 256, y: 0, z: 256}
   MinLotSize: {x: 10, y: 10, z: 10}
