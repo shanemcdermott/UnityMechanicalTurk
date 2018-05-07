@@ -1,0 +1,13 @@
+<map id="Framework.Generation.GeneratorCameraController" name="Framework.Generation.GeneratorCameraController">
+<area shape="rect" id="node2" href="$class_camera_controls_1_1_camera_controller.html" title="CameraController" alt="" coords="656,115,779,144"/>
+<area shape="rect" id="node15" href="$class_framework_1_1_generation_1_1_generation_controller.html" title="Manages Random Seed, Generation Sequences. " alt="" coords="1663,210,1881,257"/>
+<area shape="rect" id="node20" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="648,440,787,469"/>
+<area shape="rect" id="node23" href="$class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="609,277,825,307"/>
+<area shape="rect" id="node6" href="$class_camera_controls_1_1_view_target_event.html" title="CameraControls.ViewTarget\lEvent" alt="" coords="208,5,389,51"/>
+<area shape="rect" id="node10" href="$class_camera_controls_1_1_camera_view_target.html" title="Represents a target view transform for a camera to lerp to. " alt="" coords="203,115,395,162"/>
+<area shape="rect" id="node18" href="$class_framework_1_1_generation_1_1_city_generator.html" title="Framework.Generation.City\lGenerator" alt="" coords="960,237,1139,283"/>
+<area shape="rect" id="node26" href="$class_framework_1_1_generation_1_1_terrain_generator.html" title="Framework.Generation.Terrain\lGenerator" alt="" coords="1319,387,1513,434"/>
+<area shape="rect" id="node29" href="$class_framework_1_1_generation_1_1_noise_generator.html" title="Framework.Generation.Noise\lGenerator" alt="" coords="955,387,1144,434"/>
+<area shape="rect" id="node34" href="$class_framework_1_1_generation_1_1_biome_generator.html" title="Framework.Generation.Biome\lGenerator" alt="" coords="952,525,1147,571"/>
+<area shape="rect" id="node38" href="$struct_framework_1_1_generation_1_1_terrain_type.html" title="Framework.Generation.TerrainType" alt="" coords="605,544,829,573"/>
+</map>

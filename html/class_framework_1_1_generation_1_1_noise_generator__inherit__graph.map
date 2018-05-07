@@ -1,0 +1,5 @@
+<map id="Framework.Generation.NoiseGenerator" name="Framework.Generation.NoiseGenerator">
+<area shape="rect" id="node7" href="$class_algorithms_1_1_noise_1_1_perlin_octaves.html" title="Algorithms.Noise.PerlinOctaves" alt="" coords="5,265,211,295"/>
+<area shape="rect" id="node9" href="$class_algorithms_1_1_noise_1_1_simplex_noise.html" title="Algorithms.Noise.Simplex\lNoise" alt="" coords="235,257,405,303"/>
+<area shape="rect" id="node2" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="144,83,283,112"/>
+</map>

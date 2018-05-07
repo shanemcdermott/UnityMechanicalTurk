@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
-using Framework.Util;
+using CameraControls;
 
 /// <summary>
 /// Editor Panel for CameraViewTarget

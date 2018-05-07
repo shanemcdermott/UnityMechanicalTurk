@@ -1,0 +1,5 @@
+<map id="CameraControllerEditor" name="CameraControllerEditor">
+<area shape="rect" id="node4" href="$class_camera_controls_1_1_camera_controller.html" title="CameraControls.CameraController" alt="" coords="120,219,339,248"/>
+<area shape="rect" id="node8" href="$class_camera_controls_1_1_view_target_event.html" title="CameraControls.ViewTarget\lEvent" alt="" coords="139,105,320,151"/>
+<area shape="rect" id="node12" href="$class_camera_controls_1_1_camera_view_target.html" title="Represents a target view transform for a camera to lerp to. " alt="" coords="344,105,536,151"/>
+</map>

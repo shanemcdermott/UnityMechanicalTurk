@@ -1,0 +1,6 @@
+<map id="Framework.Generation.CityGenerator" name="Framework.Generation.CityGenerator">
+<area shape="rect" id="node7" href="$class_algorithms_1_1_city_1_1_city_biome_generator.html" title="Algorithms.City.CityBiome\lGenerator" alt="" coords="613,5,787,51"/>
+<area shape="rect" id="node9" href="$class_algorithms_1_1_city_1_1_l_system_generation.html" title="Algorithms.City.LSystemGeneration" alt="" coords="585,75,815,104"/>
+<area shape="rect" id="node11" href="$class_algorithms_1_1_city_1_1_perlin_city_generator.html" title="Algorithms.City.PerlinCity\lGenerator" alt="" coords="615,127,785,174"/>
+<area shape="rect" id="node2" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="167,75,305,104"/>
+</map>

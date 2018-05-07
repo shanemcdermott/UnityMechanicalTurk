@@ -1,0 +1,13 @@
+<map id="Algorithms.City.PerlinCityGenerator" name="Algorithms.City.PerlinCityGenerator">
+<area shape="rect" id="node2" href="$class_framework_1_1_generation_1_1_city_generator.html" title="CityGenerator" alt="" coords="695,341,796,371"/>
+<area shape="rect" id="node4" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="211,181,349,211"/>
+<area shape="rect" id="node11" href="$class_framework_1_1_generation_1_1_noise_generator.html" title="Framework.Generation.Noise\lGenerator" alt="" coords="651,194,840,241"/>
+<area shape="rect" id="node15" href="$class_algorithms_1_1_city_1_1_building_generator.html" title="Algorithms.City.Building\lGenerator" alt="" coords="665,394,825,441"/>
+<area shape="rect" id="node24" href="$class_framework_1_1_generation_1_1_terrain_generator.html" title="Framework.Generation.Terrain\lGenerator" alt="" coords="1079,173,1273,219"/>
+<area shape="rect" id="node29" href="$class_framework_1_1_generation_1_1_biome_generator.html" title="Framework.Generation.Biome\lGenerator" alt="" coords="648,14,843,61"/>
+<area shape="rect" id="node8" href="$class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="172,315,388,344"/>
+<area shape="rect" id="node21" href="$class_framework_1_1_collections_1_1_poly_grid.html" title="Framework.Collections.PolyGrid" alt="" coords="416,491,624,520"/>
+<area shape="rect" id="node35" href="$class_algorithms_1_1_city_1_1_road_painter.html" title="Applies a road texture to terrain. " alt="" coords="867,532,1053,561"/>
+<area shape="rect" id="node19" href="$struct_algorithms_1_1_city_1_1_building_generator_1_1_building_type.html" title="Algorithms.City.Building\lGenerator.BuildingType" alt="" coords="200,414,360,461"/>
+<area shape="rect" id="node33" href="$struct_framework_1_1_generation_1_1_terrain_type.html" title="Framework.Generation.TerrainType" alt="" coords="168,5,392,35"/>
+</map>

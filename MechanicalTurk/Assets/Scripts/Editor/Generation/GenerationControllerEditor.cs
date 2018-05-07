@@ -5,33 +5,77 @@ using UnityEngine;
 using UnityEditor;
 
 using Framework.Generation;
+using Framework.Collections;
 using Algorithms.City;
+
+
 
 /*Editor Inspector UI for interacting with GenerationController */
 [CustomEditor(typeof(GenerationController))]
 public class GenerationControllerEditor : Editor
 {
+    private GenerationController controller;
+
+    private SerializedProperty _seed;
+    private SerializedProperty _terrainGen;
+    private SerializedProperty _cityGen;
+
+    private int cityGenTab;
+    private string[] cityGenNames = { "None", "Recursive Detail", "Noise Based", "L-System" };
+
+    private void OnEnable()
+    {
+       controller = (GenerationController)target;
+        _seed = serializedObject.FindProperty("Seed");
+        _terrainGen = serializedObject.FindProperty("terrainGenerator");
+        _cityGen = serializedObject.FindProperty("cityGenerator");
+    }
 
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
-        GenerationController controller = (GenerationController)target;
-        if(GUILayout.Button("Generate"))
+        serializedObject.Update();
+        EditorGUILayout.PropertyField(_seed);
+        EditorGUILayout.PropertyField(_terrainGen);
+        EditorGUILayout.PropertyField(_cityGen);
+        if (controller.cityGenerator == null)
         {
-            controller.SetupAndGenerate();
+            cityGenTab = GUILayout.Toolbar(cityGenTab, cityGenNames);
+            switch (cityGenTab)
+            {
+                case 1:
+                    CityBiomeGenerator gen = CreateCityGenerator<CityBiomeGenerator>();
+                    gen.terrain = controller.terrainGenerator.terrain;
+                    break;
+                case 2:
+                    PerlinCityGenerator pGen = CreateCityGenerator<PerlinCityGenerator>();
+                    pGen.terrainGenerator = controller.terrainGenerator;
+                    break;
+                case 3:
+                    LSystemGeneration lGen = CreateCityGenerator<LSystemGeneration>();
+                    lGen.terrainGenerator = controller.terrainGenerator;
+                    break;
+            }
         }
-        if(GUILayout.Button("Clear Buildings"))
+        else
         {
-            while(controller.cityGenerator.transform.childCount > 0)
+            if (GUILayout.Button("Generate"))
             {
-                Transform child = controller.cityGenerator.transform.GetChild(0);
-                DestroyImmediate(child.gameObject);
+                controller.SetupAndGenerate();
             }
-            if(controller.cityGenerator is LSystemGeneration)
+            if (GUILayout.Button("Clear Buildings"))
             {
-                ((LSystemGeneration)controller.cityGenerator).clearBuildings();
+                while (controller.cityGenerator.transform.childCount > 0)
+                {
+                    Transform child = controller.cityGenerator.transform.GetChild(0);
+                    DestroyImmediate(child.gameObject);
+                }
+                if (controller.cityGenerator is LSystemGeneration)
+                {
+                    ((LSystemGeneration)controller.cityGenerator).clearBuildings();
+                }
             }
         }
+        serializedObject.ApplyModifiedProperties();
 
         /*
         if (GUILayout.Button("Save Heightmap"))
@@ -42,5 +86,38 @@ public class GenerationControllerEditor : Editor
             Debug.Log("Saved to " + fileName);
         }
         */
+    }
+
+    public T CreateCityGenerator<T>() where T : CityGenerator
+    {
+        GameObject citObj = new GameObject("City Generator");
+        citObj.transform.SetParent(controller.transform);
+        T generator = citObj.AddComponent<T>();
+        controller.cityGenerator = generator;
+        controller.cityGenerator.heightMap = controller.heightMap;
+        return generator;
+    }
+
+
+    [MenuItem("GameObject/Generation Controller")]
+    public static GenerationController CreateGenerationController()
+    {
+        GameObject camObj = new GameObject("GenerationController");
+        GenerationController camCon = camObj.AddComponent<GenerationController>();
+
+        GameObject terObj = new GameObject("Terrain Generator");
+        terObj.transform.SetParent(camObj.transform);
+        camCon.terrainGenerator = terObj.AddComponent<TerrainGenerator>();
+        camCon.terrainGenerator.terrain = terObj.AddComponent<Terrain>();
+        terObj.AddComponent<TerrainCollider>();
+
+        camCon.terrainGenerator.biomeGenerator = terObj.AddComponent<BiomeGenerator>();
+
+        NoiseMap noiseMap = terObj.AddComponent<NoiseMap>();
+        camCon.terrainGenerator.heightMap = noiseMap;
+        camCon.terrainGenerator.biomeGenerator.heightMap = noiseMap;
+
+        Selection.activeGameObject = camObj;
+        return camCon;
     }
 }

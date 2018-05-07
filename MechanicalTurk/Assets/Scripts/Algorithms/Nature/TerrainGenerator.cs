@@ -99,5 +99,6 @@ namespace Framework.Generation
             terrain.terrainData.RefreshPrototypes();
             terrain.Flush();
         }
+
     }
 }

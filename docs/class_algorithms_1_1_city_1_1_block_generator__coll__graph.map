@@ -1,9 +1,0 @@
-<map id="Algorithms.City.BlockGenerator" name="Algorithms.City.BlockGenerator">
-<area shape="rect" id="node2" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="389,38,529,64"/>
-<area shape="rect" id="node5" href="$class_framework_1_1_generation_1_1_point_generator.html" title="Generates a set of points within a specified range " alt="" coords="786,30,973,72"/>
-<area shape="rect" id="node4" href="$class_algorithms_1_1_city_1_1_road_designer.html" title="Algorithms.City.RoadDesigner" alt="" coords="553,95,749,122"/>
-<area shape="rect" id="node6" href="$class_framework_1_1_collections_1_1_grid_node.html" title="Framework.Collections.GridNode" alt="" coords="773,198,985,224"/>
-<area shape="rect" id="node7" href="$class_framework_1_1_collections_1_1_grid_face.html" title="GridFace" alt="" coords="422,198,497,224"/>
-<area shape="rect" id="node8" href="$class_framework_1_1_collections_1_1_node.html" title="Node" alt="" coords="259,198,311,224"/>
-<area shape="rect" id="node9" href="$interface_framework_1_1_collections_1_1_i_has_connections.html" title="IHasConnections\&lt; Node \&gt;" alt="" coords="5,198,180,224"/>
-</map>

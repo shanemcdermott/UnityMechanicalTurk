@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-using Framework.Util;
-using Algorithms.Util;
+using CameraControls;
+using Framework.Generation;
 
 [CustomEditor(typeof(GeneratorCameraController))]
 public class GeneratorCameraControllerEditor : Editor
@@ -31,7 +32,7 @@ public class GeneratorCameraControllerEditor : Editor
         GeneratorCameraController camCon = camObj.AddComponent<GeneratorCameraController>();
         camCon.AddCameras(2);
         camCon.AddAllGenControllersInScene();
-
+        camCon.AlignCamerasWithGenerators();
         Selection.activeGameObject = camObj;
     }
 
@@ -73,6 +74,8 @@ public class GeneratorCameraControllerEditor : Editor
         if (_cameraTab == _tabNames.Length - 1)
         {
             _camController.AddCamera();
+            Array.Resize(ref _camController.generationControllers, _tabNames.Length);
+            _camController.generationControllers[_cameraTab] = GenerationControllerEditor.CreateGenerationController();
             UpdateCameraTabs();
         }
         else
@@ -90,7 +93,7 @@ public class GeneratorCameraControllerEditor : Editor
         showGenProperties = EditorGUILayout.Foldout(showGenProperties, "Generator Properties");
         if (showGenProperties)
         {
-            Object genObj = _genProperties.GetArrayElementAtIndex(index).objectReferenceValue;
+            UnityEngine.Object genObj = _genProperties.GetArrayElementAtIndex(index).objectReferenceValue;
             if (genObj)
             {
                 CreateEditor(genObj).OnInspectorGUI();
@@ -105,7 +108,7 @@ public class GeneratorCameraControllerEditor : Editor
         showCamProperties = EditorGUILayout.Foldout(showCamProperties, "Camera Properties");
         if (showCamProperties)
         {
-            Object camObj = _camProperties.GetArrayElementAtIndex(index).objectReferenceValue;
+            UnityEngine.Object camObj = _camProperties.GetArrayElementAtIndex(index).objectReferenceValue;
             if (camObj)
             {
                 CreateEditor(camObj).OnInspectorGUI();

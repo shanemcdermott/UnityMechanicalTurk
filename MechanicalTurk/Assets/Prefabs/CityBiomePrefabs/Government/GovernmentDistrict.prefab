@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4115063461840902}
   - component: {fileID: 114685894119768556}
   - component: {fileID: 114848952077936862}
+  - component: {fileID: 114244873455142808}
+  - component: {fileID: 114430349120949102}
   m_Layer: 0
   m_Name: GovernmentDistrict
   m_TagString: Untagged
@@ -41,6 +43,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114244873455142808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036081809498088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cb56094b9566c4fbff9cbac80a01f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGenerationComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  blockPrefabs: []
+  pointGenerator: {fileID: 0}
+  Dimensions: {x: 256, y: 0, z: 256}
+  MinLotSize: {x: 16, y: 16, z: 16}
+  terrain: {fileID: 0}
+  roadDesigner: {fileID: 114430349120949102}
+--- !u!114 &114430349120949102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036081809498088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed679f7349f92784cb21dffb3b4ada73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bShouldDrawFromCenter: 1
 --- !u!114 &114685894119768556
 MonoBehaviour:
   m_ObjectHideFlags: 1

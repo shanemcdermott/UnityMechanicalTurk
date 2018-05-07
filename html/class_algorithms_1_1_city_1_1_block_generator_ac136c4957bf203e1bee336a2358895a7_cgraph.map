@@ -1,0 +1,5 @@
+<map id="Algorithms.City.BlockGenerator.SpawnBlockObject" name="Algorithms.City.BlockGenerator.SpawnBlockObject">
+<area shape="rect" id="node3" href="$class_algorithms_1_1_city_1_1_block_generator.html#a423f6c718ee52e98ff72aba907b4fecf" title="Creates CityBlock dummy transform. If districtNode doesn&#39;t exist, CreateGrid is called. Tries to find roadDesigner " alt="" coords="265,5,473,51"/>
+<area shape="rect" id="node5" href="$class_algorithms_1_1_city_1_1_block_generator.html#a813e2e56a8041aa1cb74c464fd8b8c8d" title="Returns true if districtNode and terrain are valid. " alt="" coords="265,74,473,121"/>
+<area shape="rect" id="node7" href="$class_algorithms_1_1_city_1_1_block_generator.html#a526b92cf47765adbdd2a67a290ebf63a" title="if pointGenerator is valid, calls PopulateBlocksSelectively. otherwise calls PopulateBlocks ..." alt="" coords="265,143,473,190"/>
+</map>

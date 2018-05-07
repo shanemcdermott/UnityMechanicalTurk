@@ -1,0 +1,18 @@
+<map id="Framework.Generation.GenerationAlgorithm" name="Framework.Generation.GenerationAlgorithm">
+<area shape="rect" id="node5" href="$class_algorithms_1_1_city_1_1_block_generator.html" title="Fills a square region with random objects " alt="" coords="443,13,648,43"/>
+<area shape="rect" id="node11" href="$class_algorithms_1_1_city_1_1_building_generator.html" title="Algorithms.City.Building\lGenerator" alt="" coords="465,66,625,113"/>
+<area shape="rect" id="node13" href="$class_framework_1_1_generation_1_1_biome_generator.html" title="Framework.Generation.Biome\lGenerator" alt="" coords="448,135,643,182"/>
+<area shape="rect" id="node15" href="$class_framework_1_1_generation_1_1_city_generator.html" title="Framework.Generation.City\lGenerator" alt="" coords="456,205,635,251"/>
+<area shape="rect" id="node23" href="$class_framework_1_1_generation_1_1_generation_sequence.html" title="Framework.Generation.Generation\lSequence" alt="" coords="436,274,655,321"/>
+<area shape="rect" id="node25" href="$class_framework_1_1_generation_1_1_noise_generator.html" title="Framework.Generation.Noise\lGenerator" alt="" coords="451,343,640,390"/>
+<area shape="rect" id="node31" href="$class_framework_1_1_generation_1_1_point_generator.html" title="Generates a set of points within a specified range " alt="" coords="452,413,639,459"/>
+<area shape="rect" id="node35" href="$class_framework_1_1_generation_1_1_terrain_generator.html" title="Framework.Generation.Terrain\lGenerator" alt="" coords="448,482,643,529"/>
+<area shape="rect" id="node7" href="$class_algorithms_1_1_city_1_1_city_block_generator.html" title="Algorithms.City.CityBlock\lGenerator" alt="" coords="735,5,905,51"/>
+<area shape="rect" id="node9" href="$class_algorithms_1_1_nature_1_1_clutter_placement.html" title="Algorithms.Nature.Clutter\lPlacement" alt="" coords="984,5,1152,51"/>
+<area shape="rect" id="node17" href="$class_algorithms_1_1_city_1_1_city_biome_generator.html" title="Algorithms.City.CityBiome\lGenerator" alt="" coords="733,121,907,167"/>
+<area shape="rect" id="node19" href="$class_algorithms_1_1_city_1_1_l_system_generation.html" title="Algorithms.City.LSystemGeneration" alt="" coords="705,191,935,220"/>
+<area shape="rect" id="node21" href="$class_algorithms_1_1_city_1_1_perlin_city_generator.html" title="Algorithms.City.PerlinCity\lGenerator" alt="" coords="735,243,905,290"/>
+<area shape="rect" id="node27" href="$class_algorithms_1_1_noise_1_1_perlin_octaves.html" title="Algorithms.Noise.PerlinOctaves" alt="" coords="717,313,923,343"/>
+<area shape="rect" id="node29" href="$class_algorithms_1_1_noise_1_1_simplex_noise.html" title="Algorithms.Noise.Simplex\lNoise" alt="" coords="735,366,905,413"/>
+<area shape="rect" id="node33" href="$class_algorithms_1_1_noise_1_1_poisson_disk_sampling.html" title="Algorithms.Noise.Poisson\lDiskSampling" alt="" coords="735,435,905,482"/>
+</map>

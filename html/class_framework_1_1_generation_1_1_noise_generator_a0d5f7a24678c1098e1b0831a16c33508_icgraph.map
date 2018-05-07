@@ -1,0 +1,4 @@
+<map id="Framework.Generation.NoiseGenerator.Setup" name="Framework.Generation.NoiseGenerator.Setup">
+<area shape="rect" id="node3" href="$class_algorithms_1_1_city_1_1_l_system_generation.html#a273c6d9d1d373e547f402eb03b6b796f" title="Collects any prerequisites for generation. " alt="" coords="245,5,480,51"/>
+<area shape="rect" id="node5" href="$class_algorithms_1_1_city_1_1_perlin_city_generator.html#a9a75a58864a6ce11609398fb35034bec" title="Collects any prerequisites for generation. " alt="" coords="277,74,448,121"/>
+</map>

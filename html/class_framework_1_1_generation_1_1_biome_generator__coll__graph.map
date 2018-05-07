@@ -1,0 +1,5 @@
+<map id="Framework.Generation.BiomeGenerator" name="Framework.Generation.BiomeGenerator">
+<area shape="rect" id="node2" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="211,5,349,35"/>
+<area shape="rect" id="node6" href="$class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="172,59,388,88"/>
+<area shape="rect" id="node9" href="$struct_framework_1_1_generation_1_1_terrain_type.html" title="Framework.Generation.TerrainType" alt="" coords="168,112,392,141"/>
+</map>

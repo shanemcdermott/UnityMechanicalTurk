@@ -1,4 +1,0 @@
-<map id="Framework.Util.CameraController" name="Framework.Util.CameraController">
-<area shape="rect" id="node3" href="$class_framework_1_1_util_1_1_view_target_event.html" title="Framework.Util.ViewTarget\lEvent" alt="" coords="140,96,317,137"/>
-<area shape="rect" id="node5" href="$class_framework_1_1_util_1_1_camera_view_target.html" title="Represents a target view transform for a camera to lerp to. " alt="" coords="342,96,529,137"/>
-</map>

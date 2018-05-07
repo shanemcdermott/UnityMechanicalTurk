@@ -12,7 +12,7 @@ namespace Framework.Generation
     /// </summary>
     public class GenerationController : MonoBehaviour
     {
-        public List<GameObject> buildings = new List<GameObject>();
+
         /*RNG Seed to be used for all generation processes*/
         public int Seed;
 
@@ -29,7 +29,7 @@ namespace Framework.Generation
         }
 
 
-        private int seed;
+   
         void Awake()
         {
             LookForComponents();

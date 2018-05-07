@@ -1,0 +1,4 @@
+<map id="Algorithms.City.BlockGenerator.Setup" name="Algorithms.City.BlockGenerator.Setup">
+<area shape="rect" id="node3" href="$class_algorithms_1_1_city_1_1_block_generator.html#ac136c4957bf203e1bee336a2358895a7" title="Selects a GameObject to spawn from blockPrefabs and instantiates. If the spawned object has a BlockGe..." alt="" coords="265,5,473,51"/>
+<area shape="rect" id="node5" href="$class_algorithms_1_1_city_1_1_city_biome_generator.html#a243e1f039e1cf4a188f83b051ec1725a" title="Collects any prerequisites for generation. " alt="" coords="283,74,456,121"/>
+</map>

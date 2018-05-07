@@ -1,0 +1,9 @@
+<map id="Framework.Generation.GenerationController" name="Framework.Generation.GenerationController">
+<area shape="rect" id="node6" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="211,144,349,174"/>
+<area shape="rect" id="node9" href="$class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="172,267,388,296"/>
+<area shape="rect" id="node4" href="$class_framework_1_1_generation_1_1_city_generator.html" title="Framework.Generation.City\lGenerator" alt="" coords="523,364,701,410"/>
+<area shape="rect" id="node12" href="$class_framework_1_1_generation_1_1_terrain_generator.html" title="Framework.Generation.Terrain\lGenerator" alt="" coords="881,137,1076,184"/>
+<area shape="rect" id="node15" href="$class_framework_1_1_generation_1_1_noise_generator.html" title="Framework.Generation.Noise\lGenerator" alt="" coords="517,188,707,234"/>
+<area shape="rect" id="node20" href="$class_framework_1_1_generation_1_1_biome_generator.html" title="Framework.Generation.Biome\lGenerator" alt="" coords="515,46,709,93"/>
+<area shape="rect" id="node24" href="$struct_framework_1_1_generation_1_1_terrain_type.html" title="Framework.Generation.TerrainType" alt="" coords="168,43,392,72"/>
+</map>

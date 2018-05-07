@@ -1,0 +1,6 @@
+<map id="Algorithms.Noise.SimplexNoise" name="Algorithms.Noise.SimplexNoise">
+<area shape="rect" id="node2" href="$class_framework_1_1_generation_1_1_noise_generator.html" title="NoiseGenerator" alt="" coords="79,191,191,220"/>
+<area shape="rect" id="node4" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="5,85,144,115"/>
+<area shape="rect" id="node8" href="$class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="168,85,384,115"/>
+<area shape="rect" id="node11" href="$class_algorithms_1_1_noise_1_1_simplex_noise_1_1_grad.html" title="Algorithms.Noise.Simplex\lNoise.Grad" alt="" coords="215,182,385,229"/>
+</map>

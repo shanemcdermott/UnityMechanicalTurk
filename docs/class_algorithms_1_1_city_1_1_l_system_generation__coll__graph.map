@@ -1,9 +1,0 @@
-<map id="Algorithms.City.LSystemGeneration" name="Algorithms.City.LSystemGeneration">
-<area shape="rect" id="node2" href="$class_framework_1_1_generation_1_1_city_generator.html" title="CityGenerator" alt="" coords="558,313,661,340"/>
-<area shape="rect" id="node3" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="207,161,347,188"/>
-<area shape="rect" id="node6" href="$class_framework_1_1_generation_1_1_noise_generator.html" title="Framework.Generation.Noise\lGenerator" alt="" coords="514,161,705,202"/>
-<area shape="rect" id="node7" href="$class_framework_1_1_generation_1_1_terrain_generator.html" title="Framework.Generation.Terrain\lGenerator" alt="" coords="876,149,1072,190"/>
-<area shape="rect" id="node8" href="$class_framework_1_1_generation_1_1_biome_generator.html" title="Framework.Generation.Biome\lGenerator" alt="" coords="512,17,707,58"/>
-<area shape="rect" id="node5" href="$class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="169,229,385,256"/>
-<area shape="rect" id="node9" href="$struct_framework_1_1_generation_1_1_terrain_type.html" title="Framework.Generation.TerrainType" alt="" coords="165,5,389,32"/>
-</map>

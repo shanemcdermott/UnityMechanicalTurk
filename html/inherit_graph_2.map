@@ -1,0 +1,30 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node3" href="$class_algorithms_1_1_city_1_1_road_designer.html" title="Algorithms.City.RoadDesigner" alt="" coords="180,67,375,96"/>
+<area shape="rect" id="node9" href="$class_algorithms_1_1_city_1_1_road_painter.html" title="Applies a road texture to terrain. " alt="" coords="184,121,371,151"/>
+<area shape="rect" id="node11" href="$class_camera_controls_1_1_camera_controller.html" title="CameraControls.CameraController" alt="" coords="168,175,387,204"/>
+<area shape="rect" id="node15" href="$class_framework_1_1_collections_1_1_game_node.html" title="Framework.Collections.GameNode" alt="" coords="167,228,388,257"/>
+<area shape="rect" id="node17" href="$class_framework_1_1_collections_1_1_noise_map.html" title="2D Array with indexers " alt="" coords="169,281,385,311"/>
+<area shape="rect" id="node19" href="$class_framework_1_1_collections_1_1_poly_grid.html" title="Framework.Collections.PolyGrid" alt="" coords="173,335,381,364"/>
+<area shape="rect" id="node21" href="$class_framework_1_1_generation_1_1_generation_algorithm.html" title="Wrapper for various generation algorithms that adds events. " alt="" coords="168,387,387,434"/>
+<area shape="rect" id="node55" href="$class_framework_1_1_generation_1_1_generation_controller.html" title="Manages Random Seed, Generation Sequences. " alt="" coords="168,457,387,503"/>
+<area shape="rect" id="node57" href="$class_framework_1_1_util_1_1_random_transform.html" title="Randomizes the object&#39;s transform within a specified range. " alt="" coords="168,527,387,556"/>
+<area shape="rect" id="node5" href="$class_algorithms_1_1_city_1_1_all_road_designer.html" title="Algorithms.City.AllRoadDesigner" alt="" coords="443,5,653,35"/>
+<area shape="rect" id="node7" href="$class_algorithms_1_1_city_1_1_road_block_designer.html" title="Algorithms.City.RoadBlock\lDesigner" alt="" coords="459,58,637,105"/>
+<area shape="rect" id="node13" href="$class_framework_1_1_generation_1_1_generator_camera_controller.html" title="Framework.Generation.Generator\lCameraController" alt="" coords="441,127,655,174"/>
+<area shape="rect" id="node23" href="$class_algorithms_1_1_city_1_1_block_generator.html" title="Fills a square region with random objects " alt="" coords="445,197,651,227"/>
+<area shape="rect" id="node29" href="$class_algorithms_1_1_city_1_1_building_generator.html" title="Algorithms.City.Building\lGenerator" alt="" coords="468,250,628,297"/>
+<area shape="rect" id="node31" href="$class_framework_1_1_generation_1_1_biome_generator.html" title="Framework.Generation.Biome\lGenerator" alt="" coords="451,319,645,366"/>
+<area shape="rect" id="node33" href="$class_framework_1_1_generation_1_1_city_generator.html" title="Framework.Generation.City\lGenerator" alt="" coords="459,389,637,435"/>
+<area shape="rect" id="node41" href="$class_framework_1_1_generation_1_1_generation_sequence.html" title="Framework.Generation.Generation\lSequence" alt="" coords="439,458,657,505"/>
+<area shape="rect" id="node43" href="$class_framework_1_1_generation_1_1_noise_generator.html" title="Framework.Generation.Noise\lGenerator" alt="" coords="453,527,643,574"/>
+<area shape="rect" id="node49" href="$class_framework_1_1_generation_1_1_point_generator.html" title="Generates a set of points within a specified range " alt="" coords="455,597,641,643"/>
+<area shape="rect" id="node53" href="$class_framework_1_1_generation_1_1_terrain_generator.html" title="Framework.Generation.Terrain\lGenerator" alt="" coords="451,666,645,713"/>
+<area shape="rect" id="node25" href="$class_algorithms_1_1_city_1_1_city_block_generator.html" title="Algorithms.City.CityBlock\lGenerator" alt="" coords="737,189,908,235"/>
+<area shape="rect" id="node27" href="$class_algorithms_1_1_nature_1_1_clutter_placement.html" title="Algorithms.Nature.Clutter\lPlacement" alt="" coords="987,189,1155,235"/>
+<area shape="rect" id="node35" href="$class_algorithms_1_1_city_1_1_city_biome_generator.html" title="Algorithms.City.CityBiome\lGenerator" alt="" coords="736,305,909,351"/>
+<area shape="rect" id="node37" href="$class_algorithms_1_1_city_1_1_l_system_generation.html" title="Algorithms.City.LSystemGeneration" alt="" coords="708,375,937,404"/>
+<area shape="rect" id="node39" href="$class_algorithms_1_1_city_1_1_perlin_city_generator.html" title="Algorithms.City.PerlinCity\lGenerator" alt="" coords="737,427,908,474"/>
+<area shape="rect" id="node45" href="$class_algorithms_1_1_noise_1_1_perlin_octaves.html" title="Algorithms.Noise.PerlinOctaves" alt="" coords="720,497,925,527"/>
+<area shape="rect" id="node47" href="$class_algorithms_1_1_noise_1_1_simplex_noise.html" title="Algorithms.Noise.Simplex\lNoise" alt="" coords="737,550,908,597"/>
+<area shape="rect" id="node51" href="$class_algorithms_1_1_noise_1_1_poisson_disk_sampling.html" title="Algorithms.Noise.Poisson\lDiskSampling" alt="" coords="737,619,908,666"/>
+</map>

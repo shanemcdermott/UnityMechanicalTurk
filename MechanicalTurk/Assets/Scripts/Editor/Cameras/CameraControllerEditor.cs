@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-using Framework.Util;
+using CameraControls;
 
 [CustomEditor(typeof(CameraController))]
 public class CameraControllerEditor : Editor
