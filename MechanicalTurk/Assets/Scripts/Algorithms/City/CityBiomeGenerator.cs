@@ -21,9 +21,19 @@ namespace Algorithms.City
         {
             base.Setup();
             Clean();
+            terrain = transform.root.gameObject.GetComponentInChildren<Terrain>();
             regionGenerator.terrain = terrain;
             regionGenerator.Setup();
             roadPainter.Setup();
+        }
+
+        public override bool CanGenerate()
+        {
+            return base.CanGenerate() &&
+                regionGenerator != null &&
+                terrain != null
+                && terrain.terrainData != null &&
+                roadPainter != null;
         }
 
         public override void Clean()

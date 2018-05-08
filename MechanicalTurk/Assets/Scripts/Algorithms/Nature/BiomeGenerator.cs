@@ -14,6 +14,13 @@ namespace Framework.Generation
         public string name;
         public float height;
         public Color colour;
+
+        public TerrainType(string terrainName, float  heightRequirement, Color terrainColor)
+        {
+            name = terrainName;
+            height = heightRequirement;
+            colour = terrainColor;
+        }
     }
 
     public class BiomeGenerator : GenerationAlgorithm
@@ -37,6 +44,16 @@ namespace Framework.Generation
             if (heightMap == null)
             {
                 heightMap = GetComponent<NoiseMap>();
+            }
+            if(biomeTypes == null || biomeTypes.Length==0)
+            {
+                biomeTypes = new TerrainType[4]
+                {
+                    new TerrainType("dirt", 0.2f, new Color(83/255f,66/255f,11/255f)),
+                    new TerrainType("swamp", 0.4f, new Color(15/255f,62/255f,14/255f)),
+                    new TerrainType("grass", 0.6f, new Color(61/255f,167/255f,62/255f)),
+                    new TerrainType("stone", 0.8f, new Color(98/255f,98/255f,98/255f)),
+                };
             }
         }
 
@@ -76,5 +93,6 @@ namespace Framework.Generation
 
             return 0;
         }
+
     }
 }

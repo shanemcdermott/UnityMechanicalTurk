@@ -16,12 +16,6 @@ namespace Algorithms.City
         public GameObject testObject;
         public bool spawnTestObjectsEnabled = false;
 
-        public PolyGrid polyGrid;
-
-        public int lowRoadNumber = 2;
-        public int highRoadNumber = 4;
-
-        public Vector2Int facesPerSide;
 
         public TerrainGenerator terrainGenerator;
 
@@ -33,6 +27,12 @@ namespace Algorithms.City
         [SerializeField]
         [Header("Roads")]
         public RoadPainter roadPainter;
+        public PolyGrid polyGrid;
+
+        public int lowRoadNumber = 2;
+        public int highRoadNumber = 4;
+
+        public Vector2Int facesPerSide;
 
         private GameObject[] buildings;
 

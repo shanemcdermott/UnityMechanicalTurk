@@ -36,6 +36,16 @@ public class GenerationControllerEditor : Editor
         serializedObject.Update();
         EditorGUILayout.PropertyField(_seed);
         EditorGUILayout.PropertyField(_terrainGen);
+        if (!controller.terrainGenerator.CanGenerate())
+        {
+            TerrainGenerationEditor terEditor = (TerrainGenerationEditor)CreateEditor(controller.terrainGenerator);
+            terEditor.ShowMissingGenRequirements();
+        }
+        if (controller.terrainGenerator.terrain != null)
+        {
+            controller.terrainGenerator.terrain.terrainData = (TerrainData)EditorGUILayout.ObjectField("Terrain Data", controller.terrainGenerator.terrain.terrainData, typeof(TerrainData), true);
+        }
+
         EditorGUILayout.PropertyField(_cityGen);
         if (controller.cityGenerator == null)
         {
@@ -43,12 +53,14 @@ public class GenerationControllerEditor : Editor
             switch (cityGenTab)
             {
                 case 1:
-                    CityBiomeGenerator gen = CreateCityGenerator<CityBiomeGenerator>();
-                    gen.terrain = controller.terrainGenerator.terrain;
+                    CityBiomeGenerator gen = CityBiomeGeneratorEditor.CreateRecursiveDetailGenerator(controller);
+                    // CreateCityGenerator<CityBiomeGenerator>();
+                    //gen.terrain = controller.terrainGenerator.terrain;
                     break;
                 case 2:
-                    PerlinCityGenerator pGen = CreateCityGenerator<PerlinCityGenerator>();
-                    pGen.terrainGenerator = controller.terrainGenerator;
+
+                    PerlinCityGenerator pGen = PerlinCityGeneratorEditor.CreatePerlinCityGenerator(controller);
+                    //pGen.terrainGenerator = controller.terrainGenerator;
                     break;
                 case 3:
                     LSystemGeneration lGen = CreateCityGenerator<LSystemGeneration>();
@@ -56,7 +68,12 @@ public class GenerationControllerEditor : Editor
                     break;
             }
         }
-        else
+        else if (!controller.cityGenerator.CanGenerate())
+        {
+            GeneratorEditor cityEditor = (GeneratorEditor)CreateEditor(controller.cityGenerator);
+            cityEditor.ShowMissingGenRequirements();
+        }
+        else if(controller.terrainGenerator.CanGenerate())
         {
             if (GUILayout.Button("Generate"))
             {

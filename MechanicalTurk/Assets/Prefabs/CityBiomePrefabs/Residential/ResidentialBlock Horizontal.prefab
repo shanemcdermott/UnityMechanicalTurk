@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4838295790841492}
-  - component: {fileID: 114397124158399994}
-  - component: {fileID: 114147717468203470}
+  - component: {fileID: 114419263267796408}
+  - component: {fileID: 114487011798468240}
   m_Layer: 0
   m_Name: ResidentialBlock Horizontal
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114147717468203470
+--- !u!114 &114419263267796408
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,15 +49,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1999119434732032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fc0c874db4a0684280deacaa1b3d118, type: 3}
+  m_Script: {fileID: 11500000, guid: 11cba248503b07e429fcad3cd0110785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bShouldDrawFromCenter: 1
   wantsVerticalConnections: 0
   wantsVerticalFaceConnections: 1
   wantsHorizontalConnections: 1
-  wantsHorizontalFaceConnections: 0
---- !u!114 &114397124158399994
+  wantsHorizontalFaceConnections: 1
+--- !u!114 &114487011798468240
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1999119434732032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a387e841cdcc149b55b283638f4ef7, type: 3}
+  m_Script: {fileID: 11500000, guid: 62f83bcf7c2b2a64cb805ed3e1ad5349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnGenerationComplete:
@@ -82,15 +82,8 @@ MonoBehaviour:
   - {fileID: 1545321841923720, guid: ee5e4d4a0102f62479505715d5435e09, type: 2}
   - {fileID: 1522777732376790, guid: 47d89905497c88f458312f2f5ba52c34, type: 2}
   - {fileID: 1394466182907090, guid: 5a1c1acb43028744f945201217240a84, type: 2}
-  - {fileID: 1030841049492366, guid: 9a240b3d5fc7c3a4bbbfe7c2f1fd678f, type: 2}
-  - {fileID: 1938361531888250, guid: c3c33b11514ec5c42914eb1ee1d7aa8a, type: 2}
-  - {fileID: 1772892034892704, guid: b1133a050900e2b4da58ce51af638722, type: 2}
-  - {fileID: 1529419426210288, guid: a7627181e94b6cb44b1f8757a792b405, type: 2}
-  - {fileID: 1729032696951768, guid: d27b0739ccab82040b05cf6b3d72af46, type: 2}
-  - {fileID: 1575666294584998, guid: 9891448b9838e984ba5c9a9f249c3bd1, type: 2}
-  - {fileID: 1643180542855640, guid: d7b837ac915eb5c4ea389f79a9d1b21f, type: 2}
   pointGenerator: {fileID: 0}
   Dimensions: {x: 256, y: 0, z: 256}
-  MinLotSize: {x: 4, y: 4, z: 4}
+  MinLotSize: {x: 10, y: 10, z: 10}
   terrain: {fileID: 0}
-  roadDesigner: {fileID: 0}
+  roadDesigner: {fileID: 114419263267796408}

@@ -41,7 +41,7 @@ namespace Algorithms.City
         {
             if (terrainData == null)
             {
-                terrainData = GetComponent<Terrain>().terrainData;
+                terrainData = transform.root.gameObject.GetComponentInChildren<Terrain>().terrainData;
             }
 
             SetupSplatPrototypes();
