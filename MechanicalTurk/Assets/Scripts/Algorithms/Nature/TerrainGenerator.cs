@@ -15,7 +15,32 @@ namespace Framework.Generation
         public BiomeGenerator biomeGenerator;
 
         public float heightScale = 1f;
-        public NoiseMap heightMap;
+
+        public NoiseMap heightMap
+        {
+            get
+            {
+                if (_heightMap == null)
+                {
+                    _heightMap = GetComponent<NoiseMap>();
+                }
+                return _heightMap;
+            }
+            set
+            {
+                _heightMap = value;
+                if(biomeGenerator)
+                {
+                    biomeGenerator.heightMap = value;
+                }
+                if(heightMapGenerator)
+                {
+                    heightMapGenerator.noiseMap = value;
+                }
+            }
+        }
+        private NoiseMap _heightMap;
+
         public Terrain terrain;
         public Texture2D biomeTexture;
 
@@ -23,9 +48,12 @@ namespace Framework.Generation
         public override bool CanGenerate()
         {
             return heightMapGenerator != null &&
+                heightMapGenerator.CanGenerate() &&
                 biomeGenerator != null &&
+                //biomeGenerator.CanGenerate() &&
                 heightMap != null &&
-                terrain != null;
+                terrain != null &&
+                terrain.terrainData != null;
         }
 
         public override void Setup()

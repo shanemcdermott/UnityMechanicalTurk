@@ -54,7 +54,23 @@ namespace Algorithms.City
         /// </summary>
         public Terrain terrain;
 
-        public RoadDesigner roadDesigner;
+        public RoadDesigner roadDesigner
+        {
+            get
+            {
+                if(_roadDesigner == null)
+                {
+                    _roadDesigner = gameObject.GetComponent<RoadDesigner>();
+                }
+                return _roadDesigner;
+            }
+            set
+            {
+                _roadDesigner = value;
+            }
+        }
+        private RoadDesigner _roadDesigner;
+
         /// <summary>
         /// Root Transform dummy object used for handling offets.
         /// </summary>
@@ -87,10 +103,6 @@ namespace Algorithms.City
             {
                 CreateGrid();
             }
-            if (roadDesigner == null)
-            {
-                roadDesigner = GetComponent<RoadDesigner>();
-            }
         }
 
         /// <summary>
@@ -110,7 +122,9 @@ namespace Algorithms.City
         /// <returns>true if all generation requirements are met.</returns>
         public override bool CanGenerate()
         {
-            return districtNode != null && terrain != null;
+            return terrain != null &&
+                blockPrefabs != null &&
+                blockPrefabs.Count > 0;
         }
 
         /// <summary>

@@ -11,11 +11,29 @@ namespace Algorithms.City
 
     public class CityBiomeGenerator : CityGenerator
     {
-        public Terrain terrain;
+        public Terrain terrain
+        {
+            get { return _terrain; }
+            set
+            {
+                _terrain = value;
+                if(roadPainter)
+                {
+                    roadPainter.terrainData = _terrain.terrainData;
+                }
+                if(regionGenerator)
+                {
+                    regionGenerator.terrain = _terrain;
+                }
+            }
+        }
+
         public RoadPainter roadPainter;
         public BlockGenerator regionGenerator;
 
         public GridNode gridNode;
+
+        private Terrain _terrain;
 
         public override void Setup()
         {
@@ -31,6 +49,7 @@ namespace Algorithms.City
         {
             return base.CanGenerate() &&
                 regionGenerator != null &&
+                regionGenerator.CanGenerate() &&
                 terrain != null
                 && terrain.terrainData != null &&
                 roadPainter != null;

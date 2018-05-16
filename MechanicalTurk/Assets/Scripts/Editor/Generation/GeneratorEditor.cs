@@ -5,7 +5,7 @@ using UnityEditor;
 using Framework.Generation;
 using Algorithms.Noise;
 
-public abstract class GeneratorEditor : Editor
+public abstract class GeneratorEditor : Editor, HasGenerationRequirements
 {
     protected GUIStyle errorStyle;
 

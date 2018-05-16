@@ -12,7 +12,7 @@ namespace Framework.Generation
         /// <summary>
         /// Unity Event dispatcher that triggers when Generate has finished.
         /// </summary>
-        public UnityEvent OnGenerationComplete;
+        public UnityEvent OnGenerationComplete = new UnityEvent();
 
         void Awake()
         {

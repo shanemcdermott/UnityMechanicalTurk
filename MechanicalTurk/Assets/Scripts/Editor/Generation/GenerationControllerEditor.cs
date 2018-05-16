@@ -41,10 +41,6 @@ public class GenerationControllerEditor : Editor
             TerrainGenerationEditor terEditor = (TerrainGenerationEditor)CreateEditor(controller.terrainGenerator);
             terEditor.ShowMissingGenRequirements();
         }
-        if (controller.terrainGenerator.terrain != null)
-        {
-            controller.terrainGenerator.terrain.terrainData = (TerrainData)EditorGUILayout.ObjectField("Terrain Data", controller.terrainGenerator.terrain.terrainData, typeof(TerrainData), true);
-        }
 
         EditorGUILayout.PropertyField(_cityGen);
         if (controller.cityGenerator == null)
@@ -116,23 +112,15 @@ public class GenerationControllerEditor : Editor
     }
 
 
-    [MenuItem("GameObject/Generation Controller")]
+    [MenuItem("GameObject/Generation/Generation Controller")]
     public static GenerationController CreateGenerationController()
     {
         GameObject camObj = new GameObject("GenerationController");
         GenerationController camCon = camObj.AddComponent<GenerationController>();
 
-        GameObject terObj = new GameObject("Terrain Generator");
-        terObj.transform.SetParent(camObj.transform);
-        camCon.terrainGenerator = terObj.AddComponent<TerrainGenerator>();
-        camCon.terrainGenerator.terrain = terObj.AddComponent<Terrain>();
-        terObj.AddComponent<TerrainCollider>();
-
-        camCon.terrainGenerator.biomeGenerator = terObj.AddComponent<BiomeGenerator>();
-
-        NoiseMap noiseMap = terObj.AddComponent<NoiseMap>();
-        camCon.terrainGenerator.heightMap = noiseMap;
-        camCon.terrainGenerator.biomeGenerator.heightMap = noiseMap;
+        TerrainGenerator terGen = TerrainGenerationEditor.CreateTerrainGenerator();
+        camCon.terrainGenerator = terGen;
+        terGen.gameObject.transform.SetParent(camObj.transform);
 
         Selection.activeGameObject = camObj;
         return camCon;

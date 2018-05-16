@@ -26,9 +26,30 @@ namespace Framework.Generation
     public class BiomeGenerator : GenerationAlgorithm
     {
 
-        public TerrainType[] biomeTypes;
+        public TerrainType[] biomeTypes = new TerrainType[4]
+                {
+                    new TerrainType("dirt", 0.2f, new Color(83/255f,66/255f,11/255f)),
+                    new TerrainType("swamp", 0.4f, new Color(15/255f,62/255f,14/255f)),
+                    new TerrainType("grass", 0.6f, new Color(61/255f,167/255f,62/255f)),
+                    new TerrainType("stone", 0.8f, new Color(98/255f,98/255f,98/255f)),
+                };
 
-        public NoiseMap heightMap;
+        public NoiseMap heightMap
+        {
+            get
+            {
+                if(_heightMap == null)
+                {
+                    _heightMap = GetComponent<NoiseMap>();
+                }
+                return _heightMap;
+            }
+            set
+            {
+                _heightMap = value;
+            }
+        }
+        private NoiseMap _heightMap;
 
         public int[,] biomeMap;
 
@@ -41,10 +62,6 @@ namespace Framework.Generation
 
         public override void Setup()
         {
-            if (heightMap == null)
-            {
-                heightMap = GetComponent<NoiseMap>();
-            }
             if(biomeTypes == null || biomeTypes.Length==0)
             {
                 biomeTypes = new TerrainType[4]
